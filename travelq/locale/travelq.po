@@ -1,0 +1,41 @@
+# Open Canada Solr Search (https://github.com/thriuin/oc_search).
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the Open Canada Solr Search package.
+# Ross Thompson <ross.thompson@tbs-sct.gc.ca>, 2020.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: \"Open Canada Search - travelq Module\"\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-01-07 18:47-0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: C:\Users\rosst\PycharmProjects\oc_search\search\templates\snippets\custom\tmp0pbqmsgf\travelq_record_item.html:7
+#: C:\Users\rosst\PycharmProjects\oc_search\search\templates\snippets\custom\tmp0pbqmsgf\travelq_record_item.html:42
+msgid "Show similar records"
+msgstr "Recherche des dossiers similaires"
+
+
+#: .\search\templates\snippets\data\travelq_search_item.html:6
+msgid "Nothing to report this period"
+msgstr "Rien à signaler pour cette périod"
+
+#: .\search\templates\snippets\data\travelq_search_item.html:8
+msgid "Year"
+msgstr "Anneé"
+
+#: .\search\templates\snippets\data\travelq_search_item.html:9
+msgid "Month"
+msgstr "Mois"
+
+#: C:\Users\rosst\PycharmProjects\oc_search\search\templates\snippets\custom\tmp0pbqmsgf\travelq_search_item.html:30
+#: C:\Users\rosst\PycharmProjects\oc_search\search\templates\snippets\custom\tmp0pbqmsgf\travelq_search_item.html:55
+msgid "Destination:"
+msgstr "Destination :"

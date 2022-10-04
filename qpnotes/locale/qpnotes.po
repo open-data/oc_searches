@@ -1,0 +1,45 @@
+# Question Period Notes Localization.
+# Copyright (C) 2021 "Government of Canada, Gouvernement du Canada"
+# This file is distributed under the same license as the "Open Canada Search - QP Notes Module" package.
+# Ross t <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: \"Open Canada Search - reclass Module\"\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-08-12 12:00-0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Ross \n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Question Period Note:"
+msgstr "Note pour la période des questions :"
+
+msgid "Reference Number:"
+msgstr "Numéro de demande :"
+
+msgid "Date received: "
+msgstr "Date fournie : "
+
+msgid "Name of Minister: "
+msgstr "Nom du ministre :"
+
+msgid "Title of Minister: "
+msgstr "Titre du ministre :"
+
+msgid "Issue/Question: "
+msgstr "Enjeu ou question : "
+
+msgid "Suggested Response: "
+msgstr "Réponse suggérée : "
+
+msgid "Background: "
+msgstr "Contexte : "
+
+msgid "Additional Information: "
+msgstr "Renseignements supplémentaires : "

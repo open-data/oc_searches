@@ -1,0 +1,115 @@
+{% extends "record.html" %}
+{% load static %}
+{% load humanize %}
+{% load i18n %}
+{% load l10n %}
+{% load search_extras %}
+{% get_current_language as LANGUAGE_CODE %}
+
+{% block main-content-title %}
+<h1 property="name" id="wb-cont">{% translate 'National Action Plan on Open Government Commitment' %}</h1>
+{% endblock main-content-title %}
+
+
+<div class="col-md-12">
+    {% block main-content-search-items %}
+
+        <section class="panel panel-info mrgn-tp-lg">
+            <header class="panel-heading">
+                <h2 class="panel-title">{{ docs.0.indicators }} - {% if language == 'fr' %}{{ docs.0.commitments_fr }}{% else %}{{ docs.0.commitments_en }}{% endif %}</h2>
+            </header>
+            <div class="panel-body">
+                <dl>
+                    <div class="row">
+                        <dt><div class="col-sm-3"><strong>{% translate 'Commitment: ' %}</strong></div></dt>
+                        <dd><div class="col-sm-9">{% if language == 'fr' %}{{ docs.0.commitments_fr }}{% else %}{{ docs.0.commitments_en }}{% endif %}</div></dd>
+                    </div>
+                    <div class="row">
+                        <dt><div class="col-sm-3"><strong>{% translate 'Milestone: ' %}</strong></div></dt>
+                        <dd><div class="col-sm-9">
+                            {% if language == 'fr' %}{{ docs.0.milestones_fra }}{% else %}{{ docs.0.milestones_eng }}{% endif %}
+                        </div></dd>
+                    </div>
+                    <div class="row">
+                        <dt><div class="col-sm-3"><strong>{% translate 'Indicator: ' %}</strong></div></dt>
+                        <dd><div class="col-sm-9">
+                            {% if language == 'fr' %}{{ docs.0.indicators_fra }}{% else %}{{ docs.0.indicators_eng }}{% endif %}
+                        </div></dd>
+                    </div>
+                    <div class="row">
+                        <dt><div class="col-sm-3"><strong>{% translate 'Lead Organization: ' %}</strong></div></dt>
+                        <dd><div class="col-sm-9">
+                            {% if language == 'fr' %}{{ docs.0.owner_org_fr }}{% else %}{{ docs.0.owner_org_en }}{% endif %}
+                        </div></dd>
+                    </div>
+                    <div class="row">
+                        <dt><div class="col-sm-3"><strong>{% translate 'Deadline: ' %}</strong></div></dt>
+                        <dd><div class="col-sm-9">
+                        {% if language == 'fr' %}{{ docs.0.deadline_fr }}{% else %}{{ docs.0.deadline_en }}{% endif %}
+                        </div></dd>
+                    </div>
+                    <div class="row">
+                      <dt><div class="col-sm-3"><strong>{% trans 'Summit for Democracy: ' %}</strong></div></dt>
+                      <dd><div class="col-sm-9">
+                        {% if language == 'fr' %}{{ docs.0.s4d_fr }}{% else %}{{ docs.0.s4d_en }}{% endif %}
+                      </div></dd>
+                    </div>
+                </dl>
+            </div>
+        </section>
+</div>
+<div class="col-sm-12 mrgn-bttm"><h2>{% translate 'Updates' %}</h2></div>
+<div class="col-sm-12 mrgn-tp-md">
+    {% for doc in docs %}
+         <div class="panel panel-default">
+             <header class="panel-heading"><h5 class="panel-title">{{ doc.reporting_period }}</h5></header>
+             <div class="panel-body">
+               <div class="row">
+               <div class="col-sm-3"><strong>{% translate 'Status: ' %}</strong></div>
+               <div class="col-sm-9">
+                  <span class="label {% if doc.status == 'NS' %}label-danger{% elif doc.status == 'LP' %}label-warning{% elif doc.status == 'SP' %}label-info{% elif doc.status == 'C' %}label-success{% endif %}">{% if language == 'fr' %}{{ doc.status_fr }}{% else %}{{ doc.status_en }}{% endif %}</span>
+               </div>
+               </div>
+               {% if doc.progress_en != '-' and doc.progress_fr != '-' %}
+               <div class="row">
+               <div class="col-sm-12">
+                <strong>{% trans 'Evidence of progress: ' %}</strong>
+                <div>
+                    {% if language == 'fr' %}{{ doc.progress_fr | markdown_filter | normalize_headings | safe }}
+                    {% else %}
+                    {{ doc.progress_en | markdown_filter | normalize_headings | safe}}{% endif %}
+                </div>
+                </div>
+                 </div>
+               {% endif %}
+               {% if doc.evidence_en != '-' and doc.evidence_fr != '-' %}
+               <div class="row">
+               <div class="col-sm-12">
+                <strong>{% trans 'Evidence: ' %}</strong>
+                <div>
+                    {% if language == 'fr' %}{{ doc.evidence_fr | markdown_filter | normalize_headings | safe }}
+                    {% else %}
+                    {{ doc.evidence_en | markdown_filter | normalize_headings | safe}}{% endif %}
+                </div>
+                </div>
+               </div>
+               {% endif %}
+               {% if doc.challenges_en != '-' and doc.challenges_fr != '-' %}
+               <div class="row">
+               <div class="col-sm-12">
+                <strong>{% trans 'Challenges: ' %}</strong>
+                <div>
+                    {% if language == 'fr' %}{{ doc.challenges_fr | markdown_filter | normalize_headings | safe }}
+                    {% else %}
+                    {{ doc.challenges_en | markdown_filter | normalize_headings | safe}}{% endif %}
+                </div>
+                </div>
+               </div>
+               {% endif %}
+             </div>
+         </div>
+    {% endfor %}
+    {% endblock main-content-search-items %}
+</div>
+
+

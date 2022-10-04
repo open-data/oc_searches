@@ -1,0 +1,75 @@
+{% load i18n %}
+{% load search_extras %}
+
+<div class="row mrgn-bttm-xl mrgn-lft-md">
+{% if doc.format != "NTR" %}
+  <div class="row">
+     <div class="col-sm-8 text-capitalize">
+         <a href="{{ path_info }}record/{{ doc.id }}"><h3>{{ doc.vendor_name | safe }}</h3></a>
+    </div>
+    <div class="col-sm-4 text-right"><h3>{% trans 'Total Value: ' %} {% if LANGUAGE_CODE == 'fr' %}{{ doc.contract_value_fr }}{% else %}{{ doc.contract_value_en }}{% endif %}</h3></div>
+  </div>
+  <div class="row">
+    <div class="col-sm-4"><strong>{% trans 'Contract Date:' %}</strong></div>
+    <div class="col-sm-8">{% if LANGUAGE_CODE == 'fr' %}{{ doc.contract_date_fr }}{% else %}{{ doc.contract_date_en }}{% endif %}</div>
+  </div>
+  <div class="row">
+    <div class="col-sm-4"><strong>{% trans 'Original Value: ' %}</strong></div>
+    <div class="col-sm-8">{% if LANGUAGE_CODE == 'fr' %}{{ doc.original_value_fr }}{% else %}{{ doc.original_value_en }}{% endif %}</div>
+  </div>
+  <div class="row">
+    <div class="col-sm-4"><strong>{% trans 'Amendment Value: ' %}</strong></div>
+    <div class="col-sm-8">{% if LANGUAGE_CODE == 'fr' %}{{ doc.amendment_value_fr }}{% else %}{{ doc.amendment_value_en }}{% endif %}</div>
+  </div>
+  <div class="row">
+    <div class="col-sm-4" id="org_value_lbl"><strong>{% trans 'Work Description:' %}</strong></div>
+    <div class="col-sm-8" aria-labelledby="org_value_lbl">
+         {% if LANGUAGE_CODE == 'fr' %}{{ doc.description_fr | safe }}{% else %}{{ doc.description_en | safe }}{% endif %}
+    </div>
+  </div>
+  {% if not doc.instrument_type == '-' %}
+  <div class="row">
+    <div class="col-sm-4" id="instrument_lbl"><strong>{% trans 'Instrument Type:' %}</strong></div>
+    <div class="col-sm-8" aria-labelledby="instrument_lbl">{% if LANGUAGE_CODE == 'fr' %}{{ doc.instrument_type_fr | safe }}{% else %}{{ doc.instrument_type_en | safe }}{% endif %}</div>
+  </div>
+  {% endif %}
+  {% if not doc.commodity_type == '-' %}
+    <div class="row">
+      <div class="col-sm-4" id="commodity_lbl"><strong>{% trans 'Commodity Type:' %}</strong></div>
+      <div class="col-sm-8" aria-labelledby="commodity_lbl">{% if LANGUAGE_CODE == 'fr' %}{{ doc.commodity_type_fr | safe }}{% else %}{{ doc.commodity_type_en | safe }}{% endif %}</div>
+    </div>
+  {% endif %}
+  {% if not doc.comments_en == "-" and not doc.comments_fr == "-"%}
+  <div class="row">
+    <div class="col-sm-4" id="comments_lbl"><strong>{% trans 'Comments:' %}</strong></div>
+    <div class="col-sm-8" aria-labelledby="comments_lbl">{% if LANGUAGE_CODE == 'fr' %}{{ doc.comments_fr | safe }}{% else %}{{ doc.comments_en | safe }}{% endif %}</div>
+  </div>
+  {% endif %}
+  {% if not doc.additional_comments_en == "-" and not doc.additional_comments_fr == "-"%}
+  <div class="row">
+    <div class="col-sm-4" id="acomments_lbl"><strong>{% trans 'Additional Comments:' %}</strong></div>
+    <div class="col-sm-8" aria-labelledby="acomments_lbl">{% if LANGUAGE_CODE == 'fr' %}{{ doc.additional_comments_fr | safe }}{% else %}{{ doc.additional_comments_en | safe }}{% endif %}</div>
+  </div>
+  {% endif %}
+  <div class="row">
+    <div class="col-sm-4" id="org_lbl"><strong>{% trans 'Organization:' %}</strong></div>
+    <div class="col-sm-8" aria-labelledby="org_lbl">{% if LANGUAGE_CODE == 'fr' %}{{ doc.owner_org_fr | safe }}{% else %}{{ doc.owner_org_en | safe }}{% endif %}</div>
+  </div>
+
+{% else %}
+
+   <div class="row">
+     <div class="col-sm-3">
+        <strong>{{ doc.reporting_period }}</strong>
+    </div>
+     <div class="col-sm-9">
+        <div class="mrgn-tp-0 mrgn-bttm-0 text-left">
+            {% if LANGUAGE_CODE == 'fr' %}{{ doc.owner_org_fr }}{% else %}{{ doc.owner_org_en }}{% endif %}
+        </div>
+    </div>
+    <div class="col-sm-12 mrgn-tp-sm">
+        {% trans 'Nothing to report' %}
+    </div>
+   </div>
+{% endif %}
+</div>

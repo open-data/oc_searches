@@ -1,0 +1,47 @@
+{% load i18n %}
+{% load search_extras %}
+
+<div class="row mrgn-bttm-lg">
+
+    <div class="col-sm-8">
+        <h2 class="mrgn-tp-0 mrgn-bttm-sm h4">
+            {% if language == 'en' %}
+                <a href="{{ path_info }}record/{{ doc.id }}"><strong>{{ doc.title_en | safe }}</strong></a>
+            {% else %}
+                <a href="{{ path_info }}record/{{ doc.id }}"><strong>{{ doc.title_fr | safe }}</strong></a>
+            {% endif %}
+        </h2>
+    </div>
+    <div class="col-sm-4 text-right">
+        <strong>
+            {% if language == 'en' %}{{ doc.date_received_en }}
+            {% else %}{{ doc.date_received_fr }}
+            {% endif %}
+        </strong>
+    </div>
+
+    <div class="col-sm-12">
+    {% if language == 'fr' %}
+        {% if doc.question_fra != '-' %}
+            <p class="mrgn-tp-md">{{ doc.question_fr | markdown_filter | normalize_headings | safe }}</p>
+        {% endif %}
+        <p class="mrgn-tp-md">
+            <div><strong>{% trans 'Organization: ' %}</strong> {{ doc.owner_org_fr | safe }}</div>
+            {% if doc.minister_name_fr %}
+                <div><strong>{% trans 'Minister by name: ' %}</strong> {{ doc.minister_name_fr | safe }}</div>
+            {% endif %}
+            <div><strong>{% trans 'Minister by title: ' %}</strong> {{ doc.minister_fr | safe }}</div>
+        </p>
+    {% else %}
+        {% if doc.question_eng != '-' %}
+            <p class="mrgn-tp-md">{{ doc.question_en | markdown_filter | normalize_headings | safe }}</p>
+        {% endif %}
+        <p class="mrgn-tp-md">
+            <div><strong>{% trans 'Organization: ' %}</strong> {{ doc.owner_org_en | safe }}</div>
+            {% if doc.minister_name_en %}
+                <div><strong>{% trans 'Minister by name: ' %}</strong> {{ doc.minister_name_en | safe }}</div>
+            {% endif %}
+            <div><strong>{% trans 'Minister by title: ' %}</strong> {{ doc.minister_en | safe }}</div>                                </p>
+    {% endif %}
+    </div>
+</div>

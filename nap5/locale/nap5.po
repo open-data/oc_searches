@@ -1,0 +1,98 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR "Government of Canada, Gouvernement du Canada"
+# This file is distributed under the same license as the "Open Canada Search - reclass Module" package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: \"Open Canada  - Search 5th National Action Plan Commitments\"\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-07-15 10:00-0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+
+msgid "National Action Plan on Open Government Commitment"
+msgstr "Plan d’action national du Canada pour un gouvernement ouvert"
+
+msgid "Lead Organization:"
+msgstr "Ministrère responsable :"
+
+msgid "Status: "
+msgstr "État : "
+
+msgid "Program: "
+msgstr "Programme : "
+
+msgid "Progress: "
+msgstr "Progrés : "
+
+msgid "Evidence of progress: "
+msgstr "Preuve de progrès : "
+
+msgid "Challenges: "
+msgstr "Défis : "
+
+msgid "Reporting Period"
+msgstr "Période de déclaration"
+
+msgid "Milestone"
+msgstr "Jalon"
+
+msgid "Milestone: "
+msgstr "Jalon : "
+
+msgid "Commitment"
+msgstr "Engagement"
+
+msgid "Commitment: "
+msgstr "Engagement : "
+
+msgid "Lead Organization: "
+msgstr "Ministrère responsable : "
+
+msgid "Indicator: "
+msgstr "indicateur : "
+
+msgid "Updates"
+msgstr "Mises à jour"
+
+msgid "Progress Summary"
+msgstr "Résumé des progrès"
+
+msgid "Commitments"
+msgstr "Engagements"
+
+msgid "Milestones"
+msgstr "Jalons"
+
+msgid "Due Date"
+msgstr "Date limite"
+
+msgid "Due Date: "
+msgstr "Date limite : "
+
+msgid "Summit for Democracy"
+msgstr "Sommet sur la démocratie"
+
+msgid "Summit for Democracy: "
+msgstr "Sommet sur la démocratie : "
+
+msgid "Deadline: "
+msgstr "Date d'échéance"
+
+msgid "Found"
+msgstr "trouvé"
+
+msgid "commitment"
+msgstr "engagement"
+
+msgid "with status"
+msgstr "d'état"
+

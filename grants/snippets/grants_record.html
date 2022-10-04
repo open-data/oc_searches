@@ -1,0 +1,415 @@
+{% extends "record.html" %}
+{% load static %}
+{% load humanize %}
+{% load i18n %}
+{% load l10n %}
+{% load search_extras %}
+{% get_current_language as LANGUAGE_CODE %}
+
+{% block main-content-title %}
+<h1 property="name" id="wb-cont">
+  {% if amendments %}{% translate 'Amendments for:' %} {{ docs.0.ref_number }}{% else %}{% translate 'Grants and Contributions:' %}{% endif %}</h1>
+{% endblock main-content-title %}
+
+{% block main-content-centre %}
+<div class="col-md-12">
+  {% block main-content-search-items %}
+
+  {% comment %} The first section of this template is for displaying a single GC record. The second section is for displaying a list of GC amendments. {% endcomment %}
+
+    {% if amendments %}
+
+      {% for doc in docs %}
+        <div class="panel panel-default">
+            <header class="panel-heading">
+                <h5 class="panel-title">
+                    {% if not doc.amendment_number == 'current' %}
+                      {% translate 'Amendment' %} {{ doc.amendment_number }}
+                    {% else %}
+                      <a href="{{ path_info }}">{% translate 'Current' %}
+                    {% endif %}
+                    {% if doc.amendment_date_en %} ({{ doc.amendment_date_en }}){% elif doc.amendment_date_fr %} ({{ doc.amendment_date_fr }}){% endif %}
+                    {% if doc.amendment_number == 'current' %}</a>{% endif %}
+                </h5>
+            </header>
+            <div class="panel-body">
+                {% if LANGUAGE_CODE == 'fr' %}
+                    {% spaceless %}
+                    <strong>{% translate 'Agreement Value:' %}</strong> {{ doc.agreement_value_fr | safe }}<br>
+                    {% if not doc.agreement_title_fr == "-" %}<strong>{% translate 'Agreement:' %}</strong> {{ doc.agreement_title_fr | safe }}
+                        {% if not doc.agreement_number == "-" %} ({{ doc.agreement_number }}). {% endif %}
+                        {% if doc.agreement_end_date_fr %} {{ doc.agreement_start_date_fr }} - {{ doc.agreement_end_date_fr }}{% endif %}<br>{% endif %}
+                    {% if not doc.description_fr == "-" %}<strong>{% translate 'Description:' %}</strong> {{ doc.description_fr | markdown_filter | safe}}{% endif %}
+                    {% if not doc.expected_results_fr == "-" %}<strong>{% translate 'Expected Results:' %}</strong> {{ doc.expected_results_fr | markdown_filter | safe }}{% endif %}
+                    <strong>{% translate 'Organization:' %}</strong> {{ doc.owner_org_fr }}<br>
+                    <strong>{% translate 'Recipient:' %}</strong> {{ doc.recipient_legal_name | safe}}{% if not doc.recipient_type == "-" %} ({{ doc.recipient_type_fr }}){% endif %}<br>
+                    {% if not doc.recipient_city == "-" or not doc.recipient_country == "-" or not doc.recipient_postal_code == "-"%}
+                    <strong>{% translate 'Location:' %}</strong> {% if not doc.recipient_city == "-" %}{{ doc.recipient_city }}, {% endif %}{% if doc.recipient_province_fr %}{{ doc.recipient_province_fr.0 }}, {% endif %}{% if not doc.recipient_country == "-" %}{{ doc.recipient_country }} {% endif %}{% if not doc.recipient_postal_code == "-" %} {{ doc.recipient_postal_code | safe }}{% endif %}<br>{% endif %}
+                    <strong>{% translate 'Type:' %}</strong> {{ doc.agreement_type_fr }}<br>{# There is ALWAYS a reference no. #}
+                    {% if not doc.additional_information_fr == "-" %}<strong>{% translate 'Additional Information:' %}</strong> {{ doc.additional_information_fr | markdown_filter | safe }}{% endif %}
+                    {% if not doc.recipient_operating_name == "-" %}<strong>{% translate "Recipient's Operating Name:" %}</strong> {{ doc.recipient_operating_name | safe}}<br>{% endif %}
+                    {% if not doc.research_organization_name == "-" %}<strong>{% translate 'Research Organization:' %}</strong> {{ doc.research_organization_name | safe}}<br>{% endif %}
+                    {% if not doc.federal_riding_name_fr == "-" %}<strong>{% translate 'Federal Riding Name:' %}</strong> {{ doc.federal_riding_name_fr | safe }}
+                        {% if doc.federal_riding_number %}({{ doc.federal_riding_number }}){% endif %}<br>{% endif %}
+                    {% if not doc.prog_name_fr == "-" %}<strong>{% translate 'Program Name:' %}</strong> {{ doc.prog_name_fr | safe }}<br>
+                        {% if not doc.prog_purpose_fr == "-" %}{{ doc.prog_purpose_fr | markdown_filter | safe }}{% endif %}{% endif %}
+                    {% if not doc.coverage_fr == "-" %}<strong>{% translate 'Coverage:' %}</strong> {{ doc.coverage_fr | safe }}<br>{% endif %}
+                    {% if not doc.foreign_currency_type == "-" and not doc.foreign_currency_value  == 0 %}<strong>{% blocktrans with fctype=doc.foreign_currency_type %}Value in {{ fctype }}{% endblocktrans %}</strong>: {{ doc.foreign_currency_value }}<br>{% endif %}
+                    {% if not doc.naics_identifier == "-" %}<strong>{% translate "NAICS Code:" %}</strong> {{ doc.naics_identifier }}<br>{% endif %}
+                   {% endspaceless %}
+                {% else %}
+                    {% spaceless %}
+                    <strong>{% translate 'Agreement Value:' %}</strong> {{ doc.agreement_value_en | safe }}<br>
+                    {% if not doc.agreement_title_en == "-" %}<strong>{% translate 'Agreement:' %}</strong> {{ doc.agreement_title_en | safe }}
+                        {% if not doc.agreement_number == "-" %} ({{ doc.agreement_number }}). {% endif %}
+                        {% if doc.agreement_end_date_en %} {{ doc.agreement_start_date_en }} - {{ doc.agreement_end_date_en }}{% endif %}<br>{% endif %}
+                    {% if not doc.description_en == "-" %}<strong>{% translate 'Description:' %}</strong> {{ doc.description_en | markdown_filter | safe}}{% endif %}
+                    {% if not doc.expected_results_en == "-" %}<strong>{% translate 'Expected Results:' %}</strong> {{ doc.expected_results_en | markdown_filter | safe }}{% endif %}
+                    <strong>{% translate 'Organization:' %}</strong> {{ doc.owner_org_en }}<br>
+                    <strong>{% translate 'Recipient:' %}</strong> {{ doc.recipient_legal_name | safe}}{% if not doc.recipient_type == "-" %} ({{ doc.recipient_type_en }}){% endif %}<br>
+                    {% if not doc.recipient_city == "-" or not doc.recipient_country == "-" or not doc.recipient_postal_code == "-"%}
+                    <strong>{% translate 'Location:' %}</strong> {% if not doc.recipient_city == "-" %}{{ doc.recipient_city }}, {% endif %}{% if doc.recipient_province_en %}{{ doc.recipient_province_en.0 }}, {% endif %}{% if not doc.recipient_country == "-" %}{{ doc.recipient_country }} {% endif %}{% if not doc.recipient_postal_code == "-" %} {{ doc.recipient_postal_code | safe }}{% endif %}<br>{% endif %}
+                    <strong>{% translate 'Type:' %}</strong> {{ doc.agreement_type_en }}<br>{# There is ALWAYS a reference no. #}
+                    {% if not doc.additional_information_en == "-" %}<strong>{% translate 'Additional Information:' %}</strong> {{ doc.additional_information_en | markdown_filter | safe }}{% endif %}
+                    {% if not doc.recipient_operating_name == "-" %}<strong>{% translate "Recipient's Operating Name:" %}</strong> {{ doc.recipient_operating_name | safe}}<br>{% endif %}
+                    {% if not doc.research_organization_name == "-" %}<strong>{% translate 'Research Organization:' %}</strong> {{ doc.research_organization_name | safe}}<br>{% endif %}
+                    {% if not doc.federal_riding_name_en == "-" %}<strong>{% translate 'Federal Riding Name:' %}</strong> {{ doc.federal_riding_name_en | safe }}
+                        {% if doc.federal_riding_number %}({{ doc.federal_riding_number }}){% endif %}<br>{% endif %}
+                    {% if not doc.prog_name_en == "-" %}<strong>{% translate 'Program Name:' %}</strong> {{ doc.prog_name_en | safe }}<br>
+                        {% if not doc.prog_purpose_en == "-" %}{{ doc.prog_purpose_en | markdown_filter | safe }}{% endif %}{% endif %}
+                    {% if not doc.coverage_en == "-" %}<strong>{% translate 'Coverage:' %}</strong> {{ doc.coverage_en | safe }}<br>{% endif %}
+                    {% if not doc.foreign_currency_type == "-" and not doc.foreign_currency_value  == 0 %}<strong>{% blocktrans with fctype=doc.foreign_currency_type %}Value in {{ fctype }}{% endblocktrans %}</strong>: {{ doc.foreign_currency_value }}<br>{% endif %}
+                    {% if not doc.naics_identifier == "-" %}<strong>{% translate "NAICS Code:" %}</strong> {{ doc.naics_identifier }}<br>{% endif %}
+                   {% endspaceless %}
+                {% endif %}
+            </div>
+        </div>
+      {% endfor %}
+
+    {% else %}
+      {% for doc in docs %}
+      {% if language == 'fr' %}
+
+        {% if not doc.agreement_title_fr == "-" %}
+        <div class="row mrgn-bttm-sm">
+            <div class="col-sm-4"><strong>{% translate 'Title:' %}</strong></div>
+            <div class="col-sm-8">{{ doc.agreement_title_fr }}</div>
+        </div>
+        {% endif %}
+        {% if not results.docs.0.agreement_number == "-" %}
+        <div class="row mrgn-bttm-sm">
+            <div class="col-sm-4"><strong>{% translate 'Agreement Number:' %}</strong></div>
+            <div class="col-sm-8">{{ doc.agreement_number }}</div>
+        </div>
+        {% endif %}
+        {% if not doc.agreement_value_fr == "-" %}
+        <div class="row mrgn-bttm-sm">
+            <div class="col-sm-4"><strong>{% translate 'Agreement Value:' %}</strong></div>
+            <div class="col-sm-8">{{ doc.agreement_value_fr }}</div>
+        </div>
+        {% endif %}
+        {% if not doc.agreement_end_date_fr == "-" %}
+        <div class="row mrgn-bttm-sm">
+            <div class="col-sm-4"><strong>{% translate 'Agreement Date:' %}</strong></div>
+            <div class="col-sm-8">{{ doc.agreement_start_date_fr }} - {{ doc.agreement_end_date_fr }}</div>
+        </div>
+        {% endif %}
+        {% if not doc.description_fr == "-" %}
+        <div class="row mrgn-bttm-sm">
+            <div class="col-sm-4"><strong>{% translate 'Description:' %}</strong></div>
+            <div class="col-sm-8">{{ doc.description_fr }}</div>
+        </div>
+        {% endif %}
+        <div class="row mrgn-bttm-sm">
+            <div class="col-sm-4"><strong>{% translate 'Organization:' %}</strong></div>
+            <div class="col-sm-8">{{ doc.owner_org_fr }}</div>
+        </div>
+        {% if not doc.expected_results_fr == "-" %}
+        <div class="row mrgn-bttm-sm">
+            <div class="col-sm-4"><strong>{% translate 'Expected Results:' %}</strong></div>
+            <div class="col-sm-8">{{ doc.expected_results_fr | markdown_filter | safe }}</div>
+        </div>
+        {% endif %}
+        {% if not doc.recipient_city == "-" or not doc.recipient_country == "-" or not doc.recipient_postal_code == "-"%}
+        <div class="row mrgn-bttm-sm">
+            <div class="col-sm-4"><strong>{% translate 'Location:' %}</strong></div>
+            <div class="col-sm-8">{% if not doc.recipient_city == "-" %}{{ doc.recipient_city }}, {% endif %}{% if not doc.recipient_province_fr == "-" %}{{ doc.recipient_province_fr }}, {% endif %}{% if not recipient_country == "-" %}{{ doc.recipient_country }} {% endif %}{% if not doc.recipient_postal_code == "-" %} {{ doc.recipient_postal_code | safe }}{% endif %}</div>
+        </div>
+        {% endif %}
+        <div class="row mrgn-bttm-sm">
+            <div class="col-sm-4"><strong>{% translate 'Reference Number:' %}</strong></div>
+            <div class="col-sm-8">{{ doc.ref_number | safe }}</div>
+        </div>
+        <div class="row mrgn-bttm-sm">
+            <div class="col-sm-4"><strong>{% translate 'Agreement Type:' %}</strong></div>
+            <div class="col-sm-8">{{ doc.agreement_type_fr | safe }}</div>
+        </div>
+        <div class="row mrgn-bttm-sm">
+            <div class="col-sm-4"><strong>{% translate "Report Type:" %}</strong></div>
+            <div class="col-sm-8">{% if doc.format == "NTR" %}{% translate "Nothing To Report" %}{% else %}{% translate 'Grants and Contributions' %}{% endif %}</div>
+        </div>
+        {% if not doc.recipient_business_number == "-" %}
+        <div class="row mrgn-bttm-sm">
+            <div class="col-sm-4"><strong>{% translate 'Recipient Business Number:' %}</strong></div>
+            <div class="col-sm-8">{{ doc.recipient_business_number | safe }}</div>
+        </div>
+        {% endif %}
+        {% if not doc.recipient_type == "-" %}
+        <div class="row mrgn-bttm-sm">
+            <div class="col-sm-4"><strong>{% translate 'Recipient Type:' %}</strong></div>
+            <div class="col-sm-8">{{ doc.recipient_type_fr | safe}}</div>
+        </div>
+        {% endif %}
+        {% if not doc.additional_information_fr == "-" %}
+        <div class="row mrgn-bttm-sm">
+            <div class="col-sm-4"><strong>{% translate "Additional Information:" %}</strong></div>
+            <div class="col-sm-8">{{ doc.additional_information_fr | markdown_filter | safe }}</div>
+        </div>
+        {% endif %}
+        {% if not doc.amendment_number == 'current' %}
+        <div class="row mrgn-bttm-sm">
+            <div class="col-sm-4"><strong>{% translate 'Amendment Number:' %}</strong></div>
+            <div class="col-sm-8">{% translate doc.amendment_number %}</div>
+        </div>
+        {% endif %}
+        {% if doc.amendment_date_fr %}
+        <div class="row mrgn-bttm-sm">
+            <div class="col-sm-4"><strong>{% translate 'Amendment Date' %}</strong></div>
+            <div class="col-sm-8">{{ doc.amendment_date_fr }}</div>
+        </div>
+        {% endif %}
+        {% if not doc.recipient_operating_name == "-" %}
+        <div class="row mrgn-bttm-sm">
+            <div class="col-sm-4"><strong>{% translate "Recipient's Operating Name:" %}</strong></div>
+            <div class="col-sm-8">{{ doc.recipient_operating_name | safe }}</div>
+        </div>
+        {% endif %}
+        {% if not doc.recipient_legal_name == "-" %}
+        <div class="row mrgn-bttm-sm">
+            <div class="col-sm-4"><strong>{% translate "Recipient's Legal Name:" %}</strong></div>
+            <div class="col-sm-8">{{ doc.recipient_legal_name | safe }}</div>
+        </div>
+        {% endif %}
+        {% if not doc.research_organization_name == "-" %}
+        <div class="row mrgn-bttm-sm">
+            <div class="col-sm-4"><strong>{% translate "Research Organization:" %}</strong></div>
+            <div class="col-sm-8">{{ doc.research_organization_name | safe }}</div>
+        </div>
+        {% endif %}
+        {% if not doc.federal_riding_name_fr == "-" %}
+        <div class="row mrgn-bttm-sm">
+            <div class="col-sm-4"><strong>{% translate "Federal Riding Name:" %}</strong></div>
+            <div class="col-sm-8">{{ doc.federal_riding_name_fr | safe }}</div>
+        </div>
+        {% endif %}
+        {% if not doc.federal_riding_number == "-" %}
+        <div class="row mrgn-bttm-sm">
+            <div class="col-sm-4"><strong>{% translate "Federal Riding Number:" %}</strong></div>
+            <div class="col-sm-8">{{ doc.federal_riding_number | safe }}</div>
+        </div>
+        {% endif %}
+        {% if not doc.prog_name_fr == "-" %}
+        <div class="row mrgn-bttm-sm">
+            <div class="col-sm-4"><strong>{% translate "Program:" %}</strong></div>
+            <div class="col-sm-8">{{ doc.prog_name_fr | safe }}</div>
+        </div>
+        {% endif %}
+        {% if not doc.prog_purpose_fr == "-" %}
+        <div class="row mrgn-bttm-sm">
+            <div class="col-sm-4"><strong>{% translate "Program Purpose:" %}</strong></div>
+            <div class="col-sm-8">{{ doc.prog_purpose_fr | markdown_filter | safe }}</div>
+        </div>
+        {% endif %}
+        {% if not doc.coverage_fr == "-" %}
+        <div class="row mrgn-bttm-sm">
+            <div class="col-sm-4"><strong>{% translate "Coverage:" %}</strong></div>
+            <div class="col-sm-8">{{ doc.coverage_fr | safe }}</div>
+        </div>
+        {% endif %}
+        {% if not doc.foreign_currency_type == "-" and not doc.foreign_currency_value  == 0 %}
+        <div class="row mrgn-bttm-sm">
+            <div class="col-sm-4"><strong>{% blocktrans with fctype=doc.foreign_currency_type %}Value in {{ fctype }}{% endblocktrans %}</strong>:</div>
+            <div class="col-sm-8">{{ doc.foreign_currency_value  }}</div>
+        </div>
+        {% endif %}
+        {% if not doc.naics_identifier == "-" %}
+        <div class="row mrgn-bttm-sm">
+            <div class="col-sm-4"><strong>{% translate "NAICS Code:" %}</strong></div>
+            <div class="col-sm-8">{{ doc.naics_identifier | safe }}</div>
+        </div>
+        {% endif %}
+        {% if doc.amendment_date_fr %}{% if not doc.amendment_date_fr == "-" %}
+        <div class="row mrgn-bttm-sm">
+          <div class="col-sm-4"><strong>{% translate 'Amendments:' %}</strong></div>
+          <div class="col-sm-8"><a href="{{ path_info }}?amendments"><strong>{% translate 'See Amendments' %}</strong></a></div>
+        </div>
+        {% endif %}{% endif %}
+
+      {% else %}
+
+        {% if not doc.agreement_title_en == "-" %}
+        <div class="row mrgn-bttm-sm">
+            <div class="col-sm-4"><strong>{% translate 'Title:' %}</strong></div>
+            <div class="col-sm-8">{{ doc.agreement_title_en }}</div>
+        </div>
+        {% endif %}
+        {% if not results.docs.0.agreement_number == "-" %}
+        <div class="row mrgn-bttm-sm">
+            <div class="col-sm-4"><strong>{% translate 'Agreement Number:' %}</strong></div>
+            <div class="col-sm-8">{{ doc.agreement_number }}</div>
+        </div>
+        {% endif %}
+        {% if not doc.agreement_value_en == "-" %}
+        <div class="row mrgn-bttm-sm">
+            <div class="col-sm-4"><strong>{% translate 'Agreement Value:' %}</strong></div>
+            <div class="col-sm-8">{{ doc.agreement_value_en }}</div>
+        </div>
+        {% endif %}
+        {% if not doc.agreement_end_date_en == "-" %}
+        <div class="row mrgn-bttm-sm">
+            <div class="col-sm-4"><strong>{% translate 'Agreement Date:' %}</strong></div>
+            <div class="col-sm-8">{{ doc.agreement_start_date_en }} - {{ doc.agreement_end_date_en }}</div>
+        </div>
+        {% endif %}
+        {% if not doc.description_en == "-" %}
+        <div class="row mrgn-bttm-sm">
+            <div class="col-sm-4"><strong>{% translate 'Description:' %}</strong></div>
+            <div class="col-sm-8">{{ doc.description_en }}</div>
+        </div>
+        {% endif %}
+        <div class="row mrgn-bttm-sm">
+            <div class="col-sm-4"><strong>{% translate 'Organization:' %}</strong></div>
+            <div class="col-sm-8">{{ doc.owner_org_en }}</div>
+        </div>
+
+           {% if not doc.expected_results_en == "-" %}
+        <div class="row mrgn-bttm-sm">
+            <div class="col-sm-4"><strong>{% translate 'Expected Results:' %}</strong></div>
+            <div class="col-sm-8">{{ doc.expected_results_en | markdown_filter | safe }}</div>
+        </div>
+        {% endif %}
+        {% if not doc.recipient_city == "-" or not doc.recipient_country == "-" or not doc.recipient_postal_code == "-"%}
+        <div class="row mrgn-bttm-sm">
+            <div class="col-sm-4"><strong>{% translate 'Location:' %}</strong></div>
+            <div class="col-sm-8">{% if not doc.recipient_city == "-" %}{{ doc.recipient_city }}, {% endif %}{% if not doc.recipient_province_en == "-" %}{{ doc.recipient_province_en }}, {% endif %}{% if not recipient_country == "-" %}{{ doc.recipient_country }} {% endif %}{% if not doc.recipient_postal_code == "-" %} {{ doc.recipient_postal_code | safe }}{% endif %}</div>
+        </div>
+        {% endif %}
+        <div class="row mrgn-bttm-sm">
+            <div class="col-sm-4"><strong>{% translate 'Reference Number:' %}</strong></div>
+            <div class="col-sm-8">{{ doc.ref_number | safe }}</div>
+        </div>
+        <div class="row mrgn-bttm-sm">
+            <div class="col-sm-4"><strong>{% translate 'Agreement Type:' %}</strong></div>
+            <div class="col-sm-8">{{ doc.agreement_type_en | safe }}</div>
+        </div>
+        <div class="row mrgn-bttm-sm">
+            <div class="col-sm-4"><strong>{% translate "Report Type:" %}</strong></div>
+            <div class="col-sm-8">{% if doc.format == "NTR" %}{% translate "Nothing To Report" %}{% else %}{% translate 'Grants and Contributions' %}{% endif %}</div>
+        </div>
+        {% if not doc.recipient_business_number == "-" %}
+        <div class="row mrgn-bttm-sm">
+            <div class="col-sm-4"><strong>{% translate 'Recipient Business Number:' %}</strong></div>
+            <div class="col-sm-8">{{ doc.recipient_business_number | safe }}</div>
+        </div>
+        {% endif %}
+        {% if not doc.recipient_type == "-" %}
+        <div class="row mrgn-bttm-sm">
+            <div class="col-sm-4"><strong>{% translate 'Recipient Type:' %}</strong></div>
+            <div class="col-sm-8">{{ doc.recipient_type_en | safe}}</div>
+        </div>
+        {% endif %}
+        {% if not doc.additional_information_en == "-" %}
+        <div class="row mrgn-bttm-sm">
+            <div class="col-sm-4"><strong>{% translate "Additional Information:" %}</strong></div>
+            <div class="col-sm-8">{{ doc.additional_information_en | markdown_filter | safe }}</div>
+        </div>
+        {% endif %}
+        {% if not doc.amendment_number == 'current' %}
+        <div class="row mrgn-bttm-sm">
+            <div class="col-sm-4"><strong>{% translate 'Amendment Number:' %}</strong></div>
+            <div class="col-sm-8">{% translate doc.amendment_number %}</div>
+        </div>
+        {% endif %}
+        {% if doc.amendment_date_en %}
+        <div class="row mrgn-bttm-sm">
+            <div class="col-sm-4"><strong>{% translate 'Amendment Date' %}</strong></div>
+            <div class="col-sm-8">{{ doc.amendment_date_en }}</div>
+        </div>
+        {% endif %}
+        {% if not doc.recipient_operating_name == "-" %}
+        <div class="row mrgn-bttm-sm">
+            <div class="col-sm-4"><strong>{% translate "Recipient's Operating Name:" %}</strong></div>
+            <div class="col-sm-8">{{ doc.recipient_operating_name | safe }}</div>
+        </div>
+        {% endif %}
+        {% if not doc.recipient_legal_name == "-" %}
+        <div class="row mrgn-bttm-sm">
+            <div class="col-sm-4"><strong>{% translate "Recipient's Legal Name:" %}</strong></div>
+            <div class="col-sm-8">{{ doc.recipient_legal_name | safe }}</div>
+        </div>
+        {% endif %}
+        {% if not doc.research_organization_name == "-" %}
+        <div class="row mrgn-bttm-sm">
+            <div class="col-sm-4"><strong>{% translate "Research Organization:" %}</strong></div>
+            <div class="col-sm-8">{{ doc.research_organization_name | safe }}</div>
+        </div>
+        {% endif %}
+        {% if not doc.federal_riding_name_en == "-" %}
+        <div class="row mrgn-bttm-sm">
+            <div class="col-sm-4"><strong>{% translate "Federal Riding Name:" %}</strong></div>
+            <div class="col-sm-8">{{ doc.federal_riding_name_en | safe }}</div>
+        </div>
+        {% endif %}
+        {% if not doc.federal_riding_number == "-" %}
+        <div class="row mrgn-bttm-sm">
+            <div class="col-sm-4"><strong>{% translate "Federal Riding Number:" %}</strong></div>
+            <div class="col-sm-8">{{ doc.federal_riding_number | safe }}</div>
+        </div>
+        {% endif %}
+        {% if not doc.prog_name_en == "-" %}
+        <div class="row mrgn-bttm-sm">
+            <div class="col-sm-4"><strong>{% translate "Program:" %}</strong></div>
+            <div class="col-sm-8">{{ doc.prog_name_en | safe }}</div>
+        </div>
+        {% endif %}
+        {% if not doc.prog_purpose_en == "-" %}
+        <div class="row mrgn-bttm-sm">
+            <div class="col-sm-4"><strong>{% translate "Program Purpose:" %}</strong></div>
+            <div class="col-sm-8">{{ doc.prog_purpose_en | markdown_filter | safe }}</div>
+        </div>
+        {% endif %}
+        {% if not doc.coverage_en == "-" %}
+        <div class="row mrgn-bttm-sm">
+            <div class="col-sm-4"><strong>{% translate "Coverage:" %}</strong></div>
+            <div class="col-sm-8">{{ doc.coverage_en | safe }}</div>
+        </div>
+        {% endif %}
+        {% if not doc.foreign_currency_type == "-" and not doc.foreign_currency_value  == 0 %}
+        <div class="row mrgn-bttm-sm">
+            <div class="col-sm-4"><strong>{% blocktrans with fctype=doc.foreign_currency_type %}Value in {{ fctype }}{% endblocktrans %}</strong>:</div>
+            <div class="col-sm-8">{{ doc.foreign_currency_value  }}</div>
+        </div>
+        {% endif %}
+        {% if not doc.naics_identifier == "-" %}
+        <div class="row mrgn-bttm-sm">
+            <div class="col-sm-4"><strong>{% translate "NAICS Code:" %}</strong></div>
+            <div class="col-sm-8">{{ doc.naics_identifier | safe }}</div>
+        </div>
+        {% endif %}
+        {% if doc.amendment_date_en %}{% if not doc.amendment_date_en == "-" %}
+        <div class="row mrgn-bttm-sm">
+          <div class="col-sm-4"><strong>{% translate 'Amendments:' %}</strong></div>
+          <div class="col-sm-8"><a href="{{ path_info }}?amendments"><strong>{% translate 'See Amendments' %}</strong></a></div>
+        </div>
+        {% endif %}{% endif %}
+
+    {% endif %}
+    {% endfor %}
+
+
+
+  {% endif %}
+  {% endblock main-content-search-items %}
+</div>
+{% endblock main-content-centre %}
+

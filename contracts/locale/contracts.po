@@ -1,0 +1,181 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR "Government of Canada, Gouvernement du Canada"
+# This file is distributed under the same license as the "Open Canada Search - reclass Module" package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: \"Open Canada Search - contracts Module\"\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-05-18 11:45-0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+
+msgid "Contract Details:"
+msgstr "Détails du contrat :"
+
+msgid "Search Government Contracts"
+msgstr "Rechercher des contrats gouvernementaux"
+
+msgid "Contract"
+msgstr "Contrats"
+
+msgid "Contract Date:"
+msgstr "Date du contrat :"
+
+msgid "Vendor Name:"
+msgstr "Nom du fournisseur :"
+
+msgid "Description: "
+msgstr "Description :"
+
+msgid "Economic Object Code: "
+msgstr "Code d’article économique :"
+
+msgid "Instrument Type: "
+msgstr "Type d’instrument :"
+
+msgid "Commodity Type: "
+msgstr "Type de produit"
+
+msgid "Commodity Code: "
+msgstr "Code de produit :"
+
+msgid "Organization: "
+msgstr "Organisation :"
+
+msgid "Vendor Postal Code:"
+msgstr "Code postal du fournisseur :"
+
+msgid "Comments: "
+msgstr "Commentaires :"
+
+msgid "Additional Comments: "
+msgstr "Commentaires supplémentaires :"
+
+msgid "Buyer Name: "
+msgstr "Nom de l'acheteur :"
+
+msgid "Date and Value"
+msgstr "Date et valeur"
+
+msgid "Reporting Period: "
+msgstr "Période de déclaration :"
+
+msgid "Contract Date: "
+msgstr "Date du contrat :"
+
+msgid "Contract Period Start Date: "
+msgstr "Date de début du marché :"
+
+msgid "Contract Period End or Delivery Date: "
+msgstr "Date de clôture du marché ou Date de livraison :"
+
+msgid "Total Contract Value: "
+msgstr "Valeur totale du contrat : "
+
+msgid "Original Contract Value: "
+msgstr "Valeur d'origine dumarché : "
+
+msgid "Amendment Value: "
+msgstr "Valeur de modification :"
+
+msgid "Applicable Trade Agreements"
+msgstr "Accord commercial applicable"
+
+msgid "Additional Details"
+msgstr "Informations supplémentaires"
+
+msgid "Procurement Identification Number: "
+msgstr "Numéro d’identification d’approvisionnement :"
+
+msgid "Solicitation Procedure: "
+msgstr "Méthode d’invitation à soumissionner :"
+
+msgid "Limited Tendering Reason: "
+msgstr "Raisons justifiant le recours à l’appel d’offres limité :"
+
+msgid "Contracting Entity: "
+msgstr "Entité contractante :"
+
+msgid "Standing Offer Number: "
+msgstr "Numéro d’offre à commandes :"
+
+msgid "Trade Agreement Exceptions and Exclusions: "
+msgstr "Exceptions et exclusions applicables aux accords commerciaux :"
+
+msgid "Comprehensive Land Claims Agreement: "
+msgstr "Entente sur les revendications territoriales globales :"
+
+msgid "Procurement Strategy for Indigenous Business: "
+msgstr "Stratégie d’approvisionnement auprès des entreprises autochtones :"
+
+msgid "Indigenous Business excluding PSIB: "
+msgstr "Entreprises autochtones excluant le marché réservé en vertu de la SAEA :"
+
+msgid "Intellectual Property: "
+msgstr "propriété intellectuelle :"
+
+msgid "Potential Commercial Exploitation: "
+msgstr "Potentiel d'exploitation commerciale :"
+
+msgid "Former Public Servant: "
+msgstr "Ancien fonctionnaire :"
+
+msgid "Ministers Office Contracts: "
+msgstr "Marchés du cabinet du ministre :"
+
+msgid "Country of Vendor: "
+msgstr "Pays du fournisseur :"
+
+msgid "Number of Bids: "
+msgstr "Nombre do soumissions : "
+
+msgid "Article 6 Government Contract Exceptions: "
+msgstr "Article 6 – Exceptions au Règlement sur les marchés de l’État :"
+
+msgid "Award Criteria: "
+msgstr "Critères d’attribution :"
+
+msgid "Socio-Economic Indicator: "
+msgstr "Indicateur socioéconomique :"
+
+msgid "Search Government Contracts over $10,000"
+msgstr "Rechercher des contrats gouvernementaux dont la valeur est supérieure à 10 000 $"
+
+msgid "Contract Date"
+msgstr "Date du contrat"
+
+msgid "Value"
+msgstr "Valeur"
+
+msgid "Total Value: "
+msgstr "Valeur totale : "
+
+msgid "Original Value: "
+msgstr "Valeur d'origine :"
+
+msgid "Work Description:"
+msgstr "Description du travail :"
+
+msgid "Instrument Type:"
+msgstr "Type d’instrument :"
+
+msgid "Commodity Type:"
+msgstr "Type de produit :"
+
+msgid "Comments:"
+msgstr "Commentaires :"
+
+msgid "Additional Comments:"
+msgstr "Commentaires additionnels :"
+
+msgid "Duration:"
+msgstr "Dureé :"

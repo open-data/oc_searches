@@ -1,0 +1,45 @@
+{% load i18n %}
+{% load search_extras %}
+
+<div class="row mrgn-bttm-lg">
+  <div class="col-sm-12">
+    <h2 class="mrgn-tp-0 mrgn-bttm-sm h4">
+      {% if language == 'en' %}
+      <a href="{{ path_info }}record/{{ doc.id }}"><strong>{{ doc.minister_en | safe }}</strong></a>
+      {% else %}
+      <a href="{{ path_info }}record/{{ doc.id }}"><strong>{{ doc.minister_fr | safe }}</strong></a>
+      {% endif %}
+    </h2>
+  </div>
+  <div class="col-sm-6">
+    <strong>{% if language == 'fr' %}{{ doc.minister_name_fr }}{% else %}{{ doc.minister_name_en }}{% endif %}</strong>
+  </div>
+  <div class="col-sm-6 text-right">
+    <strong>
+      {% if language == 'en' %}{{ doc.start_date_en }} - {{ doc.end_date_en }}
+      {% else %}{{ doc.start_date_fr }} - {{ doc.end_date_fr }}
+      {% endif %}
+    </strong>
+  </div>
+  <div class="col-sm-12">
+    {% if language == 'fr' %}
+    <p class="mrgn-tp-md"><strong>{% trans 'Purpose:' %}</strong> {{ doc.purpose_fr | safe }}</p>
+    <p class="mrgn-tp-md"><strong>{% trans 'Locations:' %}</strong>
+    <ul class="list-none">
+      {% for location in doc.locations_fr %}
+      <li>{{location}}</li>
+      {% endfor %}
+    </ul>
+    </p>
+    {% else %}
+    <p class="mrgn-tp-md"><strong>{% trans 'Purpose: ' %}</strong> {{ doc.purpose_en | safe }}</p>
+    <p class="mrgn-tp-md"><strong>{% trans 'Locations:' %}</strong>
+    <ul class="list-none">
+      {% for location in doc.locations_en %}
+      <li>{{location}}</li>
+      {% endfor %}
+    </ul>
+    </p>
+    {% endif %}
+  </div>
+</div>

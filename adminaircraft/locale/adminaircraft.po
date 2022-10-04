@@ -1,0 +1,48 @@
+# RCAF Aircraft Administration Localization.
+# Copyright (C) 2022 "Government of Canada, Gouvernement du Canada"
+# This file is distributed under the same license as the "Open Canada Search - QP Notes Module" package.
+# Ross t <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: \"Open Canada Search - adminaircraft Module\"\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-01-12 12:00-0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Ross \n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Purpose:"
+msgstr "But :"
+
+msgid "Locations:"
+msgstr "Endroits :"
+
+msgid "Reference Number:"
+msgstr "Numéro de référence :"
+
+msgid "Travel start date:"
+msgstr "Date du début du voyage :"
+
+msgid "Travel end date:"
+msgstr "Date de fin du voyage :"
+
+msgid "Number of hours flown:"
+msgstr "Le nombre d’heures de vol :"
+
+msgid "Purpose of the trip:"
+msgstr "But du voyage :"
+
+msgid "Locations visited:"
+msgstr "Endroits visité :"
+
+msgid "Passenger names:"
+msgstr "Nom des passagers :"
+
+msgid "Additional Information:"
+msgstr "Renseignements supplémentaires :"

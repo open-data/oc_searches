@@ -1,0 +1,44 @@
+
+{% load i18n %}
+{% load search_extras %}
+
+<div class="col-md-12 h3 mrgn-bttm-md">
+    {% if language == 'fr' %}{{ doc.minister_fr }} : {{ doc.minister_name_fr }}{% else %}{{ doc.minister_en }}: {{ doc.minister_name_en }}{% endif %}
+</div>
+<div class="col-sm-4"><strong>{% trans 'Reference Number:' %}</strong></div>
+<div class="col-sm-8">{{ doc.reference_number }}</div>
+<div class="col-sm-4"><strong>{% trans 'Travel start date:' %}</strong></div>
+<div class="col-sm-8">{% if language == 'fr' %}{{ doc.start_date_fr }}{% else %}{{ doc.start_date_en }}{% endif %}</div>
+<div class="col-sm-4"><strong>{% trans 'Travel end date:' %}</strong></div>
+<div class="col-sm-8">{% if language == 'fr' %}{{ doc.end_date_fr }}{% else %}{{ doc.end_date_en }}{% endif %}</div>
+<div class="col-sm-4"><strong>{% trans 'Number of hours flown:' %}</strong></div>
+<div class="col-sm-8">{{ doc.hours }}</div>
+<div class="col-sm-4"><strong>{% trans 'Purpose of the trip:' %}</strong></div>
+<div class="col-sm-8">{% if language == 'fr' %}{{ doc.purpose_fr }}{% else %}{{ doc.purpose_en }}{% endif %}</div>
+<div class="col-sm-4"><strong>{% trans 'Locations visited:' %}</strong></div>
+<div class="col-sm-8"><ul class="list-unstyled">{% if language == 'fr' %}
+    {% for location in doc.locations_fr %}
+      <li>{{location}}</li>
+    {% endfor %}
+  {% else %}
+    {% for location in doc.locations_en %}
+      <li>{{location}}</li>
+    {% endfor %}
+  {% endif %}</ul></div>
+<div class="col-sm-4"><strong>{% trans 'Passenger names:' %}</strong></div>
+<div class="col-sm-8"><ul class="list-unstyled">
+    {% for passenger in doc.passengers %}
+      <li>{{ passenger }}</li>
+    {% endfor %}
+  </ul></div>
+{% if language == 'fr' %}
+  {% if doc.additional_information_fr != '-' %}
+  <div class="col-sm-4"><strong>{% trans 'Additional Information:' %}</strong></div>
+  <div class="col-sm-8">{{ doc.additional_information_fr }}</div>
+  {% endif %}
+{% else %}
+  {% if doc.additional_information_en != '-' %}
+  <div class="col-sm-4"><strong>{% trans 'Additional Information:' %}</strong></div>
+  <div class="col-sm-8">{{ doc.additional_information_en }}</div>
+  {% endif %}
+{% endif %}

@@ -1,0 +1,177 @@
+{% extends "record.html" %}
+{% load static %}
+{% load humanize %}
+{% load i18n %}
+{% load l10n %}
+{% load search_extras %}
+{% get_current_language as LANGUAGE_CODE %}
+
+{% block main-content-title %}
+<h1 property="name" id="wb-cont">{% translate 'Annual Report on Travel, Hospitality and Conference Expenditures' %}</h1>
+{% endblock main-content-title %}
+
+
+    {% block main-content-centre %}
+    <div class="col-md-12">
+        {% block main-content-search-items %}
+        {% for doc in docs %}
+        <h2>{{ org_title }} {{ doc.year|add:-1 }} - {{ doc.year }}</h2>
+
+            <p>{% blocktranslate with org_title=org_title doc_year=doc.year %}As required by the Treasury Board Directive on Travel, Hospitality, Conference and Event Expenditures, this report provides information on travel, hospitality and conference expenditures for {{ org_title }} for the fiscal year ended March 31, {{ doc_year }}.{% endblocktranslate %}</p>
+
+            <p>{% translate 'Travel, hospitality and conference expenditures incurred by a federal department or agency relate to activities that support the department or agency’s mandate and the government’s priorities.' %}</p>
+
+            <h3>{% translate "Mandate:" %}</h3>
+            <p>{% if language == 'fr' %}{{ doc.mandate_description_fr }}{% else %}{{ doc.mandate_description_en }}{% endif %}</p>
+
+            <h3>{{ org_title}} {% translate "Travel, Hospitality and Conference Expenditures for Year ending March 31," %} {{ doc.year }}</h3>
+            <table class="table">
+                <caption class="wb-inv">{% translate "Travel, Hospitality and Conference Expenditures" %}</caption>
+                <thead>
+                    <tr>
+                        <th scope="col"><p class="text-center">{% translate "Expenditure category" %}</p></th>
+                        <th scope="col"><p class="text-center">{% blocktranslate with doc_year=doc.year %}Expenditures for year ended March 31, {{ doc_year}} ($ thousands){% endblocktranslate %}</p></th>
+                        {% if doc.variance %}
+                        <th scope="col"><p class="text-center">{% translate "Expenditures for year ended March 31," %} {{ doc.year|add:-1 }}{% if doc.year == "2018" %} <sup id="fn1-rf"><a class="fn-lnk" href="#fn1"><span class="wb-inv">Note  </span>1</a></sup>{% endif %} {% translate "($ thousands)" %}</p></th>
+                        <th scope="col"><p class="text-center">{% translate "Variance ($ thousands)" %}</p></th>
+                        {% endif %}
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td colspan="2">{% translate 'Travel' %}</td></tr>
+                    {% if doc.year < "2018" %}
+                        <tr>
+                            <td><p style="padding-left: 1em;">{% translate 'Public Servants' %}</p></td>
+                            <td><p class="text-right">{{ doc.public_servants_kdollars|friendly_currency:curr_fmt }}</p></td>
+                            {% if doc.variance %}<td><p class="text-right">{{doc.prev_ps_dollars|friendly_currency:curr_fmt }}</p></td>
+                            <td><p class="text-right">{{doc.var_ps_dollars|friendly_currency:curr_fmt }}</p></td>{% endif %}
+                        </tr><tr>
+                            <td><p style="padding-left: 1em;">{% translate 'Non-public Servants' %}</p></td>
+                            <td><p class="text-right">{{ doc.non_public_servants_kdollars|friendly_currency:curr_fmt }}</p></td>
+                            {% if doc.variance %}<td><p class="text-right">{{doc.prev_non_ps_dollars|friendly_currency:curr_fmt }}</p></td>
+                            <td><p class="text-right">{{doc.var_ps_dollars|friendly_currency:curr_fmt }}</td></p>{% endif %}
+                        </tr><tr>
+                            <td>{% translate 'A. Total travel' %}</td>
+                            <td style="border-top: black double"><p class="text-right">{{ doc.total_travel|friendly_currency:curr_fmt }}</p></td>
+                            {% if doc.variance %}<td style="border-top: black double"><p class="text-right">{{doc.prev_ps_dollars|friendly_currency:curr_fmt }}</p></td>
+                            <td style="border-top: black double"><p class="text-right">{{doc.var_non_ps_dollars|friendly_currency:curr_fmt }}</p></td>{% endif %}
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td><p style="padding-left: 1em;">{% translate 'Operational activities' %}</p></td>
+                            <td><p class="text-right">{{ doc.operational_activities_kdollars|friendly_currency:curr_fmt }}</p></td>
+                            {% if doc.variance %}{% if doc.year == "2018" %}
+                                <td><p class="text-right">-</p></td><td><p class="text-right">-</p></td>
+                            {% else %}
+                                <td><p class="text-right">{{ doc.prev_op_dollars|friendly_currency:curr_fmt }}</p></td>
+                                <td><p class="text-right">{{ doc.var_op_dollars|friendly_currency:curr_fmt }}</p></td>{% endif %}{% endif %}
+                        </tr>
+                        <tr>
+                            <td><p style="padding-left: 1em;">{% translate 'Key stakeholders' %}<p style="padding-left: 10px;"></p></td>
+                            <td><p class="text-right">{{ doc.key_stakeholders_kdollars|friendly_currency:curr_fmt }}</p></td>
+                            {% if doc.variance %}{% if doc.year == "2018" %}
+                                <td><p class="text-right">-</p></td><td><p class="text-right">-</p></td>
+                            {% else %}
+                                <td><p class="text-right">{{ doc.prev_key_dollars|friendly_currency:curr_fmt }}</p></td>
+                                <td><p class="text-right">{{ doc.var_key_dollars|friendly_currency:curr_fmt }}</p></td>{% endif %}{% endif %}
+                        </tr>
+                        <tr>
+                            <td><p style="padding-left: 1em;">{% translate 'Internal governance' %}</p></td>
+                            <td><p class="text-right">{{ doc.internal_governance_kdollars|friendly_currency:curr_fmt }}</p></td>
+                            {% if doc.variance %}{% if doc.year == "2018" %}
+                                <td><p class="text-right">-</p></td><td><p class="text-right">-</p></td>
+                            {% else %}
+                                <td><p class="text-right">{{ doc.prev_internal_dollars|friendly_currency:curr_fmt }}</p></td>
+                                <td><p class="text-right">{{ doc.var_internal_dollars|friendly_currency:curr_fmt }}</p></td>{% endif %}{% endif %}
+                        </tr>
+                        <tr>
+                            <td><p style="padding-left: 1em;">{% translate 'Training' %}</p></td>
+                            <td><p class="text-right">{{ doc.training_kdollars|friendly_currency:curr_fmt }}</p></td>
+                            {% if doc.variance %}{% if doc.year == "2018" %}
+                                <td><p class="text-right">-</p></td><td><p class="text-right">-</p></td>
+                            {% else %}
+                                <td><p class="text-right">{{ doc.prev_training_dollars|friendly_currency:curr_fmt }}</p></td>
+                                <td><p class="text-right">{{ doc.var_training_dollars|friendly_currency:curr_fmt }}</p></td>{% endif %}{% endif %}
+                        </tr>
+                        <tr>
+                            <td><p style="padding-left: 1em;">{% translate 'Other' %}</p></td>
+                            <td><p class="text-right">{{ doc.other_kdollars|friendly_currency:curr_fmt }}</p></td>
+                            {% if doc.variance %}{% if doc.year == "2018" %}
+                                <td><p class="text-right">-</p></td><td><p class="text-right">-</p></td>
+                            {% else %}
+                                <td><p class="text-right">{{ doc.prev_other_dollars|friendly_currency:curr_fmt }}</p></td>
+                                <td><p class="text-right">{{ doc.var_other_dollars|friendly_currency:curr_fmt }}</p></td>{% endif %}{% endif %}
+                        </tr>
+                        <tr>
+                            <td>{% translate 'A. Total travel' %}</td>
+                            <td style="border-top: black double"><p class="text-right">{{ doc.total_travel|friendly_currency:curr_fmt }}</p></td>
+                            {% if doc.variance %}{% if doc.year == "2017" %}
+                                <td><p class="text-right">-</p></td><td><p class="text-right">-</p></td>
+                            {% else %}
+                            <td style="border-top: black double"><p class="text-right">{{doc.prev_total_travel|friendly_currency:curr_fmt }}</p></td>
+                            <td style="border-top: black double"><p class="text-right">{{doc.var_total_travel|friendly_currency:curr_fmt }}</p></td>{% endif %}{% endif %}
+                        </tr>
+                    {% endif %}
+                    <tr>
+                        <td>{% translate 'B. Hospitality' %}</td>
+                        <td><p class="text-right">{{ doc.hospitality_kdollars|friendly_currency:curr_fmt }}</p></td>
+                        {% if doc.variance %}
+                        <td><p class="text-right">{{ doc.prev_hospitality|friendly_currency:curr_fmt }}</p></td>
+                        <td><p class="text-right">{{ doc.var_hospitality|friendly_currency:curr_fmt }}</p></td>{% endif %}
+                    </tr>
+                    <tr>
+                        <td>{% translate 'C. Conference fees' %}</td><td><p class="text-right">{{ doc.conference_fees_kdollars|friendly_currency:curr_fmt }}</p></td>
+                        {% if doc.variance %}
+                        <td><p class="text-right">{{ doc.prev_conf_fees|friendly_currency:curr_fmt }}</p></td>
+                        <td><p class="text-right">{{ doc.var_conf_fees|friendly_currency:curr_fmt }}</p></td>{% endif %}
+                    </tr>
+                    <tr>
+                        <td class="active">{% translate 'Total [A+B+C]' %}</td>
+                        <td class="active"><p class="text-right">{{ doc.total_abc|friendly_currency:curr_fmt }}</p></td>
+                        {% if doc.variance %}<td class="active"><p class="text-right">{{ doc.prev_total_abc|friendly_currency:curr_fmt }}</p></td>
+                        <td class="active"><p class="text-right">{{ doc.var_total_abc|friendly_currency:curr_fmt }}</p></td>{% endif %}
+                    </tr>
+                    <tr>
+                        <td>{% translate "International travel by minister and minister's staff (included in travel)" %}</td>
+                        <td><p class="text-right">{{ doc.minister_kdollars|friendly_currency:curr_fmt }}</p></td>
+                        {% if doc.variance %}<td><p class="text-right">{{ doc.prev_minister|friendly_currency:curr_fmt }}</p></td>
+                        <td><p class="text-right">{{ doc.var_minister|friendly_currency:curr_fmt }}</p></td>{% endif %}
+                    </tr>
+
+                </tbody>
+            </table>
+            {% if doc.year == "2018" %}
+            <aside class="wb-fnote" role="note">
+                <h2 id="fn">Note</h2>
+                	<dl>
+                        <dt>Note</dt>
+                        <dd id="fn1">
+                            <p>{% translate 'Effective April 1st, 2017, total annual travel expenditures must be disclosed per travel category (above) and an explanation of significant variance be provided on total travel expenditures. Previously, total travel expenditures were disclosed between the travel categories of public and non-public servants.' %}</p>
+                            <p class="fn-rtn"><a href="#fn1-rf"><span class="wb-inv">Return to note </span>1<span class="wb-inv"> referrer</span></a></p>
+                        </dd>
+                    </dl>
+            </aside>
+            {% endif %}
+            <h3>{% translate 'Explanation of significant variances compared with previous fiscal year' %}</h3>
+            {% if doc.travel_compared_fiscal_year_en or doc.travel_compared_fiscal_year_fr%}
+                <h4>{% translate "Total travel:" %}</h4>
+                {% if language == 'fr' %}{{ doc.travel_compared_fiscal_year_fr|safe }}{% else %}{{ doc.travel_compared_fiscal_year_en|safe }}{% endif %}<br>
+            {% endif %}
+            {% if doc.hospitality_compared_fiscal_year_en or doc.hospitality_compared_fiscal_year_fr %}
+                <h4>{% translate "Hospitality:" %}</h4>
+                {% if language == 'fr' %}{{ doc.hospitality_compared_fiscal_year_fr }}{% else %}{{ doc.hospitality_compared_fiscal_year_en }}{% endif %}
+            {% endif %}
+            {% if doc.conference_fees_compared_fiscal_year_en or doc.conference_fees_compared_fiscal_year_fr %}
+                <h4>{% translate "Conference fees:" %}</h4>
+                {% if language == 'fr' %}{{ doc.conference_fees_compared_fiscal_year_fr }}{% else %}{{ doc.conference_fees_compared_fiscal_year_en }}{% endif %}
+            {% endif %}
+            {% if doc.conference_fees_compared_fiscal_year_en or doc.conference_fees_compared_fiscal_year_fr %}
+                <h4>{% translate "Minister and minister’s exempt staff - International travel:" %}</h4>
+                {% if language == 'fr' %}{{ doc.minister_compared_fiscal_year_fr }}{% else %}{{ doc.minister_compared_fiscal_year_en }}{% endif %}
+            {% endif %}
+        {% endfor %}
+        {% endblock main-content-search-items %}
+
+    </div>
+    {% endblock main-content-centre %}
+

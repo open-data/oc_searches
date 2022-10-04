@@ -1,0 +1,99 @@
+{% extends "record.html" %}
+{% load static %}
+{% load humanize %}
+{% load i18n %}
+{% load l10n %}
+{% load search_extras %}
+{% get_current_language as LANGUAGE_CODE %}
+
+{% block main-content-title %}
+<h1 property="name" id="wb-cont">{% translate 'Question Period Note:' %} {% if language == 'fr' %}
+    {{ docs.0.title_fr }}{% else %}{{ docs.0.title_en }}{% endif %}</h1>
+{% endblock main-content-title %}
+
+{% block main-content-centre %}
+<div class="col-md-12">
+    {% block main-content-search-items %}
+    {% for doc in docs %}
+
+        <section class="panel panel-info mrgn-tp-lg">
+            <header class="panel-heading">
+                <h2 class="panel-title">{% trans 'About' %}</h2>
+            </header>
+            <div class="panel-body">
+                <dl>
+                    <div class="row">
+                        <dt><div class="col-sm-3"><strong>{% trans 'Reference number: ' %}</strong></div></dt>
+                        <dd><div class="col-sm-9">{{ doc.reference_number | safe }}</div></dd>
+                    </div>
+                    <div class="row brdr-tp">
+                        <dt><div class="col-sm-3"><strong>{% trans 'Date received: ' %}</strong></div></dt>
+                        <dd><div class="col-sm-9">
+                            {% if language == 'fr' %}{{ doc.date_received_fr }}{% else %}{{ doc.date_received_en }}{% endif %}
+                        </div></dd>
+                    </div>
+                    <div class="row brdr-tp">
+                        <dt><div class="col-sm-3"><strong>{% trans 'Organization: ' %}</strong></div></dt>
+                        <dd><div class="col-sm-9">
+                            {% if language == 'fr' %}{{ doc.owner_org_fr }}{% else %}{{ doc.owner_org_en }}{% endif %}
+                        </div></dd>
+                    </div>
+                    {% if doc.minister_name_en or doc.minister_name_fr %}
+                        <div class="row brdr-tp">
+                            <dt><div class="col-sm-3"><strong>{% trans 'Name of Minister: ' %}</strong></div></dt>
+                            <dd><div class="col-sm-9">
+                            {% if language == 'fr' %}{{ doc.minister_name_fr }}{% else %}{{ doc.minister_name_en }}{% endif %}
+                            </div></dd>
+                        </div>
+                    {% endif %}
+                    <div class="row brdr-tp">
+                        <dt><div class="col-sm-3"><strong>{% trans 'Title of Minister: ' %}</strong></div></dt>
+                        <dd><div class="col-sm-9">
+                            {% if language == 'fr' %}{{ doc.minister_fr }}{% else %}{{ doc.minister_en }}{% endif %}
+                        </div></dd>
+                    </div>
+                </dl>
+            </div>
+        </section>
+
+        {% if doc.question_en != '-' and doc.question_fr != '-' %}
+            <h2>{% trans 'Issue/Question: ' %}</h2>
+            <div>
+                {% if language == 'fr' %}{{ doc.question_fr | markdown_filter | normalize_headings | safe }}
+                {% else %}
+                {{ doc.question_en | markdown_filter | normalize_headings | safe}}{% endif %}
+            </div>
+        {% endif %}
+
+        {% if doc.response_en != '-' and doc.response_fr != '-' %}
+            <h2>{% trans 'Suggested Response: ' %}</h2>
+            <div>
+                {% if language == 'fr' %}{{ doc.response_fr | markdown_filter | safe }}
+                {% else %}
+                {{ doc.response_en | markdown_filter | safe}}{% endif %}
+            </div>
+        {% endif %}
+
+        {% if doc.background_en != '-' and doc.background_fr != '-' %}
+            <h2>{% trans 'Background: ' %}</h2>
+            <div>
+                {% if language == 'fr' %}{{ doc.background_fr | markdown_filter | safe }}
+                {% else %}
+                {{ doc.background_en | markdown_filter | safe}}{% endif %}
+            </div>
+        {% endif %}
+
+        {% if doc.additional_information_en != '-' and doc.additional_information_fr != '-' %}
+            <h2>{% trans 'Additional Information: ' %}</h2>
+            <div>
+                {% if language == 'fr' %}{{ doc.additional_information_fr | markdown_filter | safe }}
+                {% else %}
+                {{ doc.additional_information_en | markdown_filter | safe}}{% endif %}
+            </div>
+        {%  endif %}
+
+    {% endfor %}
+    {% endblock main-content-search-items %}
+</div>
+{% endblock main-content-centre %}
+

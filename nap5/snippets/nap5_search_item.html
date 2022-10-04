@@ -1,0 +1,37 @@
+{% load i18n %}
+{% load search_extras %}
+
+<div class="row mrgn-bttm-lg">
+
+    <div class="col-sm-12">
+        <h2 class="mrgn-tp-0 mrgn-bttm-sm h4">
+            {% if language == 'fr' %}
+                <a href="{{ path_info }}record/{{ doc.id }}">{{ doc.indicators_fra | truncatewords_html:22 | markdown_filter | safe }}</a>
+            {% else %}
+                <a href="{{ path_info }}record/{{ doc.id }}">{{ doc.indicators_eng | truncatewords_html:22 | markdown_filter | safe }}</a>
+            {% endif %}
+        </h2>
+    </div>
+
+    <div class="col-sm-12">
+        <strong>{% translate 'Milestone: ' %}</strong>{% if language == 'fr' %}{{ doc.milestones_fra | safe }}{% else %}{{ doc.milestones_eng | safe }}{% endif %}
+    </div>
+    <div class="col-sm-12">
+        <strong>{% translate 'Commitment: ' %}</strong>{% if language == 'fr' %}{{ doc.commitments_fr | safe }}{% else %}{{ doc.commitments_en | safe }}{% endif %}
+    </div>
+    <div class="col-sm-12">
+        <strong>{% translate 'Lead Organization: ' %}</strong>{% if language == 'fr' %}{{ doc.owner_org_fr }}{% else %}{{ doc.owner_org_en }}{% endif %}
+    </div>
+    <div class="col-sm-12">
+        <strong>{% translate 'Deadline: ' %}</strong>{% if language == 'fr' %}{{ doc.deadline_fr }}{% else %}{{ doc.deadline_en }}{% endif %}
+    </div>
+    <div class="col-sm-8">
+         <strong>{% translate 'Status: ' %}</strong>
+      <span class="label {% if doc.status == 'NS' %}label-danger{% elif doc.status == 'LP' %}label-warning{% elif doc.status == 'SP' %}label-info{% elif doc.status == 'C' %}label-success{% endif %}">
+      {% if language == 'fr' %}{{ doc.status_fr }}{% else %}{{ doc.status_en }}{% endif %}</span>
+    </div>
+    <div class="col-sm-4 text-right">{% if doc.s4d == 'y' %}
+        <span class="label label-primary">{% translate 'Summit for Democracy' %}</span>{% endif %}
+    </div>
+
+</div>

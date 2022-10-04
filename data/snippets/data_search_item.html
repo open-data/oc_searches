@@ -1,0 +1,106 @@
+{% load i18n %}
+{% load search_extras %}
+
+<div class="row mrgn-bttm-xl mrgn-lft-md" xmlns="http://www.w3.org/1999/html">
+  <div class="row">
+     <div class="col-sm-9 text-capitalize">
+       {% spaceless %}
+         <a href="{{ path_info }}record/{{ doc.id | striptags }}">
+           <strong>{% if LANGUAGE_CODE == 'fr' %}
+              {{ doc.title_translated_fr | safe | truncatewords_html:12 }}
+              {% if 'title_translated_fr' in doc.machine_translated_fields %}
+                {{ machine_xlt_msg | safe }}
+              {% endif %}
+             {% else %}
+              {{ doc.title_translated_en | safe | truncatewords_html:12 }}
+              {% if 'title_translated_en' in doc.machine_translated_fields %}
+                {{ machine_xlt_msg | safe }}
+              {% endif %}
+             {% endif %}</strong></a>
+       {% endspaceless %}
+    </div>
+    <div class="col-sm-3 text-right"><span class="{% if doc.jurisdiction_en == 'Provincial' or doc.jurisdiction_fr == 'Provinciale' %}badge badge-provincial
+                                         {% elif doc.jurisdiction_en == 'User' or doc.jurisdiction_fr == 'Utilisateur' %}badge badge-warning
+                                         {% elif doc.jurisdiction_en == 'Municipal' or doc.jurisdiction_fr == 'Municipal' %}badge badge-municipal
+                                         {% else %}badge badge-federal{% endif %}  mrgn-rght-sm">
+      {% if LANGUAGE_CODE == 'fr' %}{{ doc.jurisdiction_fr }}{% else %}{{ doc.jurisdiction_en }}{% endif %}</span></div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12 mrgn-tp-md">
+    {# If the notes were machine-translated, then we add an icon to the end of the markdown text with an informational message #}
+    {% if LANGUAGE_CODE == 'fr' %}
+      {% if 'notes_translated_fr' in doc.machine_translated_fields %}
+        {{ doc.notes_translated_fr | truncatewords_html:100 | add:machine_xlt_msg | markdown_filter | safe }}
+      {% else %}
+        {{ doc.notes_translated_fr | truncatewords_html:100 | markdown_filter | safe }}
+      {% endif %}
+    {% else %}
+      {% if 'notes_translated_en' in doc.machine_translated_fields %}
+        {{ doc.notes_translated_en | truncatewords_html:100 | add:machine_xlt_msg | markdown_filter | safe }}
+      {% else %}
+        {{ doc.notes_translated_en | truncatewords_html:100 | markdown_filter | safe }}
+      {% endif %}
+    {% endif %}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-6">
+      <strong>{% translate 'Last Updated:' %}</strong> {% if LANGUAGE_CODE == 'fr' %}{{ doc.metadata_modified_fr }}{% else %}{{ doc.metadata_modified_en }}{% endif %}
+    </div>
+    <div class="col-sm-6">
+      <strong>{% translate 'Date Published:' %}</strong> {% if LANGUAGE_CODE == 'fr' %}{{ doc.metadata_created_fr }}{% else %}{{ doc.metadata_created_en }}{% endif %}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <strong>{% translate 'Publisher:' %}</strong> {% if LANGUAGE_CODE == 'fr' %}{{ doc.owner_org_fr }}{% else %}{{ doc.owner_org_en }}{% endif %}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <strong>{% translate 'Formats:' %}</strong>
+      {% if LANGUAGE_CODE == 'fr' %}
+        {% for f in doc.formats_fr %}<span class="badge badge-info">{{ f }}</span> {% endfor %}
+      {% else %}
+        {% for f in doc.formats_en %}<span class="badge badge-info">{{ f }}</span> {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <strong>{% translate 'Keywords:' %}</strong>
+      {% if LANGUAGE_CODE == 'fr' %}
+        {% for k in doc.keywords_fr_text %}
+          {% if forloop.counter < 13 or '<mark>' in k %}<span class="badge badge-light">{{ k | safe }}</span> {% endif %}
+          {% if forloop.last and forloop.counter > 12 %} ...{% endif %}
+        {% endfor %}
+        {% if 'keywords_fr' in doc.machine_translated_fields %}{{ machine_xlt_msg | safe }}{% endif %}
+      {% else %}
+        {% for k in doc.keywords_en_text %}
+          {% if forloop.counter < 13 or '<mark>' in k %}<span class="badge badge-light">{{ k | safe }}</span> {% endif %}
+          {% if forloop.last and forloop.counter > 12 %} ...{% endif %}
+        {% endfor %}
+        {% if 'keywords_en' in doc.machine_translated_fields %}{{ machine_xlt_msg | safe }}{% endif %}
+      {% endif %}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12 mrgn-tp-md">
+      {% if not 'data/similar' in path_info and not 'data/similaire' in path_info %}
+      <button type="button" class="btn btn-link">
+        <a href="{% if LANGUAGE_CODE == 'fr' %}/rechercher/fr/data/similaire/{{ doc.id | striptags }}{% else %}/search/en/data/similar/{{ doc.id | striptags }}{% endif %}">{% translate 'More like this' %}</a>
+      </button>
+      {% endif %}
+      {% if "fgp_viewer" in doc.display_flags %}
+          <a value="{{ doc.name }}"
+             id="OGSCartAdd_{{ doc.name }}"
+             class="ogscartbtn ogscartaddbtn btn btn-default btn-sm" href="javascript:;">
+            <span class="glyphicon glyphicon-plus text-success"></span> <span class="text-success">{% trans 'Add to Map List' %}</span></a>
+          <a value="{{ doc.name }}"
+             id="OGSCartRemove_{{ doc.name }}"
+             class="ogscartbtn ogscartremovebtn btn btn-default btn-sm" href="javascript:;">
+            <span class="glyphicon glyphicon-minus text-danger"></span><span class="text-danger"> {% trans 'Remove from Map List' %}</span></a>
+      {% endif %}
+    </div>
+  </div>
+</div>

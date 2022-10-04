@@ -1,0 +1,119 @@
+{% extends "search.html" %}
+{% load static %}
+{% load humanize %}
+{% load i18n %}
+{% load qurl %}
+{% load search_extras %}
+
+{% block main-content-body-top %}
+  <style>
+    @keyframes kf_c {
+      from {stroke-dashoffset: 360} to {stroke-dashoffset: {{c_offset}};}
+    }
+    @keyframes kf_sp {
+      from {stroke-dashoffset: 360} to {stroke-dashoffset: {{sp_offset}};}
+    }
+    @keyframes kf_lp {
+      from {stroke-dashoffset: 360} to {stroke-dashoffset: {{lp_offset}};}
+    }
+    @keyframes kf_ns {
+      from {stroke-dashoffset: 360} to {stroke-dashoffset: {{ns_offset}};}
+    }
+  </style>
+  <div class="row">
+    <div class="col-md-8 col-md-push-2 mrgn-tp-sm">
+    <div class="row mrgn-bttm-md mrgn-lft-md form-inline">
+      <div class="col-md-3">
+        {% if C_list %}<a href="{% qurl request.get_full_path status=C_list %}" title="{{ codes.status|get_dict_value:'C' }}" alt="{{ c_num }} {% translate "committment" %}{{ c_num|pluralize }} {% translate "with status" %} {{ codes.status|get_dict_value:'C' }}">{% endif %}
+        <svg aria-labelledby="cStatTitle" role="img">
+          <title id="cStatTitle">{{ c_num }} {% translate "commitment" %}{{ c_num|pluralize }} {% translate "with status" %} {{ codes.status|get_dict_value:'C' }}</title>
+          <circle class="bg-C" cx="57" cy="57" r="52" />
+          <circle class="meter-C" cx="57" cy="57" r="52" stroke-dashoffset="{{ c_offset }}" style="animation: kf_c 1s ease-out"/>
+          <text x="57" y="64" text-anchor="middle" class="status_count_text">{{ c_num }}</text>
+        </svg>
+        <div class="text-center">{{ codes.status|get_dict_value:'C' }}</div>
+        {% if C_list %}</a>{% endif %}
+      </div>
+
+      <div class="col-md-3">
+        {% if SP_list %}<a href="{% qurl request.get_full_path status=SP_list %}" title="{{ codes.status|get_dict_value:'SP' }}" alt="{{ sp_num }} {% translate "commitment" %}{{ sp_num|pluralize }} {% translate "with status" %} {{ codes.status|get_dict_value:'SP' }}">{% endif %}
+        <svg aria-labelledby="spStatTitle" role="img">
+          <title id="spStatTitle">{{ sp_num }} {% translate "commitment" %}{{ sp_num|pluralize }} {% translate "with status" %} {{ codes.status|get_dict_value:'SP' }}</title>
+          <circle class="bg-SP" cx="57" cy="57" r="52" />
+          <circle class="meter-SP" cx="57" cy="57" r="52" stroke-dashoffset="{{ sp_offset }}" style="animation: kf_sp .8s ease-out"/>
+          <text x="57" y="64" text-anchor="middle" class="status_count_text">{{ sp_num }}</text>
+        </svg>
+        <div class="text-center">{{ codes.status|get_dict_value:'SP' }}</div>
+        {% if SP_list %}</a>{% endif %}
+      </div>
+
+      <div class="col-md-3">
+        {% if LP_list %}<a href="{% qurl request.get_full_path status=LP_list %}" title="{{ codes.status|get_dict_value:'LP' }}" alt="{{ lp_num }} {% translate "commitment" %}{{ lp_num|pluralize }} {% translate "with status" %} {{ codes.status|get_dict_value:'LP' }}">{% endif %}
+        <svg aria-labelledby="lpStatTitle" role="img">
+          <title id="lpStatTitle">{{ lp_num }} {% translate "commitment" %}{{ lp_num|pluralize }} {% translate "with status" %} {{ codes.status|get_dict_value:'LP' }}</title>
+          <circle class="bg-LP" cx="57" cy="57" r="52" />
+          <circle class="meter-LP" cx="57" cy="57" r="52" stroke-dashoffset="{{ lp_offset }}" style="animation: kf_lp .6s ease-out"/>
+          <text x="57" y="64" text-anchor="middle" class="status_count_text">{{ lp_num }}</text>
+        </svg>
+        <div class="text-center">{{ codes.status|get_dict_value:'LP' }}</div>
+        {% if LP_list %}</a>{% endif %}
+      </div>
+
+      <div class="col-md-3">
+        {% if NS_list %}<a href="{% qurl request.get_full_path status=NS_list %}" title="{{ ns_num }} {% translate "commitment" %}{{ ns_num|pluralize }} {% translate "with status" %} {{ codes.status|get_dict_value:'NS' }}">{% endif %}
+        <svg aria-labelledby="nsStatTitle" role="img">
+          <title id="nsStatTitle">{{ ns_num }} {% translate "commitment" %}{{ ns_num|pluralize }} {% translate "with status" %} {{ codes.status|get_dict_value:'NS' }}</title>
+          <circle class="bg-NS" cx="57" cy="57" r="52" />
+          <circle class="meter-NS" cx="57" cy="57" r="52" stroke-dashoffset="{{ ns_offset }}" style="animation: kf_ns .4s ease-out"/>
+          <text x="57" y="64" text-anchor="middle" class="status_count_text">{{ ns_num }}</text>
+        </svg>
+        <div class="text-center">{{ codes.status|get_dict_value:'NS' }}</div>
+        {% if NS_list %}</a>{% endif %}
+      </div>
+    </div>
+      </div>
+  </div>
+{% endblock main-content-body-top %}
+
+{% block search_results_message %}
+{% if not show_all_results %}
+<div class="row mrgn-rght-lg">
+    <div class="col-md-12">
+    <p><b>{% if LANGUAGE_CODE == 'fr' %}{{ total_hits|apnumber }} engagement{{ total_hits|pluralize }} trouvé{{ total_hits|pluralize }}
+      {% else %}Found {{ total_hits|apnumber }} commitment{{ total_hits|pluralize }}{% endif %}</b></p>
+    </div>
+</div>
+{% endif %}
+{% endblock search_results_message %}
+
+
+{% block main-centre-search-box %}
+<div class="col-md-12 mrgn-bttm-md mrgn-tp-xs mrgn-lft-md form-inline">
+
+    <div style="display: flex">
+      <label class="control-label mrgn-rght-md" for="sort"> {% translate "Order By" %}</label>
+      <select class="form-control mrgn-rght-lg" id="sort" name="sort" onchange="submitForm();" value="{{ sort }}">
+          {% for option, label in sort_options.items %}
+              <option value="{{ option }}" {% if sort == option %}selected="selected"{% endif %}>{{ label }}</option>
+          {% endfor %}
+      </select>
+
+      <label for="search_text" class="wb-inv">{% translate 'Search' %}</label>
+      <input type="text" name="search_text" class="form-control mrgn-lft-lg"  id="search_text"
+         value="{{ search_text }}" placeholder="{% translate 'Search' %}"
+         aria-label="{% translate 'Search' %}" style="flex: auto" />
+
+      <label for="search-button" class="wb-inv">{% translate "Search" %}</label>
+      <button type="button" class="btn btn-primary btn-lg form-submit" id="search-button" onclick="submitForm();"
+           style="padding: 6px 12px;"><span class="glyphicon glyphicon-search" aria-hidden="true"></span>  {% translate "Search" %}
+      </button>
+    </div>
+</div>
+{% endblock main-centre-search-box %}
+
+
+{% block main-content-search-items %}
+{% for doc in docs %}
+    {% include search_item_snippet %}
+{% endfor %}
+{% endblock main-content-search-items %}

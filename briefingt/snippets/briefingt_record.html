@@ -1,0 +1,81 @@
+{% extends "record.html" %}
+{% load static %}
+{% load humanize %}
+{% load i18n %}
+{% load l10n %}
+{% load search_extras %}
+{% get_current_language as LANGUAGE_CODE %}
+
+{% block main-content-title %}
+<h1 property="name" id="wb-cont">{% translate 'Briefing Note:' %} {% if language == 'fr' %}
+    {{ docs.0.title_fr }}{% else %}{{ docs.0.title_en }}{% endif %}</h1>
+{% endblock main-content-title %}
+
+{% block main-content-centre %}
+<div class="col-md-12">
+    {% block main-content-search-items %}
+    {% for doc in docs %}
+    {% if language == 'fr' %}
+        <div class="row">
+            <div class="col-sm-3"><strong>{% trans 'Title:' %}</strong> </div>
+            <div class="col-sm-9">{{ doc.title_fr }}</div>
+        </div>
+        {% if results.docs.0.additional_information_fr_s %}
+        <div class="row">
+            <div class="col-sm-3"><strong>{% trans 'Additional Information: ' %}</strong> </div>
+            <div class="col-sm-9">{{ doc.additional_information_fr }}</div>
+        </div>
+        {% endif %}
+        <div class="row">
+            <div class="col-sm-3"><strong>{% trans 'Received:' %}</strong> </div>
+            <div class="col-sm-9">{{ doc.date_received_fr }}</div>
+        </div><div class="row">
+            <div class="col-sm-3"><strong>{% trans 'Organization:' %}</strong> </div>
+            <div class="col-sm-9">{{ doc.owner_org_fr }}</div>
+        </div><div class="row">
+            <div class="col-sm-3"><strong>{% trans 'Sector:' %}</strong> </div>
+            <div class="col-sm-9">{{ doc.originating_sector_fr | safe }}</div>
+        </div><div class="row">
+            <div class="col-sm-3"><strong>{% trans 'Addressee:' %}</strong> </div>
+            <div class="col-sm-9">{{ doc.addressee_fr }}</div>
+        </div><div class="row">
+            <div class="col-sm-3"><strong>{% trans 'Action Required:' %}</strong> </div>
+            <div class="col-sm-9">{{ doc.action_required_fr }}</div>
+        </div>
+    {% else %}
+        <div class="row">
+            <div class="col-sm-3"><strong>Title: </strong></div>
+            <div class="col-sm-9">{{ doc.title_en }}</div>
+        </div>
+        {% if doc.additional_information_en %}
+        <div class="row">
+            <div class="col-sm-3"><strong>Additional Information: </strong></div>
+            <div class="col-sm-9">{{ doc.additional_information_en }}</div>
+        </div>
+        {% endif %}
+        <div class="row">
+            <div class="col-sm-3"><strong>Received: </strong></div>
+            <div class="col-sm-9">{{ doc.date_received_en }}</div>
+        </div><div class="row">
+            <div class="col-sm-3"><strong>Organization: </strong></div>
+            <div class="col-sm-9">{{ doc.owner_org_en }}</div>
+        </div><div class="row">
+            <div class="col-sm-3"><strong>Sector: </strong></div>
+            <div class="col-sm-9">{{ doc.originating_sector_en | safe }}</div>
+        </div><div class="row">
+            <div class="col-sm-3"><strong>Addressee: </strong></div>
+            <div class="col-sm-9">{{ doc.addressee_en }}</div>
+        </div><div class="row">
+            <div class="col-sm-3"><strong>Action Required: </strong></div>
+            <div class="col-sm-9">{{ doc.action_required_en }}</div>
+        </div>
+    {% endif %}
+        <div class="row">
+            <div class="col-sm-3"><strong>{% translate 'Reference Number:' %} </strong></div>
+            <div class="col-sm-9">{{ doc.tracking_number }}</div>
+        </div>
+    {% endfor %}
+    {% endblock main-content-search-items %}
+</div>
+{% endblock main-content-centre %}
+

@@ -1,0 +1,75 @@
+{% load i18n %}
+{% load search_extras %}
+
+<div class="row mrgn-bttm-xl mrgn-lft-md">
+
+  <div class="row">
+    <div class="col-sm-9">
+      <h4 class="mrgn-tp-0 mrgn-bttm-sm"><a href="{{ path_info }}record/{{ doc.id }}">
+        {% if language == 'fr' %}{{ doc.title_fr | safe }}{% else %}{{ doc.title_en | safe }}{% endif %}</a>
+      </h4>
+    </div>
+    <div class="col-sm-3 text-right">
+      <h4 class="mrgn-tp-0 mrgn-bttm-sm">{% if language == 'fr' %}{{ doc.date_received_fr | safe }}{% else %}
+        {{ doc.date_received_en | safe }}{% endif %}</h4>
+    </div>
+  </div>
+
+  {% if language == 'fr' %}
+  {% if doc.additional_information_fr and doc.additional_information_fr != '-' %}
+  <div class="row mrgn-bttm-md">
+    <div class="col-sm-12">
+      {{ doc.additional_information_fr | safe }}
+    </div>
+  </div>
+  {% endif %}
+  <div class="row">
+    <div class="col-sm-4"><strong>Reference Nombre : </strong></div>
+    <div class="col-sm-8">{{ doc.tracking_number | safe }}</div>
+  </div>
+  <div class="row">
+    <div class="col-sm-4"><strong>Organisation' : </strong></div>
+    <div class="col-sm-8">{{ doc.owner_org_fr }}</div>
+  </div>
+  <div class="row">
+    <div class="col-sm-4"><strong>Secteur : </strong></div>
+    <div class="col-sm-8">{{ doc.originating_sector_fr | safe }}</div>
+  </div>
+  <div class="row">
+    <div class="col-sm-4"><strong>Destinataire : </strong></div>
+    <div class="col-sm-8">{{ doc.addressee_fr }}</div>
+  </div>
+  <div class="row">
+    <div class="col-sm-4"><strong>Mesure requise : </strong></div>
+    <div class="col-sm-8">{{ doc.action_required_fr }}</div>
+  </div>
+
+  {% else %}
+  <div class="row mrgn-bttm-md">
+  {% if doc.additional_information_en and doc.additional_information_en != '-' %}
+    <div class="col-sm-12">{{ doc.additional_information_en | safe }}</div>
+    {% endif %}
+  </div>
+  <div class="row">
+    <div class="col-sm-4"><strong>Reference Number:</strong></div>
+    <div class="col-sm-8">{{ doc.tracking_number | safe }}</div>
+  </div>
+  <div class="row">
+    <div class="col-sm-4"><strong>Organization:</strong></div>
+    <div class="col-sm-8">{{ doc.owner_org_en }}</div>
+  </div>
+  <div class="row">
+    <div class="col-sm-4"><strong>Sector:</strong></div>
+    <div class="col-sm-8">{{ doc.originating_sector_en | safe }}</div>
+  </div>
+  <div class="row">
+    <div class="col-sm-4"><strong>Addressee:</strong></div>
+    <div class="col-sm-8">{{ doc.addressee_en }}</div>
+  </div>
+  <div class="row">
+    <div class="col-sm-4"><strong>Action Required:</strong></div>
+    <div class="col-sm-8">{{ doc.action_required_en }}</div>
+  </div>
+  {% endif %}
+
+</div>

@@ -1,0 +1,141 @@
+# Open Canada Solr Search (https://github.com/thriuin/oc_search).
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the Open Canada Solr Search package.
+# Ross Thompson <ross.thompson@tbs-sct.gc.ca>, 2020.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: \"Open Canada Search - travela Module\"\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-01-07 18:48-0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: C:\Users\rosst\PycharmProjects\oc_search\search\templates\snippets\custom\tmpex0q0vid\travela_record.html:10
+msgid "Annual Report on Travel, Hospitality and Conference Expenditures"
+msgstr "Rapport annuel sur les dépenses de voyages, d’accueil et de conférences"
+
+#: C:\Users\rosst\PycharmProjects\oc_search\search\templates\snippets\custom\tmpex0q0vid\travela_record.html:20
+#, python-format
+msgid "As required by the Treasury Board Directive on Travel, Hospitality, Conference and Event Expenditures, this report provides information on travel, hospitality and conference expenditures for %(org_title)s for the fiscal year ended March 31, %(doc_year)s."
+msgstr "Comme l’exige la Directive sur les dépenses de voyages, d’accueil, de conférences et d’événements du Conseil du Trésor, le présent rapport fournit de l’information sur les dépenses de voyages, d’accueil et de conférences de %(org_title)s pour l’exercice se terminant le 31 mars %(doc_year)s."
+
+#: C:\Users\rosst\PycharmProjects\oc_search\search\templates\snippets\custom\tmpex0q0vid\travela_record.html:22
+msgid "Travel, hospitality and conference expenditures incurred by a federal department or agency relate to activities that support the department or agency’s mandate and the government’s priorities."
+msgstr "Les dépenses de voyages, d’accueil et de conférences engagées par un ministère ou un organisme fédéral sont liées à des activités qui appuient le mandat du ministère ou de l’organisme et les priorités gouvernementales."
+
+#: C:\Users\rosst\PycharmProjects\oc_search\search\templates\snippets\custom\tmpex0q0vid\travela_record.html:26
+msgid "Mandate:"
+msgstr "Mandat :"
+
+#: C:\Users\rosst\PycharmProjects\oc_search\search\templates\snippets\custom\tmpex0q0vid\travela_record.html:29
+msgid "Travel, Hospitality and Conference Expenditures for Year ending March 31,"
+msgstr "Dépenses pour l'exercice se terminant le 31 mars"
+
+#: C:\Users\rosst\PycharmProjects\oc_search\search\templates\snippets\custom\tmpex0q0vid\travela_record.html:31
+msgid "Travel, Hospitality and Conference Expenditures"
+msgstr "Dépenses de voyages, d’accueil et de conférences"
+
+#: C:\Users\rosst\PycharmProjects\oc_search\search\templates\snippets\custom\tmpex0q0vid\travela_record.html:34
+msgid "Expenditure category"
+msgstr "Catégorie de dépenses"
+
+#: C:\Users\rosst\PycharmProjects\oc_search\search\templates\snippets\custom\tmpex0q0vid\travela_record.html:35
+#, python-format
+msgid "Expenditures for year ended March 31, %(doc_year)s ($ thousands)"
+msgstr "Dépenses pour l'exercice se terminant le 31 mars %(doc_year)s (en milliers de dollars)"
+
+#: C:\Users\rosst\PycharmProjects\oc_search\search\templates\snippets\custom\tmpex0q0vid\travela_record.html:37
+msgid "($ thousands)"
+msgstr "(en milliers de dollars)"
+
+#: C:\Users\rosst\PycharmProjects\oc_search\search\templates\snippets\custom\tmpex0q0vid\travela_record.html:37
+msgid "Expenditures for year ended March 31,"
+msgstr "Exercice se terminant le 31 mars"
+
+#: C:\Users\rosst\PycharmProjects\oc_search\search\templates\snippets\custom\tmpex0q0vid\travela_record.html:38
+msgid "Variance ($ thousands)"
+msgstr "Écart (en milliers de dollars)"
+
+#: C:\Users\rosst\PycharmProjects\oc_search\search\templates\snippets\custom\tmpex0q0vid\travela_record.html:43
+msgid "Travel"
+msgstr "Voyages"
+
+#: C:\Users\rosst\PycharmProjects\oc_search\search\templates\snippets\custom\tmpex0q0vid\travela_record.html:46
+msgid "Public Servants"
+msgstr "Fonctionnaires"
+
+#: C:\Users\rosst\PycharmProjects\oc_search\search\templates\snippets\custom\tmpex0q0vid\travela_record.html:51
+msgid "Non-public Servants"
+msgstr "Non–fonctionnaires"
+
+#: C:\Users\rosst\PycharmProjects\oc_search\search\templates\snippets\custom\tmpex0q0vid\travela_record.html:56
+#: C:\Users\rosst\PycharmProjects\oc_search\search\templates\snippets\custom\tmpex0q0vid\travela_record.html:108
+msgid "A. Total travel"
+msgstr "A. Total des dépenses de voyages"
+
+#: C:\Users\rosst\PycharmProjects\oc_search\search\templates\snippets\custom\tmpex0q0vid\travela_record.html:63
+msgid "Operational activities"
+msgstr "Activités opérationnelles"
+
+#: C:\Users\rosst\PycharmProjects\oc_search\search\templates\snippets\custom\tmpex0q0vid\travela_record.html:72
+msgid "Key stakeholders"
+msgstr "Principaux intervenants"
+
+#: C:\Users\rosst\PycharmProjects\oc_search\search\templates\snippets\custom\tmpex0q0vid\travela_record.html:81
+msgid "Internal governance"
+msgstr "Gouvernance interne"
+
+#: C:\Users\rosst\PycharmProjects\oc_search\search\templates\snippets\custom\tmpex0q0vid\travela_record.html:90
+msgid "Training"
+msgstr "Formation"
+
+#: C:\Users\rosst\PycharmProjects\oc_search\search\templates\snippets\custom\tmpex0q0vid\travela_record.html:99
+msgid "Other"
+msgstr "Autre"
+
+#: C:\Users\rosst\PycharmProjects\oc_search\search\templates\snippets\custom\tmpex0q0vid\travela_record.html:118
+msgid "B. Hospitality"
+msgstr "B. Accueil"
+
+#: C:\Users\rosst\PycharmProjects\oc_search\search\templates\snippets\custom\tmpex0q0vid\travela_record.html:125
+msgid "C. Conference fees"
+msgstr "C. Frais de conférences"
+
+#: C:\Users\rosst\PycharmProjects\oc_search\search\templates\snippets\custom\tmpex0q0vid\travela_record.html:131
+msgid "Total [A+B+C]"
+msgstr "Total [A, B, et C]"
+
+#: C:\Users\rosst\PycharmProjects\oc_search\search\templates\snippets\custom\tmpex0q0vid\travela_record.html:137
+msgid "International travel by minister and minister's staff (included in travel)"
+msgstr "Voyages internationaux du ministre et du personnel du ministre"
+
+#: C:\Users\rosst\PycharmProjects\oc_search\search\templates\snippets\custom\tmpex0q0vid\travela_record.html:151
+msgid "Effective April 1st, 2017, total annual travel expenditures must be disclosed per travel category (above) and an explanation of significant variance be provided on total travel expenditures. Previously, total travel expenditures were disclosed between the travel categories of public and non-public servants."
+msgstr "À compter du 1er avril 2017, le total des dépenses annuelles de voyage doit être divulgué par catégorie de voyage (ci-dessus) et une explication des écarts importants doit être fournie sur le total des dépenses de voyage. Auparavant, le total des dépenses de voyage était divulgué entre les catégories de voyage des fonctionnaires et des non-fonctionnaires."
+
+#: C:\Users\rosst\PycharmProjects\oc_search\search\templates\snippets\custom\tmpex0q0vid\travela_record.html:157
+msgid "Explanation of significant variances compared with previous fiscal year"
+msgstr "Écarts importants par rapport à l’exercice précédent"
+
+#: C:\Users\rosst\PycharmProjects\oc_search\search\templates\snippets\custom\tmpex0q0vid\travela_record.html:159
+msgid "Total travel:"
+msgstr "Total des dépenses de voyages :"
+
+#: C:\Users\rosst\PycharmProjects\oc_search\search\templates\snippets\custom\tmpex0q0vid\travela_record.html:163
+msgid "Hospitality:"
+msgstr "Accueil :"
+
+#: C:\Users\rosst\PycharmProjects\oc_search\search\templates\snippets\custom\tmpex0q0vid\travela_record.html:167
+msgid "Conference fees:"
+msgstr "Frais de conférences :"
+
+#: C:\Users\rosst\PycharmProjects\oc_search\search\templates\snippets\custom\tmpex0q0vid\travela_record.html:171
+msgid "Minister and minister’s exempt staff - International travel:"
+msgstr "Le ministre et le personnel exempté du ministre – voyages internationaux :"
