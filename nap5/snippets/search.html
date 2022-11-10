@@ -76,40 +76,28 @@
 {% endblock main-content-body-top %}
 
 {% block search_results_message %}
-{% if not show_all_results %}
-<div class="row mrgn-rght-lg">
-    <div class="col-md-12">
-    <p><b>{% if LANGUAGE_CODE == 'fr' %}{{ total_hits|apnumber }} engagement{{ total_hits|pluralize }} trouvé{{ total_hits|pluralize }}
-      {% else %}Found {{ total_hits|apnumber }} commitment{{ total_hits|pluralize }}{% endif %}</b></p>
+
+<div class="row mrgn-bttm-lg">
+    <div class="col-sm-5 col-xs-12" style="justify-content: left">
+    {% if not show_all_results %}
+      <b>{% if LANGUAGE_CODE == 'fr' %}{{ total_hits|apnumber }} engagement{{ total_hits|pluralize }} trouvé{{ total_hits|pluralize }}
+      {% else %}Found {{ total_hits|apnumber }} commitment{{ total_hits|pluralize }}{% endif %}</b>
+    {% endif %}
+    </div>
+    <div class="col-sm-7 col-xs-12"><div style="display: flex; justify-content: right">
+    <label class="control-label mrgn-rght-md" for="sort"> {% translate "Order By" %}</label>
+    <select class="form-control mrgn-rght-0" id="sort" name="sort" onchange="submitForm();" value="{{ sort }}" style="flex: none">
+        {% for option, label in sort_options.items %}
+            <option value="{{ option }}" {% if sort == option %}selected="selected"{% endif %}>{{ label }}</option>
+        {% endfor %}
+    </select>
+    </div>
     </div>
 </div>
-{% endif %}
 {% endblock search_results_message %}
 
 
-{% block main-centre-search-box %}
-<div class="col-md-12 mrgn-bttm-md mrgn-tp-xs mrgn-lft-md form-inline">
 
-    <div style="display: flex">
-      <label class="control-label mrgn-rght-md" for="sort"> {% translate "Order By" %}</label>
-      <select class="form-control mrgn-rght-lg" id="sort" name="sort" onchange="submitForm();" value="{{ sort }}">
-          {% for option, label in sort_options.items %}
-              <option value="{{ option }}" {% if sort == option %}selected="selected"{% endif %}>{{ label }}</option>
-          {% endfor %}
-      </select>
-
-      <label for="search_text" class="wb-inv">{% translate 'Search' %}</label>
-      <input type="text" name="search_text" class="form-control mrgn-lft-lg"  id="search_text"
-         value="{{ search_text }}" placeholder="{% translate 'Search' %}"
-         aria-label="{% translate 'Search' %}" style="flex: auto" />
-
-      <label for="search-button" class="wb-inv">{% translate "Search" %}</label>
-      <button type="button" class="btn btn-primary btn-lg form-submit" id="search-button" onclick="submitForm();"
-           style="padding: 6px 12px;"><span class="glyphicon glyphicon-search" aria-hidden="true"></span>  {% translate "Search" %}
-      </button>
-    </div>
-</div>
-{% endblock main-centre-search-box %}
 
 
 {% block main-content-search-items %}

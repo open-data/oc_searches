@@ -151,14 +151,14 @@ def pre_render_search(context: dict, template: str, request: HttpRequest, lang: 
         if 'status' in request.GET:
             statii = request.GET.getlist('status')
             stati = statii[0].split('|')
-            context['c_offset'] = circle_progress_bar_offset(context['facets']['status']['C'], context['total_hits']) if "C" in stati else 360
-            context['sp_offset'] = circle_progress_bar_offset(context['facets']['status']['SP'], context['total_hits']) if "SP" in stati else 360
-            context['lp_offset'] = circle_progress_bar_offset(context['facets']['status']['LP'], context['total_hits']) if "LP" in stati else 360
-            context['ns_offset'] = circle_progress_bar_offset(context['facets']['status']['NS'], context['total_hits']) if "NS" in stati else 360
-            context['c_num'] = context['facets']['status']['C'] if "C" in stati else 0
-            context['sp_num'] = context['facets']['status']['SP'] if "SP" in stati else 0
-            context['lp_num'] = context['facets']['status']['LP'] if "LP" in stati else 0
-            context['ns_num'] = context['facets']['status']['NS'] if "NS" in stati else 0
+            context['c_offset'] = circle_progress_bar_offset(context['facets']['status']['C'], context['total_hits']) if "C" in stati and 'C' in context['facets']['status'] else 360
+            context['sp_offset'] = circle_progress_bar_offset(context['facets']['status']['SP'], context['total_hits']) if "SP" in stati and 'SP' in context['facets']['status'] else 360
+            context['lp_offset'] = circle_progress_bar_offset(context['facets']['status']['LP'], context['total_hits']) if "LP" in stati and 'LP' in context['facets']['status'] else 360
+            context['ns_offset'] = circle_progress_bar_offset(context['facets']['status']['NS'], context['total_hits']) if "NS" in stati and 'NS' in context['facets']['status'] else 360
+            context['c_num'] = context['facets']['status']['C'] if "C" in stati and 'C' in context['facets']['status'] else 0
+            context['sp_num'] = context['facets']['status']['SP'] if "SP" in stati and 'SP' in context['facets']['status'] else 0
+            context['lp_num'] = context['facets']['status']['LP'] if "LP" in stati and 'LP' in context['facets']['status'] else 0
+            context['ns_num'] = context['facets']['status']['NS'] if "NS" in stati and 'NS' in context['facets']['status'] else 0
             for s in ['C', 'SP', 'LP', 'NS']:
                 stati2 = stati.copy()
                 if s in stati:
