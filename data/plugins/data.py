@@ -86,6 +86,7 @@ def pre_render_search(context: dict, template: str, request: HttpRequest, lang: 
     context['search_alerts'] = []
     context['od_en_fgp_root'] = settings.OPEN_DATA_EN_FGP_BASE
     context['od_fr_fgp_root'] = settings.OPEN_DATA_FR_FGP_BASE
+    context['open_data_url_base'] = settings.OPEN_DATA_BASE_URL_FR if lang == 'fr' else settings.OPEN_DATA_BASE_URL_EN
 
     # Display a special message if the user has selected "Open Information"  as a filter
     if str(request.GET.get("dataset_type", "")).find("info") >= 0:

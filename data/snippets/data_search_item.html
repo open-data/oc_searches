@@ -5,7 +5,7 @@
   <div class="row">
      <div class="col-sm-9 text-capitalize">
        {% spaceless %}
-         <a href="{{ path_info }}record/{{ doc.id | striptags }}">
+         <a href="{{ open_data_url_base }}{{ doc.id | striptags }}">
            <strong>{% if LANGUAGE_CODE == 'fr' %}
               {{ doc.title_translated_fr | safe | truncatewords_html:12 }}
               {% if 'title_translated_fr' in doc.machine_translated_fields %}
