@@ -182,6 +182,8 @@ def load_csv_record(csv_record: dict, solr_record: dict, search: Search, fields:
         if not csv_record['instrument_type']:
             solr_record['instrument_type'] = ''
 
+        solr_record['vendor_name_txt'] = csv_record['vendor_name'] if csv_record['vendor_name'] else "-"
+
     return solr_record
 
 # Version 1.1 Methods
