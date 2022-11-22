@@ -118,7 +118,7 @@ def pre_render_search(context: dict, template: str, request: HttpRequest, lang: 
         if lang == 'fr':
             context["mlt_link_path"] = f'{settings.SEARCH_HOST_PATH}/donneesouvertes/similaire'
         else:
-            context["mlt_link_path"] = f'{settings.SEARCH_HOST_PATH}/opendata/similaire'
+            context["mlt_link_path"] = f'{settings.SEARCH_HOST_PATH}/opendata/similar'
 
     return context, template
 
