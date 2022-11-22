@@ -88,7 +88,7 @@
     <div class="col-sm-12 mrgn-tp-md">
       {% if not 'data/similar' in path_info and not 'data/similaire' in path_info %}
       <button type="button" class="btn btn-link">
-        <a href="{% if LANGUAGE_CODE == 'fr' %}/rechercher/fr/data/similaire/{{ doc.id | striptags }}{% else %}/search/en/data/similar/{{ doc.id | striptags }}{% endif %}">{% translate 'More like this' %}</a>
+        <a href="{{ mlt_link_path}}/{{ doc.id | striptags }}">{% translate 'More like this' %}</a>
       </button>
       {% endif %}
       {% if "fgp_viewer" in doc.display_flags %}

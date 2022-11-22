@@ -108,6 +108,18 @@ def pre_render_search(context: dict, template: str, request: HttpRequest, lang: 
     else:
         context['machine_xlt_msg'] = MACHINE_XLT_MSG_EN
 
+    # Determine link for "More like this..."
+    if settings.SEARCH_LANG_USE_PATH:
+        if lang == 'fr':
+            context["mlt_link_path"] = "/rechercher/fr/donneesouvertes/similaire"
+        else:
+            context["mlt_link_path"] = "/search/en/opendata/similar"
+    else:
+        if lang == 'fr':
+            context["mlt_link_path"] = f'{settings.SEARCH_HOST_PATH}/donneesouvertes/similaire'
+        else:
+            context["mlt_link_path"] = f'{settings.SEARCH_HOST_PATH}/opendata/similaire'
+
     return context, template
 
 def pre_render_record(context: dict, template: str, request: HttpRequest, lang: str, search: Search, fields: dict, codes: dict):
