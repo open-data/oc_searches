@@ -1,0 +1,59 @@
+# Localization info for the Experimental Inventory Search.
+# Copyright (C) 2022 "Government of Canada, Gouvernement du Canada"
+# This file is distributed under the same license as the "Open Canada Search - reclass Module" package.
+# FIRST AUTHOR ross.thompson@tbs-sct.gc.ca 2022.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: \"Open Canada Search - Open Data and Information Search\"\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-11-24 15:00-0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+
+msgid "Experiment: "
+msgstr "Expérience : "
+
+msgid "Project Summary:"
+msgstr "Résumé du projet :"
+
+msgid "Design Details:"
+msgstr "Devis détails :"
+
+msgid "Intervention:"
+msgstr "Intervention :"
+
+msgid "Outcomes:"
+msgstr "Mesure des résultats :"
+
+msgid "Findings:"
+msgstr "Résultats :"
+
+msgid "Design:"
+msgstr "Devis :"
+
+msgid "Experimentation Area:"
+msgstr "Secteur :"
+
+msgid "Experiment Status:"
+msgstr "Statut d'expérience : "
+
+msgid "Last Updated:"
+msgstr "Dernière mise à jour :"
+
+msgid "Local Branch and/or Unit:"
+msgstr "Direction et/ou unité responsable :"
+
+msgid "Reference No.:"
+msgstr "N° de référence :"
+
+msgid "Organization:"
+msgstr "Organisation :"
+
+msgid "Research Question:"
+msgstr "Question de recherche :"

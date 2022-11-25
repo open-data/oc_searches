@@ -1,0 +1,73 @@
+{% extends "record.html" %}
+{% load static %}
+{% load humanize %}
+{% load i18n %}
+{% load l10n %}
+{% load search_extras %}
+{% get_current_language as LANGUAGE_CODE %}
+
+{% block main-content-title %}
+<h1 property="name" id="wb-cont">{% translate 'Experiment: ' %} {% if language == 'fr' %}
+    {{ docs.0.titre_du_projet_fr }}{% else %}{{ docs.0.titre_du_projet_en }}{% endif %}</h1>
+{% endblock main-content-title %}
+
+{% block main-content-centre %}
+  <div class="col-md-12">
+  {% block main-content-search-items %}
+    {% for doc in docs %}
+    <row class=" mrgn-bttm-md">
+      <div class="col-md-4"><strong>{% translate 'Research Question:' %}</strong></div>
+      <div class="col-md-8">{% if language == "fr" %}{{ doc.question_de_recherche_fr }}{% else %}{{ doc.question_de_recherche_en }}{% endif %}</div>
+    </row>
+    <row class=" mrgn-bttm-md">
+      <div class="col-md-4"><strong>{% translate 'Project Summary:' %}</strong></div>
+      <div class="col-md-8">{% if language == "fr" %}{{ doc.project_summary_fr }}{% else %}{{ doc.project_summary_en }}{% endif %}</div>
+    </row>
+    <row class=" mrgn-bttm-md">
+      <div class="col-md-4"><strong>{% translate 'Design Details:' %}</strong></div>
+      <div class="col-md-8">{% if language == "fr" %}{{ doc.design_details_fr }}{% else %}{{ doc.design_details_en }}{% endif %}</div>
+    </row>
+    <row class=" mrgn-bttm-md">
+      <div class="col-md-4"><strong>{% translate 'Intervention:' %}</strong></div>
+      <div class="col-md-8">{% if language == "fr" %}{{ doc.intervention_fr }}{% else %}{{ doc.intervention_en }}{% endif %}</div>
+    </row>
+    <row class=" mrgn-bttm-md">
+      <div class="col-md-4"><strong>{% translate 'Outcomes:' %}</strong></div>
+      <div class="col-md-8">{% if language == "fr" %}{{ doc.mesure_des_resultats_fr }}{% else %}{{ doc.mesure_des_resultats_en }}{% endif %}</div>
+    </row>
+    <row class=" mrgn-bttm-md">
+      <div class="col-md-4"><strong>{% translate 'Findings:' %}</strong></div>
+      <div class="col-md-8">{% if language == "fr" %}{{ doc.resultats_fr }}{% else %}{{ doc.resultats_en }}{% endif %}</div>
+    </row>
+    <row class=" mrgn-bttm-md">
+      <div class="col-md-4"><strong>{% translate 'Design:' %}</strong></div>
+      <div class="col-md-8">{% if language == "fr" %}{{ doc.research_design_fr }}{% else %}{{ doc.research_design_en }}{% endif %}</div>
+    </row>
+    <row class=" mrgn-bttm-md">
+      <div class="col-md-4"><strong>{% translate 'Experimentation Area:' %}</strong></div>
+      <div class="col-md-8">{% if language == "fr" %}{{ doc.experimental_area_fr }}{% else %}{{ doc.experimental_area_en }}{% endif %}</div>
+    </row>
+    <row class="mrgn-bttm-md">
+      <div class="col-xs-12 col-md-4"><strong>{% translate 'Experiment Status:' %}</strong></div>
+      <div class="col-xs-12 col-md-8">{% if language == "fr" %}{{ doc.status_fr }}{% else %}{{ doc.status_en }}{% endif %}</div>
+    </row>
+    <row class="mrgn-bttm-md">
+      <div class="col-md-4"><strong>{% translate 'Last Updated:' %}</strong></div>
+      <div class="col-md-8">{% if language == "fr" %}{{ doc.last_updated_fr }}{% else %}{{ doc.last_updated_en }}{% endif %}</div>
+    </row>
+    <row class="mrgn-bttm-md">
+      <div class="col-md-4"><strong>{% translate 'Local Branch and/or Unit:' %}</strong></div>
+      <div class="col-md-8">{% if language == "fr" %}{{ doc.lead_branch_fr }}{% else %}{{ doc.lead_branch_en }}{% endif %}</div>
+    </row>
+    <row class=" mrgn-bttm-md">
+      <div class="col-md-4"><strong>{% translate 'Reference No.:' %}</strong></div>
+      <div class="col-md-8">{{ doc.reference_number }}</div>
+    </row>
+    <row class=" mrgn-bttm-md">
+      <div class="col-md-4"><strong>{% translate 'Organization:' %}</strong></div>
+      <div class="col-md-8">{% if language == "fr" %}{{ doc.owner_org_fr }}{% else %}{{ doc.owner_org_en }}{% endif %}</div>
+    </row>
+    {% endfor %}
+  {% endblock main-content-search-items %}
+</div>
+{% endblock main-content-centre %}

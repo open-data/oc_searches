@@ -1,0 +1,18 @@
+{% load i18n %}
+{% load search_extras %}
+
+<div class="row mrgn-bttm-lg mrgn-tp-sm">
+    <div class="row">
+         <div class="col-sm-9 text-capitalize">
+             <a href="{{ path_info }}record/{{ doc.id }}"><strong>{% if language == 'fr' %}{{ doc.titre_du_projet_fr | safe }}{% else %}{{doc.titre_du_projet_en }}{% endif %}</strong></a>
+        </div>
+        <div class="col-sm-3 text-right"> <strong>{% if language == 'fr' %}{{ doc.last_updated_fr }}{% else %}{{ doc.last_updated_en }}{% endif %}</strong></div>
+    </div>
+    <div class="row mrgn-bttm-0"><div class="col-sm-12">{% if language == 'fr' %}{{ doc.question_de_recherche_fr | markdown_filter | normalize_headings | safe }}{% else %}{{ doc.question_de_recherche_en | markdown_filter | normalize_headings | safe }}{% endif %}</div></div>
+    <div class="row">
+        <div class="col-sm-12 text-left"><strong>{% trans 'Organization:' %}</strong> {% if language == 'fr' %}{{ doc.owner_org_fr }}{% else %}{{ doc.owner_org_en }}{% endif %}</div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 text-sm-right"><span class="label label-default">{% if language == 'fr' %}{{ doc.status_fr }}{% else %}{{ doc.status_en }}{% endif %}</span></div>
+    </div>
+</div>
