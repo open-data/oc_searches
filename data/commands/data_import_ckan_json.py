@@ -151,6 +151,10 @@ class Command(BaseCommand):
         datastore_enabled = False
         for r in self.resource_map:
             solr_resources[self.resource_map[r]] = []
+            solr_resources['resource_character_set_en'] = []
+            solr_resources['resource_character_set_fr'] = []
+            solr_resources['resource_language_en'] = []
+            solr_resources['resource_language_fr'] = []
 
         # set a list of unique file formats for the dataset as a whole
         formats = []
@@ -175,6 +179,24 @@ class Command(BaseCommand):
                             solr_resources[self.resource_map[res_value]].append(",".join(res[res_value]))
                         else:
                             solr_resources[self.resource_map[res_value]].append('-')
+                        if res_value == 'language':
+                            if res[res_value]:
+                                for l in res[res_value]:
+                                    solr_resources['resource_language_en'].append(
+                                        self.field_codes['resource_language'][l.lower()].label_en)
+                                    solr_resources['resource_language_fr'].append(
+                                        self.field_codes['resource_language'][l.lower()].label_fr)
+                            else:
+                                solr_resources['resource_language_en'].append('-')
+                                solr_resources['resource_language_fr'].append('-')
+                    elif res_value == 'character_set':
+                        # Coded value needs two fields
+                        if res[res_value]:
+                            solr_resources['resource_character_set_en'].append(self.field_codes['resource_character_set'][str(res[res_value]).lower()].label_en)
+                            solr_resources['resource_character_set_fr'].append(self.field_codes['resource_character_set'][str(res[res_value]).lower()].label_fr)
+                        else:
+                            solr_resources['resource_character_set_en'].append('-')
+                            solr_resources['resource_character_set_fr'].append('-')
                     else:
                         solr_resources[self.resource_map[res_value]].append(res[res_value])
                     if res_value == "format":
@@ -182,6 +204,13 @@ class Command(BaseCommand):
                             formats.append(res["format"])
                 else:
                     solr_resources[self.resource_map[res_value]].append('-')
+                    # Open Maps doesn't set the character_set field
+                    if res_value == 'character_set':
+                        solr_resources['resource_character_set_en'].append('-')
+                        solr_resources['resource_character_set_fr'].append('-')
+                    elif res_value == 'language':
+                        solr_resources['resource_language_en'].append('-')
+                        solr_resources['resource_language_fr'].append('-')
 
         solr_record['formats'] = formats
 
