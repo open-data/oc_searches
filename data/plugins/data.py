@@ -25,6 +25,15 @@ def post_record_solr_query(context: dict, solr_response: SolrResponse, solr_quer
 
 
 def pre_export_solr_query(solr_query: dict, request: HttpRequest, search: Search, fields: dict, codes: dict, facets: list):
+    solr_query['fl'] = str(solr_query['fl']).replace("display_flags,", "")
+    solr_query['fl'] = str(solr_query['fl']).replace("creator,", "")
+    solr_query['fl'] = str(solr_query['fl']).replace("datastore_enabled_en,", "")
+    solr_query['fl'] = str(solr_query['fl']).replace("datastore_enabled_fr,", "")
+    solr_query['fl'] = str(solr_query['fl']).replace("imso_approval,", "")
+    solr_query['fl'] = str(solr_query['fl']).replace("portal_release_date,", "")
+    solr_query['fl'] = str(solr_query['fl']).replace("date_modified,", "")
+    solr_query['fl'] = str(solr_query['fl']).replace("federated_date_modified,", "")
+    solr_query['fl'] = str(solr_query['fl']).replace("ready_to_publish,", "")
     return solr_query
 
 

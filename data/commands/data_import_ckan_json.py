@@ -116,7 +116,7 @@ class Command(BaseCommand):
             # indicator for an empty value
             if raw_value is None or not raw_value:
                 raw_value = "-"
-            elif self.search_fields[field_name].solr_field_is_coded:
+            if self.search_fields[field_name].solr_field_is_coded:
                 # self.logger.info(f'Field: {field_name}, Value: {raw_value}')
                 if type(raw_value) == list:
                     values = []
@@ -137,8 +137,12 @@ class Command(BaseCommand):
                 else:
                     ri = str(raw_value).lower()
                     solr_record[field_name] = raw_value
-                    solr_record[field_name + "_en"] = self.field_codes[field_name][ri].label_en
-                    solr_record[field_name + "_fr"] = self.field_codes[field_name][ri].label_fr
+                    if ri in self.field_codes[field_name]:
+                        solr_record[field_name + "_en"] = self.field_codes[field_name][ri].label_en
+                        solr_record[field_name + "_fr"] = self.field_codes[field_name][ri].label_fr
+                    else:
+                        solr_record[field_name + "_en"] = "-"
+                        solr_record[field_name + "_fr"] = "-"
             else:
                 solr_record[field_name] = raw_value
 
@@ -151,13 +155,25 @@ class Command(BaseCommand):
         datastore_enabled = False
         for r in self.resource_map:
             solr_resources[self.resource_map[r]] = []
-            solr_resources['resource_character_set_en'] = []
-            solr_resources['resource_character_set_fr'] = []
-            solr_resources['resource_language_en'] = []
-            solr_resources['resource_language_fr'] = []
+        solr_resources['resource_character_set_en'] = []
+        solr_resources['resource_character_set_fr'] = []
+        solr_resources['resource_language_en'] = []
+        solr_resources['resource_language_fr'] = []
+        solr_resources['resource_format_en'] = []
+        solr_resources['resource_format_fr'] = []
+        solr_resources['resource_related_type_en'] = []
+        solr_resources['resource_related_type_fr'] = []
+        solr_resources['resource_related_relationship_en'] = []
+        solr_resources['resource_related_relationship_fr'] = []
+        solr_resources['resource_type_en'] = []
+        solr_resources['resource_type_fr'] = []
+        solr_resources['resource_data_quality_en'] = []
+        solr_resources['resource_data_quality_fr'] = []
 
         # set a list of unique file formats for the dataset as a whole
         formats = []
+        formats_en = []
+        formats_fr = []
 
         for res in resources:
             for res_value in RESOURCE_FIELDS:
@@ -189,19 +205,67 @@ class Command(BaseCommand):
                             else:
                                 solr_resources['resource_language_en'].append('-')
                                 solr_resources['resource_language_fr'].append('-')
+
+                        elif res_value == 'data_quality':
+                            if res[res_value] and len(res[res_value]) > 0:
+                                for dq in res[res_value]:
+                                    solr_resources['resource_data_quality_en'].append(
+                                        self.field_codes['resource_data_quality'][dq.lower()].label_en)
+                                    solr_resources['resource_data_quality_fr'].append(
+                                        self.field_codes['resource_data_quality'][dq.lower()].label_fr)
+                            else:
+                                solr_resources['resource_data_quality_en'].append('-')
+                                solr_resources['resource_data_quality_fr'].append('-')
+                            solr_resources['resource_data_quality'].append(res[res_value] if res[res_value] else "-")
+
                     elif res_value == 'character_set':
                         # Coded value needs two fields
                         if res[res_value]:
-                            solr_resources['resource_character_set_en'].append(self.field_codes['resource_character_set'][str(res[res_value]).lower()].label_en)
-                            solr_resources['resource_character_set_fr'].append(self.field_codes['resource_character_set'][str(res[res_value]).lower()].label_fr)
+                            solr_resources['resource_character_set_en'].append(self.field_codes['resource_character_set'][res[res_value].lower()].label_en)
+                            solr_resources['resource_character_set_fr'].append(self.field_codes['resource_character_set'][res[res_value].lower()].label_fr)
                         else:
                             solr_resources['resource_character_set_en'].append('-')
                             solr_resources['resource_character_set_fr'].append('-')
+                        solr_resources['resource_character_set'].append(res[res_value] if res[res_value] else "-")
+                    elif res_value == 'format':
+                        if res[res_value]:
+                            solr_resources['resource_format_en'].append(self.field_codes['resource_format'][res[res_value].lower()].label_en)
+                            solr_resources['resource_format_fr'].append(self.field_codes['resource_format'][res[res_value].lower()].label_fr)
+                        else:
+                            solr_resources['resource_format_en'].append('-')
+                            solr_resources['resource_format_fr'].append('-')
+                        solr_resources['resource_format'].append(res[res_value] if res[res_value] else "-")
+                    elif res_value == 'related_type':
+                        if res[res_value]:
+                            solr_resources['resource_related_type_en'].append(self.field_codes['resource_related_type'][res[res_value].lower()].label_en)
+                            solr_resources['resource_related_type_fr'].append(self.field_codes['resource_related_type'][res[res_value].lower()].label_fr)
+                        else:
+                            solr_resources['resource_related_type_en'].append('-')
+                            solr_resources['resource_related_type_fr'].append('-')
+                        solr_resources['resource_related_type'].append(res[res_value] if res[res_value] else "-")
+                    elif res_value == 'related_relationship':
+                        if res[res_value]:
+                            solr_resources['resource_related_relationship_en'].append(self.field_codes['resource_related_relationship'][res[res_value].lower()].label_en)
+                            solr_resources['resource_related_relationship_fr'].append(self.field_codes['resource_related_relationship'][res[res_value].lower()].label_fr)
+                        else:
+                            solr_resources['resource_related_relationship_en'].append('-')
+                            solr_resources['resource_related_relationship_fr'].append('-')
+                        solr_resources['resource_related_relationship'].append(res[res_value] if res[res_value] else "-")
+                    elif res_value == 'resource_type':
+                        if res[res_value]:
+                            solr_resources['resource_type_en'].append(self.field_codes['resource_type'][res[res_value].lower()].label_en)
+                            solr_resources['resource_type_fr'].append(self.field_codes['resource_type'][res[res_value].lower()].label_fr)
+                        else:
+                            solr_resources['resource_type_en'].append('-')
+                            solr_resources['resource_type_fr'].append('-')
+                        solr_resources['resource_type'].append(res[res_value] if res[res_value] else "-")
                     else:
                         solr_resources[self.resource_map[res_value]].append(res[res_value])
                     if res_value == "format":
-                        if not res["format"] in formats:
+                        if not res["format"] in formats and res['format']:
                             formats.append(res["format"])
+                            formats_en.append(self.field_codes['resource_format'][res['format'].lower()].label_en)
+                            formats_fr.append(self.field_codes['resource_format'][res['format'].lower()].label_fr)
                 else:
                     solr_resources[self.resource_map[res_value]].append('-')
                     # Open Maps doesn't set the character_set field
@@ -211,8 +275,22 @@ class Command(BaseCommand):
                     elif res_value == 'language':
                         solr_resources['resource_language_en'].append('-')
                         solr_resources['resource_language_fr'].append('-')
+                    elif res_value == 'data_quality':
+                        solr_resources['resource_data_quality_en'].append('-')
+                        solr_resources['resource_data_quality_fr'].append('-')
+                    elif res_value == 'format':
+                        solr_resources['resource_format_en'].append('-')
+                        solr_resources['resource_format_fr'].append('-')
+                    elif res_value == 'related_type':
+                        solr_resources['resource_related_type_en'].append('-')
+                        solr_resources['resource_related_type_fr'].append('-')
+                    elif res_value == 'related_relationship':
+                        solr_resources['resource_related_relationship_en'].append('-')
+                        solr_resources['resource_related_relationship_fr'].append('-')
 
         solr_record['formats'] = formats
+        solr_record['formats_en'] = formats_en
+        solr_record['formats_fr'] = formats_fr
 
         if datastore_enabled:
             solr_record['datastore_enabled'] = 'True'
@@ -236,14 +314,15 @@ class Command(BaseCommand):
     def set_empty_fields(self, solr_record: dict):
 
         for sf in self.all_fields:
-            self.set_empty_field(solr_record, sf)
+            if sf not in ['default_fmt', 'unique_identifier', ]:
+                self.set_empty_field(solr_record, sf)
         return solr_record
 
     def set_empty_field(self, solr_record: dict, sf: Field):
-        if (sf.field_id not in solr_record and sf not in ['default_fmt', 'unique_identifier']) \
+        if (sf.field_id not in solr_record) \
             or solr_record[sf.field_id] == '' \
-            or (isinstance(solr_record[sf.field_id], list) and len(solr_record[sf.field_id]) < 1) \
-            or (isinstance(solr_record[sf.field_id], list) and solr_record[sf.field_id][0] == ''):
+            or ((isinstance(solr_record[sf.field_id], list) and len(solr_record[sf.field_id]) < 1)) \
+            or ((isinstance(solr_record[sf.field_id], list) and solr_record[sf.field_id][0] == '')):
             if sf.default_export_value:
                 default_fmt = sf.default_export_value.split('|')
                 if default_fmt[0] in ['str', 'date']:
@@ -262,7 +341,11 @@ class Command(BaseCommand):
                         solr_record[sf.field_id + "_en"] = float(default_fmt[1])
                         solr_record[sf.field_id + "_fr"] = float(default_fmt[1])
                 else:
-                    solr_record[sf.field_id] = ''
+                    solr_record[sf.field_id] = '-'
+            else:
+                solr_record[sf.field_id] = '-'
+        elif solr_record[sf.field_id] == "":
+            solr_record[sf.field_id] = '-'
 
     def jsons_to_dataset(self, ds):
         """ Convert a CKAN JSON object to the OCSS Data search JSON object """
@@ -270,7 +353,10 @@ class Command(BaseCommand):
         solr_record = {'machine_translated_fields': ['-'],
                        'subject': [],
                        'subject_en': [],
-                       'subject_fr': []}
+                       'subject_fr': [],
+                       'spatial_representation_type': [],
+                       'spatial_representation_type_en': [],
+                       'spatial_representation_type_fr': []}
 
         for f in ds:
             # Organization, resources, and type requires special handling
@@ -282,16 +368,17 @@ class Command(BaseCommand):
                 pass
             elif f == 'resources':
                 solr_record = self.handle_resources(ds[f], solr_record)
-                formats_en = []
-                formats_fr = []
-                for f in solr_record['formats']:
-                    if f.lower() in self.field_codes['resource_format']:
-                        formats_en.append(self.field_codes['resource_format'][f.lower()].label_en)
-                        formats_fr.append(self.field_codes['resource_format'][f.lower()].label_fr)
-                solr_record['formats_en'] = formats_en
-                solr_record['formats_fr'] = formats_fr
             elif f == 'type':
                 solr_record = self.set_value('dataset_type', ds[f], solr_record, ds['id'])
+            elif f == "spatial_representation_type":
+                for srt in ds[f]:
+                    solr_record['spatial_representation_type_en'].append(self.field_codes['spatial_representation_type'][srt].label_en)
+                    solr_record['spatial_representation_type_fr'].append(self.field_codes['spatial_representation_type'][srt].label_fr)
+                    solr_record['spatial_representation_type'].append(srt)
+                if len(solr_record['spatial_representation_type']) == 0:
+                    solr_record['spatial_representation_type_en'] = ['-']
+                    solr_record['spatial_representation_type_fr'] = ['-']
+                    solr_record['spatial_representation_type'] = ['-']
             elif f == "subject":
                 for s in ds[f]:
                     solr_record['subject_en'].append(self.field_codes['subject'][s].label_en)
@@ -355,7 +442,7 @@ class Command(BaseCommand):
             try:
                 self.search_target = Search.objects.get(search_id=options['search'])
                 self.solr_core = self.search_target.solr_core_name
-                self.all_fields = Field.objects.filter(search_id=self.search_target)
+                self.all_fields = Field.objects.filter(search_id=self.search_target).order_by('field_id')
                 self.all_fields_dict = {}
                 for f in self.all_fields:
                     self.all_fields_dict[f.field_id] = f;
