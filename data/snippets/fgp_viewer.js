@@ -79,11 +79,12 @@ function updateCartUI()
     var solr_query = '';
     cleanCart();
     // Only accept en and fr as languages
-    if (wb.lang == 'fr') {
-        solr_query = '/search/fr/data/?search_text="' + OGSMapsChecked_ids.join('" OR "') + '"'
-    } else {
-        solr_query = '/search/en/data/?search_text="' + OGSMapsChecked_ids.join('" OR "') + '"'
-    }
+    // if (wb.lang == 'fr') {
+    //     solr_query = '/search/fr/data/?search_text="' + OGSMapsChecked_ids.join('" OR "') + '"'
+    // } else {
+    //     solr_query = '/search/en/data/?search_text="' + OGSMapsChecked_ids.join('" OR "') + '"'
+    // }
+    solr_query = window.location.pathname + '?search_text="' + OGSMapsChecked_ids.join('" OR "') + '"'
     $('.ogscartlistbtn').attr("href", solr_query);
 
     cart_full = false
