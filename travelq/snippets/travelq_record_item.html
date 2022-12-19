@@ -23,6 +23,10 @@
     <div class="col-md-9 mrgn-bttm-md">{{ doc.destination_fr }}</div>
     <div class="col-md-3 mrgn-bttm-md"><strong>Numéro de demande:</strong></div>
     <div class="col-md-9 mrgn-bttm-md">{{ doc.ref_number }}</div>
+    {% if doc.additional_comments_fr != '-' %}
+    <div class="col-md-3 mrgn-bttm-md"><strong>Commentaires supplémentaires :</strong></div>
+    <div class="col-md-9 mrgn-bttm-md">{{ doc.additional_comments_fr }}</div>
+    {% endif %}
     <div class="col-md-12 mrgn-tp-lg">
         <div class="panel panel-info">
             <header class="panel-heading">
@@ -62,6 +66,10 @@
     <div class="col-md-9 mrgn-bttm-md">{{ doc.destination_en }}</div>
     <div class="col-md-3 mrgn-bttm-md"><strong>Reference Number:</strong></div>
     <div class="col-md-9 mrgn-bttm-md">{{ doc.ref_number }}</div>
+    {% if doc.additional_comments_en != '-' %}
+    <div class="col-md-3 mrgn-bttm-md"><strong>Additional Comments:</strong></div>
+    <div class="col-md-9 mrgn-bttm-md">{{ doc.additional_comments_en }}</div>
+    {% endif %}
     <div class="col-md-12 mrgn-tp-lg">
         <div class="panel panel-info">
             <header class="panel-heading">
