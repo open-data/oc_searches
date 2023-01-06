@@ -1,0 +1,67 @@
+{% load i18n %}
+{% load search_extras %}
+
+<div class="row mrgn-bttm-lg mrgn-tp-sm">
+  {% if LANGUAGE_CODE == 'fr' %}
+      <div class="row">
+          <div class="col-sm-9 text-capitalize">
+              <a href="{{ path_info }}record/{{ doc.id }}"><strong>{{ doc.title_fr_txt | safe }}</strong></a><br>
+              <span class="text-info small">{{ doc.owner_org_fr }}</span>
+          </div>
+
+          <div class="col-sm-3"><strong>Votes : {{ doc.votes }}</strong>
+          </div>
+      </div>
+
+      <div class="row mrgn-bttm-md">
+          <div class="col-sm-12">{{ doc.desc_fr | safe }}</div>
+      </div>
+      <div class="row">
+          <div class="col-sm-12 col-md-12 mrgn-bttm-md">
+              <span class="decal decal-status">{{ doc.status_fr }}</span>
+          </div>
+      </div>
+      <div class="row">
+          <div class="col-sm-12 col-md-6">
+              <strong>Date Requested : </strong>{{ doc.date_created_fr }}
+          </div>
+          <div class="col-sm-12 col-md-6">
+              {% if not doc.date_released_fr == "-" %}
+                  <strong>{% trans 'Date Released: ' %}</strong>
+                  {{ doc.date_released_fr }}
+              {% endif %}
+          </div>
+      </div>
+  {% else %}
+      <div class="row">
+          <div class="col-sm-9 text-capitalize">
+              <a href="{{ path_info }}record/{{ doc.id }}"><strong>{{ doc.title_en | safe }}</strong></a><br>
+              <span class="text-info small">{{ doc.owner_org_en }}</span>
+          </div>
+
+          <div class="col-sm-3"><strong>Votes: {{ doc.votes_en }}</strong>
+          </div>
+      </div>
+
+      <div class="row mrgn-bttm-md">
+          <div class="col-sm-12">{{ doc.desc_en | safe }}</div>
+      </div>
+      <div class="row">
+          <div class="col-sm-12 col-md-12 mrgn-bttm-md">
+              <span class="decal decal-status">{{ doc.status_en }}</span>
+          </div>
+      </div>
+      <div class="row">
+          <div class="col-sm-12 col-md-6">
+              <strong>Date Requested: </strong>{{ doc.date_created_en }}
+          </div>
+          <div class="col-sm-12 col-md-6">
+              {% if not doc.date_released_en == "-" %}
+                  <strong>{% trans 'Date Released: ' %}</strong>
+                  {{ doc.date_released_en }}
+              {% endif %}
+          </div>
+      </div>
+
+  {% endif %}
+</div>

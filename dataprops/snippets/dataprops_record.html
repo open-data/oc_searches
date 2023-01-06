@@ -1,0 +1,94 @@
+
+{% load static %}
+{% load humanize %}
+{% load i18n %}
+{% load l10n %}
+{% load search_extras %}
+{% get_current_language as LANGUAGE_CODE %}
+
+  <div class="row mrgn-tp-lg">
+    {# Main details #}
+    <div class="col-md-7 col-md-push-5">
+      <div class="row">
+        <div class="col-sm-12"><strong>{% if LANGUAGE_CODE == 'fr' %}{{ doc.owner_org_fr }}{% else %}{{ doc.owner_org_en | safe }}{% endif %}</strong></div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">{% if LANGUAGE_CODE == 'fr' %}{{ doc.desc_fr | safe }}{% else %}{{ doc.desc_en | safe }}{% endif %}</div>
+      </div>
+      <div class="row mrgn-tp-md">
+        <div class="col-sm-8"><strong>{% trans 'Suggestion sent to organization:' %}</strong></div>
+        <div class="col-sm-4">{% if LANGUAGE_CODE == 'fr' %}{{ doc.date_forwarded_fr }}{% else %}{{ doc.date_forwarded_en }}{% endif %}</div>
+      </div>
+      {% if doc.status_update_reason|length > 0 or doc.status_update_reason|length > 0 %}
+      <div class="row mrgn-tp-lg">
+        <div class="col-sm-12 panel panel-default">
+          <table class="table">
+            <caption class="wb-inv">{% trans 'Status Updates' %}</caption>
+            <thead>
+            <tr>
+              <th scope="col" colspan="3">{% trans 'Status Updates' %}</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            {% for status in doc.status_updates reversed %}
+            <tr>
+              <td style="font-weight: bolder">{{ status.date }}</td>
+              <td colspan="2" style="">{{ status.reason }}</td>
+            </tr>
+            <tr>
+              <td colspan="3" style="border-top-color: white; font-style: italic">{{ status.comment | markdown_filter | safe }}</td>
+            </tr>
+            {% endfor %}
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+      {% endif %}
+    </div>
+    {# Left-hand Sidebar #}
+    <div class="col-md-5 col-md-pull-7">
+      <section>
+        {% spaceless %}
+        <aside class="mrgn-tp-lg">
+          <span><strong>{% trans 'Status:' %}</strong></span><br>
+          <span class="decal decal-status mrgn-tp-md">
+                        {% if LANGUAGE_CODE == 'fr' %}
+                            {{ doc.status_fr }}
+                        {% else %}
+                            {{ doc.status_en }}
+                        {% endif %}
+                    </span>
+          <br>
+        </aside>
+        <aside class="mrgn-tp-lg">
+          <div data-ajax-replace="{% if LANGUAGE_CODE == 'fr' %}{{ votes_base_fr }}{% else %}{{ votes_base_en }}{% endif %}{{ doc.suggestion_id }}"></div>
+        </aside>
+        <aside class="mrgn-tp-lg">
+          <span><strong>{% trans 'Subjects:' %}</strong></span><br>
+          {% if LANGUAGE_CODE == 'fr' %}
+          {% for subject in doc.subject_fr %}
+          <span class="decal decal-subject mrgn-tp-md">{{ subject }}</span><br>
+          {% endfor %}
+          {% else %}
+          {% for subject in doc.subject_en %}
+          <span class="decal decal-subject mrgn-tp-md">{{ subject }}</span>
+          {% endfor %}
+          {% endif %}
+        </aside>
+        {% endspaceless %}
+      </section>
+
+    </div>
+  </div>
+  <div class="row">
+    {% if LANGUAGE_CODE == 'fr' %}
+    <div data-ajax-replace="{{comments_base_fr}}{{ doc.id }}"></div>
+    {% else %}
+    <div data-ajax-replace="{{comments_base_en}}{{ doc.id }}"></div>
+    {% endif %}
+  </div>
+
+
+
