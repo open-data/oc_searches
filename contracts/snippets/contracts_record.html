@@ -110,7 +110,7 @@
         {% if not doc.delivery_date|date:"Y-m-d" == "0001-01-01" %}
         <div class="row">
             <div class="col-sm-4"><strong>{% trans 'Contract Period End or Delivery Date: ' %}</strong></div>
-            <div class="col-sm-8">{% if LANGUAGE_CODE == 'fr' %}{{ doc.delivery_date_fr }}{% else %}{{ doc.delivery_data_en }}{% endif %}</div>
+            <div class="col-sm-8">{% if LANGUAGE_CODE == 'fr' %}{{ doc.delivery_date_fr }}{% else %}{{ doc.delivery_date_en }}{% endif %}</div>
         </div>
         {% endif %}
         <div class="row">
