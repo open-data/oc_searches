@@ -7,6 +7,16 @@
 {# Do not display this block #}
 {% block about-message-block %}{% endblock %}
 
+{% block main-content-body-top %}
+    <div class="col-md-12 mrgn-bttm-0 mrgn-tp-lg">
+      {% if LANGUAGE_CODE == 'fr' %}
+        {{ custom_search_message_fr | markdown_filter | safe }}
+      {% else %}
+        {{ custom_search_message_en | markdown_filter | safe }}
+      {% endif %}
+    </div>
+{% endblock main-content-body-top %}
+
 {% block main-content-centre-top %}
 <div class="col-md-12 mrgn-bttm-md">
     <a href="{% translate 'https://open.canada.ca/en/forms/suggest-dataset' %}" class="btn btn-secondary btn-sm mrgn-rght-sm" target="_blank" rel="noopener noreferrer">

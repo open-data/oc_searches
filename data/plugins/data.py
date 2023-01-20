@@ -1,6 +1,6 @@
 from django.conf import settings
 from django.http import HttpRequest
-from search.models import Search, Field, Code
+from search.models import Search, Field, Code, Setting
 from SolrClient import SolrResponse
 
 
@@ -128,6 +128,16 @@ def pre_render_search(context: dict, template: str, request: HttpRequest, lang: 
             context["mlt_link_path"] = f'{settings.SEARCH_HOST_PATH}/donneesouvertes/similaire'
         else:
             context["mlt_link_path"] = f'{settings.SEARCH_HOST_PATH}/opendata/similar'
+
+    # Get search drop in message:
+    context["custom_search_message_en"] = ""
+    search_msg_en, is_new = Setting.objects.get_or_create(key="data.searchpage.topmessage.en")
+    if not is_new:
+        context["custom_search_message_en"] = search_msg_en.value
+    context["custom_search_message_fr"] = ""
+    search_msg_fr, is_new = Setting.objects.get_or_create(key="data.searchpage.topmessage.fr")
+    if not is_new:
+        context["custom_search_message_fr"] = search_msg_fr.value
 
     return context, template
 
