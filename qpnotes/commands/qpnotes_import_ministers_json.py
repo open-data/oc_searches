@@ -37,12 +37,12 @@ class Command(BaseCommand):
             # Remove existing data if requested
             if options['flush']:
                 self.logger.info('Flushing existing data')
-                codes = Code.objects.filter(field_id=field)
+                codes = Code.objects.filter(field_fid=field)
                 for code in codes:
-                    ChronologicCode.objects.filter(code_id=code).delete()
+                    ChronologicCode.objects.filter(code_cid=code).delete()
 
             for choice in choices:
-                code, created = Code.objects.get_or_create(field_id_id=field.id, code_id=choice)
+                code, created = Code.objects.get_or_create(field_fid=field, code_id=choice)
                 code.label_en = choices[choice]['en']
                 code.label_fr = choices[choice]['fr']
                 code.save()
@@ -56,7 +56,7 @@ class Command(BaseCommand):
                         end_date = datetime.strptime(minister['end_date'], '%Y-%m-%dT%H:%M:%S').replace(tzinfo=pytz.timezone(local_tz))
                     else:
                         end_date = datetime(2999, 12, 31).replace(tzinfo=pytz.timezone(local_tz))
-                    chronocode, created = ChronologicCode.objects.get_or_create(code_id_id=code.id,
+                    chronocode, created = ChronologicCode.objects.get_or_create(code_cid=code,
                                                                                 start_date=start_date)
                     chronocode.label = minister['name']
                     chronocode.label_en = minister['name_en']
