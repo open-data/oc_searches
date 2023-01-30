@@ -1,0 +1,33 @@
+# Open Canada Solr Search (https://github.com/open-data/oc_search).
+# Copyright (C) 2023 Government of Canada
+# This file is distributed under the same license as the Open Canada Solr Search package.
+# Ross Thompson <ross.thompson@tbs-sct.gc.ca>, 2023.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-01-20 16:00-0500\n"
+"PO-Revision-Date: 2023-01-20 16:00-0500\n"
+"Last-Translator: b'Ross Thompson <ross.thompson@tbs-sct.gc.ca>'\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Translated-Using: django-rosetta 0.9.5\n"
+
+#: .\oc_search\settings-sample.py:119 .\oc_search\settings.py:129
+msgid "Suggestion sent to organization:"
+msgstr "Suggestion envoyée à l’organisation :"
+
+msgid "Status:"
+msgstr "État :"
+
+msgid "Subjects:"
+msgstr "Sujets :"
+
+msgid "Status Updates"
+msgstr "Mises à jour sur l’état"

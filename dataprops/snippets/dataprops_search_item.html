@@ -1,65 +1,69 @@
 {% load i18n %}
 {% load search_extras %}
 
-<div class="row mrgn-bttm-lg mrgn-tp-sm">
+<div class="row mrgn-bttm-xl mrgn-tp-md">
   {% if LANGUAGE_CODE == 'fr' %}
       <div class="row">
           <div class="col-sm-9 text-capitalize">
-              <a href="{{ path_info }}record/{{ doc.id }}"><strong>{{ doc.title_fr_txt | safe }}</strong></a><br>
+              <a href="{{ path_info }}record/{{ doc.id }}"><strong>{{ doc.title_fr | safe }}</strong></a><br>
               <span class="text-info small">{{ doc.owner_org_fr }}</span>
           </div>
 
-          <div class="col-sm-3"><strong>Votes : {{ doc.votes }}</strong>
+        <div class="col-sm-3"><span class="h5">Votes : </span>{{ doc.votes }}
           </div>
       </div>
 
-      <div class="row mrgn-bttm-md">
-          <div class="col-sm-12">{{ doc.desc_fr | safe }}</div>
+      <div class="row mrgn-bttm-0">
+          <div class="col-sm-12">{{ doc.desc_fr | markdown_filter | safe }}</div>
       </div>
-      <div class="row">
-          <div class="col-sm-12 col-md-12 mrgn-bttm-md">
-              <span class="decal decal-status">{{ doc.status_fr }}</span>
-          </div>
-      </div>
+
       <div class="row">
           <div class="col-sm-12 col-md-6">
-              <strong>Date Requested : </strong>{{ doc.date_created_fr }}
+              <span class="h5">Date de la demande : </span>{{ doc.date_created_fr }}
           </div>
           <div class="col-sm-12 col-md-6">
-              {% if not doc.date_released_fr == "-" %}
-                  <strong>{% trans 'Date Released: ' %}</strong>
+              {% if doc.date_released_fr != "-" %}
+                  <span class="h5">Date fournie : </span>
                   {{ doc.date_released_fr }}
               {% endif %}
+          </div>
+      </div>
+
+      <div class="row">
+          <div class="col-sm-12 col-md-12">
+              <span class="decal decal-outline">{{ doc.status_fr | safe }}</span>
           </div>
       </div>
   {% else %}
       <div class="row">
           <div class="col-sm-9 text-capitalize">
-              <a href="{{ path_info }}record/{{ doc.id }}"><strong>{{ doc.title_en | safe }}</strong></a><br>
+              <a href="{{ path_info }}record/{{ doc.id }}"><span class="h3">{{ doc.title_en | safe }}</span></a><br>
               <span class="text-info small">{{ doc.owner_org_en }}</span>
           </div>
 
-          <div class="col-sm-3"><strong>Votes: {{ doc.votes_en }}</strong>
+          <div class="col-sm-3"><span class="h5">Votes: </span>{{ doc.votes_en }}
           </div>
       </div>
 
-      <div class="row mrgn-bttm-md">
-          <div class="col-sm-12">{{ doc.desc_en | safe }}</div>
+      <div class="row mrgn-bttm-0">
+          <div class="col-sm-12">{{ doc.desc_en | markdown_filter | safe }}</div>
       </div>
-      <div class="row">
-          <div class="col-sm-12 col-md-12 mrgn-bttm-md">
-              <span class="decal decal-status">{{ doc.status_en }}</span>
-          </div>
-      </div>
-      <div class="row">
+
+      <div class="row mrgn-bttm-sm">
           <div class="col-sm-12 col-md-6">
-              <strong>Date Requested: </strong>{{ doc.date_created_en }}
+              <span class="h5"> Date Requested: </span>{{ doc.date_created_en }}
           </div>
           <div class="col-sm-12 col-md-6">
-              {% if not doc.date_released_en == "-" %}
-                  <strong>{% trans 'Date Released: ' %}</strong>
+              {% if doc.date_released_en != "-" %}
+                  <span class="h5">Date Released: </span>
                   {{ doc.date_released_en }}
               {% endif %}
+          </div>
+      </div>
+
+      <div class="row">
+          <div class="col-sm-12 col-md-12">
+              <span class="decal decal-outline">{{ doc.status_en }}</span>
           </div>
       </div>
 
