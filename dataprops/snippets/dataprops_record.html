@@ -53,7 +53,7 @@
         {% spaceless %}
         <aside class="mrgn-tp-lg">
           <span><strong>{% trans 'Status:' %}</strong></span><br>
-          <span class="decal decal-outline mrgn-tp-md">
+          <span class="label label-primary mrgn-tp-md">
                         {% if LANGUAGE_CODE == 'fr' %}
                             {{ doc.status_fr }}
                         {% else %}
@@ -69,11 +69,11 @@
           <span><strong>{% trans 'Subjects:' %}</strong></span><br>
           {% if LANGUAGE_CODE == 'fr' %}
           {% for subject in doc.subject_fr %}
-          <span class="decal decal-subject mrgn-tp-md">{{ subject }}</span><br>
+          <span class="label label-success mrgn-tp-md">{{ subject }}</span><br>
           {% endfor %}
           {% else %}
           {% for subject in doc.subject_en %}
-          <span class="decal decal-subject mrgn-tp-md">{{ subject }}</span><br>
+          <span class="label label-success mrgn-tp-md">{{ subject }}</span><br>
           {% endfor %}
           {% endif %}
         </aside>
