@@ -178,4 +178,4 @@ msgid "Additional Comments:"
 msgstr "Commentaires additionnels :"
 
 msgid "Duration:"
-msgstr "Dureé :"
+msgstr "Durée :"

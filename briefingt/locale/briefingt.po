@@ -42,4 +42,4 @@ msgid "Action Required:"
 msgstr "Mesure requise :"
 
 msgid "Reference Number:"
-msgstr "Reference Nombre :"
+msgstr "Numéro de référence :"
