@@ -34,7 +34,7 @@
     {% if not doc.agreement_title_fr == "-" %}
     <div class="col-sm-12 mrgn-tp-0"><strong>{% translate 'Agreement:' %}</strong> {{ doc.agreement_title_fr | markdown_filter | safe }}
       {% if not doc.agreement_number == "-" %}</div><div class="col-sm-12 mrgn-tp-0"><strong>{% translate 'Agreement Number:' %}</strong> {{ doc.agreement_number_text | markdown_filter | safe }} {% endif %}
-      {% if not doc.agreement_end_date_fr == "-" %}</div><div class="col-sm-12 mrgn-tp-0"><strong>{% translate 'Duration:' %}</strong> de {{ doc.agreement_start_date_fr }} á {{ doc.agreement_end_date_fr }}{% endif %}
+      {% if not doc.agreement_end_date_fr == "-" %}</div><div class="col-sm-12 mrgn-tp-0"><strong>{% translate 'Duration:' %}</strong> du {{ doc.agreement_start_date_fr }} au {{ doc.agreement_end_date_fr }}{% endif %}
     </div>
     {% endif %}
     {% if not doc.description_fr == "-" %}
