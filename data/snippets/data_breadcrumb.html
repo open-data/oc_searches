@@ -24,7 +24,11 @@
                 "href": "https://www.canada.ca/{{ language_code }}.html",
             },{
                 "title": "{% translate 'Open Government' %}",
+                {% if not url_uses_path %}
+                "href": "{% if LANGUAGE_CODE == 'fr' %}{{ site_url_fr }}{% else %}{{ site_url_en }}{% endif %}/{{ LANGUAGE_CODE }}",
+                {% else %}
                 "href": "{% translate 'https://open.canada.ca' %}/{{ LANGUAGE_CODE }}",
+                {% endif %}
             }]
         });
     </script>
