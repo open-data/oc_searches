@@ -21,7 +21,7 @@ msgid "Question Period Note:"
 msgstr "Note pour la période des questions :"
 
 msgid "Reference Number:"
-msgstr "Numéro de demande :"
+msgstr "Numéro de référence :"
 
 msgid "Date received: "
 msgstr "Date fournie : "

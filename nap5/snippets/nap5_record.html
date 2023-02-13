@@ -89,7 +89,7 @@
                 <div>
                     {% if language == 'fr' %}{{ doc.evidence_fr | markdown_filter | normalize_headings | safe }}
                     {% else %}
-                    {{ doc.evidence_en | markdown_filter | normalize_headings | safe}}{% endif %}
+                    {{ doc.evidence_en | markdown_filter | safe }}{% endif %}
                 </div>
                 </div>
                </div>
