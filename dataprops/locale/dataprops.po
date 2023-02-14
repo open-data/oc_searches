@@ -31,3 +31,9 @@ msgstr "Sujets :"
 
 msgid "Status Updates"
 msgstr "Mises à jour sur l’état"
+
+msgid "/en/open-data"
+msgstr "/fr/donnees-ouvertes"
+
+msgid "Open Data"
+msgstr "Données ouvertes"
