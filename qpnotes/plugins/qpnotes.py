@@ -76,7 +76,7 @@ def load_csv_record(csv_record: dict, solr_record: dict, search: Search, fields:
                         solr_record['minister_name_en'] = ccode.label_en
                         solr_record['minister_name_fr'] = ccode.label_fr
         if solr_record['title_en']:
-            solr_record['title_en'] = str(solr_record['title_en']).strip().capitalize()
+            solr_record['title_en'] = str(solr_record['title_en']).strip()
         if solr_record['title_fr']:
             solr_record['title_fr'] = str(solr_record['title_fr']).strip()
     except Exception as e:
