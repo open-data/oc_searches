@@ -1,18 +1,29 @@
 from babel.numbers import NumberFormatError, parse_decimal, format_currency
 from datetime import date
 from django.http import HttpRequest
+import re
 from search.models import Search, Field, Code
 from SolrClient import SolrResponse
 
 
 def _set_bilingual_field(field_name: str, field_value: str, solr_record: list):
     values = field_value.split('|')
+    # Some departments are using 'l' or 'Í' instead of '|'. Test for this condition
     if len(values) == 1:
-        solr_record['{0}_en'.format(field_name)] = field_value
-        solr_record['{0}_fr'.format(field_name)] = field_value
+        l_test = re.split("\sl\s", field_value)
+        if len(l_test) == 2:
+            values = l_test
+        else:
+            i_test = re.split("\sI\s", field_value)
+            if len(i_test) == 2:
+                values = i_test
+
+    if len(values) == 1:
+        solr_record[f'{field_name}_en'] = field_value
+        solr_record[f'{field_name}_fr'] = field_value
     else:
-        solr_record['{0}_en'.format(field_name)] = values[0].strip()
-        solr_record['{0}_fr'.format(field_name)] = values[1].strip()
+        solr_record[f'{field_name}_en'] = values[0].strip()
+        solr_record[f'{field_name}_fr'] = values[1].strip()
     return solr_record
 
 
