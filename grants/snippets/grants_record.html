@@ -301,12 +301,12 @@
           {% if LANGUAGE_CODE == "fr" %}
           <div class="row mrgn-bttm-sm">
               <div class="col-sm-4"><strong>{% translate 'Location:' %}</strong></div>
-              <div class="col-sm-8">{% if not doc.recipient_city == "-" %}{{ doc.recipient_city_fr }}, {% endif %}{% if not doc.recipient_province == "ZZ" %}{{ doc.recipient_province_fr.0 }}, {% endif %}{% if not recipient_country == "-" %}{{ doc.recipient_country }} {% endif %}{% if not doc.recipient_postal_code == "-" %} {{ doc.recipient_postal_code | safe }}{% endif %}</div>
+              <div class="col-sm-8">{% if not doc.recipient_city == "-" %}{{ doc.recipient_city_fr }}, {% endif %}{% if not doc.recipient_province == "zz" %}{{ doc.recipient_province_fr.0 }}, {% endif %}{% if not recipient_country == "-" %}{{ doc.recipient_country }} {% endif %}{% if not doc.recipient_postal_code == "-" %} {{ doc.recipient_postal_code | safe }}{% endif %}</div>
           </div>
           {% else %}
           <div class="row mrgn-bttm-sm">
               <div class="col-sm-4"><strong>{% translate 'Location:' %}</strong></div>
-              <div class="col-sm-8">{% if not doc.recipient_city == "-" %}{{ doc.recipient_city_en }}, {% endif %}{% if not doc.recipient_province == "ZZ" %}{{ doc.recipient_province_en.0 }}, {% endif %}{% if not recipient_country == "-" %}{{ doc.recipient_country }} {% endif %}{% if not doc.recipient_postal_code == "-" %} {{ doc.recipient_postal_code | safe }}{% endif %}</div>
+              <div class="col-sm-8">{% if not doc.recipient_city == "-" %}{{ doc.recipient_city_en }}, {% endif %}{% if not doc.recipient_province == "zz" %}{{ doc.recipient_province_en.0 }}, {% endif %}{% if not recipient_country == "-" %}{{ doc.recipient_country }} {% endif %}{% if not doc.recipient_postal_code == "-" %} {{ doc.recipient_postal_code | safe }}{% endif %}</div>
           </div>
           {% endif %}
         {% endif %}

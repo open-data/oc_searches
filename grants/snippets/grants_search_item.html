@@ -44,7 +44,7 @@
       <div class="col-sm-12"><strong>{% translate 'Program Name:' %}</strong> {{ doc.prog_name_fr | safe }}</div>
       {% endif %}
       {% if not doc.recipient_city == "-" or not doc.recipient_city == "-" or not doc.recipient_postal_code == "-"%}
-      <div class="col-sm-12"><strong>{% translate 'Location:' %}</strong> {% if not doc.recipient_city_fr == "-" %}{{ doc.recipient_city_fr | safe }}, {% endif %}{% if not doc.recipient_province == "ZZ" %}{{ doc.recipient_province_fr.0 }}, {% endif %}{% if not doc.recipient_country == "" %}{{ doc.recipient_country }} {% endif %}{% if not doc.recipient_postal_code == "-" %} {{ doc.recipient_postal_code | safe }}{% endif %}</div>
+      <div class="col-sm-12"><strong>{% translate 'Location:' %}</strong> {% if not doc.recipient_city_fr == "-" %}{{ doc.recipient_city_fr | safe }}, {% endif %}{% if not doc.recipient_province == "zz" %}{{ doc.recipient_province_fr.0 }}, {% endif %}{% if not doc.recipient_country == "" %}{{ doc.recipient_country }} {% endif %}{% if not doc.recipient_postal_code == "-" %} {{ doc.recipient_postal_code | safe }}{% endif %}</div>
       {% endif %}
       {% if doc.amendment_date_fr %}{% if not doc.amendment_date_fr == "-" %}
       <div class="col-sm-12"><a href="{{ path_info }}record/{{ doc.id }}?amendments"><strong>{% translate 'Amendments' %}</strong></a></div>
@@ -67,8 +67,8 @@
       {% if not doc.prog_name_en == "-" %}
       <div class="col-sm-12"><strong>{% translate 'Program Name:' %}</strong> {{ doc.prog_name_en | safe }}</div>
       {% endif %}
-      {% if not doc.recipient_city == "-" or not doc.recipient_province == "ZZ" or not doc.recipient_postal_code == "-"%}
-      <div class="col-sm-12"><strong>{% translate 'Location:' %}</strong> {% if not doc.recipient_city_en == "-" %}{{ doc.recipient_city_en | safe }}, {% endif %}{% if not doc.recipient_province == "ZZ" %}{{ doc.recipient_province_en.0 }}, {% endif %}{% if not doc.recipient_country == "-" %}{{ doc.recipient_country }} {% endif %}{% if not doc.recipient_postal_code == "-" %} {{ doc.recipient_postal_code | safe }}{% endif %}</div>
+      {% if not doc.recipient_city == "-" or not doc.recipient_province == "zz" or not doc.recipient_postal_code == "-"%}
+      <div class="col-sm-12"><strong>{% translate 'Location:' %}</strong> {% if not doc.recipient_city_en == "-" %}{{ doc.recipient_city_en | safe }}, {% endif %}{% if not doc.recipient_province == "zz" %}{{ doc.recipient_province_en.0 }}, {% endif %}{% if not doc.recipient_country == "-" %}{{ doc.recipient_country }} {% endif %}{% if not doc.recipient_postal_code == "-" %} {{ doc.recipient_postal_code | safe }}{% endif %}</div>
       {% endif %}
       {% if doc.amendment_date_en %}{% if not doc.amendment_date_en == "-" %}
       <div class="col-sm-12"><a href="{{ path_info }}record/{{ doc.id }}?amendments"><strong>{% translate 'Amendments' %}</strong></a></div>
