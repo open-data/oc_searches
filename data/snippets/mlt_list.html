@@ -1,23 +1,23 @@
 {% load i18n %}
 {% load search_extras %}
-{% get_current_language as LANGUAGE_CODE %}
 
 <div>
     <ul class="lst-spcd">
          {% for doc in docs %}
              <li>
                 <a href="{{open_data_url_base}}{{doc.id}}">
-                {% if LANGUAGE_CODE == 'en' %}
+                {% if language == 'fr' %}
+                    FR {{ doc.title_translated_fr | safe | truncatewords_html:12 }}
+                    {% if 'title_translated_fr' in doc.machine_translated_fields %}
+                      {{ machine_xlt_msg | safe }}
+                    {% endif %}
+                {% else %}
                     {{ doc.title_translated_en | safe | truncatewords_html:12 }}
                     {% if 'title_translated_en' in doc.machine_translated_fields %}
                       {{ machine_xlt_msg | safe }}
                     {% endif %}
-                {% else %}
-                    {{ doc.title_translated_fr | safe | truncatewords_html:12 }}
-                    {% if 'title_translated_fr' in doc.machine_translated_fields %}
-                      {{ machine_xlt_msg | safe }}
-                    {% endif %}
                 {% endif %}
+                </a>
              </li>
          {% endfor %}
     </ul>
