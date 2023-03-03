@@ -7,7 +7,7 @@
              <li>
                 <a href="{{open_data_url_base}}{{doc.id}}">
                 {% if language == 'fr' %}
-                    FR {{ doc.title_translated_fr | safe | truncatewords_html:12 }}
+                    {{ doc.title_translated_fr | safe | truncatewords_html:12 }}
                     {% if 'title_translated_fr' in doc.machine_translated_fields %}
                       {{ machine_xlt_msg | safe }}
                     {% endif %}
