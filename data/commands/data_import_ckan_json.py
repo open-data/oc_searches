@@ -384,6 +384,20 @@ class Command(BaseCommand):
                     solr_record['subject_en'].append(self.field_codes['subject'][s].label_en)
                     solr_record['subject_fr'].append(self.field_codes['subject'][s].label_fr)
                     solr_record['subject'].append(s)
+            elif f == "title_translated":
+                if 'en' in ds[f]:
+                    solr_record['title_translated_eng'] = ds[f]['en']
+                    solr_record['title_translated_en'] = ds[f]['en']
+                if 'en-t-fr' in ds[f]:
+                    solr_record['title_translated_eng'] = ds[f]['en-t-fr']
+                    solr_record['title_translated_en'] = ds[f]['en-t-fr']
+                if 'fr' in ds[f]:
+                    solr_record['title_translated_fra'] = ds[f]['fr']
+                    solr_record['title_translated_fr'] = ds[f]['fr']
+                if 'fr-t-en' in ds[f]:
+                    solr_record['title_translated_fra'] = ds[f]['fr-t-en']
+                    solr_record['title_translated_fr'] = ds[f]['fr-t-en']
+
             elif f == 'keywords':
                 if 'en' in ds[f]:
                     solr_record['keywords_en'] = ds[f]['en']
