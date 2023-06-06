@@ -355,7 +355,7 @@
         {% if not doc.recipient_operating_name == "-" %}
         <div class="row mrgn-bttm-sm">
             <div class="col-sm-4"><strong>{% translate "Recipient's Operating Name:" %}</strong></div>
-            <div class="col-sm-8">{% if LANGUAGE_CODE == 'fr' %}{{ doc.recipient_operating_name_fr.0 | safe }}{% else %}{{ doc.recipient_operating_name_en.0 | safe }}{% endif %}</div>
+            <div class="col-sm-8">{% if LANGUAGE_CODE == 'fr' %}{{ doc.recipient_operating_name_fr | safe }}{% else %}{{ doc.recipient_operating_name_en | safe }}{% endif %}</div>
         </div>
         {% endif %}
         {% if not doc.recipient_legal_name == "-" %}
