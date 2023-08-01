@@ -76,7 +76,7 @@ def post_mlt_solr_query(context: dict, solr_response: SolrResponse, solr_query: 
 def filter_csv_record(csv_record,search: Search, fields: dict, codes: dict, format: str):
     if format != 'NTR':
 
-        if not csv_record['agreement_type_code']:
+        if not csv_record['agreement_type_code'] and not csv_record['trade_agreement']:
             csv_record['agreement_type_code'] = '0'
         else:
             # Do some data cleanup on the Agreement Type Code
@@ -149,7 +149,7 @@ def load_csv_record(csv_record: dict, solr_record: dict, search: Search, fields:
 
         # Expand the Agreement Type Code to their lookup values
         atc = solr_record['agreement_type_code'].lower()
-        if atc in codes['agreement_type_code']:
+        if atc and atc in codes['agreement_type_code']:
             ta_en = []
             ta_fr = []
 
@@ -163,6 +163,7 @@ def load_csv_record(csv_record: dict, solr_record: dict, search: Search, fields:
             for v in lookup_values:
                 ta_en.append(codes['agreement_type_code'][v.lower()].label_en)
                 ta_fr.append(codes['agreement_type_code'][v.lower()].label_fr)
+
             solr_record['trade_agreement_en'] = ta_en
             solr_record['trade_agreement_fr'] = ta_fr
 
