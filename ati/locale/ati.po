@@ -1,0 +1,32 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2023 "Government of Canada, Gouvernement du Canada"
+# This file is distributed under the same license as the "Open Canada Search - ati Module" package.
+# Ross Thompson, .
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: \"Open Canada  - Search 5th National Action Plan Commitments\"\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-07-15 10:00-0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+
+msgid "Request Number:"
+msgstr "Numéro de la demande :"
+
+msgid "Summary:"
+msgstr "Résumé de la demande :"
+
+msgid "Pages:"
+msgstr "Nombre de pages :"
+
+msgid "Organization:"
+msgstr "Organisation :"
+

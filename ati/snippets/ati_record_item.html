@@ -1,0 +1,17 @@
+
+{% load i18n %}
+{% load search_extras %}
+
+<div class="col-md-3"><strong>{% translate 'Request Number:' %}</strong></div>
+<div class="col-md-9">{{ doc.request_number }}</div>
+<div class="col-md-3"></div>
+<div class="col-md-9">{% if language == "fr" %}{{ doc.month_fr }}{% else %}{{ doc.month_en }}{% endif %} {{ doc.year }}</div>
+<div class="col-md-3"><strong>{% translate 'Summary:' %}</strong></div>
+<div class="col-md-9">{% if language == "fr" %}{{ doc.summary_fr | markdown_filter | safe }}{% else %}{{ doc.summary_en | markdown_filter | safe }}{% endif %}</div>
+<div class="col-md-3"><strong>{% translate 'Disposition:' %}</strong></div>
+<div class="col-md-9">{% if language == "fr" %}{{ doc.disposition_fr }}{% else %}{{ doc.disposition_en }}{% endif %}</div>
+<div class="col-md-3"><strong>{% translate 'Pages:' %}</strong></div>
+<div class="col-md-9">{% if language == "fr" %}{{ doc.pages_fr }}{% else %}{{ doc.pages_en }}{% endif %}</div>
+<div class="col-md-3"><strong>{% translate 'Organization:' %}</strong></div>
+<div class="col-md-9">{% if language == "fr" %}{{ doc.owner_org_fr }}{% else %}{{ doc.owner_org_en }}{% endif %}</div>
+

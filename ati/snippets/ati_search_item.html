@@ -1,0 +1,22 @@
+{% load i18n %}
+{% load search_extras %}
+
+<div class="row mrgn-bttm-lg" xmlns="http://www.w3.org/1999/html">
+  <div class="col-md-12">
+    <div class="row">
+      <div class="col-md-7"><strong><a href="{{ path_info }}record/{{ doc.id }}">{{ doc.request_number }}</a></strong></div>
+      <div class="col-md-5">{% if language == 'fr' %}<strong>{{ doc.month_fr }} {{ doc.year }}</strong>, {{ doc.pages_fr }}
+        {% else %}<strong>{{ doc.month_en }} {{ doc.year }}</strong>, {{ doc.pages_en }}{% endif %} page{{ doc.pages|pluralize }}</div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        {% if language == 'fr' %}{{ doc.summary_fr | markdown_filter | safe | truncatewords_html:100 }}{% else %}{{ doc.summary_en | markdown_filter | safe | truncatewords_html:100 }}{% endif %}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <i>{% if language == 'fr' %}{{ doc.owner_org_fr }}{% else %}{{ doc.owner_org_en }}{% endif %}</i>
+      </div>
+    </div>
+  </div>
+</div>
