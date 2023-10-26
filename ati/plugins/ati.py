@@ -44,7 +44,7 @@ def filter_csv_record(csv_record,search: Search, fields: dict, codes: dict, form
 
 
 def load_csv_record(csv_record: dict, solr_record: dict, search: Search, fields: dict, codes: dict, format: str):
-    bi_title = f'{solr_record["owner_org_en"]} | {solr_record["owner_org_en"]}'
+    bi_title = f'{solr_record["owner_org_en"]} | {solr_record["owner_org_fr"]}'
     solr_record['owner_org_title'] = bi_title
     return solr_record
 
