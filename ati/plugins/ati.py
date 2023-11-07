@@ -1,6 +1,8 @@
 from django.conf import settings
+from django.core.cache import caches
 from django.http import HttpRequest
 import json
+import nltk
 from nltk.stem import PorterStemmer
 import numpy as np
 import os
@@ -18,12 +20,29 @@ def load_model(path):
         print('Loading file : {0} sec'.format(end1-start1))
         return model
 
+# Use a local memory cache for the DB objects
+cache = caches['local']
+# Load Search and Field configuration
 
-stemmer = PorterStemmer()
-classifier_en = os.path.join(settings.NLTK_DATADIR, 'ati_en.model')
-classifier_fr = os.path.join(settings.NLTK_DATADIR, 'ati_fr.model')
-model_en = load_model(classifier_en)
-model_fr = load_model(classifier_fr)
+stemmer = cache.get('ati_stemmer')
+if stemmer is None:
+    stemmer = PorterStemmer()
+    cache.set('ati_stemmer', stemmer, timeout=3600)
+
+model_en = cache.get('ati_model_en')
+if model_en is None:
+    classifier_en = os.path.join(settings.NLTK_DATADIR, 'ati_en.model')
+    model_en = load_model(classifier_en)
+    cache.set('ati_model_en', model_en, timeout=3600)
+
+model_fr = cache.get('ati_model_fr')
+if model_fr is None:
+    classifier_fr = os.path.join(settings.NLTK_DATADIR, 'ati_fr.model')
+    model_fr = load_model(classifier_fr)
+    cache.set('ati_model_fr', model_fr, timeout=3600)
+
+if settings.NLTK_DATADIR not in nltk.data.path:
+    nltk.data.path.append(settings.NLTK_DATADIR)
 
 
 def plugin_api_version():
