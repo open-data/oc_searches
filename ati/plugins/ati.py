@@ -1,6 +1,29 @@
+from django.conf import settings
 from django.http import HttpRequest
+import json
+from nltk.stem import PorterStemmer
+import numpy as np
+import os
+import pickle
 from search.models import Search, Field, Code
 from SolrClient import SolrResponse
+import time
+
+
+def load_model(path):
+    if os.path.exists(path):
+        start1 = time.time()
+        model = pickle.load(open(path, 'rb'))
+        end1 = time.time()
+        print('Loading file : {0} sec'.format(end1-start1))
+        return model
+
+
+stemmer = PorterStemmer()
+classifier_en = os.path.join(settings.NLTK_DATADIR, 'ati_en.model')
+classifier_fr = os.path.join(settings.NLTK_DATADIR, 'ati_fr.model')
+model_en = load_model(classifier_en)
+model_fr = load_model(classifier_fr)
 
 
 def plugin_api_version():
@@ -12,6 +35,30 @@ def pre_search_solr_query(context: dict, solr_query: dict, request: HttpRequest,
 
 
 def post_search_solr_query(context: dict, solr_response: SolrResponse, solr_query: dict, request: HttpRequest, search: Search, fields: dict, codes: dict, facets: list, record_ids: str):
+    search_terms = np.array([solr_query['q']])
+
+    predicted = {}
+    short_list = {}
+    if request.LANGUAGE_CODE == 'fr':
+        predicted = model_fr.predict_proba(search_terms)[0]
+        for index, name in enumerate(model_fr.classes_):
+            short_list[index] = {'relevance': predicted[index], 'department': name}
+    else:
+        predicted = model_en.predict_proba(search_terms)[0]
+        for index, name in enumerate(model_en.classes_):
+            short_list[index] = {'relevance': predicted[index], 'department': name}
+
+    sorted_list = sorted(short_list, key=lambda x: (short_list[x]['relevance']), reverse=True)
+
+    # Just return the top ten matches
+    short_sorted_list = sorted_list[0:10]
+    results = []
+    for i in short_sorted_list:
+        results.append({'relevance': short_list[i]["relevance"], 'department': short_list[i]["department"]})
+
+    extras = {'relevance': results}
+    solr_response.data['extras'] = extras
+
     return context, solr_response
 
 
