@@ -1,3 +1,4 @@
+from babel.dates import format_date
 from django.conf import settings
 from django.core.cache import caches
 from django.http import HttpRequest
@@ -9,6 +10,7 @@ import os
 import pickle
 from search.models import Search, Field, Code
 from SolrClient import SolrResponse
+import sys
 import time
 
 
@@ -61,19 +63,19 @@ def post_search_solr_query(context: dict, solr_response: SolrResponse, solr_quer
     if request.LANGUAGE_CODE == 'fr':
         predicted = model_fr.predict_proba(search_terms)[0]
         for index, name in enumerate(model_fr.classes_):
-            short_list[index] = {'relevance': predicted[index], 'department': name}
+            short_list[index] = {'relevance': predicted[index], 'umd_number': name}
     else:
         predicted = model_en.predict_proba(search_terms)[0]
         for index, name in enumerate(model_en.classes_):
-            short_list[index] = {'relevance': predicted[index], 'department': name}
+            short_list[index] = {'relevance': predicted[index], 'umd_number': name}
 
     sorted_list = sorted(short_list, key=lambda x: (short_list[x]['relevance']), reverse=True)
 
     # Just return the top ten matches
-    short_sorted_list = sorted_list[0:10]
+    short_sorted_list = sorted_list[0:5]
     results = []
     for i in short_sorted_list:
-        results.append({'relevance': short_list[i]["relevance"], 'department': short_list[i]["department"]})
+        results.append({'relevance': short_list[i]["relevance"], 'umd_number': short_list[i]["umd_number"]})
 
     extras = {'relevance': results}
     solr_response.data['extras'] = extras
@@ -106,7 +108,20 @@ def post_mlt_solr_query(context: dict, solr_response: SolrResponse, solr_query: 
 
 
 def filter_csv_record(csv_record,search: Search, fields: dict, codes: dict, format: str):
-    return True,  csv_record
+    go = True
+    if csv_record['year']:
+        try:
+            year = int(csv_record['year'])
+            if year < 2020:
+                go = False
+                # sys.stdout.write(f"Record pre-dates 2020: {csv_record['year']} {csv_record['request_number']}\n")
+            if not csv_record['umd_number']:
+                go = False
+                sys.stdout.write(f"Missing UMD number {csv_record['request_number']} {csv_record['owner_org_title']}\n")
+        except ValueError as ve:
+            go = False
+
+    return go,  csv_record
 
 
 def load_csv_record(csv_record: dict, solr_record: dict, search: Search, fields: dict, codes: dict, format: str):

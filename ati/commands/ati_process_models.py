@@ -49,14 +49,15 @@ class Command(BaseCommand):
 
         self.logger.info("Parsing and cleaning English and French data ...")
 
-        # drop records with NA summaries
+        # drop records with NA summaries or UMD Numner
+        df_ati = df_ati.dropna(subset=['umd_number'])
         df_en = df_ati.dropna(subset=["summary_en"])
         df_fr = df_ati.dropna(subset=["summary_fr"])
 
         X_en = df_en['summary_en']
         X_fr = df_fr['summary_fr']
-        y_en = df_en.owner_org_title
-        y_fr = df_fr.owner_org_title
+        y_en = df_en.umd_number
+        y_fr = df_fr.umd_number
 
         X_train_en = X_en
         X_train_fr = X_fr
