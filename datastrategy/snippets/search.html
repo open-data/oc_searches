@@ -1,0 +1,91 @@
+{% extends "search.html" %}
+{% load static %}
+{% load humanize %}
+{% load i18n %}
+{% load qurl %}
+{% load search_extras %}
+
+{% block main-content-body-top %}
+  <style>
+    @keyframes kf_ip {
+      from {stroke-dashoffset: 360} to {stroke-dashoffset: {{ip_offset}};}
+    }
+    @keyframes kf_ns {
+      from {stroke-dashoffset: 360} to {stroke-dashoffset: {{ns_offset}};}
+    }
+    @keyframes kf_co {
+      from {stroke-dashoffset: 360} to {stroke-dashoffset: {{co_offset}};}
+    }
+    @keyframes kf_bl {
+      from {stroke-dashoffset: 360} to {stroke-dashoffset: {{bl_offset}};}
+    }
+    @keyframes kf_be {
+      from {stroke-dashoffset: 360} to {stroke-dashoffset: {{be_offset}};}
+    }
+  </style>
+  <div class="row">
+    <div class="col-md-8 col-md-push-2 mrgn-tp-sm">
+      <div class="row mrgn-bttm-md mrgn-lft-md form-inline">
+
+        {% if LANGUAGE_CODE == 'en' %}
+        <div class="col-md-3">
+          {% if In_Progess_list %}<a href="{% qurl request.get_full_path status=In_Progess_list %}" title="In Progress" alt="{{ ip_num }} item{{ ip_num|pluralize }} {% translate 'with status' %} In progress ">{% endif %}
+          <svg aria-labelledby="ipStatTitle" role="img">
+            <title id="ipStatTitle">{{ ip_num }} item{{ ip_num|pluralize }} {% translate "with status" %} In Progress</title>
+            <circle class="bg-C" cx="57" cy="57" r="52" />
+            <circle class="meter-C" cx="57" cy="57" r="52" stroke-dashoffset="{{ ip_offset }}" style="animation: kf_ip 1s ease-out"/>
+            <text x="57" y="64" text-anchor="middle" class="status_count_text">{{ ip_num }}</text>
+          </svg>
+          <div class="text-center">In Progress</div>
+          {% if In_Progress_list %}</a>{% endif %}
+        </div>
+
+        <div class="col-md-3">
+          {% if Not_Started_list %}<a href="{% qurl request.get_full_path status=Not_Started_list %}" title="Not Started" alt="{{ ns_num }} item{{ ns_num|pluralize }} {% translate 'with status' %} Not Started ">{% endif %}
+          <svg aria-labelledby="nsStatTitle" role="img">
+            <title id="nsStatTitle">{{ ns_num }} item{{ ns_num|pluralize }} {% translate "with status" %} Not Started</title>
+            <circle class="bg-NS" cx="57" cy="57" r="52" />
+            <circle class="meter-NS" cx="57" cy="57" r="52" stroke-dashoffset="{{ ns_offset }}" style="animation: kf_ns 1s ease-out"/>
+            <text x="57" y="64" text-anchor="middle" class="status_count_text">{{ ns_num }}</text>
+          </svg>
+          <div class="text-center">Not Started</div>
+          {% if Not_Started_list %}</a>{% endif %}
+        </div>
+
+        <div class="col-md-3">
+          {% if Completed_list %}<a href="{% qurl request.get_full_path status=Completed_list %}" title="Completed" alt="{{ co_num }} item{{ co_num|pluralize }} {% translate 'with status' %} Completed ">{% endif %}
+          <svg aria-labelledby="coStatTitle" role="img">
+            <title id="coStatTitle">{{ co_num }} item{{ co_num|pluralize }} {% translate "with status" %} Completed</title>
+            <circle class="bg-SP" cx="57" cy="57" r="52" />
+            <circle class="meter-SP" cx="57" cy="57" r="52" stroke-dashoffset="{{ co_offset }}" style="animation: co_ns 1s ease-out"/>
+            <text x="57" y="64" text-anchor="middle" class="status_count_text">{{ co_num }}</text>
+          </svg>
+          <div class="text-center">Completed</div>
+          {% if Completed_list %}</a>{% endif %}
+        </div>
+
+        {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock main-content-body-top %}
+
+{% block search_results_message %}
+<div class="row mrgn-bttm-lg">
+    <div class="col-sm-5 col-xs-12" style="justify-content: left">
+    {% if not show_all_results %}
+      <b>{% if LANGUAGE_CODE == 'fr' %}{{ total_hits|apnumber }} engagement{{ total_hits|pluralize }} trouvé{{ total_hits|pluralize }}
+      {% else %}Found {{ total_hits|apnumber }} commitment{{ total_hits|pluralize }}{% endif %}</b>
+    {% endif %}
+    </div>
+    <div class="col-sm-7 col-xs-12"><div style="display: flex; justify-content: right">
+    <label class="control-label mrgn-rght-md" for="sort"> {% translate "Order By" %}</label>
+    <select class="form-control mrgn-rght-0" id="sort" name="sort" onchange="submitForm();" value="{{ sort }}" style="flex: none">
+        {% for option, label in sort_options.items %}
+            <option value="{{ option }}" {% if sort == option %}selected="selected"{% endif %}>{{ label }}</option>
+        {% endfor %}
+    </select>
+    </div>
+    </div>
+</div>
+{% endblock search_results_message %}

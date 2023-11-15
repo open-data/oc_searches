@@ -4,23 +4,24 @@
 <div class="row mrgn-bttm-lg" xmlns="http://www.w3.org/1999/html">
   <div class="col-md-12">
     <div class="row">
-      <div class="col-md-12"><strong><a href="{{ path_info }}record/{{ doc.id }}">{% translate 'Action ID: ' %}{{ doc.action_id }}</a></strong></div>
-
-      <div class="col-md-3"><strong>{% translate 'Date:' %}</strong></div>
-      <div class="col-md-9">{% if language == "fr" %}{{ doc.ex_completion_dt_fra }}{% else %}{{ doc.ex_completion_dt_eng }}{% endif %}</div>
-
-      <div class="col-md-3"><strong>{% translate 'Priority:' %}</strong></div>
-      <div class="col-md-9">{% if language == "fr" %}{{ doc.priority_fr }}{% else %}{{ doc.priority }}{% endif %}</div>
-
-      <div class="col-md-3"><strong>{% translate 'Action Area:' %}</strong></div>
-      <div class="col-md-9">{% if language == "fr" %}{{ doc.area_for_action_fr }}{% else %}{{ doc.area_for_action }}{% endif %}</div>
-
-      <div class="col-md-3"><strong>{% translate 'Action:' %}</strong></div>
-      <div class="col-md-9">{% if language == "fr" %}{{ doc.action_fr | markdown_filter | safe }}{% else %}{{ doc.action | markdown_filter | safe }}{% endif %}</div>
-
-      <div class="col-md-3"><strong>{% translate 'Lead:' %}</strong></div>
-      <div class="col-md-9">{% if language == "fr" %}{{ doc.lead_fr }}{% else %}{{ doc.lead_en }}{% endif %}</div>
-
+      <div class="row">
+        <div class="col-md-12"><strong><a href="{{ path_info }}record/{{ doc.id }}">{{ doc.action_id }} - {% if language == "fr" %}{{ doc.mission_fr }}{% else %}{{ doc.mission }}{% endif %}</a></strong></div>
+      </div>
+      <div class="row">
+        <div class="col-md-12"><strong>{% translate 'Action: ' %} </strong>{% if language == "fr" %}{{ doc.action_fr | markdown_filter | safe | strip_paragraph }}{% else %}{{ doc.action | markdown_filter | safe | strip_paragraph }}{% endif %}</div>
+      </div>
+      <div class="row">
+        <div class="col-md-12"><strong>{% translate 'Area for action: ' %}</strong> {% if language == "fr" %}{{ doc.area_for_action_fr }}{% else %}{{ doc.area_for_action }}{% endif %}</div>
+      </div>
+      <div class="row">
+        <div class="col-md-12"><strong>{% translate 'Priority: ' %}</strong>{% if language == "fr" %}{{ doc.priority_fr }}{% else %}{{ doc.priority }}{% endif %}</div>
+      </div>
+      <div class="row">
+        <div class="col-md-12"><strong>{% translate 'Status: ' %}</strong>{% if language == "fr" %}{{ doc.action_status_fr }}{% else %}{{ doc.action_status }}{% endif %}</div>
+      </div>
+      <div class="row">
+        <div class="col-md-12"><strong>{% translate 'Expected Completion Date: ' %}</strong>{% if language == "fr" %}{{ doc.ex_completion_dt_fra }}{% else %}{{ doc.ex_completion_dt_eng }}{% endif %}</div>
+      </div>
     </div>
   </div>
 </div>

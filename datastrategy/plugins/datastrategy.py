@@ -7,6 +7,13 @@ from search.models import Search, Field, Code
 from SolrClient import SolrResponse
 
 
+def circle_progress_bar_offset(value: int, total: int):
+    if value == 0:
+        return 360
+    else:
+        return 360 - round(value * 360 / total)
+
+
 def plugin_api_version():
     return 1.1
 
@@ -85,19 +92,6 @@ def load_csv_record(csv_record: dict, solr_record: dict, search: Search, fields:
 
 # Version 1.1 Methods
 
-def pre_render_search(context: dict, template: str, request: HttpRequest, lang: str, search: Search, fields: dict, codes: dict):
-    """
-    If required, make changes to the context before rendering the search page or modify the template name
-    :param context: the Django view context to be used
-    :param template: the default name of the  template to be rendered
-    :param request: the HTTP request object
-    :param lang: the language of the page being rendered
-    :param search: the application search object
-    :param fields: the application field objects
-    :param codes: the application code objects to be used
-    :return: context object, and the template name
-    """
-    return context, template
 
 def pre_render_record(context: dict, template: str, request: HttpRequest, lang: str, search: Search, fields: dict, codes: dict):
     """
@@ -111,4 +105,140 @@ def pre_render_record(context: dict, template: str, request: HttpRequest, lang: 
     :param codes: the application code objects to be used
     :return: context object, and the template name
     """
+
+    return context, template
+
+
+def pre_render_search(context: dict, template: str, request: HttpRequest, lang: str, search: Search, fields: dict, codes: dict):
+    """
+    If required, make changes to the context before rendering the search page or modify the template name
+    :param context: the Django view context to be used
+    :param template: the default name of the  template to be rendered
+    :param request: the HTTP request object
+    :param lang: the language of the page being rendered
+    :param search: the application search object
+    :param fields: the application field objects
+    :param codes: the application code objects to be used
+    :return: context object, and the template name
+    """
+    if context['total_hits'] == 0:
+        context['ip_offset'] = 360
+        context['ns_offset'] = 360
+        context['co_offset'] = 360
+        context['bl_offset'] = 360
+        context['be_offset'] = 360
+        context['ip_num'] = 0
+        context['ns_num'] = 0
+        context['co_num'] = 0
+        context['bl_num'] = 0
+        context['be_num'] = 0
+        context['ip_list'] = ()
+        context['ns_list'] = ()
+        context['co_list'] = ()
+        context['bl_list'] = ()
+        context['be_list'] = ()
+    else:
+
+        context['show_all_results'] = True
+        for p in request.GET:
+            if p not in ['encoding', 'page', 'sort']:
+                context['show_all_results'] = False
+                break
+        # @TODO Do some better calculations for the circle progress bars on the search page for more accurate rendering
+
+        # The graph at the top or the search page uses non-standard facet counts - when the status facets are selected,
+        # the unselected values are automatically set to zero. It is simpler to calculate these numbers here instead of
+        # in the template
+        if request.LANGUAGE_CODE == 'fr':
+            if 'action_status_fr' in request.GET:
+                statii = request.GET.getlist('action_status_fr')
+                stati = statii[0].split('|')
+                context['ip_offset'] = circle_progress_bar_offset(context['facets']['action_status_fr']['Essentiel'], context['total_hits']) if "Essentiel" in stati and 'Essentiel' in context['facets']['action_status'] else 360
+                context['ns_offset'] = circle_progress_bar_offset(context['facets']['action_status_fr']['Pas commencé'], context['total_hits']) if "Pas commencé" in stati and 'Pas commencé' in context['facets']['action_status_fr'] else 360
+                context['co_offset'] = circle_progress_bar_offset(context['facets']['action_status_fr']['Terminé'], context['total_hits']) if "Terminé" in stati and 'Terminé' in context['facets']['action_status_fr'] else 360
+                context['bl_offset'] = circle_progress_bar_offset(context['facets']['action_status_fr']['Bloqué'], context['total_hits']) if "Bloqué" in stati and 'Bloqué' in context['facets']['action_status_fr'] else 360
+                context['be_offset'] = circle_progress_bar_offset(context['facets']['action_status_fr']['Behind'], context['total_hits']) if "Behind" in stati and 'Behind' in context['facets']['action_status_fr'] else 360
+
+                context['ip_num'] = context['facets']['action_status_fr']['Essentiel'] if "Essentiel" in stati and 'Essentiel' in context['facets']['action_status_fr'] else 0
+                context['ns_num'] = context['facets']['action_status_fr']['Pas commencé'] if "Pas commencé" in stati and 'Pas commencé' in context['facets']['action_status_fr'] else 0
+                context['co_num'] = context['facets']['action_status_fr']['Terminé'] if "Terminé" in stati and 'Terminé' in context['facets']['action_status_fr'] else 0
+                context['bl_num'] = context['facets']['action_status_fr']['Bloqué'] if "Bloqué" in stati and 'Bloqué' in context['facets']['action_status_fr'] else 0
+                context['be_num'] = context['facets']['action_status_fr']['Behind'] if "Behind" in stati and 'Behind' in context['facets']['action_status_fr'] else 0
+
+                for s in ['Essentiel', 'Pas commencé', 'Terminé', 'Bloqué', 'Behind']:
+                    stati2 = stati.copy()
+                    if s in stati:
+                        stati2.remove(s)
+                    else:
+                        # We do not want to show any links when clicking on the status would result in no change or zero results
+                        if s in context['facets']['action_status_fr'] and context['facets']['status'][s] > 0:
+                            stati2.append(s)
+                        elif stati == stati2:
+                            stati2 = ()
+                    context[s + "_list"] = "|".join(stati2)
+
+            else:
+                context['ip_offset'] = circle_progress_bar_offset(context['facets']['action_status_fr']['Essentiel'], context['total_hits']) if "Essentiel" in context['facets']['status'] else 360
+                context['ns_offset'] = circle_progress_bar_offset(context['facets']['action_status_fr']['Pas commencé'], context['total_hits']) if "Pas commencé" in context['facets']['status'] else 360
+                context['co_offset'] = circle_progress_bar_offset(context['facets']['action_status_fr']['Terminé'], context['total_hits']) if "Terminé" in context['facets']['status'] else 360
+                context['bt_offset'] = circle_progress_bar_offset(context['facets']['action_status_fr']['Bloqué'], context['total_hits']) if "Bloqué" in context['facets']['status'] else 360
+                context['be_offset'] = circle_progress_bar_offset(context['facets']['action_status_fr']['Behind'], context['total_hits']) if "Behind" in context['facets']['status'] else 360
+                context['ip_num'] = context['facets']['action_status_fr']['Essentiel'] if "Essentiel" in context['facets']['action_status_fr'] else 0
+                context['ns_num'] = context['facets']['action_status_fr']['Pas commencé'] if "Pas commencé" in context['facets']['action_status_fr'] else 0
+                context['co_num'] = context['facets']['action_status_fr']['Terminé'] if "Terminé" in context['facets']['action_status_fr'] else 0
+                context['bl_num'] = context['facets']['action_status_fr']['Bloqué'] if "Bloqué" in context['facets']['action_status_fr'] else 0
+                context['be_num'] = context['facets']['action_status_fr']['Behind'] if "Behind" in context['facets']['action_status_fr'] else 0
+
+                for s in ['Essentiel', 'Pas commencé', 'Terminé', 'Bloqué', 'Behind']:
+                    if s in context['facets']['action_status_fr'] and context['facets']['action_status_fr'][s] > 0:
+                        context[s.replace(" ", "_") + "_list"] = s
+                    else:
+                        context[s.replace(" ", "_") + "_list"] = ()
+
+        else:
+            if 'action_status' in request.GET:
+                statii = request.GET.getlist('action_status')
+                stati = statii[0].split('|')
+                context['ip_offset'] = circle_progress_bar_offset(context['facets']['action_status']['In Progess'], context['total_hits']) if "In Progess" in stati and 'In Progess' in context['facets']['action_status'] else 360
+                context['ns_offset'] = circle_progress_bar_offset(context['facets']['action_status']['Not Started'], context['total_hits']) if "Not Started" in stati and 'Not Started' in context['facets']['action_status'] else 360
+                context['co_offset'] = circle_progress_bar_offset(context['facets']['action_status']['Completed'], context['total_hits']) if "Completed" in stati and 'Completed' in context['facets']['action_status'] else 360
+                context['bl_offset'] = circle_progress_bar_offset(context['facets']['action_status']['Blocked'], context['total_hits']) if "Blocked" in stati and 'Blocked' in context['facets']['action_status'] else 360
+                context['be_offset'] = circle_progress_bar_offset(context['facets']['action_status']['Behind'], context['total_hits']) if "Behind" in stati and 'Behind' in context['facets']['action_status'] else 360
+
+                context['ip_num'] = context['facets']['action_status']['In Progess'] if "In Progess" in stati and 'In Progess' in context['facets']['action_status'] else 0
+                context['ns_num'] = context['facets']['action_status']['Not Started'] if "Not Started" in stati and 'Not Started' in context['facets']['action_status'] else 0
+                context['co_num'] = context['facets']['action_status']['Completed'] if "Completed" in stati and 'Completed' in context['facets']['action_status'] else 0
+                context['bl_num'] = context['facets']['action_status']['Blocked'] if "Blocked" in stati and 'Blocked' in context['facets']['action_status'] else 0
+                context['be_num'] = context['facets']['action_status']['Behind'] if "Behind" in stati and 'Behind' in context['facets']['action_status'] else 0
+
+                for s in ['In Progess', 'Not Started', 'Completed', 'Blocked', 'Behind']:
+                    stati2 = stati.copy()
+                    if s in stati:
+                        stati2.remove(s)
+                    else:
+                        # We do not want to show any links when clicking on the status would result in no change or zero results
+                        if s in context['facets']['action_status'] and context['facets']['action_status'][s] > 0:
+                            stati2.append(s)
+                        elif stati == stati2:
+                            stati2 = ()
+                    context[s + "_list"] = "|".join(stati2)
+
+            else:
+                context['ip_offset'] = circle_progress_bar_offset(context['facets']['action_status']['In Progess'], context['total_hits']) if "In Progess" in context['facets']['action_status'] else 360
+                context['ns_offset'] = circle_progress_bar_offset(context['facets']['action_status']['Not Started'], context['total_hits']) if "Not Started" in context['facets']['action_status'] else 360
+                context['co_offset'] = circle_progress_bar_offset(context['facets']['action_status']['Completed'], context['total_hits']) if "Completed" in context['facets']['action_status'] else 360
+                context['bt_offset'] = circle_progress_bar_offset(context['facets']['action_status']['Blocked'], context['total_hits']) if "Blocked" in context['facets']['action_status'] else 360
+                context['be_offset'] = circle_progress_bar_offset(context['facets']['action_status']['Behind'], context['total_hits']) if "Behind" in context['facets']['action_status'] else 360
+                context['ip_num'] = context['facets']['action_status']['In Progess'] if "In Progess" in context['facets']['action_status'] else 0
+                context['ns_num'] = context['facets']['action_status']['Not Started'] if "Not Started" in context['facets']['action_status'] else 0
+                context['co_num'] = context['facets']['action_status']['Completed'] if "Completed" in context['facets']['action_status'] else 0
+                context['bl_num'] = context['facets']['action_status']['Blocked'] if "Blocked" in context['facets']['action_status'] else 0
+                context['be_num'] = context['facets']['action_status']['Behind'] if "Behind" in context['facets']['action_status'] else 0
+
+                for s in ['In Progess', 'Not Started', 'Completed', 'Blocked', 'Behind']:
+                    if s in context['facets']['action_status'] and context['facets']['action_status'][s] > 0:
+                        context[s.replace(" ", "_") + "_list"] = s
+                    else:
+                        context[s.replace(" ", "_") + "_list"] = ()
+
     return context, template
