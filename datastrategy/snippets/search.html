@@ -24,44 +24,131 @@
     }
   </style>
   <div class="row">
-    <div class="col-md-8 col-md-push-2 mrgn-tp-sm">
+    <div class="col-md-10 col-md-push-2 mrgn-tp-sm">
       <div class="row mrgn-bttm-md mrgn-lft-md form-inline">
 
-        {% if LANGUAGE_CODE == 'en' %}
-        <div class="col-md-3">
-          {% if In_Progess_list %}<a href="{% qurl request.get_full_path status=In_Progess_list %}" title="In Progress" alt="{{ ip_num }} item{{ ip_num|pluralize }} {% translate 'with status' %} In progress ">{% endif %}
+        {% if LANGUAGE_CODE == 'fr' %}
+
+        <div class="col-md-2">
+          {% if En_cours_list %}<a href="{% qurl request.get_full_path action_status_fr=En_cours_list %}" title="En cours" alt="{{ ip_num }} item{{ ip_num|pluralize }} {% translate 'with status' %} En cours ">{% endif %}
+          <svg aria-labelledby="ipStatTitle" role="img">
+            <title id="ipStatTitle">{{ ip_num }} item{{ ip_num|pluralize }} {% translate "with status" %} En cours</title>
+            <circle class="bg-Green" cx="57" cy="57" r="52" />
+            <circle class="meter-Green" cx="57" cy="57" r="52" stroke-dashoffset="{{ ip_offset }}" style="animation: kf_ip 1s ease-out"/>
+            <text x="57" y="64" text-anchor="middle" class="status_count_text">{{ ip_num }}</text>
+          </svg>
+          <div class="text-center">En cours</div>
+          {% if En_cours_list %}</a>{% endif %}
+        </div>
+
+        <div class="col-md-2">
+          {% if Pas_commence_list %}<a href="{% qurl request.get_full_path action_status_fr=Pas_commence_list %}" title="Pas commencé" alt="{{ ns_num }} item{{ ns_num|pluralize }} {% translate 'with status' %} Pas commencé ">{% endif %}
+          <svg aria-labelledby="nsStatTitle" role="img">
+            <title id="nsStatTitle">{{ ns_num }} item{{ ns_num|pluralize }} {% translate "with status" %} Pas commencé</title>
+            <circle class="bg-Silver" cx="57" cy="57" r="52" />
+            <circle class="meter-Silver" cx="57" cy="57" r="52" stroke-dashoffset="{{ ns_offset }}" style="animation: kf_ns 1s ease-out"/>
+            <text x="57" y="64" text-anchor="middle" class="status_count_text">{{ ns_num }}</text>
+          </svg>
+          <div class="text-center">Pas commencé</div>
+          {% if Pas_commence_list %}</a>{% endif %}
+        </div>
+
+        <div class="col-md-2">
+          {% if Termine_list %}<a href="{% qurl request.get_full_path action_status_fr=Termine_list %}" title="Terminé" alt="{{ co_num }} item{{ co_num|pluralize }} {% translate 'with status' %} Terminé ">{% endif %}
+          <svg aria-labelledby="coStatTitle" role="img">
+            <title id="coStatTitle">{{ co_num }} item{{ co_num|pluralize }} {% translate "with status" %} Terminé</title>
+            <circle class="bg-Blue" cx="57" cy="57" r="52" />
+            <circle class="meter-Blue" cx="57" cy="57" r="52" stroke-dashoffset="{{ co_offset }}" style="animation: co_ns 1s ease-out"/>
+            <text x="57" y="64" text-anchor="middle" class="status_count_text">{{ co_num }}</text>
+          </svg>
+          <div class="text-center">Terminé</div>
+          {% if Termine_list %}</a>{% endif %}
+        </div>
+
+        <div class="col-md-2">
+          {% if Bloque_list %}<a href="{% qurl request.get_full_path action_status_fr=Bloque_list %}" title="Bloqué" alt="{{ bl_num }} item{{ bl_num|pluralize }} {% translate 'with status' %} Bloqué ">{% endif %}
+          <svg aria-labelledby="blStatTitle" role="img">
+            <title id="blStatTitle">{{ bl_num }} item{{ bl_num|pluralize }} {% translate "with status" %} Bloqué</title>
+            <circle class="bg-Red" cx="57" cy="57" r="52" />
+            <circle class="meter-Red" cx="57" cy="57" r="52" stroke-dashoffset="{{ bl_offset }}" style="animation: bl_ns 1s ease-out"/>
+            <text x="57" y="64" text-anchor="middle" class="status_count_text">{{ bl_num }}</text>
+          </svg>
+          <div class="text-center">Bloqué</div>
+          {% if Bloque_list %}</a>{% endif %}
+        </div>
+
+        <div class="col-md-2">
+          {% if Behind_list %}<a href="{% qurl request.get_full_path action_status_fr=Behind_list %}" title="Behind" alt="{{ be_num }} item{{ be_num|pluralize }} {% translate 'with status' %} Behind ">{% endif %}
+          <svg aria-labelledby="beStatTitle" role="img">
+            <title id="beStatTitle">{{ be_num }} item{{ be_num|pluralize }} {% translate "with status" %} Behind</title>
+            <circle class="bg-Orange" cx="57" cy="57" r="52" />
+            <circle class="meter-Orange" cx="57" cy="57" r="52" stroke-dashoffset="{{ be_offset }}" style="animation: be_ns 1s ease-out"/>
+            <text x="57" y="64" text-anchor="middle" class="status_count_text">{{ be_num }}</text>
+          </svg>
+          <div class="text-center">Behind</div>
+          {% if Behind_list %}</a>{% endif %}
+        </div>
+
+        {% else %}
+
+        <div class="col-md-2">
+          {% if In_Progess_list %}<a href="{% qurl request.get_full_path action_status=In_Progess_list %}" title="In Progress" alt="{{ ip_num }} item{{ ip_num|pluralize }} {% translate 'with status' %} In progress ">{% endif %}
           <svg aria-labelledby="ipStatTitle" role="img">
             <title id="ipStatTitle">{{ ip_num }} item{{ ip_num|pluralize }} {% translate "with status" %} In Progress</title>
-            <circle class="bg-C" cx="57" cy="57" r="52" />
-            <circle class="meter-C" cx="57" cy="57" r="52" stroke-dashoffset="{{ ip_offset }}" style="animation: kf_ip 1s ease-out"/>
+            <circle class="bg-Green" cx="57" cy="57" r="52" />
+            <circle class="meter-Green" cx="57" cy="57" r="52" stroke-dashoffset="{{ ip_offset }}" style="animation: kf_ip 1s ease-out"/>
             <text x="57" y="64" text-anchor="middle" class="status_count_text">{{ ip_num }}</text>
           </svg>
           <div class="text-center">In Progress</div>
           {% if In_Progress_list %}</a>{% endif %}
         </div>
 
-        <div class="col-md-3">
-          {% if Not_Started_list %}<a href="{% qurl request.get_full_path status=Not_Started_list %}" title="Not Started" alt="{{ ns_num }} item{{ ns_num|pluralize }} {% translate 'with status' %} Not Started ">{% endif %}
+        <div class="col-md-2">
+          {% if Not_Started_list %}<a href="{% qurl request.get_full_path action_status=Not_Started_list %}" title="Not Started" alt="{{ ns_num }} item{{ ns_num|pluralize }} {% translate 'with status' %} Not Started ">{% endif %}
           <svg aria-labelledby="nsStatTitle" role="img">
             <title id="nsStatTitle">{{ ns_num }} item{{ ns_num|pluralize }} {% translate "with status" %} Not Started</title>
-            <circle class="bg-NS" cx="57" cy="57" r="52" />
-            <circle class="meter-NS" cx="57" cy="57" r="52" stroke-dashoffset="{{ ns_offset }}" style="animation: kf_ns 1s ease-out"/>
+            <circle class="bg-Silver" cx="57" cy="57" r="52" />
+            <circle class="meter-Silver" cx="57" cy="57" r="52" stroke-dashoffset="{{ ns_offset }}" style="animation: kf_ns 1s ease-out"/>
             <text x="57" y="64" text-anchor="middle" class="status_count_text">{{ ns_num }}</text>
           </svg>
           <div class="text-center">Not Started</div>
           {% if Not_Started_list %}</a>{% endif %}
         </div>
 
-        <div class="col-md-3">
-          {% if Completed_list %}<a href="{% qurl request.get_full_path status=Completed_list %}" title="Completed" alt="{{ co_num }} item{{ co_num|pluralize }} {% translate 'with status' %} Completed ">{% endif %}
+        <div class="col-md-2">
+          {% if Completed_list %}<a href="{% qurl request.get_full_path action_status=Completed_list %}" title="Completed" alt="{{ co_num }} item{{ co_num|pluralize }} {% translate 'with status' %} Completed ">{% endif %}
           <svg aria-labelledby="coStatTitle" role="img">
             <title id="coStatTitle">{{ co_num }} item{{ co_num|pluralize }} {% translate "with status" %} Completed</title>
-            <circle class="bg-SP" cx="57" cy="57" r="52" />
-            <circle class="meter-SP" cx="57" cy="57" r="52" stroke-dashoffset="{{ co_offset }}" style="animation: co_ns 1s ease-out"/>
+            <circle class="bg-Blue" cx="57" cy="57" r="52" />
+            <circle class="meter-Blue" cx="57" cy="57" r="52" stroke-dashoffset="{{ co_offset }}" style="animation: co_ns 1s ease-out"/>
             <text x="57" y="64" text-anchor="middle" class="status_count_text">{{ co_num }}</text>
           </svg>
           <div class="text-center">Completed</div>
           {% if Completed_list %}</a>{% endif %}
+        </div>
+
+        <div class="col-md-2">
+          {% if Blocked_list %}<a href="{% qurl request.get_full_path action_status=Blocked_list %}" title="Blocked" alt="{{ bl_num }} item{{ bl_num|pluralize }} {% translate 'with status' %} Blocked ">{% endif %}
+          <svg aria-labelledby="blStatTitle" role="img">
+            <title id="blStatTitle">{{ bl_num }} item{{ bl_num|pluralize }} {% translate "with status" %} Blocked</title>
+            <circle class="bg-Red" cx="57" cy="57" r="52" />
+            <circle class="meter-Red" cx="57" cy="57" r="52" stroke-dashoffset="{{ bl_offset }}" style="animation: bl_ns 1s ease-out"/>
+            <text x="57" y="64" text-anchor="middle" class="status_count_text">{{ bl_num }}</text>
+          </svg>
+          <div class="text-center">Blocked</div>
+          {% if Blocked_list %}</a>{% endif %}
+        </div>
+
+        <div class="col-md-2">
+          {% if Behind_list %}<a href="{% qurl request.get_full_path action_status=Behind_list %}" title="Behind" alt="{{ be_num }} item{{ be_num|pluralize }} {% translate 'with status' %} Behind ">{% endif %}
+          <svg aria-labelledby="beStatTitle" role="img">
+            <title id="beStatTitle">{{ be_num }} item{{ be_num|pluralize }} {% translate "with status" %} Behind</title>
+            <circle class="bg-Orange" cx="57" cy="57" r="52" />
+            <circle class="meter-Orange" cx="57" cy="57" r="52" stroke-dashoffset="{{ be_offset }}" style="animation: be_ns 1s ease-out"/>
+            <text x="57" y="64" text-anchor="middle" class="status_count_text">{{ be_num }}</text>
+          </svg>
+          <div class="text-center">Behind</div>
+          {% if Behind_list %}</a>{% endif %}
         </div>
 
         {% endif %}

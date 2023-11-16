@@ -1,0 +1,57 @@
+# Data Stratey Tracker localiaton
+# Copyright (C) 2023 "Government of Canada, Gouvernement du Canada"
+# This file is distributed under the same license as the "Open Canada Search - Data Strategy Module" package.
+# Ross Thompson, .
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: \"Open Canada  - Data Strategy Implementation Tracker\"\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-11-16 10:00-0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+
+msgid "with status"
+msgstr "avec statut"
+
+msgid "Order By"
+msgstr "Ordonner par"
+
+msgid "Action: "
+msgstr "Action : "
+
+msgid "Area for Action: "
+msgstr "Domaine d'action : "
+
+msgid "Priority: "
+msgstr "Priorité : "
+
+msgid "Status: '"
+msgstr "Statut : "
+
+msgid "Expected Completion Date: "
+msgstr "Date d'achèvement prévue : "
+
+msgid "Expected Completion:"
+msgstr "Date d'achèvement prévue : "
+
+msgid "Lead: "
+msgstr "Ministére : "
+
+msgid "Partners: "
+msgstr "Partenaires : "
+
+msgid "Progress Made Since Last Update: "
+msgstr "Progrès réalisés depuis la dernière mise à jour : "
+
+msgid "Action ID: "
+msgstr "N° d'Action : "
+
+

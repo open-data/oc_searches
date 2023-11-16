@@ -3,23 +3,23 @@
 {% load search_extras %}
 
 <div class="row">
-<div class="col-md-3"><strong>{% translate 'Action ID:' %}</strong></div>
+<div class="col-md-3"><strong>{% translate 'Action ID: ' %}</strong></div>
 <div class="col-md-9">{{ doc.action_id }}</div>
 </div>
 
 <div class="row">
-<div class="col-md-3"><strong>{% translate 'Action:' %}</strong></div>
+<div class="col-md-3"><strong>{% translate 'Action: ' %}</strong></div>
 <div class="col-md-9">{% if language == "fr" %}{{ doc.action_fr | markdown_filter | safe }}{% else %}{{ doc.action | markdown_filter | safe }}{% endif %}</div>
 </div>
 
 <div class="row">
-<div class="col-md-3"><strong>{% translate 'Area for Action:' %}</strong></div>
+<div class="col-md-3"><strong>{% translate 'Area for Action: ' %}</strong></div>
 <div class="col-md-9">{% if language == "fr" %}{{ doc.area_for_action_fr }}{% else %}{{ doc.area_for_action }}{% endif %}</div>
 </div>
 
-{% if doc.progress != '-' %}
+{% if doc.progress != '-' and doc.progress_fr != '-' %}
 <div class="row">
-<div class="col-md-3"><strong>{% translate 'Progress Made Since Last Update:' %}</strong></div>
+<div class="col-md-3"><strong>{% translate 'Progress Made Since Last Update: ' %}</strong></div>
 <div class="col-md-9">{% if language == "fr" %}{{ doc.progress_fr | markdown_filter | safe }}{% else %}{{ doc.progress | markdown_filter | safe }}{% endif %}</div>
 </div>
 {% endif %}
@@ -30,23 +30,23 @@
 </div>
 
 <div class="row">
-<div class="col-md-3"><strong>{% translate 'Priority:' %}</strong></div>
+<div class="col-md-3"><strong>{% translate 'Priority: ' %}</strong></div>
 <div class="col-md-9">{% if language == "fr" %}{{ doc.priority_fr }}{% else %}{{ doc.priority }}{% endif %}</div>
 </div>
 
 <div class="row">
-<div class="col-md-3"><strong>{% translate 'Status:' %}</strong></div>
+<div class="col-md-3"><strong>{% translate 'Status: ' %}</strong></div>
 <div class="col-md-9">{% if language == "fr" %}{{ doc.action_status_fr }}{% else %}{{ doc.action_status }}{% endif %}</div>
 </div>
 
 <div class="row">
-<div class="col-md-3"><strong>{% translate 'Lead:' %}</strong></div>
-<div class="col-md-9">{% if language == "fr" %}{{ doc.lead_fr_fr.0 }}{% else %}{{ doc.lead_en }}{% endif %}</div>
+<div class="col-md-3"><strong>{% translate 'Lead: ' %}</strong></div>
+<div class="col-md-9">{% if language == "fr" %}{{ doc.lead_fr_fr }}{% else %}{{ doc.lead_en }}{% endif %}</div>
 </div>
 
-{% if doc.partners != '-' %}
+{% if doc.partners != '-' and doc.partners_fr != '-' %}
 <div class="row">
-<div class="col-md-3"><strong>{% translate 'Partners:' %}</strong></div>
+<div class="col-md-3"><strong>{% translate 'Partners: ' %}</strong></div>
 <div class="col-md-9">{% if language == "fr" %}{{ doc.partners_fr_fr }}{% else %}{{ doc.partners_en }}{% endif %}</div>
 </div>
 {% endif %}

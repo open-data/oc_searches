@@ -281,44 +281,54 @@ svg {
 
 }
 
-.bg-C {
+.bg-Green {
   fill: none;
   stroke-width: 10px;
   stroke: #D8EECA;
 }
-.meter-C {
+.meter-Green {
   stroke-dasharray: 360;
   stroke: #278400;
 }
 
-.bg-SP {
+.bg-Blue {
   fill: none;
   stroke-width: 10px;
   stroke: #D7FAFF;
 }
-.meter-SP {
+.meter-Blue {
   stroke: #269ABC;
   stroke-dasharray: 360;
   animation: progress-2 .75s ease-out;
 }
 
-.bg-LP {
+.bg-Orange {
   fill: none;
   stroke-width: 10px;
   stroke: #F9F4D4;
 }
-.meter-LP {
+.meter-Orange {
   stroke: #FF9900;
   stroke-dasharray: 360;
 }
 
-.bg-NS {
+.bg-Red {
   fill: none;
   stroke-width: 10px;
   stroke: #F3E9E8;
 }
-.meter-NS {
+.meter-Red {
   stroke: #923534;
+  stroke-dasharray: 360;
+}
+
+.bg-Silver {
+  fill: none;
+  stroke-width: 10px;
+  stroke: #dddddd;
+}
+.meter-Silver {
+  stroke: #5D5D5D;
   stroke-dasharray: 360;
 }
 

@@ -153,19 +153,19 @@ def pre_render_search(context: dict, template: str, request: HttpRequest, lang: 
             if 'action_status_fr' in request.GET:
                 statii = request.GET.getlist('action_status_fr')
                 stati = statii[0].split('|')
-                context['ip_offset'] = circle_progress_bar_offset(context['facets']['action_status_fr']['Essentiel'], context['total_hits']) if "Essentiel" in stati and 'Essentiel' in context['facets']['action_status'] else 360
+                context['ip_offset'] = circle_progress_bar_offset(context['facets']['action_status_fr']['En cours'], context['total_hits']) if "En cours" in stati and 'En cours' in context['facets']['action_status'] else 360
                 context['ns_offset'] = circle_progress_bar_offset(context['facets']['action_status_fr']['Pas commencé'], context['total_hits']) if "Pas commencé" in stati and 'Pas commencé' in context['facets']['action_status_fr'] else 360
                 context['co_offset'] = circle_progress_bar_offset(context['facets']['action_status_fr']['Terminé'], context['total_hits']) if "Terminé" in stati and 'Terminé' in context['facets']['action_status_fr'] else 360
                 context['bl_offset'] = circle_progress_bar_offset(context['facets']['action_status_fr']['Bloqué'], context['total_hits']) if "Bloqué" in stati and 'Bloqué' in context['facets']['action_status_fr'] else 360
                 context['be_offset'] = circle_progress_bar_offset(context['facets']['action_status_fr']['Behind'], context['total_hits']) if "Behind" in stati and 'Behind' in context['facets']['action_status_fr'] else 360
 
-                context['ip_num'] = context['facets']['action_status_fr']['Essentiel'] if "Essentiel" in stati and 'Essentiel' in context['facets']['action_status_fr'] else 0
+                context['ip_num'] = context['facets']['action_status_fr']['En cours'] if "En cours" in stati and 'En cours' in context['facets']['action_status_fr'] else 0
                 context['ns_num'] = context['facets']['action_status_fr']['Pas commencé'] if "Pas commencé" in stati and 'Pas commencé' in context['facets']['action_status_fr'] else 0
                 context['co_num'] = context['facets']['action_status_fr']['Terminé'] if "Terminé" in stati and 'Terminé' in context['facets']['action_status_fr'] else 0
                 context['bl_num'] = context['facets']['action_status_fr']['Bloqué'] if "Bloqué" in stati and 'Bloqué' in context['facets']['action_status_fr'] else 0
                 context['be_num'] = context['facets']['action_status_fr']['Behind'] if "Behind" in stati and 'Behind' in context['facets']['action_status_fr'] else 0
 
-                for s in ['Essentiel', 'Pas commencé', 'Terminé', 'Bloqué', 'Behind']:
+                for s in ['En cours', 'Pas commencé', 'Terminé', 'Bloqué', 'Behind']:
                     stati2 = stati.copy()
                     if s in stati:
                         stati2.remove(s)
@@ -175,25 +175,25 @@ def pre_render_search(context: dict, template: str, request: HttpRequest, lang: 
                             stati2.append(s)
                         elif stati == stati2:
                             stati2 = ()
-                    context[s + "_list"] = "|".join(stati2)
+                    context[s.replace(" ", "_").replace('é', 'e') + "_list"] = "|".join(stati2)
 
             else:
-                context['ip_offset'] = circle_progress_bar_offset(context['facets']['action_status_fr']['Essentiel'], context['total_hits']) if "Essentiel" in context['facets']['status'] else 360
-                context['ns_offset'] = circle_progress_bar_offset(context['facets']['action_status_fr']['Pas commencé'], context['total_hits']) if "Pas commencé" in context['facets']['status'] else 360
-                context['co_offset'] = circle_progress_bar_offset(context['facets']['action_status_fr']['Terminé'], context['total_hits']) if "Terminé" in context['facets']['status'] else 360
-                context['bt_offset'] = circle_progress_bar_offset(context['facets']['action_status_fr']['Bloqué'], context['total_hits']) if "Bloqué" in context['facets']['status'] else 360
-                context['be_offset'] = circle_progress_bar_offset(context['facets']['action_status_fr']['Behind'], context['total_hits']) if "Behind" in context['facets']['status'] else 360
-                context['ip_num'] = context['facets']['action_status_fr']['Essentiel'] if "Essentiel" in context['facets']['action_status_fr'] else 0
+                context['ip_offset'] = circle_progress_bar_offset(context['facets']['action_status_fr']['En cours'], context['total_hits']) if "En cours" in context['facets']['action_status_fr'] else 360
+                context['ns_offset'] = circle_progress_bar_offset(context['facets']['action_status_fr']['Pas commencé'], context['total_hits']) if "Pas commencé" in context['facets']['action_status_fr'] else 360
+                context['co_offset'] = circle_progress_bar_offset(context['facets']['action_status_fr']['Terminé'], context['total_hits']) if "Terminé" in context['facets']['action_status_fr'] else 360
+                context['bl_offset'] = circle_progress_bar_offset(context['facets']['action_status_fr']['Bloqué'], context['total_hits']) if "Bloqué" in context['facets']['action_status_fr'] else 360
+                context['be_offset'] = circle_progress_bar_offset(context['facets']['action_status_fr']['Behind'], context['total_hits']) if "Behind" in context['facets']['action_status_fr'] else 360
+                context['ip_num'] = context['facets']['action_status_fr']['En cours'] if "En cours" in context['facets']['action_status_fr'] else 0
                 context['ns_num'] = context['facets']['action_status_fr']['Pas commencé'] if "Pas commencé" in context['facets']['action_status_fr'] else 0
                 context['co_num'] = context['facets']['action_status_fr']['Terminé'] if "Terminé" in context['facets']['action_status_fr'] else 0
                 context['bl_num'] = context['facets']['action_status_fr']['Bloqué'] if "Bloqué" in context['facets']['action_status_fr'] else 0
                 context['be_num'] = context['facets']['action_status_fr']['Behind'] if "Behind" in context['facets']['action_status_fr'] else 0
 
-                for s in ['Essentiel', 'Pas commencé', 'Terminé', 'Bloqué', 'Behind']:
+                for s in ['En cours', 'Pas commencé', 'Terminé', 'Bloqué', 'Behind']:
                     if s in context['facets']['action_status_fr'] and context['facets']['action_status_fr'][s] > 0:
-                        context[s.replace(" ", "_") + "_list"] = s
+                        context[s.replace(" ", "_").replace('é', 'e') + "_list"] = s
                     else:
-                        context[s.replace(" ", "_") + "_list"] = ()
+                        context[s.replace(" ", "_").replace('é', 'e') + "_list"] = ()
 
         else:
             if 'action_status' in request.GET:
@@ -227,7 +227,7 @@ def pre_render_search(context: dict, template: str, request: HttpRequest, lang: 
                 context['ip_offset'] = circle_progress_bar_offset(context['facets']['action_status']['In Progess'], context['total_hits']) if "In Progess" in context['facets']['action_status'] else 360
                 context['ns_offset'] = circle_progress_bar_offset(context['facets']['action_status']['Not Started'], context['total_hits']) if "Not Started" in context['facets']['action_status'] else 360
                 context['co_offset'] = circle_progress_bar_offset(context['facets']['action_status']['Completed'], context['total_hits']) if "Completed" in context['facets']['action_status'] else 360
-                context['bt_offset'] = circle_progress_bar_offset(context['facets']['action_status']['Blocked'], context['total_hits']) if "Blocked" in context['facets']['action_status'] else 360
+                context['bl_offset'] = circle_progress_bar_offset(context['facets']['action_status']['Blocked'], context['total_hits']) if "Blocked" in context['facets']['action_status'] else 360
                 context['be_offset'] = circle_progress_bar_offset(context['facets']['action_status']['Behind'], context['total_hits']) if "Behind" in context['facets']['action_status'] else 360
                 context['ip_num'] = context['facets']['action_status']['In Progess'] if "In Progess" in context['facets']['action_status'] else 0
                 context['ns_num'] = context['facets']['action_status']['Not Started'] if "Not Started" in context['facets']['action_status'] else 0
