@@ -153,7 +153,7 @@ def pre_render_search(context: dict, template: str, request: HttpRequest, lang: 
             if 'action_status_fr' in request.GET:
                 statii = request.GET.getlist('action_status_fr')
                 stati = statii[0].split('|')
-                context['ip_offset'] = circle_progress_bar_offset(context['facets']['action_status_fr']['En cours'], context['total_hits']) if "En cours" in stati and 'En cours' in context['facets']['action_status'] else 360
+                context['ip_offset'] = circle_progress_bar_offset(context['facets']['action_status_fr']['En cours'], context['total_hits']) if "En cours" in stati and 'En cours' in context['facets']['action_status_fr'] else 360
                 context['ns_offset'] = circle_progress_bar_offset(context['facets']['action_status_fr']['Pas commencé'], context['total_hits']) if "Pas commencé" in stati and 'Pas commencé' in context['facets']['action_status_fr'] else 360
                 context['co_offset'] = circle_progress_bar_offset(context['facets']['action_status_fr']['Terminé'], context['total_hits']) if "Terminé" in stati and 'Terminé' in context['facets']['action_status_fr'] else 360
                 context['bl_offset'] = circle_progress_bar_offset(context['facets']['action_status_fr']['Bloqué'], context['total_hits']) if "Bloqué" in stati and 'Bloqué' in context['facets']['action_status_fr'] else 360
@@ -171,7 +171,7 @@ def pre_render_search(context: dict, template: str, request: HttpRequest, lang: 
                         stati2.remove(s)
                     else:
                         # We do not want to show any links when clicking on the status would result in no change or zero results
-                        if s in context['facets']['action_status_fr'] and context['facets']['status'][s] > 0:
+                        if s in context['facets']['action_status_fr'] and context['facets']['action_status_fr'][s] > 0:
                             stati2.append(s)
                         elif stati == stati2:
                             stati2 = ()
