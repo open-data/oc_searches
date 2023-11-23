@@ -33,8 +33,8 @@ def tokenize(text):
 
 
 class Command(BaseCommand):
-    help = 'Django manage command that will import CSV data into a Solr search that created with the ' \
-           'import_schema_ckan_yaml command'
+    help = 'Django manage command that will import ATI CSV data file from Open Data into an English and French ' \
+           'Python Scikit-Learn Pipeline objects.'
 
     logger = logging.getLogger(__name__)
 
