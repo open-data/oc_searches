@@ -31,8 +31,8 @@ def pre_export_solr_query(solr_query: dict, request: HttpRequest, search: Search
     solr_query['fl'] = str(solr_query['fl']).replace("datastore_enabled_fr,", "")
     solr_query['fl'] = str(solr_query['fl']).replace("imso_approval,", "")
     solr_query['fl'] = str(solr_query['fl']).replace("portal_release_date,", "")
-    solr_query['fl'] = str(solr_query['fl']).replace("date_modified,", "")
     solr_query['fl'] = str(solr_query['fl']).replace("federated_date_modified,", "")
+    solr_query['fl'] = str(solr_query['fl']).replace("date_modified,", "")
     solr_query['fl'] = str(solr_query['fl']).replace("ready_to_publish,", "")
     return solr_query
 
