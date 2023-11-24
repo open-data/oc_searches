@@ -103,7 +103,13 @@ class Command(BaseCommand):
             # Requires Python 3.9+ This line cna replace the clunky IF statement
             # raw_date = datetime.fromisoformat(raw_value)
             if 'T' in raw_value:
-                raw_date = datetime.strptime(raw_value, "%Y-%m-%dT%H:%M:%S.%f")
+                try:
+                    raw_date = datetime.strptime(raw_value, "%Y-%m-%dT%H:%M:%S.%f")
+                except ValueError as ve:
+                    try:
+                        raw_date = datetime.strptime(raw_value, "%Y-%m-%dT%H:%M:%S")
+                    except ValueError as ve1:
+                        self.logger.error(f"Cannot parse ISO date value {raw_value}")
             elif len(raw_value) == 10:
                 raw_date = datetime.strptime(raw_value, "%Y-%m-%d")
             else:
@@ -112,7 +118,7 @@ class Command(BaseCommand):
             solr_record[field_name + '_en'] = format_date(raw_date, locale='en')
             solr_record[field_name + '_fr'] = format_date(raw_date, locale='fr')
         elif field_name in self.search_fields:
-            # Emoty values are problematic since Solr won't index a blank space. Use the dash as the understood
+            # Empty values are problematic since Solr won't index a blank space. Use the dash as the understood
             # indicator for an empty value
             if raw_value is None or not raw_value:
                 raw_value = "-"
@@ -267,7 +273,8 @@ class Command(BaseCommand):
                             formats_en.append(self.field_codes['resource_format'][res['format'].lower()].label_en)
                             formats_fr.append(self.field_codes['resource_format'][res['format'].lower()].label_fr)
                 else:
-                    solr_resources[self.resource_map[res_value]].append('-')
+                    if res_value in self.resource_map:
+                        solr_resources[self.resource_map[res_value]].append('-')
                     # Open Maps doesn't set the character_set field
                     if res_value == 'character_set':
                         solr_resources['resource_character_set_en'].append('-')
