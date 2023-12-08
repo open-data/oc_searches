@@ -1,7 +1,7 @@
-from babel.dates import format_date
-from datetime import datetime, time, timezone
-from dateutil import parser
-from dateutil.tz import gettz
+# from babel.dates import format_date
+# from datetime import datetime, time, timezone
+# from dateutil import parser
+# from dateutil.tz import gettz
 from django.http import HttpRequest
 from search.models import Search, Field, Code
 from SolrClient import SolrResponse
@@ -55,39 +55,39 @@ def filter_csv_record(csv_record,search: Search, fields: dict, codes: dict, form
 
 
 def load_csv_record(csv_record: dict, solr_record: dict, search: Search, fields: dict, codes: dict, format: str):
-    if csv_record['ex_completion_dt']:
-        cdn_tzinfos = {
-            "AST": gettz("Canada/Atlantic"),
-            "ADT": -60 * 60 * 3,
-            "CST": gettz("Canada/ Central"),
-            "CDT": -60 * 60 * 5,
-            "EST": gettz("Canada/Eastern"),
-            "EDT": -60 * 60 * 4,
-            "MST": gettz("Canada/Mountain"),
-            "MDT": -60 * 60 * 6,
-            "NST": gettz("Canada/Newfoundland"),
-            "NDT": int(-60 * 60 * 2.5),
-            "PST": gettz("Canada/Pacific"),
-            "PDT": -60 * 60 * 7,
-            "YST": gettz("Canada/Yukon"),
-            "YDT": -60 * 60 * 7
-            }
-
-        now_dt = datetime.now()
-        default_dt = datetime(now_dt.year, 12, 31, 12, 0, 0, 0, cdn_tzinfos['EST'])
-        completion_dt = parser.parse(csv_record['ex_completion_dt'], tzinfos=cdn_tzinfos, default=default_dt)
-        solr_record['ex_completion_dt'] = completion_dt.isoformat()
-        solr_record['ex_completion_dt_eng'] = format_date(completion_dt, locale='en')
-        solr_record['ex_completion_dt_fra'] = format_date(completion_dt, locale='fr')
-        sort_period = f'{completion_dt.year}{completion_dt.month:02d}'
-        solr_record['ex_completion_period'] = sort_period
-        per_field_id = fields['ex_completion_period'].fid
-        period_field = Field.objects.get(fid=per_field_id)
-        choice, created = Code.objects.get_or_create(code_id=sort_period, field_fid=period_field)
-        if created:
-            choice.label_en = format_date(completion_dt, "MMM yyyy", locale='en')
-            choice.label_fr = format_date(completion_dt, "MMM yyyy", locale='fr')
-            choice.save()
+    # if csv_record['ex_completion_dt']:
+    #     cdn_tzinfos = {
+    #         "AST": gettz("Canada/Atlantic"),
+    #         "ADT": -60 * 60 * 3,
+    #         "CST": gettz("Canada/ Central"),
+    #         "CDT": -60 * 60 * 5,
+    #         "EST": gettz("Canada/Eastern"),
+    #         "EDT": -60 * 60 * 4,
+    #         "MST": gettz("Canada/Mountain"),
+    #         "MDT": -60 * 60 * 6,
+    #         "NST": gettz("Canada/Newfoundland"),
+    #         "NDT": int(-60 * 60 * 2.5),
+    #         "PST": gettz("Canada/Pacific"),
+    #         "PDT": -60 * 60 * 7,
+    #         "YST": gettz("Canada/Yukon"),
+    #         "YDT": -60 * 60 * 7
+    #         }
+    #
+    #     now_dt = datetime.now()
+    #     default_dt = datetime(now_dt.year, 12, 31, 12, 0, 0, 0, cdn_tzinfos['EST'])
+    #     completion_dt = parser.parse(csv_record['ex_completion_dt'], tzinfos=cdn_tzinfos, default=default_dt)
+    #     solr_record['ex_completion_dt'] = completion_dt.isoformat()
+    #     solr_record['ex_completion_dt_eng'] = format_date(completion_dt, locale='en')
+    #     solr_record['ex_completion_dt_fra'] = format_date(completion_dt, locale='fr')
+    #     sort_period = f'{completion_dt.year}{completion_dt.month:02d}'
+    #     solr_record['ex_completion_period'] = sort_period
+    #     per_field_id = fields['ex_completion_period'].fid
+    #     period_field = Field.objects.get(fid=per_field_id)
+    #     choice, created = Code.objects.get_or_create(code_id=sort_period, field_fid=period_field)
+    #     if created:
+    #         choice.label_en = format_date(completion_dt, "MMM yyyy", locale='en')
+    #         choice.label_fr = format_date(completion_dt, "MMM yyyy", locale='fr')
+    #         choice.save()
     return solr_record
 
 # Version 1.1 Methods
@@ -156,16 +156,16 @@ def pre_render_search(context: dict, template: str, request: HttpRequest, lang: 
                 context['ip_offset'] = circle_progress_bar_offset(context['facets']['action_status_fr']['En cours'], context['total_hits']) if "En cours" in stati and 'En cours' in context['facets']['action_status_fr'] else 360
                 context['ns_offset'] = circle_progress_bar_offset(context['facets']['action_status_fr']['Pas commencé'], context['total_hits']) if "Pas commencé" in stati and 'Pas commencé' in context['facets']['action_status_fr'] else 360
                 context['co_offset'] = circle_progress_bar_offset(context['facets']['action_status_fr']['Terminé'], context['total_hits']) if "Terminé" in stati and 'Terminé' in context['facets']['action_status_fr'] else 360
-                context['bl_offset'] = circle_progress_bar_offset(context['facets']['action_status_fr']['Bloqué'], context['total_hits']) if "Bloqué" in stati and 'Bloqué' in context['facets']['action_status_fr'] else 360
+                context['bl_offset'] = circle_progress_bar_offset(context['facets']['action_status_fr']['En pause'], context['total_hits']) if "En pause" in stati and 'En pause' in context['facets']['action_status_fr'] else 360
                 context['be_offset'] = circle_progress_bar_offset(context['facets']['action_status_fr']['Behind'], context['total_hits']) if "Behind" in stati and 'Behind' in context['facets']['action_status_fr'] else 360
 
                 context['ip_num'] = context['facets']['action_status_fr']['En cours'] if "En cours" in stati and 'En cours' in context['facets']['action_status_fr'] else 0
                 context['ns_num'] = context['facets']['action_status_fr']['Pas commencé'] if "Pas commencé" in stati and 'Pas commencé' in context['facets']['action_status_fr'] else 0
                 context['co_num'] = context['facets']['action_status_fr']['Terminé'] if "Terminé" in stati and 'Terminé' in context['facets']['action_status_fr'] else 0
-                context['bl_num'] = context['facets']['action_status_fr']['Bloqué'] if "Bloqué" in stati and 'Bloqué' in context['facets']['action_status_fr'] else 0
+                context['bl_num'] = context['facets']['action_status_fr']['En pause'] if "En pause" in stati and 'En pause' in context['facets']['action_status_fr'] else 0
                 context['be_num'] = context['facets']['action_status_fr']['Behind'] if "Behind" in stati and 'Behind' in context['facets']['action_status_fr'] else 0
 
-                for s in ['En cours', 'Pas commencé', 'Terminé', 'Bloqué', 'Behind']:
+                for s in ['En cours', 'Pas commencé', 'Terminé', 'En pause', 'Behind']:
                     stati2 = stati.copy()
                     if s in stati:
                         stati2.remove(s)
@@ -181,15 +181,15 @@ def pre_render_search(context: dict, template: str, request: HttpRequest, lang: 
                 context['ip_offset'] = circle_progress_bar_offset(context['facets']['action_status_fr']['En cours'], context['total_hits']) if "En cours" in context['facets']['action_status_fr'] else 360
                 context['ns_offset'] = circle_progress_bar_offset(context['facets']['action_status_fr']['Pas commencé'], context['total_hits']) if "Pas commencé" in context['facets']['action_status_fr'] else 360
                 context['co_offset'] = circle_progress_bar_offset(context['facets']['action_status_fr']['Terminé'], context['total_hits']) if "Terminé" in context['facets']['action_status_fr'] else 360
-                context['bl_offset'] = circle_progress_bar_offset(context['facets']['action_status_fr']['Bloqué'], context['total_hits']) if "Bloqué" in context['facets']['action_status_fr'] else 360
+                context['bl_offset'] = circle_progress_bar_offset(context['facets']['action_status_fr']['En pause'], context['total_hits']) if "En pause" in context['facets']['action_status_fr'] else 360
                 context['be_offset'] = circle_progress_bar_offset(context['facets']['action_status_fr']['Behind'], context['total_hits']) if "Behind" in context['facets']['action_status_fr'] else 360
                 context['ip_num'] = context['facets']['action_status_fr']['En cours'] if "En cours" in context['facets']['action_status_fr'] else 0
                 context['ns_num'] = context['facets']['action_status_fr']['Pas commencé'] if "Pas commencé" in context['facets']['action_status_fr'] else 0
                 context['co_num'] = context['facets']['action_status_fr']['Terminé'] if "Terminé" in context['facets']['action_status_fr'] else 0
-                context['bl_num'] = context['facets']['action_status_fr']['Bloqué'] if "Bloqué" in context['facets']['action_status_fr'] else 0
+                context['bl_num'] = context['facets']['action_status_fr']['En pause'] if "En pause" in context['facets']['action_status_fr'] else 0
                 context['be_num'] = context['facets']['action_status_fr']['Behind'] if "Behind" in context['facets']['action_status_fr'] else 0
 
-                for s in ['En cours', 'Pas commencé', 'Terminé', 'Bloqué', 'Behind']:
+                for s in ['En cours', 'Pas commencé', 'Terminé', 'En pause', 'Behind']:
                     if s in context['facets']['action_status_fr'] and context['facets']['action_status_fr'][s] > 0:
                         context[s.replace(" ", "_").replace('é', 'e') + "_list"] = s
                     else:
