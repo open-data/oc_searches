@@ -2,7 +2,13 @@
 {% load search_extras %}
 
 <div class="row mrgn-bttm-xl mrgn-lft-md">
-
+{% if doc.format == 'NTR' %}
+  <div class="row">
+    <div class="col-md-8"><h2 class="mrgn-tp-0 mrgn-bttm-sm h4">{% trans 'Nothing to report this period'  %}</h2></div>
+    <div class="col-md-4 text-right"><strong>{% if language == "fr" %}{{ doc.month_fr }}{% else %}{{ doc.month_en }}{% endif %}, {{ doc.year }}</strong></div>
+    <div class="col-md-4"><strong>{% trans 'Organization:' %}</strong></div><div class="col-md-8">{% if language == "fr" %}{{ doc.owner_org_fr }}{% else %}{{ doc.owner_org_en }}{% endif %}</div>
+  </div>
+{% else %}
   <div class="row">
     <div class="col-sm-9">
       <h4 class="mrgn-tp-0 mrgn-bttm-sm"><a href="{{ path_info }}record/{{ doc.id }}">
@@ -71,5 +77,6 @@
     <div class="col-sm-8">{{ doc.action_required_en }}</div>
   </div>
   {% endif %}
+{% endif %}
 
 </div>
