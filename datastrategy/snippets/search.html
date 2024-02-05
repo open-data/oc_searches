@@ -78,14 +78,14 @@
         </div>
 
         <div class="col-md-2">
-          {% if Behind_list %}<a href="{% qurl request.get_full_path action_status_fr=Behind_list %}" title="Behind" alt="{{ be_num }} item{{ be_num|pluralize }} {% translate 'with status' %} Behind ">{% endif %}
+          {% if Behind_list %}<a href="{% qurl request.get_full_path action_status_fr=Behind_list %}" title="En arrière" alt="{{ be_num }} item{{ be_num|pluralize }} {% translate 'with status' %} {% translate 'Behind' %} ">{% endif %}
           <svg aria-labelledby="beStatTitle" role="img">
-            <title id="beStatTitle">{{ be_num }} item{{ be_num|pluralize }} {% translate "with status" %} Behind</title>
+            <title id="beStatTitle">{{ be_num }} item{{ be_num|pluralize }} {% translate "with status" %} {% translate "Behind" %}</title>
             <circle class="bg-Orange" cx="57" cy="57" r="52" />
             <circle class="meter-Orange" cx="57" cy="57" r="52" stroke-dashoffset="{{ be_offset }}" style="animation: be_ns 1s ease-out"/>
             <text x="57" y="64" text-anchor="middle" class="status_count_text">{{ be_num }}</text>
           </svg>
-          <div class="text-center">Behind</div>
+          <div class="text-center">{% translate "Behind" %}</div>
           {% if Behind_list %}</a>{% endif %}
         </div>
 

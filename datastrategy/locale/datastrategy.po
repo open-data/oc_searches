@@ -54,4 +54,9 @@ msgstr "Progrès réalisés depuis la dernière mise à jour : "
 msgid "Action ID: "
 msgstr "N° d'Action : "
 
+msgid "Behind"
+msgstr "En arrière"
+
+msgid "Area for action: "
+msgstr "Domaine d'action"
 
