@@ -1,0 +1,44 @@
+{% load i18n %}
+{% load search_extras %}
+
+<div class="row mrgn-bttm-xl">
+
+  <div class="col-sm-12 mrgn-bttm-md">
+      <h2 class="mrgn-tp-0 mrgn-bttm-sm h4">
+          {% if language == 'fr' %}
+              Rapport : <a href="{{ path_info }}record/{{ doc.id }}">{{ doc.report_fr | markdown_filter | safe | strip_paragraph }}</a>
+          {% else %}
+              Report: <a href="{{ path_info }}record/{{ doc.id }}">{{ doc.report_en | markdown_filter | safe | strip_paragraph }}</a>
+          {% endif %}
+      </h2>
+  </div>
+
+  <div class="col-sm-12">
+      <strong>{% translate 'Title: ' %}</strong>{% if language == 'fr' %}{{ doc.short_desc_fr | safe }}{% else %}{{ doc.short_desc_en | safe }}{% endif %}
+  </div>
+
+  <div class="col-sm-12">
+      <strong>{% translate 'Record No.: ' %}</strong>{% if language == 'fr' %}{{ doc.record_no_fr | safe }}{% else %}{{ doc.record_no_en | safe }}{% endif %}
+  </div>
+
+  <div class="col-sm-12">
+      <strong>{% translate 'Recommendation: ' %}</strong><br>{% if language == 'fr' %}{{ doc.desc_fr | markdown_filter | safe  }}{% else %}{{ doc.desc_en | markdown_filter | safe }}{% endif %}
+  </div>
+
+  <div class="col-sm-12">
+      <strong>{% translate 'Aspect of Culture: ' %}</strong>{% if language == 'fr' %}{{ doc.culture_aspect_fr }}{% else %}{{ doc.culture_aspect_en }}{% endif %}
+  </div>
+
+  <div class="col-sm-12">
+       <strong>{% translate 'Status: ' %}</strong>
+    <span class="label {% if doc.status == 'not_started' %}label-danger{% elif doc.status == 'in_progress' %}label-info{% elif doc.status == 'closed' %}label-success{% endif %}">
+    {% if language == 'fr' %}{{ doc.status_fr }}{% else %}{{ doc.status_en }}{% endif %}</span>
+  </div>
+
+  {% if doc.status_comments != '-' %}
+  <div class="col-sm-12">
+      <strong>{% translate 'Status Description: ' %}</strong>{% if language == 'fr' %}{{ doc.status_comments | markdown_filter | safe | strip_paragraph }}{% else %}{{ doc.status_comments | markdown_filter | safe | strip_paragraph }}{% endif %}
+  </div>
+  {% endif %}
+
+</div>

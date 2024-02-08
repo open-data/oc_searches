@@ -1,0 +1,52 @@
+
+{% load i18n %}
+{% load search_extras %}
+
+<div class="row">
+  <div class="col-md-3"><strong>{% translate 'Report: ' %}</strong></div>
+  <div class="col-md-9">{% if language == "fr" %}{{ doc.report_fr }}{% else %}{{ doc.report_en }}{% endif %}</div>
+</div>
+
+<div class="row">
+  <div class="col-md-3"><strong>{% translate 'Title: ' %}</strong></div>
+  <div class="col-md-9">{% if language == "fr" %}{{ doc.short_desc_fr | markdown_filter | safe }}{% else %}{{ doc.short_desc_en | markdown_filter | safe }}{% endif %}</div>
+</div>
+
+<div class="row">
+  <div class="col-md-3"><strong>{% translate 'Number: ' %}</strong></div>
+  <div class="col-md-9">{% if language == "fr" %}{{ doc.record_no_fr }}{% else %}{{ doc.record_no_en }}{% endif %}</div>
+</div>
+
+<div class="row">
+  <div class="col-md-3"><strong>{% translate 'Recommendation: ' %}</strong></div><br>
+  <div class="col-md-9">{% if language == "fr" %}{{ doc.desc_fr }}{% else %}{{ doc.desc_en }}{% endif %}</div>
+</div>
+
+<div class="row">
+  <div class="col-md-3"><strong>{% translate 'Aspect of Culture: ' %}</strong></div><br>
+  <div class="col-md-9">{% if language == "fr" %}{{ doc.culture_aspect_fr }}{% else %}{{ doc.culture_aspect_en }}{% endif %}</div>
+</div>
+
+<div class="row">
+  <div class="col-md-3"><strong>{% translate 'Implementation Timeline: ' %}</strong></div>
+  <div class="col-md-9">{% if language == "fr" %}{{ doc.completion_date_fr }}{% else %}{{ doc.completion_date_en }}{% endif %}</div>
+</div>
+
+<div class="row">
+  <div class="col-md-3"><strong>{% translate 'Status: ' %}</strong></div>
+  <div class="col-md-9">{% if language == "fr" %}{{ doc.status_fr }}{% else %}{{ doc.status_en }}{% endif %}</div>
+</div>
+
+{% if doc.status_comments != '-' %}
+<div class="row">
+<div class="col-md-3"><strong>{% translate 'Status Description: ' %}</strong></div><br>
+<div class="col-md-9">{% if language == "fr" %}{{ doc.status_comments }}{% else %}{{ doc.status_comments }}{% endif %}</div>
+</div>
+{% endif %}
+
+{% if doc.web != '-' %}
+<div class="row">
+<div class="col-md-3"><strong>{% translate 'Web Links: ' %}</strong></div><br>
+<div class="col-md-9">{{ doc.web }}</div>
+</div>
+{% endif %}
