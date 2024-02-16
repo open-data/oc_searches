@@ -43,7 +43,7 @@ def post_search_solr_query(context: dict, solr_response: SolrResponse, solr_quer
 
 
 def pre_record_solr_query(context: dict, solr_query: dict, request: HttpRequest, search: Search, fields: dict, codes: dict, facets: list, record_ids: str):
-    if request.get_raw_uri().endswith('?amendments'):
+    if request.get_full_path().endswith('?amendments'):
         id_parts = record_ids.split(",")
         if len(id_parts) == 3:
             solr_query['q'] = 'ref_number:"{0}" AND owner_org:"{1}"'.format(id_parts[1], id_parts[0])
@@ -165,7 +165,7 @@ def pre_render_search(context: dict, template: str, request: HttpRequest, lang: 
 
 
 def pre_render_record(context: dict, template: str, request: HttpRequest, lang: str, search: Search, fields: dict, codes: dict):
-    if request.get_raw_uri().endswith('?amendments'):
+    if request.get_full_path().endswith('?amendments'):
         context['amendments'] = True
     else:
         context['amendments'] = False
