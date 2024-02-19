@@ -1,0 +1,38 @@
+{% load i18n %}
+{% load search_extras %}
+
+<div class="row mrgn-bttm-xl">
+
+  <div class="col-sm-12 mrgn-bttm-md">
+      <h2 class="mrgn-tp-0 mrgn-bttm-sm h4">
+          {% if language == 'fr' %}
+              Rapport : <a href="{{ path_info }}record/{{ doc.id }}">{{ doc.actions_text_fr | markdown_filter | safe | strip_paragraph }}</a>
+          {% else %}
+              Report: <a href="{{ path_info }}record/{{ doc.id }}">{{ doc.actions_text_en | markdown_filter | safe | strip_paragraph }}</a>
+          {% endif %}
+      </h2>
+  </div>
+
+  <div class="col-sm-12">
+      <strong>{% translate 'Organization: ' %}</strong>{% if language == 'fr' %}{{ doc.owner_org_fr | safe }}{% else %}{{ doc.owner_org_en | safe }}{% endif %}
+  </div>
+
+  <div class="col-sm-12">
+      <strong>{% translate 'Category: ' %}</strong>{% if language == 'fr' %}{{ doc.categories_number_fr | safe }}{% else %}{{ doc.categories_number_en | safe }}{% endif %}
+  </div>
+
+  <div class="col-sm-12">
+      <strong>{% translate 'Sub Category: ' %}</strong>{% if language == 'fr' %}{{ doc.subcategories_number_fr | safe  }}{% else %}{{ doc.subcategories_number_en | safe }}{% endif %}
+  </div>
+
+  <div class="col-sm-12">
+      <strong>{% translate 'Target Date: ' %}</strong>{% if language == 'fr' %}{{ doc.target_date_fr }}{% else %}{{ doc.target_date_en }}{% endif %}
+  </div>
+
+  <div class="col-sm-12">
+       <strong>{% translate 'Status: ' %}</strong>
+    <span class="label {% if doc.status == 'NS' %}label-danger{% elif doc.status == 'IP' %}label-info{% elif doc.status == 'CP' %}label-success{% elif doc.status == 'ON' %}label-primary{% endif %}">
+    {% if language == 'fr' %}{{ doc.status_fr }}{% else %}{{ doc.status_en }}{% endif %}</span>
+  </div>
+
+</div>
