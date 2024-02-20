@@ -1,0 +1,53 @@
+
+{% load i18n %}
+{% load search_extras %}
+
+<div class="row">
+  <div class="col-md-3"><strong>{% translate 'Action: ' %}</strong></div>
+  <div class="col-md-9">{% if language == "fr" %}{{ doc.doc.actions_text_fr | markdown_filter | safe | strip_paragraph }}{% else %}{{ doc.actions_text_en | markdown_filter | safe | strip_paragraph }}{% endif %}</div>
+</div>
+
+<div class="row">
+  <div class="col-md-3"><strong>{% translate 'Organization: ' %}</strong></div>
+  <div class="col-md-9">{% if language == "fr" %}{{ doc.owner_org_fr }}{% else %}{{ doc.owner_org_en }}{% endif %}</div>
+</div>
+
+<div class="row">
+  <div class="col-md-3"><strong>{% translate 'Category: ' %}</strong></div>
+  <div class="col-md-9">({{ doc.categories_number }}) {% if language == "fr" %}{{ doc.categories_number_fr }}{% else %}{{ doc.categories_number_en }}{% endif %}</div>
+</div>
+
+<div class="row">
+  <div class="col-md-3"><strong>{% translate 'Sub Category: ' %}</strong></div>
+  <div class="col-md-9">({{ doc.subcategories_number }}) {% if language == "fr" %}{{ doc.subcategories_number_fr }}{% else %}{{ doc.subcategories_number_en }}{% endif %}</div>
+</div>
+
+<div class="row">
+  <div class="col-md-3"><strong>{% translate 'Status: ' %}</strong></div>
+  <div class="col-md-9">{% if language == "fr" %}{{ doc.status_fr }}{% else %}{{ doc.status_en }}{% endif %}</div>
+</div>
+
+<div class="row">
+  <div class="col-md-3"><strong>{% translate 'Reporting Period: ' %}</strong></div>
+  <div class="col-md-9">{% if language == "fr" %}{{ doc.reporting_period_fr }}{% else %}{{ doc.reporting_period_en }}{% endif %}</div>
+</div>
+
+<div class="row">
+  <div class="col-md-3"><strong>{% translate 'Actions Number: ' %}</strong></div>
+  <div class="col-md-9">{{ doc.actions_number }}</div>
+</div>
+
+<div class="row">
+  <div class="col-md-3"><strong>{% translate 'Benefits: ' %}</strong></div>
+  <div class="col-md-9">{% if language == "fr" %}{{ doc.benefits_fr }}{% else %}{{ doc.benefits_en }}{% endif %}</div>
+</div>
+
+<div class="row">
+  <div class="col-md-3"><strong>{% translate 'Results: ' %}</strong></div>
+  <div class="col-md-9">{% if language == "fr" %}{{ doc.results_fr }}{% else %}{{ doc.results_en }}{% endif %}</div>
+</div>
+
+<div class="row">
+  <div class="col-md-3"><strong>{% translate 'Link: ' %}</strong></div>
+  <div class="col-md-9">{% if language == "fr" %}{{ doc.links_fr | markdown_filter | safe  }}{% else %}{{ doc.links_en | markdown_filter | safe }}{% endif %}</div>
+</div>
