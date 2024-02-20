@@ -4,7 +4,7 @@
 
 <div class="row">
   <div class="col-md-3"><strong>{% translate 'Action: ' %}</strong></div>
-  <div class="col-md-9">{% if language == "fr" %}{{ doc.doc.actions_text_fr | markdown_filter | safe | strip_paragraph }}{% else %}{{ doc.actions_text_en | markdown_filter | safe | strip_paragraph }}{% endif %}</div>
+  <div class="col-md-9">{% if language == "fr" %}{{ doc.actions_text_fr | markdown_filter | safe | strip_paragraph }}{% else %}{{ doc.actions_text_en | markdown_filter | safe | strip_paragraph }}{% endif %}</div>
 </div>
 
 <div class="row">
@@ -33,7 +33,7 @@
 </div>
 
 <div class="row">
-  <div class="col-md-3"><strong>{% translate 'Actions Number: ' %}</strong></div>
+  <div class="col-md-3"><strong>{% translate 'Action Number: ' %}</strong></div>
   <div class="col-md-9">{{ doc.actions_number }}</div>
 </div>
 

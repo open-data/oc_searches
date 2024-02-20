@@ -305,14 +305,28 @@ svg {
 .bg-NS {
   fill: none;
   stroke-width: 10px;
-  stroke: #F3E9E8;
+  stroke: #fadfdc;
 }
 .meter-NS {
+  stroke: #762a2a;
+  stroke-dasharray: 360;
+}
+
+.bg-ON {
+  fill: none;
+  stroke-width: 10px;
+  stroke: #F3E9E8;
+}
+.meter-ON {
   stroke: #6c6c6c;
   stroke-dasharray: 360;
 }
+
+
 
 .status_count_text {
   font-weight: bolder;
   font-size: 24px;
 }
+
+.
