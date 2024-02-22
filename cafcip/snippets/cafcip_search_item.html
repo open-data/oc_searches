@@ -18,7 +18,7 @@
   </div>
 
   <div class="col-sm-12">
-      <strong>{% translate 'Record No.: ' %}</strong>{% if language == 'fr' %}{{ doc.record_no_fr | safe }}{% else %}{{ doc.record_no_en | safe }}{% endif %}
+      <strong>{% translate 'Recommendation #: ' %}</strong>{{ doc.record_no }}
   </div>
 
   <div class="col-sm-12">
@@ -26,19 +26,13 @@
   </div>
 
   <div class="col-sm-12">
-      <strong>{% translate 'Aspect of Culture: ' %}</strong>{% if language == 'fr' %}{{ doc.culture_aspect_fr }}{% else %}{{ doc.culture_aspect_en }}{% endif %}
+      <strong>{% translate 'Culture Aspect: ' %}</strong>{% if language == 'fr' %}{{ doc.culture_aspect_fr }}{% else %}{{ doc.culture_aspect_en }}{% endif %}
   </div>
 
   <div class="col-sm-12">
        <strong>{% translate 'Status: ' %}</strong>
-    <span class="label {% if doc.status == 'not_started' %}label-danger{% elif doc.status == 'in_progress' %}label-info{% elif doc.status == 'closed' %}label-success{% endif %}">
+    <span class="label {% if doc.status == 'not_started' %}label-danger{% elif doc.status == 'in_progress' %}label-info{% elif doc.status == 'completed' %}label-success{% endif %}">
     {% if language == 'fr' %}{{ doc.status_fr }}{% else %}{{ doc.status_en }}{% endif %}</span>
   </div>
-
-  {% if doc.status_comments != '-' %}
-  <div class="col-sm-12">
-      <strong>{% translate 'Status Description: ' %}</strong>{% if language == 'fr' %}{{ doc.status_comments | markdown_filter | safe | strip_paragraph }}{% else %}{{ doc.status_comments | markdown_filter | safe | strip_paragraph }}{% endif %}
-  </div>
-  {% endif %}
 
 </div>

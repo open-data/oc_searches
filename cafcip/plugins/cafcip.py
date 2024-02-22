@@ -15,22 +15,6 @@ def circle_progress_bar_offset(value: int, total: int):
         return 360 - round(value * 360 / total)
 
 
-def guess_the_date_code(date_str: str):
-    date_codes = {"31-dec-23": "dec23",
-                  "31-dec-24": "dec24",
-                  "31-dec-25": "dec25",
-                  "31-dec-26": "dec26",
-                  "31-dec-27": "dec27",
-                  "31-dec-28": "dec28",
-                  "31-dec-29": "dec29",
-                  "n/a": "na"}
-
-    if date_str.lower() in date_codes:
-        return date_codes[date_str.lower()]
-    else:
-        return "na"
-
-
 def pre_search_solr_query(context: dict, solr_query: dict, request: HttpRequest, search: Search, fields: dict, codes: dict, facets: list, record_ids: str):
     return context, solr_query
 
@@ -72,24 +56,36 @@ def filter_csv_record(csv_record,search: Search, fields: dict, codes: dict, form
     if csv_record['status']:
         csv_record['status'] = csv_record['status'].lower().replace(' ', '_')
 
-    if not csv_record['completion_date']:
-        csv_record['completion_date'] = "na"
-    else:
-        csv_record['completion_date'] = guess_the_date_code(csv_record['completion_date'])
+    #  Ensure Code values are used in the report field:
+    report_codes_en = {"independent external comprehensive review": "iecr",
+                       "third independent review of the national defence act": "ir3",
+                       "minister's advisory panel on systemic racism and discrimination final report": "apr",
+                       "national apology advisory committee report": "naac",
+                       "major policy initiatives": "mpi"}
+    if csv_record['report'] in report_codes_en:
+        csv_record['report'] = report_codes_en[csv_record['report']]
 
     return True,  csv_record
 
 
 def load_csv_record(csv_record: dict, solr_record: dict, search: Search, fields: dict, codes: dict, format: str):
 
+    aspects = {"Defence Team Experience and Wellbeing": "Expérience de l'équipe de la défense et bien-être",
+               "Diversity, Equity & Inclusion": "Diversité, équité et inclusion",
+               "Professional Conduct": "Conduite professionnelle",
+               "Trust in the Institution and Leadership": "Confiance en l'institution et au leadership"}
+
     if solr_record['culture_aspect']:
         if "/" in solr_record['culture_aspect']:
             aspects = solr_record['culture_aspect'].split("/")
             solr_record['culture_aspect_en'] = aspects[0]
             solr_record['culture_aspect_fr'] = aspects[1]
-        else:
+        elif solr_record['culture_aspect'] in aspects:
             solr_record['culture_aspect_en'] = solr_record['culture_aspect']
-            solr_record['culture_aspect_fr'] = solr_record['culture_aspect']
+            solr_record['culture_aspect_fr'] = aspects[solr_record['culture_aspect']]
+        else:
+            solr_record['culture_aspect_en'] = "-"
+            solr_record['culture_aspect_fr'] = "-"
 
     return solr_record
 
@@ -135,11 +131,11 @@ def pre_render_search(context: dict, template: str, request: HttpRequest, lang: 
             stati = statii[0].split('|')
             context['ip_offset'] = circle_progress_bar_offset(context['facets']['status']['in_progress'], context['total_hits']) if "in_progress" in stati and 'in_progress' in context['facets']['status'] else 360
             context['ns_offset'] = circle_progress_bar_offset(context['facets']['status']['not_started'], context['total_hits']) if "not_started" in stati and 'not_started' in context['facets']['status'] else 360
-            context['co_offset'] = circle_progress_bar_offset(context['facets']['status']['closed'], context['total_hits']) if "closed" in stati and 'closed' in context['facets']['status'] else 360
+            context['co_offset'] = circle_progress_bar_offset(context['facets']['status']['completed'], context['total_hits']) if "completed" in stati and 'completed' in context['facets']['status'] else 360
 
             context['ip_num'] = context['facets']['status']['in_progress'] if "in_progress" in stati and 'in_progress' in context['facets']['status'] else 0
             context['ns_num'] = context['facets']['status']['not_started'] if "not_started" in stati and 'not_started' in context['facets']['status'] else 0
-            context['co_num'] = context['facets']['status']['closed'] if "closed" in stati and 'closed' in context['facets']['status'] else 0
+            context['co_num'] = context['facets']['status']['completed'] if "closed" in stati and 'completed' in context['facets']['status'] else 0
 
             for s in ['in_progress', 'not_started', 'closed']:
                 stati2 = stati.copy()
@@ -156,10 +152,10 @@ def pre_render_search(context: dict, template: str, request: HttpRequest, lang: 
         else:
             context['ip_offset'] = circle_progress_bar_offset(context['facets']['status']['in_progress'], context['total_hits']) if "in_progress" in context['facets']['status'] else 360
             context['ns_offset'] = circle_progress_bar_offset(context['facets']['status']['not_started'], context['total_hits']) if "not_started" in context['facets']['status'] else 360
-            context['co_offset'] = circle_progress_bar_offset(context['facets']['status']['closed'], context['total_hits']) if "closed" in context['facets']['status'] else 360
+            context['co_offset'] = circle_progress_bar_offset(context['facets']['status']['completed'], context['total_hits']) if "completed" in context['facets']['status'] else 360
             context['ip_num'] = context['facets']['status']['in_progress'] if "in_progress" in context['facets']['status'] else 0
             context['ns_num'] = context['facets']['status']['not_started'] if "not_started" in context['facets']['status'] else 0
-            context['co_num'] = context['facets']['status']['closed'] if "closed" in context['facets']['status'] else 0
+            context['co_num'] = context['facets']['status']['completed'] if "completed" in context['facets']['status'] else 0
 
             for s in ['in_progress', 'not_started', 'closed']:
                 if s in context['facets']['status'] and context['facets']['status'][s] > 0:

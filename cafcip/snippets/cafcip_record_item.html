@@ -13,7 +13,7 @@
 </div>
 
 <div class="row">
-  <div class="col-md-3"><strong>{% translate 'Number: ' %}</strong></div>
+  <div class="col-md-3"><strong>{% translate 'Recommendation #: ' %}</strong></div>
   <div class="col-md-9">{% if language == "fr" %}{{ doc.record_no_fr }}{% else %}{{ doc.record_no_en }}{% endif %}</div>
 </div>
 
@@ -23,7 +23,7 @@
 </div>
 
 <div class="row">
-  <div class="col-md-3"><strong>{% translate 'Aspect of Culture: ' %}</strong></div><br>
+  <div class="col-md-3"><strong>{% translate 'Culture Aspect: ' %}</strong></div>
   <div class="col-md-9">{% if language == "fr" %}{{ doc.culture_aspect_fr }}{% else %}{{ doc.culture_aspect_en }}{% endif %}</div>
 </div>
 
@@ -37,16 +37,37 @@
   <div class="col-md-9">{% if language == "fr" %}{{ doc.status_fr }}{% else %}{{ doc.status_en }}{% endif %}</div>
 </div>
 
-{% if doc.status_comments != '-' %}
-<div class="row">
-<div class="col-md-3"><strong>{% translate 'Status Description: ' %}</strong></div><br>
-<div class="col-md-9">{% if language == "fr" %}{{ doc.status_comments }}{% else %}{{ doc.status_comments }}{% endif %}</div>
-</div>
+{% if language == "fr" %}
+  {% if doc.status_comments_fr != '-' %}
+  <div class="row">
+  <div class="col-md-3"><strong>{% translate 'Status Narrative: ' %}</strong></div><br>
+  <div class="col-md-9">{{ doc.status_comments_fr }}</div>
+  </div>
+  {% endif %}
+  {% if doc.web_links_fr != '-' %}
+  <div class="row">
+  <div class="col-md-3"><strong>{% translate 'Web Links: ' %}</strong></div>
+  <div class="col-md-9">{{ doc.web_links_fr | markdown_filter | safe }}</div>
+  </div>
+  {% endif %}
+{% else %}
+  {% if doc.status_comments_en != '-' %}
+  <div class="row">
+  <div class="col-md-3"><strong>{% translate 'Status Narrative: ' %}</strong></div><br>
+  <div class="col-md-9">{{ doc.status_comments_en }}</div>
+  </div>
+  {% endif %}
+  {% if doc.web_links_en != '-' %}
+  <div class="row">
+  <div class="col-md-3"><strong>{% translate 'Web Links: ' %}</strong></div>
+  <div class="col-md-9">{{ doc.web_links_en | markdown_filter | safe }}</div>
+  </div>
+  {% endif %}
 {% endif %}
 
-{% if doc.web != '-' %}
+{% if doc.actual_date != "2000-01-01T00:00:00Z" %}
 <div class="row">
-<div class="col-md-3"><strong>{% translate 'Web Links: ' %}</strong></div><br>
-<div class="col-md-9">{{ doc.web }}</div>
+<div class="col-md-3"><strong>{% translate 'Actual implementation date: ' %}</strong></div><br>
+<div class="col-md-9">{% if language == "fr" %}{{ doc.actual_date_fr }}{% else %}{{ doc.actual_date_en }}{% endif %}</div>
 </div>
 {% endif %}

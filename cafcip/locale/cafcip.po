@@ -17,18 +17,42 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+msgid "Report: "
+msgstr "Rapport : "
 
 msgid "Title: "
 msgstr "Titre : "
 
-msgid "Record No.: "
-msgstr "N° de dossier : "
+msgid "Recommendation #: "
+msgstr "N° de recommendation : "
 
-msgid "Status Description: "
-msgstr "Description du statut : "
+msgid "Status Narrative: "
+msgstr "Narratif du statut : "
 
-msgid "Aspect of Culture: "
-msgstr "Aspect de la culture : "
+msgid "Culture Aspect: "
+msgstr "Aspect culturel : "
+
+msgid "Actual implementation date: "
+msgstr "Date de mise en oeuvre actuelle : "
 
 msgid "Recommendation: "
 msgstr "Recommendation : "
+
+msgid "Web Links: "
+msgstr "Liens Web : "
+
+msgid "Implementation Timeline: "
+msgstr "Calendrier de mise en œuvre : "
+
+msgid "Defence Team Experience and Wellbeing"
+msgstr "Expérience de l'équipe de la défense et bien-être"
+
+msgid "Diversity, Equity & Inclusion"
+msgstr "Diversité, équité et inclusion"
+
+msgid "Professional Conduct"
+msgstr "Conduite professionnelle"
+
+msgid "Trust in the Institution and Leadership"
+msgstr "Confiance en l'institution et au leadership"
+

@@ -21,21 +21,21 @@
     <div class="col-md-9 col-md-push-3 mrgn-tp-sm">
     <div class="row mrgn-bttm-md mrgn-lft-md form-inline">
       <div class="col-md-3 text-center">
-        {% if closed_list %}<a href="{% qurl request.get_full_path status=closed_list %}" title="{{ codes.status|get_dict_value:'closed' }}" alt="{{ co_num }} {% translate "committment" %}{{ co_num|pluralize }} {% translate "with status" %} {{ codes.status|get_dict_value:'closed' }}">{% endif %}
+        {% if closed_list %}<a href="{% qurl request.get_full_path status=closed_list %}" title="{{ codes.status|get_dict_value:'completed' }}" alt="{{ co_num }} {% translate "recommendation" %}{{ co_num|pluralize }} {% translate "with status" %} {{ codes.status|get_dict_value:'completed' }}">{% endif %}
         <svg aria-labelledby="cStatTitle" role="img">
-          <title id="cStatTitle">{{ co_num }} {% translate "commitment" %}{{ co_num|pluralize }} {% translate "with status" %} {{ codes.status|get_dict_value:'closed' }}</title>
+          <title id="cStatTitle">{{ co_num }} {% translate "recommendation" %}{{ co_num|pluralize }} {% translate "with status" %} {{ codes.status|get_dict_value:'completed' }}</title>
           <circle class="bg-CO" cx="57" cy="57" r="52" />
           <circle class="meter-CO" cx="57" cy="57" r="52" stroke-dashoffset="{{ co_offset }}" style="animation: kf_co 1s ease-out"/>
           <text x="57" y="64" text-anchor="middle" class="status_count_text">{{ co_num }}</text>
         </svg><br>
-        {{ codes.status|get_dict_value:'closed' }}
+        {{ codes.status|get_dict_value:'completed' }}
         {% if closed_list %}</a>{% endif %}
       </div>
 
       <div class="col-md-3 text-center">
-        {% if in_progress_list %}<a href="{% qurl request.get_full_path status=in_progress_list %}" title="{{ codes.status|get_dict_value:'in_progress' }}" alt="{{ ip_num }} {% translate "commitment" %}{{ ip_num|pluralize }} {% translate "with status" %} {{ codes.status|get_dict_value:'in_progress' }}">{% endif %}
+        {% if in_progress_list %}<a href="{% qurl request.get_full_path status=in_progress_list %}" title="{{ codes.status|get_dict_value:'in_progress' }}" alt="{{ ip_num }} {% translate "recommendation" %}{{ ip_num|pluralize }} {% translate "with status" %} {{ codes.status|get_dict_value:'in_progress' }}">{% endif %}
         <svg aria-labelledby="spStatTitle" role="img">
-          <title id="spStatTitle">{{ ip_num }} {% translate "commitment" %}{{ ip_num|pluralize }} {% translate "with status" %} {{ codes.status|get_dict_value:'in_progress' }}</title>
+          <title id="spStatTitle">{{ ip_num }} {% translate "recommendation" %}{{ ip_num|pluralize }} {% translate "with status" %} {{ codes.status|get_dict_value:'in_progress' }}</title>
           <circle class="bg-IP" cx="57" cy="57" r="52" />
           <circle class="meter-IP" cx="57" cy="57" r="52" stroke-dashoffset="{{ ip_offset }}" style="animation: kf_ip .8s ease-out"/>
           <text x="57" y="64" text-anchor="middle" class="status_count_text">{{ ip_num }}</text>
@@ -45,9 +45,9 @@
       </div>
 
       <div class="col-md-3 text-center">
-        {% if not_started_list %}<a href="{% qurl request.get_full_path status=not_started_list %}" title="{{ codes.status|get_dict_value:'not_started' }}" alt="{{ ns_num }} {% translate "commitment" %}{{ ns_num|pluralize }} {% translate "with status" %} {{ codes.status|get_dict_value:'not_started' }}">{% endif %}
+        {% if not_started_list %}<a href="{% qurl request.get_full_path status=not_started_list %}" title="{{ codes.status|get_dict_value:'not_started' }}" alt="{{ ns_num }} {% translate "recommendation" %}{{ ns_num|pluralize }} {% translate "with status" %} {{ codes.status|get_dict_value:'not_started' }}">{% endif %}
         <svg aria-labelledby="lpStatTitle" role="img">
-          <title id="lpStatTitle">{{ ns_num }} {% translate "commitment" %}{{ ns_num|pluralize }} {% translate "with status" %} {{ codes.status|get_dict_value:'not_started' }}</title>
+          <title id="lpStatTitle">{{ ns_num }} {% translate "recommendation" %}{{ ns_num|pluralize }} {% translate "with status" %} {{ codes.status|get_dict_value:'not_started' }}</title>
           <circle class="bg-NS" cx="57" cy="57" r="52" />
           <circle class="meter-NS" cx="57" cy="57" r="52" stroke-dashoffset="{{ ns_offset }}" style="animation: kf_lp .6s ease-out"/>
           <text x="57" y="64" text-anchor="middle" class="status_count_text">{{ ns_num }}</text>
@@ -66,8 +66,8 @@
 <div class="row mrgn-bttm-lg">
     <div class="col-sm-5 col-xs-12" style="justify-content: left">
     {% if not show_all_results %}
-      <b>{% if LANGUAGE_CODE == 'fr' %}{{ total_hits|apnumber }} engagement{{ total_hits|pluralize }} trouvé{{ total_hits|pluralize }}
-      {% else %}Found {{ total_hits|apnumber }} commitment{{ total_hits|pluralize }}{% endif %}</b>
+      <b>{% if LANGUAGE_CODE == 'fr' %}{{ total_hits|apnumber }} recommendation{{ total_hits|pluralize }} trouvé{{ total_hits|pluralize }}
+      {% else %}Found {{ total_hits|apnumber }} recommendation{{ total_hits|pluralize }}{% endif %}</b>
     {% endif %}
     </div>
     <div class="col-sm-7 col-xs-12"><div style="display: flex; justify-content: right">
