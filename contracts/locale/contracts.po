@@ -179,3 +179,4 @@ msgstr "Commentaires additionnels :"
 
 msgid "Duration:"
 msgstr "Durée :"
+

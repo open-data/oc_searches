@@ -7,265 +7,493 @@
 {% get_current_language as LANGUAGE_CODE %}
 
 {% block main-content-title %}
-<h1 property="name" id="wb-cont">
-  {% translate 'Contract Details:' %} {{ docs.0.vendor_name }}</h1>
+  {% if amendments %}
+    <h1 property="name" id="wb-cont">{% translate 'Contract Details:' %} {{ docs.0.vendor_name }}</h1>
+  {% else %}
+    <h1 property="name" id="wb-cont">{% translate 'Procurement Details:' %} {{ docs.0.procurement_id }}</h1>
+  {% endif %}
 {% endblock main-content-title %}
 
 {% block main-content-centre %}
 <div class="col-md-12">
-    {% block main-content-search-items %}
-    {% for doc in docs %}
+  {% block main-content-search-items %}
 
-<div class="panel panel-info">
-    <header class="panel-heading">
-        <h2 class="panel-title">{% trans 'Contract' %}</h2>
-    </header>
-    <div class="panel-body">
+  {% if amendments %}
+    {% for doc in docs %}
+    <div class="panel panel-info">
+      <header class="panel-heading">
+        <h2 class="panel-title">{% trans 'Reporting Period: ' %}{{ doc.reporting_period }}</h2>
+      </header>
+      <div class="panel-body">
         <div class="row">
-            <div class="col-sm-4"><strong>{% trans 'Vendor Name:' %}</strong></div>
-            <div class="col-sm-8">{{ doc.vendor_name }}</div>
+          <div class="col-sm-5"><strong>{% trans 'Vendor Name:' %}</strong></div>
+          <div class="col-sm-7">{{ doc.vendor_name }}</div>
         </div>
         <div class="row">
-            <div class="col-sm-4"><strong>{% trans 'Description: ' %}</strong></div>
-            <div class="col-sm-8">{% if LANGUAGE_CODE == 'fr' %}{{ doc.description_fr }}{% else %}{{ doc.description_en }}{% endif %}</div>
+          <div class="col-sm-5"><strong>{% trans 'Description: ' %}</strong></div>
+          <div class="col-sm-7">{% if LANGUAGE_CODE == 'fr' %}{{ doc.description_fr }}{% else %}{{ doc.description_en }}{% endif %}</div>
         </div>
         {% if not doc.economic_object_code == '-' %}
         <div class="row">
-            <div class="col-sm-4"><strong>{% trans 'Economic Object Code: ' %}</strong></div>
-            <div class="col-sm-8">{{ doc.economic_object_code }}</div>
+          <div class="col-sm-5"><strong>{% trans 'Economic Object Code: ' %}</strong></div>
+          <div class="col-sm-7">{{ doc.economic_object_code }}</div>
         </div>
         {% endif %}
         {% if not doc.instrument_type == '-' %}
         <div class="row">
-            <div class="col-sm-4"><strong>{% trans 'Instrument Type: ' %}</strong></div>
-            <div class="col-sm-8">{% if LANGUAGE_CODE == 'fr' %}{{ doc.instrument_type_fr }}{% else %}{{ doc.instrument_type_en }}{% endif %}</div>
+          <div class="col-sm-5"><strong>{% trans 'Instrument Type: ' %}</strong></div>
+          <div class="col-sm-7">{% if LANGUAGE_CODE == 'fr' %}{{ doc.instrument_type_fr }}{% else %}{{ doc.instrument_type_en }}{% endif %}</div>
         </div>
         {% endif %}
         <div class="row">
-            <div class="col-sm-4"><strong>{% trans 'Commodity Type: ' %}</strong></div>
-            <div class="col-sm-8">{% if LANGUAGE_CODE == 'fr' %}{{ doc.commodity_type_fr }}{% else %}{{ doc.commodity_type_en }}{% endif %}</div>
+          <div class="col-sm-5"><strong>{% trans 'Commodity Type: ' %}</strong></div>
+          <div class="col-sm-7">{% if LANGUAGE_CODE == 'fr' %}{{ doc.commodity_type_fr }}{% else %}{{ doc.commodity_type_en }}{% endif %}</div>
         </div>
         {% if doc.commodity_code_s|length > 1 %}
         <div class="row">
-            <div class="col-sm-4"><strong>{% trans 'Commodity Code: ' %}</strong></div>
-            <div class="col-sm-8">{{ doc.commodity_code }}</div>
+          <div class="col-sm-5"><strong>{% trans 'Commodity Code: ' %}</strong></div>
+          <div class="col-sm-7">{{ doc.commodity_code }}</div>
         </div>
         {% endif %}
         <div class="row">
-            <div class="col-sm-4"><strong>{% trans 'Organization: ' %}</strong></div>
-            <div class="col-sm-8">{% if LANGUAGE_CODE == 'fr' %}{{ doc.owner_org_fr }}{% else %}{{ doc.owner_org_en }}{% endif %}</div>
+          <div class="col-sm-5"><strong>{% trans 'Organization: ' %}</strong></div>
+          <div class="col-sm-7">{% if LANGUAGE_CODE == 'fr' %}{{ doc.owner_org_fr }}{% else %}{{ doc.owner_org_en }}{% endif %}</div>
         </div>
         {% if not doc.vendor_postal_code == '-' %}
         <div class="row">
-            <div class="col-sm-4"><strong>{% trans 'Vendor Postal Code:' %}</strong></div>
-            <div class="col-sm-8">{{ doc.vendor_postal_code | upper}}</div>
+          <div class="col-sm-5"><strong>{% trans 'Vendor Postal Code:' %}</strong></div>
+          <div class="col-sm-7">{{ doc.vendor_postal_code | upper}}</div>
         </div>
         {% endif %}
         {% if doc.comments_en|length > 1 or doc.comments_fr|length > 1 %}
         <div class="row">
-            <div class="col-sm-4"><strong>{% trans 'Comments: ' %}</strong></div>
-            <div class="col-sm-8">{% if LANGUAGE_CODE == 'fr' %}{{ doc.comments_fr }}{% else %}{{ doc.comments_en }}{% endif %}</div>
+          <div class="col-sm-5"><strong>{% trans 'Comments: ' %}</strong></div>
+          <div class="col-sm-7">{% if LANGUAGE_CODE == 'fr' %}{{ doc.comments_fr }}{% else %}{{ doc.comments_en }}{% endif %}</div>
         </div>
         {% endif %}
         {% if doc.additional_comments_en|length > 1 or doc.additional_comments_fr|length > 1 %}
         <div class="row">
-            <div class="col-sm-4"><strong>{% trans 'Additional Comments: ' %}</strong></div>
-            <div class="col-sm-8">{% if LANGUAGE_CODE == 'fr' %}{{ doc.additional_comments_fr }}{% else %}{{ doc.additional_comments_en }}{% endif %}</div>
+          <div class="col-sm-5"><strong>{% trans 'Additional Comments: ' %}</strong></div>
+          <div class="col-sm-7">{% if LANGUAGE_CODE == 'fr' %}{{ doc.additional_comments_fr }}{% else %}{{ doc.additional_comments_en }}{% endif %}</div>
         </div>
         {% endif %}
         {% if not doc.buyer_name == '-' %}
         <div class="row">
-            <div class="col-sm-4"><strong>{% trans 'Buyer Name: ' %}</strong></div>
-            <div class="col-sm-8">{{ doc.buyer_name | safe }}</div>
+          <div class="col-sm-5"><strong>{% trans 'Buyer Name: ' %}</strong></div>
+          <div class="col-sm-7">{{ doc.buyer_name | safe }}</div>
         </div>
         {% endif %}
-    </div>
-</div>
-<div class="panel panel-info">
-    <header class="panel-heading">
-        <h2 class="panel-title">{% trans 'Date and Value' %}</h2>
-    </header>
-    <div class="panel-body">
-        <div class="row"></div>
         {% if doc.reporting_period|length > 1 %}
         <div class="row">
-            <div class="col-sm-4"><strong>{% trans 'Reporting Period: ' %}</strong></div>
-            <div class="col-sm-8">{{ doc.reporting_period }}</div>
+          <div class="col-sm-5"><strong>{% trans 'Reporting Period: ' %}</strong></div>
+          <div class="col-sm-7">{{ doc.reporting_period }}</div>
         </div>
         {% endif %}
         <div class="row">
-            <div class="col-sm-4"><strong>{% trans 'Contract Date: ' %}</strong></div>
+            <div class="col-sm-5"><strong>{% trans 'Contract Date: ' %}</strong></div>
             {% if doc.contract_date|date:"Y-m-d" == "0001-01-01" %}
-            <div class="col-sm-8">{{ doc.contract_date|unspecified_date:LANGUAGE_CODE }}</div>
+            <div class="col-sm-7">{{ doc.contract_date|unspecified_date:LANGUAGE_CODE }}</div>
             {% else %}
-            <div class="col-sm-8">{% if LANGUAGE_CODE == 'fr' %}{{ doc.contract_date_fr }}{% else %}{{ doc.contract_date_en }}{% endif %}</div>
+            <div class="col-sm-7">{% if LANGUAGE_CODE == 'fr' %}{{ doc.contract_date_fr }}{% else %}{{ doc.contract_date_en }}{% endif %}</div>
             {% endif %}
         </div>
         {% if not doc.contract_period_start|date:"Y-m-d" == "0001-01-01" %}
         <div class="row">
-            <div class="col-sm-4"><strong>{% trans 'Contract Period Start Date: ' %}</strong></div>
-            <div class="col-sm-8">{% if LANGUAGE_CODE == 'fr' %}{{ doc.contract_period_start_fr}}{% else %}{{ doc.contract_period_start_en }}{% endif %}</div>
+          <div class="col-sm-5"><strong>{% trans 'Contract Period Start Date: ' %}</strong></div>
+          <div class="col-sm-7">{% if LANGUAGE_CODE == 'fr' %}{{ doc.contract_period_start_fr}}{% else %}{{ doc.contract_period_start_en }}{% endif %}</div>
         </div>
         {% endif %}
         {% if not doc.delivery_date|date:"Y-m-d" == "0001-01-01" %}
         <div class="row">
-            <div class="col-sm-4"><strong>{% trans 'Contract Period End or Delivery Date: ' %}</strong></div>
-            <div class="col-sm-8">{% if LANGUAGE_CODE == 'fr' %}{{ doc.delivery_date_fr }}{% else %}{{ doc.delivery_date_en }}{% endif %}</div>
+          <div class="col-sm-5"><strong>{% trans 'Contract Period End or Delivery Date: ' %}</strong></div>
+          <div class="col-sm-7">{% if LANGUAGE_CODE == 'fr' %}{{ doc.delivery_date_fr }}{% else %}{{ doc.delivery_date_en }}{% endif %}</div>
         </div>
         {% endif %}
         <div class="row">
-            <div class="col-sm-4"><strong>{% trans 'Total Contract Value: ' %}</strong></div>
-            <div class="col-sm-8">{% if LANGUAGE_CODE == 'fr' %}{{ doc.contract_value_fr }}{% else %}{{ doc.contract_value_en }}{% endif %}</div>
+          <div class="col-sm-5"><strong>{% trans 'Total Contract Value: ' %}</strong></div>
+          <div class="col-sm-7">{% if LANGUAGE_CODE == 'fr' %}{{ doc.contract_value_fr }}{% else %}{{ doc.contract_value_en }}{% endif %}</div>
         </div>
         <div class="row">
-            <div class="col-sm-4"><strong>{% trans 'Original Contract Value: ' %}</strong></div>
-            <div class="col-sm-8">{% if LANGUAGE_CODE == 'fr' %}{{ doc.original_value_fr }}{% else %}{{ doc.original_value_en }}{% endif %}</div>
+          <div class="col-sm-5"><strong>{% trans 'Original Contract Value: ' %}</strong></div>
+          <div class="col-sm-7">{% if LANGUAGE_CODE == 'fr' %}{{ doc.original_value_fr }}{% else %}{{ doc.original_value_en }}{% endif %}</div>
         </div>
         {% if not doc.amendment_value == 0 %}
         <div class="row">
-            <div class="col-sm-4"><strong>{% trans 'Amendment Value: ' %}</strong></div>
-            <div class="col-sm-8">{% if LANGUAGE_CODE == 'fr' %}{{ doc.amendment_value_fr }}{% else %}{{ doc.amendment_value_en }}{% endif %}</div>
+          <div class="col-sm-5"><strong>{% trans 'Amendment Value: ' %}</strong></div>
+          <div class="col-sm-7">{% if LANGUAGE_CODE == 'fr' %}{{ doc.amendment_value_fr }}{% else %}{{ doc.amendment_value_en }}{% endif %}</div>
         </div>
         {% endif %}
-
-    </div>
-</div>
-
-<div class="panel panel-info">
-    <header class="panel-heading">
-        <h2 class="panel-title">{% trans 'Applicable Trade Agreements' %}</h2>
-    </header>
-    <table class="table">
-        {% if LANGUAGE_CODE == 'fr' %}
-            {% for agreement in doc.trade_agreement_fr %}
-                <tr style="background-color: {% cycle '#ffffff' '#f5f5f5' %};"><td>{{ agreement }}</td></tr>{% endfor %}
-        {% else %}
-            {% for agreement in doc.trade_agreement_en %}
-                <tr style="background-color: {% cycle '#ffffff' '#f5f5f5' %};"><td>{{ agreement }}</td></tr>{% endfor %}
-        {% endif %}
-    </table>
-</div>
-
-<div class="panel panel-info">
-    <header class="panel-heading">
-        <h2 class="panel-title">{% trans 'Additional Details' %}</h2>
-    </header>
-    <div class="panel-body">
         <div class="row">
-            <div class="col-sm-5"><strong>{% trans 'Procurement Identification Number: ' %}</strong></div>
-            <div class="col-sm-7">{{ doc.procurement_id }}</div>
+          <div class="col-sm-5"><strong>{% trans 'Procurement Identification Number: ' %}</strong></div>
+          <div class="col-sm-7">{{ doc.procurement_id }}</div>
         </div>
         <div class="row">
-            <div class="col-sm-5"><strong>{% trans 'Solicitation Procedure: ' %}</strong></div>
-            <div class="col-sm-7">{% if LANGUAGE_CODE == 'fr' %}{{ doc.solicitation_procedure_fr }}{% else %}{{ doc.solicitation_procedure_en }}{% endif %}</div>
+          <div class="col-sm-5"><strong>{% trans 'Solicitation Procedure: ' %}</strong></div>
+          <div class="col-sm-7">{% if LANGUAGE_CODE == 'fr' %}{{ doc.solicitation_procedure_fr }}{% else %}{{ doc.solicitation_procedure_en }}{% endif %}</div>
         </div>
         <div class="row">
-            <div class="col-sm-5"><strong>{% trans 'Limited Tendering Reason: ' %}</strong></div>
-            <div class="col-sm-7">{% if LANGUAGE_CODE == 'fr' %}
-              {% for ltr in doc.limited_tendering_reason_fr %}{{ ltr }}<br>{% endfor %}
-              {% else %}
-              {% for ltr in doc.limited_tendering_reason_en %}{{ ltr }}<br>{% endfor %}{% endif %}
-            </div>
+          <div class="col-sm-5"><strong>{% trans 'Limited Tendering Reason: ' %}</strong></div>
+          <div class="col-sm-7">{% if LANGUAGE_CODE == 'fr' %}
+            {% for ltr in doc.limited_tendering_reason_fr %}{{ ltr }}<br>{% endfor %}
+            {% else %}
+            {% for ltr in doc.limited_tendering_reason_en %}{{ ltr }}<br>{% endfor %}{% endif %}
+          </div>
         </div>
         {% if not doc.contracting_entity_en == '-' and not doc.contracting_entity_fr == '-' %}
         <div class="row">
-            <div class="col-sm-5"><strong>{% trans 'Contracting Entity: ' %}</strong></div>
-            <div class="col-sm-7">{% if LANGUAGE_CODE == 'fr' %}{{ doc.contracting_entity_fr }}{% else %}{{ doc.contracting_entity_en }}{% endif %}</div>
+          <div class="col-sm-5"><strong>{% trans 'Contracting Entity: ' %}</strong></div>
+          <div class="col-sm-7">{% if LANGUAGE_CODE == 'fr' %}{{ doc.contracting_entity_fr }}{% else %}{{ doc.contracting_entity_en }}{% endif %}</div>
         </div>
         {% endif %}
         {% if not doc.standing_offer_number == '-'  %}
         <div class="row">
-            <div class="col-sm-5"><strong>{% trans 'Standing Offer Number: ' %}</strong></div>
-            <div class="col-sm-7">{{ doc.standing_offer_number }}</div>
+          <div class="col-sm-5"><strong>{% trans 'Standing Offer Number: ' %}</strong></div>
+          <div class="col-sm-7">{{ doc.standing_offer_number }}</div>
         </div>
         {% endif %}
         <div class="row">
-            <div class="col-sm-5"><strong>{% trans 'Trade Agreement Exceptions and Exclusions: ' %}</strong></div>
-            <div class="col-sm-7">{% if LANGUAGE_CODE == 'fr' %}
-                {% for tax in doc.trade_agreement_exceptions_fr %}{{ tax }}<br>{% endfor %}
-              {% else %}
-                {% for tax in doc.trade_agreement_exceptions_en %}{{ tax }}<br>{% endfor %}
-              {% endif %}</div>
+          <div class="col-sm-5"><strong>{% trans 'Trade Agreement Exceptions and Exclusions: ' %}</strong></div>
+          <div class="col-sm-7">{% if LANGUAGE_CODE == 'fr' %}
+              {% for tax in doc.trade_agreement_exceptions_fr %}{{ tax }}<br>{% endfor %}
+            {% else %}
+              {% for tax in doc.trade_agreement_exceptions_en %}{{ tax }}<br>{% endfor %}
+            {% endif %}</div>
         </div>
         {% if not doc.land_claimss == '-' %}
-            <div class="row">
-                <div class="col-sm-5"><strong>{% trans 'Comprehensive Land Claims Agreement: ' %}</strong></div>
-                <div class="col-sm-7">
-                    {% if LANGUAGE_CODE == 'fr' %}
-                        {% for lc in doc.land_claims_fr %}{{ lc }}<br>{% endfor %}
-                    {% else %}
-                        {% for lc in doc.land_claims_en %}{{ lc }}<br>{% endfor %}
-                    {% endif %}</div>
-            </div>
+        <div class="row">
+          <div class="col-sm-5"><strong>{% trans 'Comprehensive Land Claims Agreement: ' %}</strong></div>
+          <div class="col-sm-7">
+            {% if LANGUAGE_CODE == 'fr' %}
+                {% for lc in doc.land_claims_fr %}{{ lc }}<br>{% endfor %}
+            {% else %}
+                {% for lc in doc.land_claims_en %}{{ lc }}<br>{% endfor %}
+            {% endif %}</div>
+        </div>
         {% endif %}
         {% if not doc.indigenous_business == '-' %}
-            <div class="row">
-                <div class="col-sm-5"><strong>{% trans 'Procurement Strategy for Indigenous Business: ' %}</strong></div>
-                <div class="col-sm-7">{% if LANGUAGE_CODE == 'fr' %}{{ doc.indigenous_business_fr }}{% else %}{{ doc.indigenous_business_en }}{% endif %}</div>
-            </div>
+        <div class="row">
+          <div class="col-sm-5"><strong>{% trans 'Procurement Strategy for Indigenous Business: ' %}</strong></div>
+          <div class="col-sm-7">{% if LANGUAGE_CODE == 'fr' %}{{ doc.indigenous_business_fr }}{% else %}{{ doc.indigenous_business_en }}{% endif %}</div>
+        </div>
         {% endif %}
-         <div class="row">
-            <div class="col-sm-5"><strong>{% trans 'Indigenous Business excluding PSIB: ' %}</strong></div>
-            <div class="col-sm-7">{% if LANGUAGE_CODE == 'fr' %}{{ doc.indigenous_business_excluding_psib_fr }}{% else %}{{ doc.indigenous_business_excluding_psib_en }}{% endif %}</div>
+        <div class="row">
+          <div class="col-sm-5"><strong>{% trans 'Indigenous Business excluding PSIB: ' %}</strong></div>
+          <div class="col-sm-7">{% if LANGUAGE_CODE == 'fr' %}{{ doc.indigenous_business_excluding_psib_fr }}{% else %}{{ doc.indigenous_business_excluding_psib_en }}{% endif %}</div>
         </div>
         {% if not doc.intellectual_property == '-' %}
         <div class="row">
-            <div class="col-sm-5"><strong>{% trans 'Intellectual Property: ' %}</strong></div>
-            <div class="col-sm-7">{% if LANGUAGE_CODE == 'fr' %}{{ doc.intellectual_property_fr }}{% else %}{{ doc.intellectual_property_en }}{% endif %}</div>
+          <div class="col-sm-5"><strong>{% trans 'Intellectual Property: ' %}</strong></div>
+          <div class="col-sm-7">{% if LANGUAGE_CODE == 'fr' %}{{ doc.intellectual_property_fr }}{% else %}{{ doc.intellectual_property_en }}{% endif %}</div>
         </div>
         {% endif %}
         {% if not doc.potential_commercial_exploitation == '-' %}
         <div class="row">
-            <div class="col-sm-5"><strong>{% trans 'Potential Commercial Exploitation: ' %}</strong></div>
-            <div class="col-sm-7">{% if LANGUAGE_CODE == 'fr' %}{{ doc.potential_commercial_exploitation_fr }}{% else %}{{ doc.potential_commercial_exploitation_en }}{% endif %}</div>
+          <div class="col-sm-5"><strong>{% trans 'Potential Commercial Exploitation: ' %}</strong></div>
+          <div class="col-sm-7">{% if LANGUAGE_CODE == 'fr' %}{{ doc.potential_commercial_exploitation_fr }}{% else %}{{ doc.potential_commercial_exploitation_en }}{% endif %}</div>
         </div>
         {% endif %}
         {% if not doc.former_public_servant_en == '-' %}
         <div class="row">
-            <div class="col-sm-5"><strong>{% trans 'Former Public Servant: ' %}</strong></div>
-            <div class="col-sm-7">{% if LANGUAGE_CODE == 'fr' %}{{ doc.former_public_servant_fr }}{% else %}{{ doc.former_public_servant_en }}{% endif %}</div>
+          <div class="col-sm-5"><strong>{% trans 'Former Public Servant: ' %}</strong></div>
+          <div class="col-sm-7">{% if LANGUAGE_CODE == 'fr' %}{{ doc.former_public_servant_fr }}{% else %}{{ doc.former_public_servant_en }}{% endif %}</div>
         </div>
         {% endif %}
         {% if not doc.ministers_office == '-' %}
         <div class="row">
-            <div class="col-sm-5"><strong>{% trans 'Ministers Office Contracts: ' %}</strong></div>
-            <div class="col-sm-7">{% if LANGUAGE_CODE == 'fr' %}{{ doc.ministers_office_fr }}{% else %}{{ doc.ministers_office_en }}{% endif %}</div>
+          <div class="col-sm-5"><strong>{% trans 'Ministers Office Contracts: ' %}</strong></div>
+          <div class="col-sm-7">{% if LANGUAGE_CODE == 'fr' %}{{ doc.ministers_office_fr }}{% else %}{{ doc.ministers_office_en }}{% endif %}</div>
         </div>
         {% endif %}
         {% if not doc.country_of_vendor == '-' %}
         <div class="row">
-            <div class="col-sm-5"><strong>{% trans 'Country of Vendor: ' %}</strong></div>
-            <div class="col-sm-7">{% if LANGUAGE_CODE == 'fr' %}{{ doc.country_of_vendor_fr }}{% else %}{{ doc.country_of_vendor_en }}{% endif %}</div>
+          <div class="col-sm-5"><strong>{% trans 'Country of Vendor: ' %}</strong></div>
+          <div class="col-sm-7">{% if LANGUAGE_CODE == 'fr' %}{{ doc.country_of_vendor_fr }}{% else %}{{ doc.country_of_vendor_en }}{% endif %}</div>
         </div>
         {% endif %}
         {% if not doc.number_of_bids == '-'  %}
-         <div class="row">
-             <div class="col-sm-5"><strong>{% trans 'Number of Bids: ' %}</strong></div>
-            <div class="col-sm-7">{{ doc.number_of_bids }}</div>
+        <div class="row">
+          <div class="col-sm-5"><strong>{% trans 'Number of Bids: ' %}</strong></div>
+          <div class="col-sm-7">{{ doc.number_of_bids }}</div>
         </div>
         {% endif %}
         {% if not article_6_exceptions == '-' %}
         <div class="row">
-             <div class="col-sm-5"><strong>{% trans 'Article 6 Government Contract Exceptions: ' %}</strong></div>
-            <div class="col-sm-7">{% if LANGUAGE_CODE == 'fr' %}{{ doc.article_6_exceptions_fr }}{% else %}{{ doc.article_6_exceptions_en }}{% endif %}</div>
+           <div class="col-sm-5"><strong>{% trans 'Article 6 Government Contract Exceptions: ' %}</strong></div>
+          <div class="col-sm-7">{% if LANGUAGE_CODE == 'fr' %}{{ doc.article_6_exceptions_fr }}{% else %}{{ doc.article_6_exceptions_en }}{% endif %}</div>
         </div>
         {% endif %}
         {% if not doc.award_criteria == '-' %}
         <div class="row">
-             <div class="col-sm-5"><strong>{% trans 'Award Criteria: ' %}</strong></div>
-            <div class="col-sm-7">{% if LANGUAGE_CODE == 'fr' %}{{ doc.award_criteria_fr }}{% else %}{{ doc.award_criteria_en }}{% endif %}</div>
+           <div class="col-sm-5"><strong>{% trans 'Award Criteria: ' %}</strong></div>
+          <div class="col-sm-7">{% if LANGUAGE_CODE == 'fr' %}{{ doc.award_criteria_fr }}{% else %}{{ doc.award_criteria_en }}{% endif %}</div>
         </div>
         {% endif %}
         {% if not doc.socioeconomic_indicator == '-' %}
         <div class="row">
-             <div class="col-sm-5"><strong>{% trans 'Socio-Economic Indicator: ' %}</strong></div>
-            <div class="col-sm-7">{% if LANGUAGE_CODE == 'fr' %}{{ doc.socioeconomic_indicator_fr }}{% else %}{{ doc.socioeconomic_indicator_en }}{% endif %}</div>
+          <div class="col-sm-5"><strong>{% trans 'Socio-Economic Indicator: ' %}</strong></div>
+          <div class="col-sm-7">{% if LANGUAGE_CODE == 'fr' %}{{ doc.socioeconomic_indicator_fr }}{% else %}{{ doc.socioeconomic_indicator_en }}{% endif %}</div>
         </div>
         {% endif %}
-    </div>
-</div>
 
-{% endfor %}
+      </div>
+    </div>
+    {% endfor %}
+  {% else %}
+    {% for doc in docs %}
+
+      <div class="panel panel-info">
+        <header class="panel-heading">
+            <h2 class="panel-title">{% trans 'Contract' %}</h2>
+        </header>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-sm-5"><strong>{% trans 'Vendor Name:' %}</strong></div>
+                <div class="col-sm-7">{{ doc.vendor_name }}</div>
+            </div>
+            <div class="row">
+                <div class="col-sm-5"><strong>{% trans 'Description: ' %}</strong></div>
+                <div class="col-sm-7">{% if LANGUAGE_CODE == 'fr' %}{{ doc.description_fr }}{% else %}{{ doc.description_en }}{% endif %}</div>
+            </div>
+            {% if not doc.economic_object_code == '-' %}
+            <div class="row">
+                <div class="col-sm-5"><strong>{% trans 'Economic Object Code: ' %}</strong></div>
+                <div class="col-sm-7">{{ doc.economic_object_code }}</div>
+            </div>
+            {% endif %}
+            {% if not doc.instrument_type == '-' %}
+            <div class="row">
+                <div class="col-sm-5"><strong>{% trans 'Instrument Type: ' %}</strong></div>
+                <div class="col-sm-7">{% if LANGUAGE_CODE == 'fr' %}{{ doc.instrument_type_fr }}{% else %}{{ doc.instrument_type_en }}{% endif %}</div>
+            </div>
+            {% endif %}
+            <div class="row">
+                <div class="col-sm-5"><strong>{% trans 'Commodity Type: ' %}</strong></div>
+                <div class="col-sm-7">{% if LANGUAGE_CODE == 'fr' %}{{ doc.commodity_type_fr }}{% else %}{{ doc.commodity_type_en }}{% endif %}</div>
+            </div>
+            {% if doc.commodity_code_s|length > 1 %}
+            <div class="row">
+                <div class="col-sm-5"><strong>{% trans 'Commodity Code: ' %}</strong></div>
+                <div class="col-sm-7">{{ doc.commodity_code }}</div>
+            </div>
+            {% endif %}
+            <div class="row">
+                <div class="col-sm-5"><strong>{% trans 'Organization: ' %}</strong></div>
+                <div class="col-sm-7">{% if LANGUAGE_CODE == 'fr' %}{{ doc.owner_org_fr }}{% else %}{{ doc.owner_org_en }}{% endif %}</div>
+            </div>
+            {% if not doc.vendor_postal_code == '-' %}
+            <div class="row">
+                <div class="col-sm-5"><strong>{% trans 'Vendor Postal Code:' %}</strong></div>
+                <div class="col-sm-7">{{ doc.vendor_postal_code | upper}}</div>
+            </div>
+            {% endif %}
+            {% if doc.comments_en|length > 1 or doc.comments_fr|length > 1 %}
+            <div class="row">
+                <div class="col-sm-5"><strong>{% trans 'Comments: ' %}</strong></div>
+                <div class="col-sm-7">{% if LANGUAGE_CODE == 'fr' %}{{ doc.comments_fr }}{% else %}{{ doc.comments_en }}{% endif %}</div>
+            </div>
+            {% endif %}
+            {% if doc.additional_comments_en|length > 1 or doc.additional_comments_fr|length > 1 %}
+            <div class="row">
+                <div class="col-sm-5"><strong>{% trans 'Additional Comments: ' %}</strong></div>
+                <div class="col-sm-7">{% if LANGUAGE_CODE == 'fr' %}{{ doc.additional_comments_fr }}{% else %}{{ doc.additional_comments_en }}{% endif %}</div>
+            </div>
+            {% endif %}
+            {% if not doc.buyer_name == '-' %}
+            <div class="row">
+                <div class="col-sm-5"><strong>{% trans 'Buyer Name: ' %}</strong></div>
+                <div class="col-sm-7">{{ doc.buyer_name | safe }}</div>
+            </div>
+            {% endif %}
+        </div>
+      </div>
+      <div class="panel panel-info">
+        <header class="panel-heading">
+            <h2 class="panel-title">{% trans 'Date and Value' %}</h2>
+        </header>
+        <div class="panel-body">
+            <div class="row"></div>
+            {% if doc.reporting_period|length > 1 %}
+            <div class="row">
+                <div class="col-sm-5"><strong>{% trans 'Reporting Period: ' %}</strong></div>
+                <div class="col-sm-7">{{ doc.reporting_period }}</div>
+            </div>
+            {% endif %}
+            <div class="row">
+                <div class="col-sm-5"><strong>{% trans 'Contract Date: ' %}</strong></div>
+                {% if doc.contract_date|date:"Y-m-d" == "0001-01-01" %}
+                <div class="col-sm-7">{{ doc.contract_date|unspecified_date:LANGUAGE_CODE }}</div>
+                {% else %}
+                <div class="col-sm-7">{% if LANGUAGE_CODE == 'fr' %}{{ doc.contract_date_fr }}{% else %}{{ doc.contract_date_en }}{% endif %}</div>
+                {% endif %}
+            </div>
+            {% if not doc.contract_period_start|date:"Y-m-d" == "0001-01-01" %}
+            <div class="row">
+                <div class="col-sm-5"><strong>{% trans 'Contract Period Start Date: ' %}</strong></div>
+                <div class="col-sm-7">{% if LANGUAGE_CODE == 'fr' %}{{ doc.contract_period_start_fr}}{% else %}{{ doc.contract_period_start_en }}{% endif %}</div>
+            </div>
+            {% endif %}
+            {% if not doc.delivery_date|date:"Y-m-d" == "0001-01-01" %}
+            <div class="row">
+                <div class="col-sm-5"><strong>{% trans 'Contract Period End or Delivery Date: ' %}</strong></div>
+                <div class="col-sm-7">{% if LANGUAGE_CODE == 'fr' %}{{ doc.delivery_date_fr }}{% else %}{{ doc.delivery_date_en }}{% endif %}</div>
+            </div>
+            {% endif %}
+            <div class="row">
+                <div class="col-sm-5"><strong>{% trans 'Total Contract Value: ' %}</strong></div>
+                <div class="col-sm-7">{% if LANGUAGE_CODE == 'fr' %}{{ doc.contract_value_fr }}{% else %}{{ doc.contract_value_en }}{% endif %}</div>
+            </div>
+            <div class="row">
+                <div class="col-sm-5"><strong>{% trans 'Original Contract Value: ' %}</strong></div>
+                <div class="col-sm-7">{% if LANGUAGE_CODE == 'fr' %}{{ doc.original_value_fr }}{% else %}{{ doc.original_value_en }}{% endif %}</div>
+            </div>
+            {% if not doc.amendment_value == 0 %}
+            <div class="row">
+                <div class="col-sm-5"><strong>{% trans 'Amendment Value: ' %}</strong></div>
+                <div class="col-sm-7">{% if LANGUAGE_CODE == 'fr' %}{{ doc.amendment_value_fr }}{% else %}{{ doc.amendment_value_en }}{% endif %}</div>
+            </div>
+            {% endif %}
+
+        </div>
+      </div>
+
+      <div class="panel panel-info">
+        <header class="panel-heading">
+            <h2 class="panel-title">{% trans 'Applicable Trade Agreements' %}</h2>
+        </header>
+        <table class="table">
+            {% if LANGUAGE_CODE == 'fr' %}
+                {% for agreement in doc.trade_agreement_fr %}
+                    <tr style="background-color: {% cycle '#ffffff' '#f5f5f5' %};"><td>{{ agreement }}</td></tr>{% endfor %}
+            {% else %}
+                {% for agreement in doc.trade_agreement_en %}
+                    <tr style="background-color: {% cycle '#ffffff' '#f5f5f5' %};"><td>{{ agreement }}</td></tr>{% endfor %}
+            {% endif %}
+        </table>
+      </div>
+
+      <div class="panel panel-info">
+        <header class="panel-heading">
+            <h2 class="panel-title">{% trans 'Additional Details' %}</h2>
+        </header>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-sm-5"><strong>{% trans 'Procurement Identification Number: ' %}</strong></div>
+                <div class="col-sm-7">{{ doc.procurement_id }}</div>
+            </div>
+            <div class="row">
+                <div class="col-sm-5"><strong>{% trans 'Solicitation Procedure: ' %}</strong></div>
+                <div class="col-sm-7">{% if LANGUAGE_CODE == 'fr' %}{{ doc.solicitation_procedure_fr }}{% else %}{{ doc.solicitation_procedure_en }}{% endif %}</div>
+            </div>
+            <div class="row">
+                <div class="col-sm-5"><strong>{% trans 'Limited Tendering Reason: ' %}</strong></div>
+                <div class="col-sm-7">{% if LANGUAGE_CODE == 'fr' %}
+                  {% for ltr in doc.limited_tendering_reason_fr %}{{ ltr }}<br>{% endfor %}
+                  {% else %}
+                  {% for ltr in doc.limited_tendering_reason_en %}{{ ltr }}<br>{% endfor %}{% endif %}
+                </div>
+            </div>
+            {% if not doc.contracting_entity_en == '-' and not doc.contracting_entity_fr == '-' %}
+            <div class="row">
+                <div class="col-sm-5"><strong>{% trans 'Contracting Entity: ' %}</strong></div>
+                <div class="col-sm-7">{% if LANGUAGE_CODE == 'fr' %}{{ doc.contracting_entity_fr }}{% else %}{{ doc.contracting_entity_en }}{% endif %}</div>
+            </div>
+            {% endif %}
+            {% if not doc.standing_offer_number == '-'  %}
+            <div class="row">
+                <div class="col-sm-5"><strong>{% trans 'Standing Offer Number: ' %}</strong></div>
+                <div class="col-sm-7">{{ doc.standing_offer_number }}</div>
+            </div>
+            {% endif %}
+            <div class="row">
+                <div class="col-sm-5"><strong>{% trans 'Trade Agreement Exceptions and Exclusions: ' %}</strong></div>
+                <div class="col-sm-7">{% if LANGUAGE_CODE == 'fr' %}
+                    {% for tax in doc.trade_agreement_exceptions_fr %}{{ tax }}<br>{% endfor %}
+                  {% else %}
+                    {% for tax in doc.trade_agreement_exceptions_en %}{{ tax }}<br>{% endfor %}
+                  {% endif %}</div>
+            </div>
+            {% if not doc.land_claimss == '-' %}
+                <div class="row">
+                    <div class="col-sm-5"><strong>{% trans 'Comprehensive Land Claims Agreement: ' %}</strong></div>
+                    <div class="col-sm-7">
+                        {% if LANGUAGE_CODE == 'fr' %}
+                            {% for lc in doc.land_claims_fr %}{{ lc }}<br>{% endfor %}
+                        {% else %}
+                            {% for lc in doc.land_claims_en %}{{ lc }}<br>{% endfor %}
+                        {% endif %}</div>
+                </div>
+            {% endif %}
+            {% if not doc.indigenous_business == '-' %}
+                <div class="row">
+                    <div class="col-sm-5"><strong>{% trans 'Procurement Strategy for Indigenous Business: ' %}</strong></div>
+                    <div class="col-sm-7">{% if LANGUAGE_CODE == 'fr' %}{{ doc.indigenous_business_fr }}{% else %}{{ doc.indigenous_business_en }}{% endif %}</div>
+                </div>
+            {% endif %}
+             <div class="row">
+                <div class="col-sm-5"><strong>{% trans 'Indigenous Business excluding PSIB: ' %}</strong></div>
+                <div class="col-sm-7">{% if LANGUAGE_CODE == 'fr' %}{{ doc.indigenous_business_excluding_psib_fr }}{% else %}{{ doc.indigenous_business_excluding_psib_en }}{% endif %}</div>
+            </div>
+            {% if not doc.intellectual_property == '-' %}
+            <div class="row">
+                <div class="col-sm-5"><strong>{% trans 'Intellectual Property: ' %}</strong></div>
+                <div class="col-sm-7">{% if LANGUAGE_CODE == 'fr' %}{{ doc.intellectual_property_fr }}{% else %}{{ doc.intellectual_property_en }}{% endif %}</div>
+            </div>
+            {% endif %}
+            {% if not doc.potential_commercial_exploitation == '-' %}
+            <div class="row">
+                <div class="col-sm-5"><strong>{% trans 'Potential Commercial Exploitation: ' %}</strong></div>
+                <div class="col-sm-7">{% if LANGUAGE_CODE == 'fr' %}{{ doc.potential_commercial_exploitation_fr }}{% else %}{{ doc.potential_commercial_exploitation_en }}{% endif %}</div>
+            </div>
+            {% endif %}
+            {% if not doc.former_public_servant_en == '-' %}
+            <div class="row">
+                <div class="col-sm-5"><strong>{% trans 'Former Public Servant: ' %}</strong></div>
+                <div class="col-sm-7">{% if LANGUAGE_CODE == 'fr' %}{{ doc.former_public_servant_fr }}{% else %}{{ doc.former_public_servant_en }}{% endif %}</div>
+            </div>
+            {% endif %}
+            {% if not doc.ministers_office == '-' %}
+            <div class="row">
+                <div class="col-sm-5"><strong>{% trans 'Ministers Office Contracts: ' %}</strong></div>
+                <div class="col-sm-7">{% if LANGUAGE_CODE == 'fr' %}{{ doc.ministers_office_fr }}{% else %}{{ doc.ministers_office_en }}{% endif %}</div>
+            </div>
+            {% endif %}
+            {% if not doc.country_of_vendor == '-' %}
+            <div class="row">
+                <div class="col-sm-5"><strong>{% trans 'Country of Vendor: ' %}</strong></div>
+                <div class="col-sm-7">{% if LANGUAGE_CODE == 'fr' %}{{ doc.country_of_vendor_fr }}{% else %}{{ doc.country_of_vendor_en }}{% endif %}</div>
+            </div>
+            {% endif %}
+            {% if not doc.number_of_bids == '-'  %}
+             <div class="row">
+                 <div class="col-sm-5"><strong>{% trans 'Number of Bids: ' %}</strong></div>
+                <div class="col-sm-7">{{ doc.number_of_bids }}</div>
+            </div>
+            {% endif %}
+            {% if not article_6_exceptions == '-' %}
+            <div class="row">
+                 <div class="col-sm-5"><strong>{% trans 'Article 6 Government Contract Exceptions: ' %}</strong></div>
+                <div class="col-sm-7">{% if LANGUAGE_CODE == 'fr' %}{{ doc.article_6_exceptions_fr }}{% else %}{{ doc.article_6_exceptions_en }}{% endif %}</div>
+            </div>
+            {% endif %}
+            {% if not doc.award_criteria == '-' %}
+            <div class="row">
+                 <div class="col-sm-5"><strong>{% trans 'Award Criteria: ' %}</strong></div>
+                <div class="col-sm-7">{% if LANGUAGE_CODE == 'fr' %}{{ doc.award_criteria_fr }}{% else %}{{ doc.award_criteria_en }}{% endif %}</div>
+            </div>
+            {% endif %}
+            {% if not doc.socioeconomic_indicator == '-' %}
+            <div class="row">
+                 <div class="col-sm-5"><strong>{% trans 'Socio-Economic Indicator: ' %}</strong></div>
+                <div class="col-sm-7">{% if LANGUAGE_CODE == 'fr' %}{{ doc.socioeconomic_indicator_fr }}{% else %}{{ doc.socioeconomic_indicator_en }}{% endif %}</div>
+            </div>
+            {% endif %}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12"><a href="{{ parent_path }}record/{{ doc.owner_org | striptags }},{{ doc.procurement_id | striptags }}?amendments">{% translate "Amendments" %}</a></div>
+      </div>
+    {% endfor %}
+  {% endif %}
   {% endblock main-content-search-items %}
 </div>
 {% endblock main-content-centre %}

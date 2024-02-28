@@ -42,14 +42,23 @@ def plugin_api_version():
 
 
 def pre_search_solr_query(context: dict, solr_query: dict, request: HttpRequest, search: Search, fields: dict, codes: dict, facets: list, record_ids: str):
+    # Only show non-amendments
+    solr_query['hl.q'] = solr_query['q']
+    solr_query['q'] = f'{solr_query["q"]} AND amendment_no:0'
     return context, solr_query
 
 
 def post_search_solr_query(context: dict, solr_response: SolrResponse, solr_query: dict, request: HttpRequest, search: Search, fields: dict, codes: dict, facets: list, record_ids: str):
+
     return context, solr_response
 
 
 def pre_record_solr_query(context: dict, solr_query: dict, request: HttpRequest, search: Search, fields: dict, codes: dict, facets: list, record_ids: str):
+    if request.get_full_path().endswith('?amendments'):
+        id_parts = record_ids.split(",")
+        if len(id_parts) == 2:
+            solr_query['q'] = f'procurement_id:"{id_parts[1]}" AND owner_org:"{id_parts[0]}"'
+            solr_query['sort'] = 'amendment_no asc'
     return context, solr_query
 
 
@@ -215,4 +224,8 @@ def pre_render_record(context: dict, template: str, request: HttpRequest, lang: 
     :param codes: the application code objects to be used
     :return: context object, and the template name
     """
+    if request.get_full_path().endswith('?amendments'):
+        context['amendments'] = True
+    else:
+        context['amendments'] = False
     return context, template

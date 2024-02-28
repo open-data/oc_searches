@@ -17,10 +17,12 @@
     <div class="col-sm-4"><strong>{% trans 'Original Value: ' %}</strong></div>
     <div class="col-sm-8">{% if LANGUAGE_CODE == 'fr' %}{{ doc.original_value_fr }}{% else %}{{ doc.original_value_en }}{% endif %}</div>
   </div>
+  {% if doc.amendment_value != 0 %}
   <div class="row">
     <div class="col-sm-4"><strong>{% trans 'Amendment Value: ' %}</strong></div>
     <div class="col-sm-8">{% if LANGUAGE_CODE == 'fr' %}{{ doc.amendment_value_fr }}{% else %}{{ doc.amendment_value_en }}{% endif %}</div>
   </div>
+  {% endif %}
   <div class="row">
     <div class="col-sm-4" id="org_value_lbl"><strong>{% trans 'Work Description:' %}</strong></div>
     <div class="col-sm-8" aria-labelledby="org_value_lbl">
@@ -55,6 +57,11 @@
     <div class="col-sm-4" id="org_lbl"><strong>{% trans 'Organization:' %}</strong></div>
     <div class="col-sm-8" aria-labelledby="org_lbl">{% if LANGUAGE_CODE == 'fr' %}{{ doc.owner_org_fr | safe }}{% else %}{{ doc.owner_org_en | safe }}{% endif %}</div>
   </div>
+  {% if doc.procurement_count > 1 %}
+  <div class="row">
+    <div class="col-sm-12"><a href="{{ path_info }}record/{{ doc.owner_org | striptags }},{{ doc.procurement_id | striptags }}?amendments">{% translate "Amendments" %}</a></div>
+  </div>
+  {% endif %}
 
 {% else %}
 
