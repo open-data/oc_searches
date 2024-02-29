@@ -131,7 +131,8 @@ def filter_csv_record(csv_record,search: Search, fields: dict, codes: dict, form
 def load_csv_record(csv_record: dict, solr_record: dict, search: Search, fields: dict, codes: dict, format: str):
     if format == 'NTR':
         solr_record['id'] = f"{csv_record['owner_org']},{csv_record['reporting_period']}"
-
+        solr_record['amendment_no'] = 0
+        solr_record['procurement_count'] = 0
     else:
         solr_record['format'] = 'DEFAULT'
         if not solr_record['land_claims']:
