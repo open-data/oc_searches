@@ -7,7 +7,11 @@
      <div class="col-sm-8 text-capitalize">
          <a href="{{ path_info }}record/{{ doc.id }}"><h3>{{ doc.vendor_name_txt | safe }}</h3></a>
     </div>
-    <div class="col-sm-4 text-right"><h3>{% trans 'Total Value: ' %} {% if LANGUAGE_CODE == 'fr' %}{{ doc.contract_value_fr }}{% else %}{{ doc.contract_value_en }}{% endif %}</h3></div>
+    {% if doc.procurement_count > 1 and doc.instrument_type == "C" %}
+      <div class="col-sm-4 text-right"><h3>{% trans 'Aggregate Value: ' %} {% if LANGUAGE_CODE == 'fr' %}{{ doc.aggregate_total_fr }}{% else %}{{ doc.aggregate_total_en }}{% endif %}</h3></div>
+    {% else %}
+      <div class="col-sm-4 text-right"><h3>{% trans 'Total Value: ' %} {% if LANGUAGE_CODE == 'fr' %}{{ doc.contract_value_fr }}{% else %}{{ doc.contract_value_en }}{% endif %}</h3></div>
+    {% endif %}
   </div>
   <div class="row">
     <div class="col-sm-4"><strong>{% trans 'Contract Date:' %}</strong></div>
@@ -59,7 +63,7 @@
   </div>
   {% if doc.procurement_count > 1 %}
   <div class="row">
-    <div class="col-sm-12"><a href="{{ path_info }}record/{{ doc.owner_org | striptags }},{{ doc.procurement_id | striptags }}?amendments" class="btn btn-primary mrgn-tp-sm">{% translate "Amendments" %}</a></div>
+    <div class="col-sm-12"><a href="{{ path_info }}record/{{ doc.owner_org | striptags }},{{ doc.procurement_id | striptags }}?amendments" class="btn btn-default mrgn-tp-sm">{% translate "Amendments" %}</a></div>
   </div>
   {% endif %}
 

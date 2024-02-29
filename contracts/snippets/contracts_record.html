@@ -491,7 +491,7 @@
       </div>
       {% if doc.procurement_count > 1 %}
       <div class="row">
-        <div class="col-sm-12"><a href="{{ parent_path }}record/{{ doc.owner_org | striptags }},{{ doc.procurement_id | striptags }}?amendments" class="btn btn-primary">{% translate "Amendments" %}</a></div>
+        <div class="col-sm-12"><a href="{{ parent_path }}record/{{ doc.owner_org | striptags }},{{ doc.procurement_id | striptags }}?amendments" class="btn btn-default">{% translate "Amendments" %}</a></div>
       </div>
       {% endif %}
     {% endfor %}

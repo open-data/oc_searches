@@ -180,3 +180,5 @@ msgstr "Commentaires additionnels :"
 msgid "Duration:"
 msgstr "Durée :"
 
+msgid "Aggregate Value: "
+msgstr "Total cumulé :"

@@ -16,7 +16,7 @@ CONTRACTS_HEADERS = "reference_number,procurement_id,vendor_name,vendor_postal_c
                     "ministers_office,number_of_bids,article_6_exceptions,award_criteria,socioeconomic_indicator," \
                     "reporting_period,owner_org,owner_org_title"
 
-AMENDMENTS_HEADERS = CONTRACTS_HEADERS + ",amendment_no,procurement_count"
+AMENDMENTS_HEADERS = CONTRACTS_HEADERS + ",amendment_no,procurement_count,aggregate_total"
 
 
 class Command(BaseCommand):
@@ -117,19 +117,23 @@ class Command(BaseCommand):
 
         # @TODO Set up CSV OUTPUT file with the amendments column
         sql_cursor_1 = sqldb.cursor()
+        sql_cursor_2 = sqldb.cursor()
         with open(options['amendments'], 'a', encoding='utf-8-sig') as csv_out:
             csv_writer = csv.DictWriter(csv_out, fieldnames=AMENDMENTS_HEADERS.split(","), delimiter=',', restval='', extrasaction='ignore', lineterminator='\n')
             csv_writer.writeheader()
             amend_cnt = 0
             record_cnt = 0
+            grand_total = 0
             for row in sql_cursor.execute(f"SELECT {CONTRACTS_HEADERS} FROM contracts ORDER BY owner_org ASC, procurement_id ASC, instrument_type DESC, reporting_period ASC"):
                 current_key = f"{row[41]},{row[1]}"
                 if current_key != last_key:
                     amend_no = 0
+
                 else:
                     amend_no = amend_no + 1
                     amend_cnt = amend_cnt + 1
                 last_key = current_key
+
                 # Create a regular dict for writing out
                 amend_dict = {}
                 for i, key in enumerate(CONTRACTS_HEADERS.split(",")):
@@ -137,6 +141,21 @@ class Command(BaseCommand):
                 amend_dict["amendment_no"] = amend_no
                 sql_cursor_1.execute("SELECT COUNT(*) FROM contracts WHERE owner_org = ? AND procurement_id = ?", (row[41], row[1]))
                 amend_dict['procurement_count'] = sql_cursor_1.fetchone()[0]
+
+                if row[34] == 'C':
+                    grand_total = 0.0
+                    for pro_row in sql_cursor_2.execute("SELECT instrument_type, original_value, amendment_value from contracts WHERE owner_org = ? and procurement_id = ?",(row[41], row[1])):
+                        try:
+                            if pro_row[0] == "C":
+                                if pro_row[1]:
+                                    grand_total += float(pro_row[1])
+                            else:
+                                if pro_row[2]:
+                                    grand_total += float(pro_row[2])
+                        except ValueError as ve:
+                            print(f"Bad numbers: original value {pro_row[1]}, amendment value {pro_row[2]}: {row[41]},{row[1]}")
+                    amend_dict['aggregate_total'] = grand_total
+
                 csv_writer.writerow(amend_dict)
                 record_cnt = record_cnt + 1
                 if record_cnt % 100000 == 0:
