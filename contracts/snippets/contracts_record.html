@@ -8,9 +8,9 @@
 
 {% block main-content-title %}
   {% if amendments %}
-    <h1 property="name" id="wb-cont">{% translate 'Contract Details:' %} {{ docs.0.vendor_name }}</h1>
+    <h1 property="name" id="wb-cont">{% translate 'Amendment Details:' %} {{ docs.0.vendor_name }}</h1>
   {% else %}
-    <h1 property="name" id="wb-cont">{% translate 'Procurement Details:' %} {{ docs.0.procurement_id }}</h1>
+    <h1 property="name" id="wb-cont">{% translate 'Contract Details:' %} {{ docs.0.procurement_id }}</h1>
   {% endif %}
 {% endblock main-content-title %}
 

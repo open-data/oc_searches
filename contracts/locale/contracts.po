@@ -182,3 +182,6 @@ msgstr "Durée :"
 
 msgid "Aggregate Value: "
 msgstr "Total cumulé :"
+
+msgid "Amendment Details:"
+msgstr "Détails de l'approvisionnement :"
