@@ -135,9 +135,9 @@ def pre_render_search(context: dict, template: str, request: HttpRequest, lang: 
 
             context['ip_num'] = context['facets']['status']['in_progress'] if "in_progress" in stati and 'in_progress' in context['facets']['status'] else 0
             context['ns_num'] = context['facets']['status']['not_started'] if "not_started" in stati and 'not_started' in context['facets']['status'] else 0
-            context['co_num'] = context['facets']['status']['completed'] if "closed" in stati and 'completed' in context['facets']['status'] else 0
+            context['co_num'] = context['facets']['status']['completed'] if "completed" in stati and 'completed' in context['facets']['status'] else 0
 
-            for s in ['in_progress', 'not_started', 'closed']:
+            for s in ['in_progress', 'not_started', 'completed']:
                 stati2 = stati.copy()
                 if s in stati:
                     stati2.remove(s)
@@ -157,7 +157,7 @@ def pre_render_search(context: dict, template: str, request: HttpRequest, lang: 
             context['ns_num'] = context['facets']['status']['not_started'] if "not_started" in context['facets']['status'] else 0
             context['co_num'] = context['facets']['status']['completed'] if "completed" in context['facets']['status'] else 0
 
-            for s in ['in_progress', 'not_started', 'closed']:
+            for s in ['in_progress', 'not_started', 'completed']:
                 if s in context['facets']['status'] and context['facets']['status'][s] > 0:
                     context[s.replace(" ", "_") + "_list"] = s
                 else:

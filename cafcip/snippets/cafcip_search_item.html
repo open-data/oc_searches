@@ -6,9 +6,9 @@
   <div class="col-sm-12 mrgn-bttm-md">
       <h2 class="mrgn-tp-0 mrgn-bttm-sm h4">
           {% if language == 'fr' %}
-              Rapport : <a href="{{ path_info }}record/{{ doc.id }}">{{ doc.report_fr | markdown_filter | safe | strip_paragraph }}</a>
+              Rapport / Initiative : <a href="{{ path_info }}record/{{ doc.id }}">{{ doc.report_fr | markdown_filter | safe | strip_paragraph }}</a>
           {% else %}
-              Report: <a href="{{ path_info }}record/{{ doc.id }}">{{ doc.report_en | markdown_filter | safe | strip_paragraph }}</a>
+              Reports / Initiatives: <a href="{{ path_info }}record/{{ doc.id }}">{{ doc.report_en | markdown_filter | safe | strip_paragraph }}</a>
           {% endif %}
       </h2>
   </div>
