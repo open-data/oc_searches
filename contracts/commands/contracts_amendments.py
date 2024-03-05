@@ -120,6 +120,7 @@ class Command(BaseCommand):
         sql_cursor_1 = sqldb.cursor()
         sql_cursor_2 = sqldb.cursor()
         sql_cursor_3 = sqldb.cursor()
+        sql_cursor_4 = sqldb.cursor()
         with open(options['amendments'], 'a', encoding='utf-8-sig') as csv_out:
             csv_writer = csv.DictWriter(csv_out, fieldnames=AMENDMENTS_HEADERS.split(","), delimiter=',', restval='', extrasaction='ignore', lineterminator='\n')
             csv_writer.writeheader()
@@ -143,8 +144,10 @@ class Command(BaseCommand):
                 amend_dict["amendment_no"] = amend_no
                 sql_cursor_1.execute("SELECT COUNT(*) FROM contracts WHERE owner_org = ? AND procurement_id = ?", (row[41], row[1]))
                 sql_cursor_3.execute("SELECT COUNT(*) FROM contracts WHERE owner_org = ? AND procurement_id = ? AND instrument_type <> 'C'", (row[41], row[1]))
+                sql_cursor_4.execute("SELECT COUNT(*) FROM contracts WHERE owner_org = ? AND procurement_id = ? AND instrument_type = 'C'", (row[41], row[1]))
 
-                if sql_cursor_3.fetchone()[0] > 0:
+                # There needs to be at least 1 amendment AND 1 contract for this logic to apply
+                if sql_cursor_3.fetchone()[0] > 0 and sql_cursor_4.fetchone()[0] == 1:
                     amend_dict['procurement_count'] = sql_cursor_1.fetchone()[0]
                     if row[34] == 'C':
                         grand_total = 0.0
