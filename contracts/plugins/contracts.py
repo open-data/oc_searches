@@ -58,7 +58,7 @@ def pre_record_solr_query(context: dict, solr_query: dict, request: HttpRequest,
         id_parts = record_ids.split(",")
         if len(id_parts) == 2:
             solr_query['q'] = f'procurement_id:"{id_parts[1]}" AND owner_org:"{id_parts[0]}"'
-            solr_query['sort'] = 'amendment_no asc'
+            solr_query['sort'] = 'reporting_period asc'
     return context, solr_query
 
 
@@ -229,4 +229,5 @@ def pre_render_record(context: dict, template: str, request: HttpRequest, lang: 
         context['amendments'] = True
     else:
         context['amendments'] = False
+    context['show_pagination'] = False
     return context, template

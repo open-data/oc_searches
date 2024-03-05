@@ -149,7 +149,7 @@ class Command(BaseCommand):
                 # There needs to be at least 1 amendment AND 1 contract for this logic to apply
                 if sql_cursor_3.fetchone()[0] > 0 and sql_cursor_4.fetchone()[0] == 1:
                     amend_dict['procurement_count'] = sql_cursor_1.fetchone()[0]
-                    if row[34] == 'C':
+                    if row[34] == 'C' or row[34] == 'SOSA':
                         grand_total = 0.0
                         for pro_row in sql_cursor_2.execute("SELECT instrument_type, original_value, amendment_value from contracts WHERE owner_org = ? and procurement_id = ?",(row[41], row[1])):
                             try:
