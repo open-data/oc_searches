@@ -28,6 +28,8 @@ class Command(BaseCommand):
         parser.add_argument('--contracts', type=str, help='Contracts CSV input file', required=True)
         parser.add_argument('--amendments', type=str, help='Amendments CSV output file', required=True)
         parser.add_argument('--reload', type=str, default='y', help="Recreate existing db files", required=False)
+        parser.add_argument('--tmpdir', type=str, default=os.getcwd(), help="Working directory to create the sqlite3 db", required=False)
+
 
     def handle(self, *args, **options):
 
@@ -41,7 +43,7 @@ class Command(BaseCommand):
         if os.path.exists(options['amendments']):
             print(f"Amendments file {options['amendments']} already exists, removing...")
             os.remove(options['amendments'])
-        sqldb = sqlite3.connect("contracts.sqlite3")
+        sqldb = sqlite3.connect(os.path.join(options['tmpdir'], "contracts.sqlite3"))
         sql_cursor = sqldb.cursor()
 
         if options['reload'] == "y":
