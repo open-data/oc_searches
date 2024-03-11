@@ -259,7 +259,7 @@ class Command(BaseCommand):
                                                (a_row[1], a_row[2], a_row[3], a_row[4])).fetchone()[0]
 
                 if c_count == 1 and a_count > 0:
-                    print(f"Vendor {a_row[1]}, Contract Date {a_row[2]}, EOC {a_row[3]}, Org {a_row[4]}")
+                    #print(f"Vendor {a_row[1]}, Contract Date {a_row[2]}, EOC {a_row[3]}, Org {a_row[4]}")
                     pass2_contracts += 1
                     # Do two passes, one to get the total AND to make sure the first record is either a contract or a SO any subsequent records are amendments
 
@@ -267,6 +267,7 @@ class Command(BaseCommand):
                     grand_total = 0.0
                     is_valid = True
                     i = 0
+                    k = 0
                     for g_row in sql_cursor_7.execute("select instrument_type, original_value, amendment_value from amendments where vendor_name = ? AND contract_date = ? AND economic_object_code = ? AND owner_org = ? AND procurement_count = 1 ORDER BY reporting_period ASC, reference_number ASC",
                                                       (a_row[1], a_row[2], a_row[3], a_row[4])):
                         if i == 0 and g_row[0] not in ('C', 'SOSA'):
@@ -283,13 +284,14 @@ class Command(BaseCommand):
                         except ValueError as ve:
                             print(f"Bad numbers: original value {g_row[1]}, amendment value {g_row[2]}: {a_row[4]},{a_row[1]}")
                         i += 1
+                        k += 1
 
                     # Step 2 - Update validated groups with amendment information
 
                     if is_valid:
                         i = 0
                         psuedo_proc = ""
-                        for g_row in sql_cursor_7.execute("SELECT owner_org, reference_number, instrument_type, procurement_id from amendments WHERE vendor_name = ? AND contract_date = ? AND economic_object_code = ? AND owner_org = ? ORDER BY reporting_period ASC, reference_number ASC",
+                        for g_row in sql_cursor_7.execute("SELECT owner_org, reference_number, instrument_type, procurement_id from amendments WHERE vendor_name = ? AND contract_date = ? AND economic_object_code = ? AND owner_org = ? AND procurement_count = 1 ORDER BY reporting_period ASC, reference_number ASC",
                                                             (a_row[1], a_row[2], a_row[3], a_row[4])):
                             sql_cursor_8 = sqldb.cursor()
 
@@ -298,11 +300,11 @@ class Command(BaseCommand):
 
                             if g_row[2] in ('C', 'SOSA'):
                                 sql_cursor_8.execute('UPDATE amendments SET aggregate_total = ?, amendment_no = ?, procurement_count = ?, pseudo_procurement_id = ? WHERE owner_org = ? AND reference_number = ?',
-                                                     (grand_total, i, a_row[0], psuedo_proc, a_row[4], g_row[1]))
+                                                     (grand_total, i, k, psuedo_proc, a_row[4], g_row[1]))
                                 # print(f"New pseudo-procid: {psuedo_proc}, org: {g_row[0]}, reference no. {g_row[1]}, new proc cnt {a_row[0]}, amend no {i}")
                             else:
                                 sql_cursor_8.execute('UPDATE amendments SET  amendment_no = ?, procurement_count = ?, pseudo_procurement_id = ? WHERE owner_org = ? AND reference_number = ?',
-                                                     (i, a_row[0], psuedo_proc, a_row[4], g_row[1]))
+                                                     (i, k, psuedo_proc, a_row[4], g_row[1]))
                                 # print(f"New pseudo-procid: {psuedo_proc}, org: {g_row[0]}, reference no. {g_row[1]}, new proc cnt {a_row[0]}, amend no {i}")
                             i += 1
                             pass2_count += 1
