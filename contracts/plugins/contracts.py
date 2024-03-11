@@ -57,7 +57,7 @@ def pre_record_solr_query(context: dict, solr_query: dict, request: HttpRequest,
     if request.get_full_path().endswith('?amendments'):
         id_parts = record_ids.split(",")
         if len(id_parts) == 2:
-            solr_query['q'] = f'procurement_id:"{id_parts[1]}" AND owner_org:"{id_parts[0]}"'
+            solr_query['q'] = f'pseudo_procurement_id:"{id_parts[1]}" AND owner_org:"{id_parts[0]}"'
             solr_query['sort'] = 'reporting_period asc'
     return context, solr_query
 
