@@ -22,12 +22,22 @@
   </div>
 
   <div class="col-sm-12">
-      <strong>{% translate 'Recommendation: ' %}</strong><br>{% if language == 'fr' %}{{ doc.desc_fr | markdown_filter | safe  }}{% else %}{{ doc.desc_en | markdown_filter | safe }}{% endif %}
+      {% if language == 'fr' %}{{ "<strong>Recommendation :</strong> "|add:doc.desc_fr|markdown_filter|safe }}{% else %}{{ "<strong>Recommendation:</strong> "|add:doc.desc_en|markdown_filter|safe }}{% endif %}
   </div>
 
   <div class="col-sm-12">
       <strong>{% translate 'Culture Aspect: ' %}</strong>{% if language == 'fr' %}{{ doc.culture_aspect_fr }}{% else %}{{ doc.culture_aspect_en }}{% endif %}
   </div>
+
+  <div class="col-sm-12">
+      <strong>{% translate 'Expected Implementation: ' %}</strong>{% if language == 'fr' %}{{ doc.completion_date_fr }}{% else %}{{ doc.completion_date_en }}{% endif %}
+  </div>
+
+  {% if doc.actual_date != "2000-01-01T00:00:00Z" %}
+    <div class="col-sm-12">
+      <strong>{% translate 'Actual Implementation: ' %}</strong>{% if language == 'fr' %}{{ doc.actual_date_fr }}{% else %}{{ doc.actual_date_en }}{% endif %}
+  </div>
+  {% endif %}
 
   <div class="col-sm-12">
        <strong>{% translate 'Status: ' %}</strong>

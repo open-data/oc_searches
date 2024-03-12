@@ -56,3 +56,8 @@ msgstr "Conduite professionnelle"
 msgid "Trust in the Institution and Leadership"
 msgstr "Confiance en l'institution et au leadership"
 
+msgid "Expected Implementation: "
+msgstr "Mise en œuvre attendue : "
+
+msgid "Actual Implementation: "
+msgstr "Mise en œuvre effective : "

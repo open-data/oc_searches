@@ -1,4 +1,6 @@
 
+from babel.dates import format_date
+from datetime import datetime
 from django.http import HttpRequest
 from search.models import Search, Field, Code
 from SolrClient import SolrResponse
@@ -87,6 +89,10 @@ def load_csv_record(csv_record: dict, solr_record: dict, search: Search, fields:
             solr_record['culture_aspect_en'] = "-"
             solr_record['culture_aspect_fr'] = "-"
 
+    if csv_record['completion_date']:
+        completion_date = datetime.strptime(csv_record['completion_date'], '%Y-%m-%d')
+        solr_record['completion_date_en'] = f"By {format_date(completion_date, locale='en')}"
+        solr_record['completion_date_fr'] = f"D'ici {format_date(completion_date, locale='fr')}"
     return solr_record
 
 # Version 1.1 Methods
@@ -162,6 +168,7 @@ def pre_render_search(context: dict, template: str, request: HttpRequest, lang: 
                     context[s.replace(" ", "_") + "_list"] = s
                 else:
                     context[s.replace(" ", "_") + "_list"] = ()
+
     return context, template
 
 
