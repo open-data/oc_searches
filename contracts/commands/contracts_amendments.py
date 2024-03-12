@@ -20,115 +20,117 @@ AMENDMENTS_HEADERS = CONTRACTS_HEADERS + ",amendment_no,procurement_count,aggreg
 
 
 class Command(BaseCommand):
-    help = 'Django manage command that will manage contracts amendments'
+    help = ('Django manage command that tries to match individual contract records into contracts and amendments '
+            'for use with Search')
 
     logger = logging.getLogger(__name__)
 
     def add_arguments(self, parser):
         parser.add_argument('--contracts', type=str, help='Contracts CSV input file', required=True)
         parser.add_argument('--amendments', type=str, help='Amendments CSV output file', required=True)
-        parser.add_argument('--reload', type=str, default='y', help="Recreate existing db files", required=False)
         parser.add_argument('--tmpdir', type=str, default=os.getcwd(), help="Working directory to create the sqlite3 db", required=False)
-
 
     def handle(self, *args, **options):
 
-        if options['reload'] == "y":
-            if not os.path.exists(options['contracts']):
-                raise CommandError(f'Contracts file {options["contracts"]} does not exist')
-            # Delete the sqllite DB File
-            if os.path.exists("contracts.sqlite3"):
-                os.remove("contracts.sqlite3")
+        if not os.path.exists(options['contracts']):
+            raise CommandError(f'Contracts file {options["contracts"]} does not exist')
+
+        if not os.path.exists(options['tmpdir']):
+            raise CommandError(f'Working directory {options["tmpdir"]} does not exist')
 
         if os.path.exists(options['amendments']):
             print(f"Amendments file {options['amendments']} already exists, removing...")
             os.remove(options['amendments'])
-        sqldb = sqlite3.connect(os.path.join(options['tmpdir'], "contracts.sqlite3"))
+
+        # Delete the sqllite DB File - always start with a clean database
+        db_path = os.path.join(options['tmpdir'], "contracts.sqlite3")
+        if os.path.exists(db_path):
+            os.remove(db_path)
+
+        sqldb = sqlite3.connect(db_path)
         sql_cursor = sqldb.cursor()
 
-        if options['reload'] == "y":
-            with open(options['contracts'], 'r', encoding='utf-8-sig', errors="xmlcharrefreplace") as csv_file:
-                csv_reader = csv.DictReader(csv_file, dialect='excel')
+        # Load the contracts PD CSV file into a SQLite3 database for easier manipulation
 
-                # Create a table to hold the original contract values
-                sql_cursor.execute(f"CREATE TABLE IF NOT EXISTS contracts({CONTRACTS_HEADERS.replace(',',' text, ')} text)")
-                sql_cursor.execute('CREATE INDEX proc_idx ON contracts (owner_org, procurement_id)')
-                sql_cursor.execute('CREATE INDEX inst_idx ON contracts (owner_org, procurement_id, instrument_type)')
+        with open(options['contracts'], 'r', encoding='utf-8-sig', errors="xmlcharrefreplace") as csv_file:
+            csv_reader = csv.DictReader(csv_file, dialect='excel')
 
-                # Create a table to hold the pass 1 amendment values
-                sql_cursor.execute(f"CREATE TABLE IF NOT EXISTS amendments({AMENDMENTS_HEADERS.replace(',',' text, ')} text)")
+            # Create a table to hold the original contract values
+            sql_cursor.execute(f"CREATE TABLE IF NOT EXISTS contracts({CONTRACTS_HEADERS.replace(',',' text, ')} text)")
 
-                for row_num, row in enumerate(csv_reader):
-                    sql_cursor.execute('INSERT INTO contracts VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
-                                       (row["reference_number"],
-                                         row["procurement_id"],
-                                         row["vendor_name"],
-                                         row["vendor_postal_code"],
-                                         row["buyer_name"],
-                                         row["contract_date"],
-                                         row["economic_object_code"],
-                                         row["description_en"],
-                                         row["description_fr"],
-                                         row["contract_period_start"],
-                                         row["delivery_date"],
-                                         row["contract_value"],
-                                         row["original_value"],
-                                         row["amendment_value"],
-                                         row["comments_en"],
-                                         row["comments_fr"],
-                                         row["additional_comments_en"],
-                                         row["additional_comments_fr"],
-                                         row["agreement_type_code"],
-                                         row["trade_agreement"],
-                                         row["land_claims"],
-                                         row["commodity_type"],
-                                         row["commodity_code"],
-                                         row["country_of_vendor"],
-                                         row["solicitation_procedure"],
-                                         row["limited_tendering_reason"],
-                                         row["trade_agreement_exceptions"],
-                                         row["indigenous_business"],
-                                         row["indigenous_business_excluding_psib"],
-                                         row["intellectual_property"],
-                                         row["potential_commercial_exploitation"],
-                                         row["former_public_servant"],
-                                         row["contracting_entity"],
-                                         row["standing_offer_number"],
-                                         row["instrument_type"],
-                                         row["ministers_office"],
-                                         row["number_of_bids"],
-                                         row["article_6_exceptions"],
-                                         row["award_criteria"],
-                                         row["socioeconomic_indicator"],
-                                         row["reporting_period"],
-                                         row["owner_org"],
-                                         row["owner_org_title"]))
+            # Create a table to hold the pass 1 and 2 amendment values
+            sql_cursor.execute(f"CREATE TABLE IF NOT EXISTS amendments({AMENDMENTS_HEADERS.replace(',',' text, ')} text)")
 
-        else:
-            # Clean out the amendments table
-            sql_cursor.execute("delete from amendments")
+            for row_num, row in enumerate(csv_reader):
+                sql_cursor.execute('INSERT INTO contracts VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
+                                   (row["reference_number"],
+                                     row["procurement_id"],
+                                     row["vendor_name"],
+                                     row["vendor_postal_code"],
+                                     row["buyer_name"],
+                                     row["contract_date"],
+                                     row["economic_object_code"],
+                                     row["description_en"],
+                                     row["description_fr"],
+                                     row["contract_period_start"],
+                                     row["delivery_date"],
+                                     row["contract_value"],
+                                     row["original_value"],
+                                     row["amendment_value"],
+                                     row["comments_en"],
+                                     row["comments_fr"],
+                                     row["additional_comments_en"],
+                                     row["additional_comments_fr"],
+                                     row["agreement_type_code"],
+                                     row["trade_agreement"],
+                                     row["land_claims"],
+                                     row["commodity_type"],
+                                     row["commodity_code"],
+                                     row["country_of_vendor"],
+                                     row["solicitation_procedure"],
+                                     row["limited_tendering_reason"],
+                                     row["trade_agreement_exceptions"],
+                                     row["indigenous_business"],
+                                     row["indigenous_business_excluding_psib"],
+                                     row["intellectual_property"],
+                                     row["potential_commercial_exploitation"],
+                                     row["former_public_servant"],
+                                     row["contracting_entity"],
+                                     row["standing_offer_number"],
+                                     row["instrument_type"],
+                                     row["ministers_office"],
+                                     row["number_of_bids"],
+                                     row["article_6_exceptions"],
+                                     row["award_criteria"],
+                                     row["socioeconomic_indicator"],
+                                     row["reporting_period"],
+                                     row["owner_org"],
+                                     row["owner_org_title"]))
+            sql_cursor.execute('CREATE INDEX proc_idx ON contracts (owner_org, procurement_id)')
+            sql_cursor.execute('CREATE INDEX inst_idx ON contracts (owner_org, procurement_id, instrument_type)')
+
         sqldb.commit()
         sql_cursor.execute("SELECT COUNT(*) FROM contracts")
         count = sql_cursor.fetchone()[0]
         print(f"{count} contracts records loaded")
+
+        #  PASS 1 - Match contracts to amendments using owner-org, procurement ID, and instrument type
+
         last_key = ""
         amend_no = 0
-
-        # Set up CSV OUTPUT file with the amendments column
-        # @TODO - WAY. WAY too many cursors - clean up when we have time
-        sql_cursor_1 = sqldb.cursor()
+        sql_cursor_count = sqldb.cursor()
         sql_cursor_2 = sqldb.cursor()
-        sql_cursor_3 = sqldb.cursor()
-        sql_cursor_4 = sqldb.cursor()
-        sql_cursor_5 = sqldb.cursor()
-
-        #  PASS 1 - Match contracts to amendments using ownser-org, procurement ID, and instrument type
-
         pass1_count = 0
         pass1_contract = 0
         record_cnt = 0
         grand_total = 0
+
+        # Cycle through the contracts and if conditions are met, set the search-only amendment fields which the
+        # Search application will use in its UI to group amendments with contracts
+
         for row in sql_cursor.execute(f"SELECT {CONTRACTS_HEADERS} FROM contracts ORDER BY owner_org ASC, procurement_id ASC, instrument_type DESC, reporting_period ASC"):
+
+            # When the key changes, s new contract has started
             current_key = f"{row[41]},{row[1]}"
             if current_key != last_key:
                 amend_no = 0
@@ -136,20 +138,20 @@ class Command(BaseCommand):
                 amend_no += 1
             last_key = current_key
 
-            # Create a regular dict for writing out
+            # Create a amendments dict for populating the amendments table. Set the search-only amendment fields
             amend_dict = {}
             for i, key in enumerate(CONTRACTS_HEADERS.split(",")):
                 amend_dict[key] = row[i]
             amend_dict["amendment_no"] = amend_no
             amend_dict["aggregate_total"] = 0
-            sql_cursor_1.execute("SELECT COUNT(*) FROM contracts WHERE owner_org = ? AND procurement_id = ?", (row[41], row[1]))
-            sql_cursor_3.execute("SELECT COUNT(*) FROM contracts WHERE owner_org = ? AND procurement_id = ? AND instrument_type <> 'C'", (row[41], row[1]))
-            sql_cursor_4.execute("SELECT COUNT(*) FROM contracts WHERE owner_org = ? AND procurement_id = ? AND instrument_type = 'C'", (row[41], row[1]))
+            proc_count = sql_cursor_count.execute("SELECT COUNT(*) FROM contracts WHERE owner_org = ? AND procurement_id = ?", (row[41], row[1])).fetchone()[0]
+            non_contracts_count = sql_cursor_count.execute("SELECT COUNT(*) FROM contracts WHERE owner_org = ? AND procurement_id = ? AND instrument_type <> 'C'", (row[41], row[1])).fetchone()[0]
+            contracts_count = sql_cursor_count.execute("SELECT COUNT(*) FROM contracts WHERE owner_org = ? AND procurement_id = ? AND instrument_type = 'C'", (row[41], row[1])).fetchone()[0]
 
-            # There needs to be at least 1 amendment AND 1 contract for this logic to apply
-            if sql_cursor_3.fetchone()[0] > 0 and sql_cursor_4.fetchone()[0] == 1:
+            # There needs to be at least 1 amendment AND 1 contract for this contact/amendming matching logic to apply
+            if non_contracts_count > 0 and contracts_count == 1:
                 pass1_count += 1
-                amend_dict['procurement_count'] = sql_cursor_1.fetchone()[0]
+                amend_dict['procurement_count'] = proc_count
                 if row[34] == 'C' or row[34] == 'SOSA':
                     grand_total = 0.0
                     pass1_contract += 1
@@ -164,13 +166,17 @@ class Command(BaseCommand):
                         except ValueError as ve:
                             print(f"Bad numbers: original value {pro_row[1]}, amendment value {pro_row[2]}: {row[41]},{row[1]}")
                     amend_dict['aggregate_total'] = grand_total
+            # Pass 1 logic does not apply, continue treating the current record as an individual record
             else:
                 amend_dict["amendment_no"] = 0
                 amend_dict['procurement_count'] = 1
                 amend_dict['aggregate_total'] = row[11]
+
+            # In order to support both pass 1 and pass 2, the Search UI uses a procurement id placeholder instead of the original orocurement id.
             amend_dict['pseudo_procurement_id'] = amend_dict['procurement_id']
 
-            sql_cursor_5.execute('INSERT INTO amendments VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
+            # Save the pass 1 data to the amendments table
+            sql_cursor_2.execute('INSERT INTO amendments VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
                                (amend_dict["reference_number"],
                                 amend_dict["procurement_id"],
                                 amend_dict["vendor_name"],
@@ -224,52 +230,46 @@ class Command(BaseCommand):
         sql_cursor.execute('CREATE INDEX IF NOT EXISTS inst2_idx ON amendments (owner_org, procurement_id, instrument_type)')
         sql_cursor.execute('CREATE INDEX IF NOT EXISTS inst3_idx ON amendments (vendor_name, contract_date, economic_object_code, owner_org, procurement_id, instrument_type)')
         sqldb.commit()
-        sql_cursor.close()
-        sql_cursor_1.close()
-        sql_cursor_2.close()
-        sql_cursor_3.close()
-        sql_cursor_4.close()
-        sql_cursor_5.close()
-        sqldb.close()
+
         print(f"Pass 1: {pass1_count} records matched to {pass1_contract} contracts based on procurement ID")
 
         # Pass 2 -
-        sqldb = sqlite3.connect(os.path.join(options['tmpdir'], "contracts.sqlite3"))
 
-        sql_cursor_6 = sqldb.cursor()
-        sql_cursor_7 = sqldb.cursor()
         pass2_count = 0
         pass2_contracts = 0
 
         # @todo Remove this temp reporting code after verification
+        if os.path.exists('pass2_report.csv'):
+            os.remove('pass2_report.csv')
         with open('pass2_report.csv', 'a', encoding='utf-8-sig') as csv_out:
             report_writer = csv.DictWriter(csv_out, fieldnames="owner_org,reference_number,instrument_type,procurement_id,vendor_name,contract_date,economic_object_code,pseudo_procurement_id".split(","), delimiter=',', restval='', extrasaction='ignore', lineterminator='\n')
             report_writer.writeheader()
 
-            for a_row in sql_cursor_6.execute("select count(*) as cnt, vendor_name, contract_date, economic_object_code, owner_org  from amendments group by vendor_name, contract_date, economic_object_code, owner_org order by cnt desc"):
-                # Don<t need to consider single records or records that were already matched in Pas 1
+            for a_row in sql_cursor.execute("select count(*) as cnt, vendor_name, contract_date, economic_object_code, owner_org  from amendments group by vendor_name, contract_date, economic_object_code, owner_org order by cnt desc"):
+                # Don't need to consider single records or records that were already matched in Pass 1
                 if a_row[0] <= 1:
                     break
                 amendment_no = 0
                 procurement_count = a_row[0]
                 aggregate_total = 0.0
-                c_count = sql_cursor_7.execute('SELECT count(*) FROM amendments WHERE vendor_name = ? AND contract_date = ? AND economic_object_code = ? AND owner_org = ? AND procurement_count = 1 and instrument_type = "C"',
+                # No. of Contract records in the group
+                c_count = sql_cursor_count.execute('SELECT count(*) FROM amendments WHERE vendor_name = ? AND contract_date = ? AND economic_object_code = ? AND owner_org = ? AND procurement_count = 1 and instrument_type = "C"',
                                                (a_row[1], a_row[2], a_row[3], a_row[4])).fetchone()[0]
-                a_count = sql_cursor_7.execute('SELECT count(*) FROM amendments WHERE vendor_name = ? AND contract_date = ? AND economic_object_code = ? AND owner_org = ? AND procurement_count = 1 and instrument_type = "A"',
+                # No. of Amendment records in the group
+                a_count = sql_cursor_count.execute('SELECT count(*) FROM amendments WHERE vendor_name = ? AND contract_date = ? AND economic_object_code = ? AND owner_org = ? AND procurement_count = 1 and instrument_type = "A"',
                                                (a_row[1], a_row[2], a_row[3], a_row[4])).fetchone()[0]
 
                 if c_count == 1 and a_count > 0:
-                    #print(f"Vendor {a_row[1]}, Contract Date {a_row[2]}, EOC {a_row[3]}, Org {a_row[4]}")
                     pass2_contracts += 1
                     # Do two passes, one to get the total AND to make sure the first record is either a contract or a SO any subsequent records are amendments
-
                     # Step 1 - validated Contract/Amendment instrument type is correct, and calculate the aggregate total
                     grand_total = 0.0
                     is_valid = True
                     i = 0
                     k = 0
-                    for g_row in sql_cursor_7.execute("select instrument_type, original_value, amendment_value from amendments where vendor_name = ? AND contract_date = ? AND economic_object_code = ? AND owner_org = ? AND procurement_count = 1 ORDER BY reporting_period ASC, reference_number ASC",
+                    for g_row in sql_cursor_2.execute("select instrument_type, original_value, amendment_value from amendments where vendor_name = ? AND contract_date = ? AND economic_object_code = ? AND owner_org = ? AND procurement_count = 1 ORDER BY reporting_period ASC, reference_number ASC",
                                                       (a_row[1], a_row[2], a_row[3], a_row[4])):
+                        # IF the first record is not a contract or standing offer then this group cannot be considered for pass 2
                         if i == 0 and g_row[0] not in ('C', 'SOSA'):
                             is_valid = False
                             break
@@ -291,21 +291,19 @@ class Command(BaseCommand):
                     if is_valid:
                         i = 0
                         psuedo_proc = ""
-                        for g_row in sql_cursor_7.execute("SELECT owner_org, reference_number, instrument_type, procurement_id from amendments WHERE vendor_name = ? AND contract_date = ? AND economic_object_code = ? AND owner_org = ? AND procurement_count = 1 ORDER BY reporting_period ASC, reference_number ASC",
+                        for g_row in sql_cursor_2.execute("SELECT owner_org, reference_number, instrument_type, procurement_id from amendments WHERE vendor_name = ? AND contract_date = ? AND economic_object_code = ? AND owner_org = ? AND procurement_count = 1 ORDER BY reporting_period ASC, reference_number ASC",
                                                             (a_row[1], a_row[2], a_row[3], a_row[4])):
-                            sql_cursor_8 = sqldb.cursor()
+                            sql_cursor_update = sqldb.cursor()
 
                             if i == 0:
                                 psuedo_proc = f"{g_row[3]}_{g_row[0]}"
 
                             if g_row[2] in ('C', 'SOSA'):
-                                sql_cursor_8.execute('UPDATE amendments SET aggregate_total = ?, amendment_no = ?, procurement_count = ?, pseudo_procurement_id = ? WHERE owner_org = ? AND reference_number = ?',
+                                sql_cursor_update.execute('UPDATE amendments SET aggregate_total = ?, amendment_no = ?, procurement_count = ?, pseudo_procurement_id = ? WHERE owner_org = ? AND reference_number = ?',
                                                      (grand_total, i, k, psuedo_proc, a_row[4], g_row[1]))
-                                # print(f"New pseudo-procid: {psuedo_proc}, org: {g_row[0]}, reference no. {g_row[1]}, new proc cnt {a_row[0]}, amend no {i}")
                             else:
-                                sql_cursor_8.execute('UPDATE amendments SET  amendment_no = ?, procurement_count = ?, pseudo_procurement_id = ? WHERE owner_org = ? AND reference_number = ?',
+                                sql_cursor_update.execute('UPDATE amendments SET  amendment_no = ?, procurement_count = ?, pseudo_procurement_id = ? WHERE owner_org = ? AND reference_number = ?',
                                                      (i, k, psuedo_proc, a_row[4], g_row[1]))
-                                # print(f"New pseudo-procid: {psuedo_proc}, org: {g_row[0]}, reference no. {g_row[1]}, new proc cnt {a_row[0]}, amend no {i}")
                             i += 1
                             pass2_count += 1
                             sqldb.commit()
@@ -322,11 +320,8 @@ class Command(BaseCommand):
                             report_writer.writerow(rpt_dict)
             print(f"Pass 2: {pass2_count} additional records matched as {pass2_contracts} amended contracts")
             sqldb.commit()
-            sql_cursor_6.close()
-            sql_cursor_7.close()
 
-        sql_cursor = sqldb.cursor()
-        # Write out amendments to CSV
+        # Write out amendments to CSV ready to be imported into Search
         with open(options['amendments'], 'a', encoding='utf-8-sig') as csv_out:
             csv_writer = csv.DictWriter(csv_out, fieldnames=AMENDMENTS_HEADERS.split(","), delimiter=',', restval='', extrasaction='ignore', lineterminator='\n')
             csv_writer.writeheader()
@@ -335,8 +330,7 @@ class Command(BaseCommand):
                 for i, key in enumerate(AMENDMENTS_HEADERS.split(",")):
                     amend_dict[key] = row[i]
                 csv_writer.writerow(amend_dict)
-                record_cnt = record_cnt + 1
-                if record_cnt % 100000 == 0:
-                    print(f"{record_cnt} records exported to CSV")
+                record_cnt += 1
+            print(f"{record_cnt} records exported to CSV")
         sqldb.close()
 
