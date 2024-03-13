@@ -296,7 +296,7 @@ class Command(BaseCommand):
                             sql_cursor_update = sqldb.cursor()
 
                             if i == 0:
-                                psuedo_proc = f"{g_row[3]}_{g_row[0]}"
+                                psuedo_proc = f"{g_row[3]}_{g_row[0]}_{a_row[2]}"
 
                             if g_row[2] in ('C', 'SOSA'):
                                 sql_cursor_update.execute('UPDATE amendments SET aggregate_total = ?, amendment_no = ?, procurement_count = ?, pseudo_procurement_id = ? WHERE owner_org = ? AND reference_number = ?',
