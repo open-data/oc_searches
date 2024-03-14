@@ -6,15 +6,15 @@
   <div class="col-sm-12 mrgn-bttm-md">
       <h2 class="mrgn-tp-0 mrgn-bttm-sm h4">
           {% if language == 'fr' %}
-              Rapport / Initiative : <a href="{{ path_info }}record/{{ doc.id }}">{{ doc.report_fr | markdown_filter | safe | strip_paragraph }}</a>
+              Rapport / Initiative : {{ doc.report_fr | markdown_filter | safe | strip_paragraph }}
           {% else %}
-              Reports / Initiatives: <a href="{{ path_info }}record/{{ doc.id }}">{{ doc.report_en | markdown_filter | safe | strip_paragraph }}</a>
+              Report / Initiative: "{{ doc.report_en | markdown_filter | safe | strip_paragraph }}</a>
           {% endif %}
       </h2>
   </div>
 
   <div class="col-sm-12">
-      <strong>{% translate 'Title: ' %}</strong>{% if language == 'fr' %}{{ doc.short_desc_fr | safe }}{% else %}{{ doc.short_desc_en | safe }}{% endif %}
+      <strong>{% translate 'Title: ' %}</strong>{% if language == 'fr' %}<a href="{{ path_info }}record/{{ doc.id }}">{{ doc.short_desc_fr | safe }}{% else %}<a href="{{ path_info }}record/{{ doc.id }}">{{ doc.short_desc_en | safe }}{% endif %}</a>
   </div>
 
   <div class="col-sm-12">
@@ -35,7 +35,7 @@
 
   {% if doc.actual_date != "2000-01-01T00:00:00Z" %}
     <div class="col-sm-12">
-      <strong>{% translate 'Actual Implementation: ' %}</strong>{% if language == 'fr' %}{{ doc.actual_date_fr }}{% else %}{{ doc.actual_date_en }}{% endif %}
+      <strong>{% translate 'Completion Date: ' %}</strong>{% if language == 'fr' %}{{ doc.actual_date_fr }}{% else %}{{ doc.actual_date_en }}{% endif %}
   </div>
   {% endif %}
 
