@@ -46,10 +46,8 @@ def post_mlt_solr_query(context: dict, solr_response: SolrResponse, solr_query: 
 
 
 def filter_csv_record(csv_record,search: Search, fields: dict, codes: dict, format: str):
-    csv_record['status'] = csv_record['status'].upper()
+    #csv_record['status'] = csv_record['status'].upper()
     csv_record['target_date'] = csv_record['target_date'].strip().replace(" ", "_")
-    if csv_record['owner_org'] == "TBS":
-        csv_record['owner_org'] = "tbs-sct"
     return True,  csv_record
 
 
@@ -79,10 +77,10 @@ def pre_render_search(context: dict, template: str, request: HttpRequest, lang: 
         context['ns_num'] = 0
         context['co_num'] = 0
         context['on_num'] = 0
-        context['IP_list'] = ()
-        context['NS_list'] = ()
-        context['CO_list'] = ()
-        context['ON_list'] = {}
+        context['IP_EC_list'] = ()
+        context['NS_NC_list'] = ()
+        context['CP_RL_list'] = ()
+        context['ON_CO_list'] = {}
 
     else:
 
@@ -100,17 +98,17 @@ def pre_render_search(context: dict, template: str, request: HttpRequest, lang: 
         if 'status' in request.GET:
             statii = request.GET.getlist('status')
             stati = statii[0].split('|')
-            context['ip_offset'] = circle_progress_bar_offset(context['facets']['status']['IP'], context['total_hits']) if 'IP' in stati and 'IP' in context['facets']['status'] else 360
-            context['ns_offset'] = circle_progress_bar_offset(context['facets']['status']['NS'], context['total_hits']) if "NS" in stati and 'NS' in context['facets']['status'] else 360
-            context['co_offset'] = circle_progress_bar_offset(context['facets']['status']['CP'], context['total_hits']) if "CP" in stati and 'CP' in context['facets']['status'] else 360
-            context['on_offset'] = circle_progress_bar_offset(context['facets']['status']['ON'], context['total_hits']) if "ON" in context['facets']['status'] else 360
+            context['ip_offset'] = circle_progress_bar_offset(context['facets']['status']['IP_EC'], context['total_hits']) if 'IP_EC' in stati and 'IP_EC' in context['facets']['status'] else 360
+            context['ns_offset'] = circle_progress_bar_offset(context['facets']['status']['NS_NC'], context['total_hits']) if "NS_NC" in stati and 'NS_NC' in context['facets']['status'] else 360
+            context['co_offset'] = circle_progress_bar_offset(context['facets']['status']['CP_RL'], context['total_hits']) if "CP_RL" in stati and 'CP_RL' in context['facets']['status'] else 360
+            context['on_offset'] = circle_progress_bar_offset(context['facets']['status']['ON_CO'], context['total_hits']) if "ON_CO" in context['facets']['status'] else 360
 
-            context['ip_num'] = context['facets']['status']['IP'] if 'IP' in stati and 'IP' in context['facets']['status'] else 0
-            context['ns_num'] = context['facets']['status']['NS'] if "NS" in stati and 'NS' in context['facets']['status'] else 0
-            context['co_num'] = context['facets']['status']['CP'] if "CP" in stati and 'CP' in context['facets']['status'] else 0
-            context['on_num'] = context['facets']['status']['ON'] if "ON" in stati and "ON" in context['facets']['status'] else 0
+            context['ip_num'] = context['facets']['status']['IP_EC'] if 'IP_EC' in stati and 'IP_EC' in context['facets']['status'] else 0
+            context['ns_num'] = context['facets']['status']['NS_NC'] if "NS_NC" in stati and 'NS_NC' in context['facets']['status'] else 0
+            context['co_num'] = context['facets']['status']['CP_RL'] if "CP_RL" in stati and 'CP_RL' in context['facets']['status'] else 0
+            context['on_num'] = context['facets']['status']['ON_CO'] if "ON_CO" in stati and "ON_CO" in context['facets']['status'] else 0
 
-            for s in ['IP', 'NS', 'CP', 'ON']:
+            for s in ['IP_EC', 'NS_NC', 'CP_RL', 'ON_CO']:
                 stati2 = stati.copy()
                 if s in stati:
                     stati2.remove(s)
@@ -123,16 +121,16 @@ def pre_render_search(context: dict, template: str, request: HttpRequest, lang: 
                 context[s + "_list"] = "|".join(stati2)
 
         else:
-            context['ip_offset'] = circle_progress_bar_offset(context['facets']['status']['IP'], context['total_hits']) if 'IP' in context['facets']['status'] else 360
-            context['ns_offset'] = circle_progress_bar_offset(context['facets']['status']['NS'], context['total_hits']) if "NS" in context['facets']['status'] else 360
-            context['co_offset'] = circle_progress_bar_offset(context['facets']['status']['CP'], context['total_hits']) if "CP" in context['facets']['status'] else 360
-            context['on_offset'] = circle_progress_bar_offset(context['facets']['status']['ON'], context['total_hits']) if "ON" in context['facets']['status'] else 360
-            context['ip_num'] = context['facets']['status']['IP'] if 'IP' in context['facets']['status'] else 0
-            context['ns_num'] = context['facets']['status']['NS'] if "NS" in context['facets']['status'] else 0
-            context['co_num'] = context['facets']['status']['CP'] if "CP" in context['facets']['status'] else 0
-            context['on_num'] = context['facets']['status']['ON'] if "ON" in context['facets']['status'] else 0
+            context['ip_offset'] = circle_progress_bar_offset(context['facets']['status']['IP_EC'], context['total_hits']) if 'IP_EC' in context['facets']['status'] else 360
+            context['ns_offset'] = circle_progress_bar_offset(context['facets']['status']['NS_NC'], context['total_hits']) if "NS_NC" in context['facets']['status'] else 360
+            context['co_offset'] = circle_progress_bar_offset(context['facets']['status']['CP_RL'], context['total_hits']) if "CP_RL" in context['facets']['status'] else 360
+            context['on_offset'] = circle_progress_bar_offset(context['facets']['status']['ON_CO'], context['total_hits']) if "ON_CO" in context['facets']['status'] else 360
+            context['ip_num'] = context['facets']['status']['IP_EC'] if 'IP_EC' in context['facets']['status'] else 0
+            context['ns_num'] = context['facets']['status']['NS_NC'] if "NS_NC" in context['facets']['status'] else 0
+            context['co_num'] = context['facets']['status']['CP_RL'] if "CP_RL" in context['facets']['status'] else 0
+            context['on_num'] = context['facets']['status']['ON_CO'] if "ON_CO" in context['facets']['status'] else 0
 
-            for s in ['IP', 'NS', 'CP', 'ON']:
+            for s in ['IP_EC', 'NS_NC', 'CP_RL', 'ON_CO']:
                 if s in context['facets']['status'] and context['facets']['status'][s] > 0:
                     context[s.replace(" ", "_") + "_list"] = s
                 else:

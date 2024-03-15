@@ -28,26 +28,23 @@
 </div>
 
 <div class="row">
-  <div class="col-md-3"><strong>{% translate 'Reporting Period: ' %}</strong></div>
-  <div class="col-md-9">{% if language == "fr" %}{{ doc.reporting_period_fr }}{% else %}{{ doc.reporting_period_en }}{% endif %}</div>
-</div>
-
-<div class="row">
   <div class="col-md-3"><strong>{% translate 'Action Number: ' %}</strong></div>
   <div class="col-md-9">{{ doc.actions_number }}</div>
 </div>
 
 <div class="row">
   <div class="col-md-3"><strong>{% translate 'Benefits: ' %}</strong></div>
-  <div class="col-md-9">{% if language == "fr" %}{{ doc.benefits_fr }}{% else %}{{ doc.benefits_en }}{% endif %}</div>
+  <div class="col-md-9">{% if language == "fr" %}{{ doc.benefits_fr | markdown_filter | safe }}{% else %}{{ doc.benefits_en | markdown_filter | safe  }}{% endif %}</div>
 </div>
 
+{% if language == "fr" and doc.results_fr != "-" %}
 <div class="row">
   <div class="col-md-3"><strong>{% translate 'Results: ' %}</strong></div>
-  <div class="col-md-9">{% if language == "fr" %}{{ doc.results_fr }}{% else %}{{ doc.results_en }}{% endif %}</div>
+  <div class="col-md-9">{{ doc.results_fr | markdown_filter | safe  }}</div>
 </div>
-
+{% elif language == "en" and doc.results_en != "-"  %}
 <div class="row">
-  <div class="col-md-3"><strong>{% translate 'Link: ' %}</strong></div>
-  <div class="col-md-9">{% if language == "fr" %}{{ doc.links_fr | markdown_filter | safe  }}{% else %}{{ doc.links_en | markdown_filter | safe }}{% endif %}</div>
+  <div class="col-md-3"><strong>{% translate 'Results: ' %}</strong></div>
+  <div class="col-md-9">{{ doc.results_en | markdown_filter | safe  }}</div>
 </div>
+{% endif %}

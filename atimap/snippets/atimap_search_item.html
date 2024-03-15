@@ -31,7 +31,7 @@
 
   <div class="col-sm-12">
        <strong>{% translate 'Status: ' %}</strong>
-    <span class="label {% if doc.status == 'NS' %}label-danger{% elif doc.status == 'IP' %}label-info{% elif doc.status == 'CP' %}label-success{% elif doc.status == 'ON' %}label-primary{% endif %}">
+    <span class="label {% if doc.status == 'NS_NC' %}label-danger{% elif doc.status == 'IP_EC' %}label-info{% elif doc.status == 'CP_RL' %}label-success{% elif doc.status == 'ON_CO' %}label-primary{% endif %}">
     {% if language == 'fr' %}{{ doc.status_fr }}{% else %}{{ doc.status_en }}{% endif %}</span>
   </div>
 

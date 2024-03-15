@@ -9,9 +9,9 @@
 
 {% block main-content-body-top %}
     <div class="col-md-12 mrgn-bttm-0 mrgn-tp-lg">
-      {% if LANGUAGE_CODE == 'fr' %}
+      {% if LANGUAGE_CODE == 'fr' and custom_search_message_fr %}
         {{ custom_search_message_fr | markdown_filter | safe }}
-      {% else %}
+      {% elif custom_search_message_en %}
         {{ custom_search_message_en | markdown_filter | safe }}
       {% endif %}
     </div>
