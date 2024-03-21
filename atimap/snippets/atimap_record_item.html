@@ -33,6 +33,11 @@
 </div>
 
 <div class="row">
+  <div class="col-md-3"><strong>{% translate 'Target Date: ' %}</strong></div>
+  <div class="col-md-9">{% if language == "fr" %}{{ doc.target_date_fr }}{% else %}{{ doc.target_date_en }}{% endif %}</div>
+</div>
+
+<div class="row">
   <div class="col-md-3"><strong>{% translate 'Benefits: ' %}</strong></div>
   <div class="col-md-9">{% if language == "fr" %}{{ doc.benefits_fr | markdown_filter | safe }}{% else %}{{ doc.benefits_en | markdown_filter | safe  }}{% endif %}</div>
 </div>

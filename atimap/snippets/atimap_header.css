@@ -322,11 +322,14 @@ svg {
   stroke-dasharray: 360;
 }
 
-
-
 .status_count_text {
   font-weight: bolder;
   font-size: 24px;
 }
 
-.
+mark {
+    background-color: yellow;
+    font-weight: bold;
+    padding: .0em;
+}
+
