@@ -328,8 +328,8 @@ svg {
 }
 
 mark {
-    background-color: yellow;
-    font-weight: bold;
+    background-color: lightyellow;
+    font-weight: normal;
     padding: .0em;
 }
 

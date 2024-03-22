@@ -24,7 +24,7 @@ msgstr "Organisation : "
 msgid "Category: "
 msgstr "Catégorie : "
 
-msgid "Sub Category: "
+msgid "Subcategory: "
 msgstr "Sous-catégorie : "
 
 msgid "Target Date: "
