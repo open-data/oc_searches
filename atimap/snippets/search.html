@@ -49,7 +49,7 @@
         <svg aria-labelledby="onStatTitle" role="img">
           <title id="onStatTitle">{{ on_num }} {% translate "commitment" %}{{ on_num|pluralize }} {% translate "with status" %} {{ codes.status|get_dict_value:'ON_CO' }}</title>
           <circle class="bg-ON" cx="57" cy="57" r="52" />
-          <circle class="meter-ON" cx="57" cy="57" r="52" stroke-dashoffset="{{ ns_offset }}" style="animation: kf_lp .6s ease-out"/>
+          <circle class="meter-ON" cx="57" cy="57" r="52" stroke-dashoffset="{{ on_offset }}" style="animation: kf_lp .6s ease-out"/>
           <text x="57" y="64" text-anchor="middle" class="status_count_text">{{ on_num }}</text>
         </svg><br>
         {{ codes.status|get_dict_value:'ON_CO' }}
