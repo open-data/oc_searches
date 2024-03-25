@@ -36,9 +36,9 @@
       {% endif %}
     {% else %}
       {% if 'notes_translated_en' in doc.machine_translated_fields %}
-        {{ doc.notes_translated_en | truncatewords_html:22 | add:machine_xlt_msg | markdown_filter | safe }}
+        {{ doc.notes_translated_en | truncatewords_html:20 | add:machine_xlt_msg | markdown_filter | safe }}
       {% else %}
-        {{ doc.notes_translated_en | truncatewords_html:22 | markdown_filter | safe }}
+        {{ doc.notes_translated_en | truncatewords_html:20 | markdown_filter | safe }}
       {% endif %}
     {% endif %}
     </div>
