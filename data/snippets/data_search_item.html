@@ -30,15 +30,15 @@
     {# If the notes were machine-translated, then we add an icon to the end of the markdown text with an informational message #}
     {% if LANGUAGE_CODE == 'fr' %}
       {% if 'notes_translated_fr' in doc.machine_translated_fields %}
-        {{ doc.notes_translated_fr | truncatewords_html:100 | add:machine_xlt_msg | markdown_filter | safe }}
+        {{ doc.notes_translated_fr | truncatewords_html:20 | add:machine_xlt_msg | markdown_filter | safe }}
       {% else %}
-        {{ doc.notes_translated_fr | truncatewords_html:100 | markdown_filter | safe }}
+        {{ doc.notes_translated_fr | truncatewords_html:20 | markdown_filter | safe }}
       {% endif %}
     {% else %}
       {% if 'notes_translated_en' in doc.machine_translated_fields %}
-        {{ doc.notes_translated_en | truncatewords_html:100 | add:machine_xlt_msg | markdown_filter | safe }}
+        {{ doc.notes_translated_en | truncatewords_html:22 | add:machine_xlt_msg | markdown_filter | safe }}
       {% else %}
-        {{ doc.notes_translated_en | truncatewords_html:100 | markdown_filter | safe }}
+        {{ doc.notes_translated_en | truncatewords_html:22 | markdown_filter | safe }}
       {% endif %}
     {% endif %}
     </div>

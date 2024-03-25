@@ -75,7 +75,7 @@ class Command(BaseCommand):
                         self.logger.warning(
                             f"Unusual data encountered in record {id} for field {field_name}: {solr_record[field_name + '_en']}")
                     if field_name == 'notes_translated':
-                        solr_record["notes_translated_en"] = textwrap.dedent(textwrap.shorten(solr_record["notes_translated_en"], width=140, tabsize=4, placeholder="..."))
+                        solr_record["notes_translated_en"] = textwrap.dedent(textwrap.shorten(solr_record["notes_translated_en"], width=160, tabsize=4, placeholder="..."))
                     if lang_code == 'en-t-fr':
                         automation = True
                 lang_found = True
@@ -95,7 +95,7 @@ class Command(BaseCommand):
                         self.logger.warning(
                             f"Unusual data encountered in record {id} for field {field_name}: {solr_record[field_name + '_fr']}")
                     if field_name == 'notes_translated':
-                        solr_record["notes_translated_fr"] = textwrap.dedent(textwrap.shorten(solr_record["notes_translated_fr"], width=140, tabsize=4, placeholder="..."))
+                        solr_record["notes_translated_fr"] = textwrap.dedent(textwrap.shorten(solr_record["notes_translated_fr"], width=160, tabsize=4, placeholder="..."))
                     if lang_code == 'fr-t-en':
                         automation = True
                 lang_found = True
