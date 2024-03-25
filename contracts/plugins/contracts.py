@@ -8,7 +8,15 @@ from SolrClient import SolrResponse
 
 MAX_YEAR = 9999
 logger = logging.getLogger(__name__)
-
+FIELDS_TO_TRIM = "reference_number,procurement_id,vendor_name,vendor_postal_code,buyer_name," \
+                 "economic_object_code,description_en,description_fr,comments_en,comments_fr," \
+                 "additional_comments_en,additional_comments_fr,agreement_type_code,trade_agreement," \
+                 "land_claims,commodity_type,commodity_code,country_of_vendor,solicitation_procedure," \
+                 "limited_tendering_reason,trade_agreement_exceptions,indigenous_business," \
+                 "indigenous_business_excluding_psib,intellectual_property,potential_commercial_exploitation," \
+                 "former_public_servant,contracting_entity,standing_offer_number,instrument_type," \
+                 "ministers_office,number_of_bids,article_6_exceptions,award_criteria,socioeconomic_indicator," \
+                 "reporting_period,owner_org"
 
 def get_dollar_range(dollar_amount: float):
     """
@@ -84,7 +92,6 @@ def post_mlt_solr_query(context: dict, solr_response: SolrResponse, solr_query: 
 
 def filter_csv_record(csv_record,search: Search, fields: dict, codes: dict, format: str):
     if format != 'NTR':
-
         if not csv_record['agreement_type_code'] and not csv_record['trade_agreement']:
             csv_record['agreement_type_code'] = '0'
         else:
@@ -129,6 +136,10 @@ def filter_csv_record(csv_record,search: Search, fields: dict, codes: dict, form
 
 
 def load_csv_record(csv_record: dict, solr_record: dict, search: Search, fields: dict, codes: dict, format: str):
+
+    for tf in FIELDS_TO_TRIM.split(","):
+        if isinstance(solr_record[tf], str):
+            solr_record[tf] = solr_record[tf].strip()
     if format == 'NTR':
         solr_record['id'] = f"{csv_record['owner_org']},{csv_record['reporting_period']}"
         solr_record['amendment_no'] = 0
