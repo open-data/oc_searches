@@ -8,7 +8,7 @@
           {% if language == 'fr' %}
               Rapport / Initiative : {{ doc.report_fr | markdown_filter | safe | strip_paragraph }}
           {% else %}
-              Report / Initiative: "{{ doc.report_en | markdown_filter | safe | strip_paragraph }}</a>
+              Report / Initiative: {{ doc.report_en | markdown_filter | safe | strip_paragraph }}</a>
           {% endif %}
       </h2>
   </div>
@@ -18,11 +18,11 @@
   </div>
 
   <div class="col-sm-12">
-      <strong>{% translate 'Recommendation #: ' %}</strong>{{ doc.record_no }}
+      <strong>{% translate 'Recommendation #: ' %}</strong>{{ doc.record_no|floatformat:-1 }}
   </div>
 
   <div class="col-sm-12">
-      {% if language == 'fr' %}{{ "<strong>Recommendation :</strong> "|add:doc.desc_fr|markdown_filter|safe }}{% else %}{{ "<strong>Recommendation:</strong> "|add:doc.desc_en|markdown_filter|safe }}{% endif %}
+      {% if language == 'fr' %}{{ "<strong>Recommendation :</strong> "|add:doc.desc_fr|markdown_filter|truncatewords_html:30|safe }}{% else %}{{ "<strong>Recommendation:</strong> "|add:doc.desc_en|markdown_filter|truncatewords_html:30|safe }}{% endif %}
   </div>
 
   <div class="col-sm-12">

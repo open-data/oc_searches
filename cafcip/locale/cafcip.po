@@ -32,9 +32,6 @@ msgstr "Narratif du statut : "
 msgid "Culture Aspect: "
 msgstr "Aspect culturel : "
 
-msgid "Actual implementation date: "
-msgstr "Date de mise en oeuvre actuelle : "
-
 msgid "Recommendation: "
 msgstr "Recommendation : "
 
@@ -61,3 +58,6 @@ msgstr "Mise en œuvre attendue : "
 
 msgid "Completion Date: "
 msgstr "Date d'achèvement : "
+
+msgid "Context: "
+msgstr "Contexte : "

@@ -27,6 +27,22 @@
   <div class="col-md-9">{% if language == "fr" %}{{ doc.culture_aspect_fr }}{% else %}{{ doc.culture_aspect_en }}{% endif %}</div>
 </div>
 
+{% if language == "fr" %}
+  {% if doc.context_fr != '-' %}
+<div class="row mrgn-tp-md">
+  <div class="col-md-3"><strong>{% translate 'Context: ' %}</strong></div>
+  <div class="col-md-9">{{ doc.context_fr }}</div>
+</div>
+  {% endif %}
+{% else %}
+  {% if doc.context_en != '-' %}
+<div class="row mrgn-tp-md">
+  <div class="col-md-3"><strong>{% translate 'Context: ' %}</strong></div>
+  <div class="col-md-9">{{ doc.context_en }}</div>
+</div>
+  {% endif %}
+{% endif %}
+
 <div class="row mrgn-tp-md">
   <div class="col-md-3"><strong>{% translate 'Expected Implementation: ' %}</strong></div>
   <div class="col-md-9">{% if language == "fr" %}{{ doc.completion_date_fr }}{% else %}{{ doc.completion_date_en }}{% endif %}</div>
@@ -44,12 +60,6 @@
   <div class="col-md-9">{{ doc.status_comments_fr }}</div>
   </div>
   {% endif %}
-  {% if doc.web_links_fr != '-' %}
-  <div class="row mrgn-tp-md">
-  <div class="col-md-3"><strong>{% translate 'Web Links: ' %}</strong></div>
-  <div class="col-md-9">{{ doc.web_links_fr | markdown_filter | safe }}</div>
-  </div>
-  {% endif %}
 {% else %}
   {% if doc.status_comments_en != '-' %}
   <div class="row mrgn-tp-md">
@@ -57,17 +67,63 @@
   <div class="col-md-9">{{ doc.status_comments_en }}</div>
   </div>
   {% endif %}
-  {% if doc.web_links_en != '-' %}
-  <div class="row mrgn-tp-md">
-  <div class="col-md-3"><strong>{% translate 'Web Links: ' %}</strong></div>
-  <div class="col-md-9">{{ doc.web_links_en | markdown_filter | safe }}</div>
-  </div>
-  {% endif %}
 {% endif %}
 
 {% if doc.actual_date != "2000-01-01T00:00:00Z" %}
 <div class="row mrgn-tp-md">
-<div class="col-md-3"><strong>{% translate 'Actual implementation date: ' %}</strong></div><br>
+<div class="col-md-3"><strong>{% translate 'Completion Date: ' %}</strong></div>
 <div class="col-md-9">{% if language == "fr" %}{{ doc.actual_date_fr }}{% else %}{{ doc.actual_date_en }}{% endif %}</div>
 </div>
+{% endif %}
+
+{% if language == "fr" %}
+  {% if doc.web_links_fr1 != '-' %}
+  <div class="row mrgn-tp-md">
+  <div class="col-md-3"><strong>{% translate 'Web Links: ' %}</strong></div>
+  <div class="col-md-9">{{ doc.web_links_fr1 | safe }}</div>
+  </div>
+  {% endif %}
+  {% if doc.web_links_fr2 != '-' %}
+  <div class="row mrgn-tp-md">
+  <div class="col-md-3"></div>
+  <div class="col-md-9">{{ doc.web_links_fr2 | safe }}</div>
+  </div>
+  {% endif %}
+  {% if doc.web_links_fr3 != '-' %}
+  <div class="row mrgn-tp-md">
+  <div class="col-md-3"></div>
+  <div class="col-md-9">{{ doc.web_links_fr3 | safe }}</div>
+  </div>
+  {% endif %}
+  {% if doc.web_links_fr4 != '-' %}
+  <div class="row mrgn-tp-md">
+  <div class="col-md-3"></div>
+  <div class="col-md-9">{{ doc.web_links_fr4 | safe }}</div>
+  </div>
+  {% endif %}
+{% else %}
+  {% if doc.web_links_en1 != '-' %}
+  <div class="row mrgn-tp-md">
+  <div class="col-md-3"><strong>{% translate 'Web Links: ' %}</strong></div>
+  <div class="col-md-9">{{ doc.web_links_en1 | safe }}</div>
+  </div>
+  {% endif %}
+  {% if doc.web_links_en2 != '-' %}
+  <div class="row mrgn-tp-md">
+  <div class="col-md-3"></div>
+  <div class="col-md-9">{{ doc.web_links_en2 | safe }}</div>
+  </div>
+  {% endif %}
+  {% if doc.web_links_en3 != '-' %}
+  <div class="row mrgn-tp-md">
+  <div class="col-md-3"></div>
+  <div class="col-md-9">{{ doc.web_links_en3 | safe }}</div>
+  </div>
+  {% endif %}
+  {% if doc.web_links_en4 != '-' %}
+  <div class="row mrgn-tp-md">
+  <div class="col-md-3"></div>
+  <div class="col-md-9">{{ doc.web_links_en4 | safe }}</div>
+  </div>
+  {% endif %}
 {% endif %}
