@@ -22,10 +22,25 @@ def pre_search_solr_query(context: dict, solr_query: dict, request: HttpRequest,
 
 
 def post_search_solr_query(context: dict, solr_response: SolrResponse, solr_query: dict, request: HttpRequest, search: Search, fields: dict, codes: dict, facets: list, record_ids: str):
+    solr_query['group'] = True
+    solr_query['group.field'] = 'cip_serial'
+    solr_query['group.limit'] = 1
+    solr_query['group.sort'] = 'reporting_period_no desc'
+    solr_query['group.facet'] = True
+    solr_query['group.main'] = True
+    solr_query['group.truncate'] = True
+
+    solr_query['q'] = f'{solr_query["q"]} AND (is_latest:"T")'
+
     return context, solr_response
 
 
-def pre_record_solr_query(context: dict, solr_query: dict, request: HttpRequest, search: Search, fields: dict, codes: dict, facets: list, record_ids: str):
+def pre_record_solr_query(context: dict, solr_query: dict, request: HttpRequest, search: Search, fields: dict, codes: dict, facets: list, record_id: str):
+    id_parts = record_id.split(",")
+    if len(id_parts) > 1:
+        solr_query['q'] = 'cip_serial:"{0}"'.format(id_parts[0])
+        solr_query['sort'] = 'reporting_period desc'
+
     return context, solr_query
 
 
