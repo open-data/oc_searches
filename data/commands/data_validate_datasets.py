@@ -2,7 +2,7 @@ from django.core.management.base import BaseCommand
 from django.conf import settings
 import json
 import logging
-from search.models import Search, Field, Code, Setting, SearchLog
+from search.models import Search, Field, Code, Setting
 from SolrClient import SolrClient
 from SolrClient.exceptions import ConnectionError
 from time import time
