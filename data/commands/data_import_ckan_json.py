@@ -660,7 +660,11 @@ class Command(BaseCommand):
             if self.error_count > 0:
                 event_category = 'warning'
                 event_msg = event_msg + f"\r{self.error_count} Data errors encountered, and {len(self.bad_data_list)} records contain data issues"
-            self.log_it(title=f"Loaded {total} datasets", category=event_category, message=event_msg)
+            if options['type'] == 'remote_ckan':
+                if self.error_count > 0 or not options['quiet']:
+                    self.log_it(title=f"Loaded {total} datasets", category=event_category, message=event_msg)
+            else:
+                self.log_it(title=f"Loaded {total} datasets", category=event_category, message=event_msg)
 
         except Search.DoesNotExist as x:
             event_msg = f'Provided search id not found: {options["search"]}'
