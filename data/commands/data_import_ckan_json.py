@@ -48,6 +48,7 @@ class Command(BaseCommand):
     bad_data_list = []
     missing_codes_dict = {}
     error_count = 0
+    import_type = 'remote_ckan'
 
     # creating a mapping between resource fields and Solr fields
     resource_map = {}
@@ -67,7 +68,10 @@ class Command(BaseCommand):
             self.logger.warning(title)
         else:
             self.logger.info(title)
-        Event.objects.create(search_id='data', component_id='data_import_ckan_json', title=title, category=category, message=message)
+        event_component = "data_import_ckan_json.remote"
+        if self.import_type.lower() == 'jsonl':
+            event_component = "data_import_ckan_json.jsonl"
+        Event.objects.create(search_id='data', component_id=event_component, title=title, category=category, message=message)
         if category != 'info':
             self.error_count += 1
 
@@ -506,6 +510,7 @@ class Command(BaseCommand):
         solr_records = []
         total = 0
         original_checkpoint_ts = utimezone.now()
+        self.import_type = options['type']
 
         try:
             # Retrieve the Search  and Field models from the database
@@ -660,11 +665,7 @@ class Command(BaseCommand):
             if self.error_count > 0:
                 event_category = 'warning'
                 event_msg = event_msg + f"\r{self.error_count} Data errors encountered, and {len(self.bad_data_list)} records contain data issues"
-            if options['type'] == 'remote_ckan':
-                if self.error_count > 0 or not options['quiet']:
-                    self.log_it(title=f"Loaded {total} datasets", category=event_category, message=event_msg)
-            else:
-                self.log_it(title=f"Loaded {total} datasets", category=event_category, message=event_msg)
+            self.log_it(title=f"Loaded {total} datasets", category=event_category, message=event_msg)
 
         except Search.DoesNotExist as x:
             event_msg = f'Provided search id not found: {options["search"]}'
