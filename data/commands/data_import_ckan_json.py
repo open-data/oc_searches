@@ -622,10 +622,6 @@ class Command(BaseCommand):
                     ckan_checkpoint_id.save()
                     ckan_checkpoint_ts.save()
 
-                    # Log the badly formatted data
-                    self.log_it(title="Poorly formatted data found in records", message="\r".join(self.bad_data_list), category='warning')
-                    for err_msg in self.missing_codes_dict:
-                        self.log_it(title=f"Error: {err_msg}", category='warning')
             else:
                 raise Exception("Unknown type")
 
@@ -647,6 +643,14 @@ class Command(BaseCommand):
                     time.sleep((10 - countdown) * 5)
 
             solr.commit(self.solr_core)
+
+            # Log the badly formatted data
+            if len(self.bad_data_list) > 0 and not options['quiet']:
+                self.log_it(title="Poorly formatted data found in records", message="\r".join(self.bad_data_list), category='warning')
+            for err_msg in self.missing_codes_dict:
+                self.log_it(title=f"Error: {err_msg}", category='warning')
+
+            # log final results
             event_msg = ""
             if options['type'] == 'jsonl':
                 event_msg = f"Command imported {total} records from {options['jsonl']}\rOptions:\r  Type - Jsonl,\r  Reset - {options['reset']},\r  Quiet - {options['quiet']}"
@@ -655,7 +659,9 @@ class Command(BaseCommand):
             event_category = 'success'
             if self.error_count > 0:
                 event_category = 'warning'
+                event_msg = event_msg + f"\r{self.error_count} Data errors encountered, and {len(self.bad_data_list)} records contain data issues"
             self.log_it(title=f"Loaded {total} datasets", category=event_category, message=event_msg)
+
         except Search.DoesNotExist as x:
             event_msg = f'Provided search id not found: {options["search"]}'
             self.logger.error(event_msg)
