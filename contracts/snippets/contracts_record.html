@@ -49,7 +49,7 @@
           <div class="col-sm-5"><strong>{% trans 'Commodity Type: ' %}</strong></div>
           <div class="col-sm-7">{% if LANGUAGE_CODE == 'fr' %}{{ doc.commodity_type_fr }}{% else %}{{ doc.commodity_type_en }}{% endif %}</div>
         </div>
-        {% if doc.commodity_code_s|length > 1 %}
+        {% if not doc.commodity_code == "-" %}
         <div class="row">
           <div class="col-sm-5"><strong>{% trans 'Commodity Code: ' %}</strong></div>
           <div class="col-sm-7">{{ doc.commodity_code }}</div>
@@ -260,7 +260,7 @@
                 <div class="col-sm-7">{{ doc.economic_object_code }}</div>
             </div>
             {% endif %}
-            {% if not doc.instrument_type == '-' %}
+            {% if not doc.instrument_type_en == '-' %}
             <div class="row">
                 <div class="col-sm-5"><strong>{% trans 'Instrument Type: ' %}</strong></div>
                 <div class="col-sm-7">{% if LANGUAGE_CODE == 'fr' %}{{ doc.instrument_type_fr }}{% else %}{{ doc.instrument_type_en }}{% endif %}</div>
@@ -270,7 +270,7 @@
                 <div class="col-sm-5"><strong>{% trans 'Commodity Type: ' %}</strong></div>
                 <div class="col-sm-7">{% if LANGUAGE_CODE == 'fr' %}{{ doc.commodity_type_fr }}{% else %}{{ doc.commodity_type_en }}{% endif %}</div>
             </div>
-            {% if doc.commodity_code_s|length > 1 %}
+            {% if not doc.commodity_code == "-" %}
             <div class="row">
                 <div class="col-sm-5"><strong>{% trans 'Commodity Code: ' %}</strong></div>
                 <div class="col-sm-7">{{ doc.commodity_code }}</div>
