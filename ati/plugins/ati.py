@@ -26,22 +26,24 @@ def load_model(path):
 cache = caches['local']
 # Load Search and Field configuration
 
-stemmer = cache.get('ati_stemmer')
-if stemmer is None:
-    stemmer = PorterStemmer()
-    cache.set('ati_stemmer', stemmer, timeout=3600)
+# Disabling models for now
 
-model_en = cache.get('ati_model_en')
-if model_en is None:
-    classifier_en = os.path.join(settings.NLTK_DATADIR, 'ati_en.model')
-    model_en = load_model(classifier_en)
-    cache.set('ati_model_en', model_en, timeout=3600)
-
-model_fr = cache.get('ati_model_fr')
-if model_fr is None:
-    classifier_fr = os.path.join(settings.NLTK_DATADIR, 'ati_fr.model')
-    model_fr = load_model(classifier_fr)
-    cache.set('ati_model_fr', model_fr, timeout=3600)
+# stemmer = cache.get('ati_stemmer')
+# if stemmer is None:
+#     stemmer = PorterStemmer()
+#     cache.set('ati_stemmer', stemmer, timeout=3600)
+#
+# model_en = cache.get('ati_model_en')
+# if model_en is None:
+#     classifier_en = os.path.join(settings.NLTK_DATADIR, 'ati_en.model')
+#     model_en = load_model(classifier_en)
+#     cache.set('ati_model_en', model_en, timeout=3600)
+#
+# model_fr = cache.get('ati_model_fr')
+# if model_fr is None:
+#     classifier_fr = os.path.join(settings.NLTK_DATADIR, 'ati_fr.model')
+#     model_fr = load_model(classifier_fr)
+#     cache.set('ati_model_fr', model_fr, timeout=3600)
 
 if settings.NLTK_DATADIR not in nltk.data.path:
     nltk.data.path.append(settings.NLTK_DATADIR)
@@ -60,24 +62,25 @@ def post_search_solr_query(context: dict, solr_response: SolrResponse, solr_quer
 
     predicted = {}
     short_list = {}
-    if request.LANGUAGE_CODE == 'fr':
-        predicted = model_fr.predict_proba(search_terms)[0]
-        for index, name in enumerate(model_fr.classes_):
-            short_list[index] = {'relevance': predicted[index], 'umd_number': name}
-    else:
-        predicted = model_en.predict_proba(search_terms)[0]
-        for index, name in enumerate(model_en.classes_):
-            short_list[index] = {'relevance': predicted[index], 'umd_number': name}
+    blank_prediction = [{"relevance": 0.0, "umd_number": 0.0}, {"relevance": 0.0, "umd_number": 0.0}, {"relevance": 0.0, "umd_number": 0.0}, {"relevance": 0.0, "umd_number": 0.0}, {"relevance": 0.0, "umd_number": 0.0}]
+    # if request.LANGUAGE_CODE == 'fr':
+    #     predicted = model_fr.predict_proba(search_terms)[0]
+    #     for index, name in enumerate(model_fr.classes_):
+    #         short_list[index] = {'relevance': predicted[index], 'umd_number': name}
+    # else:
+    #     predicted = model_en.predict_proba(search_terms)[0]
+    #     for index, name in enumerate(model_en.classes_):
+    #         short_list[index] = {'relevance': predicted[index], 'umd_number': name}
+    #
+    # sorted_list = sorted(short_list, key=lambda x: (short_list[x]['relevance']), reverse=True)
+    #
+    # # Just return the top ten matches
+    # short_sorted_list = sorted_list[0:5]
+    # results = []
+    # for i in short_sorted_list:
+    #     results.append({'relevance': short_list[i]["relevance"], 'umd_number': short_list[i]["umd_number"]})
 
-    sorted_list = sorted(short_list, key=lambda x: (short_list[x]['relevance']), reverse=True)
-
-    # Just return the top ten matches
-    short_sorted_list = sorted_list[0:5]
-    results = []
-    for i in short_sorted_list:
-        results.append({'relevance': short_list[i]["relevance"], 'umd_number': short_list[i]["umd_number"]})
-
-    extras = {'relevance': results}
+    extras = {'relevance': blank_prediction}
     solr_response.data['extras'] = extras
 
     return context, solr_response
