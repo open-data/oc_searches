@@ -123,18 +123,19 @@ class Command(BaseCommand):
         elif field_name in DATE_FIELDS:
             # Requires Python 3.9+ This line cna replace the clunky IF statement
             # raw_date = datetime.fromisoformat(raw_value)
-            if 'T' in raw_value:
-                try:
+            try:
+                if 'T' in raw_value:
                     raw_date = datetime.strptime(raw_value, "%Y-%m-%dT%H:%M:%S.%f")
-                except ValueError as ve:
-                    try:
-                        raw_date = datetime.strptime(raw_value, "%Y-%m-%dT%H:%M:%S")
-                    except ValueError as ve1:
-                        self.log_it(title=f"Cannot parse ISO date value {raw_value} in dataset {id}", category='warning')
-            elif len(raw_value) == 10:
-                raw_date = datetime.strptime(raw_value, "%Y-%m-%d")
-            else:
-                raw_date = datetime.strptime(raw_value, "%Y-%m-%d %H:%M:%S")
+                elif len(raw_value) == 10:
+                    raw_date = datetime.strptime(raw_value, "%Y-%m-%d")
+                elif len(raw_value) == 20:
+                    raw_date = datetime.strptime(raw_value, "%Y-%m-%d %H:%M:%S")
+                else:
+                    raw_date = datetime.strptime(raw_value[0:10], "%Y-%m-%d")
+            except ValueError as ve:
+                raw_date = datetime.strptime("1970-01-01", "%Y-%m-%d")
+                self.log_it(title=f"Cannot parse ISO date value {raw_value} for field {field_name} in dataset {id}", category='warning')
+
             solr_record[field_name] = raw_value
             solr_record[field_name + '_en'] = format_date(raw_date, locale='en')
             solr_record[field_name + '_fr'] = format_date(raw_date, locale='fr')
