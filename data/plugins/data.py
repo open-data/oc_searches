@@ -70,13 +70,7 @@ def pre_render_search(context: dict, template: str, request: HttpRequest, lang: 
     :param codes: the application code objects to be used
     :return: context object, and the template name
     """
-    OPEN_INFO_MSG_EN = "Please note that the Open Information Portal contains a sample of government of Canada publications and information resources. " \
-                       "For more resources, please visit [Government of Canada Publications](http://publications.gc.ca/) and " \
-                       "[Library and Archives Canada](http://www.bac-lac.gc.ca/)."
-    OPEN_INFO_MSG_FR = "Veuillez noter que le Portail d’information ouverte contient un échantillon de publications et de ressources d’information " \
-                       "du gouvernement du Canada. Pour consulter d’autres ressources, veuillez visiter " \
-                       "[Publications du gouvernement du Canada](http://publications.gc.ca/) et " \
-                       "[Bibliothèque et Archives Canada](http://www.bac-lac.gc.ca/Pages/default.aspx)."
+
     OPEN_MAPS_MSG_EN = "Search for geospatial data or click **Add to Map List** to select multiple datasets to plot on " \
                        "a single map. Then click **View on Map** to visualize and overlay the datasets using a geospatial viewer "
     OPEN_MAPS_MSG_FR = "Rechercher des données géospatiales ou cliquer sur **Ajouter à la liste de cartes** pour " \
@@ -96,13 +90,6 @@ def pre_render_search(context: dict, template: str, request: HttpRequest, lang: 
     context['od_en_fgp_root'] = settings.OPEN_DATA_EN_FGP_BASE
     context['od_fr_fgp_root'] = settings.OPEN_DATA_FR_FGP_BASE
     context['open_data_url_base'] = settings.OPEN_DATA_BASE_URL_FR if lang == 'fr' else settings.OPEN_DATA_BASE_URL_EN
-
-    # Display a special message if the user has selected "Open Information"  as a filter
-    if str(request.GET.get("dataset_type", "")).find("info") >= 0:
-        if lang == 'fr':
-            context['search_alerts'].append(OPEN_INFO_MSG_FR)
-        else:
-            context['search_alerts'].append(OPEN_INFO_MSG_EN)
 
     # Display a special message if the user has selected "Open Maps" as a filter
     if str(request.GET.get("collection", "")).find("fgp") >= 0:
