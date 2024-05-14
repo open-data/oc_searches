@@ -29,6 +29,7 @@ class Command(BaseCommand):
         parser.add_argument('--contracts', type=str, help='Contracts CSV input file', required=True)
         parser.add_argument('--amendments', type=str, help='Amendments CSV output file', required=True)
         parser.add_argument('--tmpdir', type=str, default=os.getcwd(), help="Working directory to create the sqlite3 db", required=False)
+        parser.add_argument('--round2', required=False, action='store_true', help="Perform round 2 matching")
 
     def handle(self, *args, **options):
 
@@ -243,101 +244,89 @@ class Command(BaseCommand):
 
         print(f"Pass 1: {pass1_count} records matched to {pass1_contract} contracts based on procurement ID")
 
-        # Pass 2 -
+        # Pass 2 Matching -- optional
+        if options["round2"]:
+            pass2_count = 0
+            pass2_contracts = 0
 
-        pass2_count = 0
-        pass2_contracts = 0
+            if os.path.exists('pass2_report.csv'):
+                os.remove('pass2_report.csv')
+            with open('pass2_report.csv', 'a', encoding='utf-8-sig') as csv_out:
+                # report_writer = csv.DictWriter(csv_out, fieldnames="owner_org,reference_number,instrument_type,procurement_id,vendor_name,contract_date,economic_object_code,pseudo_procurement_id".split(","), delimiter=',', restval='', extrasaction='ignore', lineterminator='\n')
+                report_writer = csv.DictWriter(csv_out, fieldnames=AMENDMENTS_HEADERS.split(","), delimiter=',', restval='', extrasaction='ignore', lineterminator='\n')
+                report_writer.writeheader()
 
-        # @todo Remove this temp reporting code after verification
-        if os.path.exists('pass2_report.csv'):
-            os.remove('pass2_report.csv')
-        with open('pass2_report.csv', 'a', encoding='utf-8-sig') as csv_out:
-            # report_writer = csv.DictWriter(csv_out, fieldnames="owner_org,reference_number,instrument_type,procurement_id,vendor_name,contract_date,economic_object_code,pseudo_procurement_id".split(","), delimiter=',', restval='', extrasaction='ignore', lineterminator='\n')
-            report_writer = csv.DictWriter(csv_out, fieldnames=AMENDMENTS_HEADERS.split(","), delimiter=',', restval='', extrasaction='ignore', lineterminator='\n')
-            report_writer.writeheader()
+                for a_row in sql_cursor.execute("select count(*) as cnt, vendor_name, contract_date, economic_object_code, owner_org  from amendments group by vendor_name, contract_date, economic_object_code, owner_org order by cnt desc"):
+                    # Don't need to consider single records or records that were already matched in Pass 1
+                    if a_row[0] <= 1:
+                        break
+                    amendment_no = 0
+                    procurement_count = a_row[0]
+                    aggregate_total = 0.0
+                    # No. of Contract records in the group
+                    c_count = sql_cursor_count.execute('SELECT count(*) FROM amendments WHERE vendor_name = ? AND contract_date = ? AND economic_object_code = ? AND owner_org = ? AND procurement_count = 1 and instrument_type = "C"',
+                                                   (a_row[1], a_row[2], a_row[3], a_row[4])).fetchone()[0]
+                    # No. of Amendment records in the group
+                    a_count = sql_cursor_count.execute('SELECT count(*) FROM amendments WHERE vendor_name = ? AND contract_date = ? AND economic_object_code = ? AND owner_org = ? AND procurement_count = 1 and instrument_type = "A"',
+                                                   (a_row[1], a_row[2], a_row[3], a_row[4])).fetchone()[0]
 
-            for a_row in sql_cursor.execute("select count(*) as cnt, vendor_name, contract_date, economic_object_code, owner_org  from amendments group by vendor_name, contract_date, economic_object_code, owner_org order by cnt desc"):
-                # Don't need to consider single records or records that were already matched in Pass 1
-                if a_row[0] <= 1:
-                    break
-                amendment_no = 0
-                procurement_count = a_row[0]
-                aggregate_total = 0.0
-                # No. of Contract records in the group
-                c_count = sql_cursor_count.execute('SELECT count(*) FROM amendments WHERE vendor_name = ? AND contract_date = ? AND economic_object_code = ? AND owner_org = ? AND procurement_count = 1 and instrument_type = "C"',
-                                               (a_row[1], a_row[2], a_row[3], a_row[4])).fetchone()[0]
-                # No. of Amendment records in the group
-                a_count = sql_cursor_count.execute('SELECT count(*) FROM amendments WHERE vendor_name = ? AND contract_date = ? AND economic_object_code = ? AND owner_org = ? AND procurement_count = 1 and instrument_type = "A"',
-                                               (a_row[1], a_row[2], a_row[3], a_row[4])).fetchone()[0]
-
-                if c_count == 1 and a_count > 0:
-                    pass2_contracts += 1
-                    # Do two passes, one to get the total AND to make sure the first record is either a contract or a SO any subsequent records are amendments
-                    # Step 1 - validated Contract/Amendment instrument type is correct, and calculate the aggregate total
-                    grand_total = 0.0
-                    is_valid = True
-                    i = 0
-                    k = 0
-                    for g_row in sql_cursor_2.execute("select instrument_type, original_value, amendment_value from amendments where vendor_name = ? AND contract_date = ? AND economic_object_code = ? AND owner_org = ? AND procurement_count = 1 ORDER BY reporting_period ASC, reference_number ASC",
-                                                      (a_row[1], a_row[2], a_row[3], a_row[4])):
-                        # IF the first record is not a contract or standing offer then this group cannot be considered for pass 2
-                        if i == 0 and g_row[0] not in ('C', 'SOSA'):
-                            is_valid = False
-                            break
-                        try:
-                            if g_row[0] == "C":
-                                if g_row[1]:
-                                    grand_total += float(g_row[1])
-                            else:
-                                if g_row[2]:
-                                    grand_total += float(g_row[2])
-
-                        except ValueError as ve:
-                            print(f"Bad numbers: original value {g_row[1]}, amendment value {g_row[2]}: {a_row[4]},{a_row[1]}")
-                        i += 1
-                        k += 1
-
-                    # Step 2 - Update validated groups with amendment information
-
-                    if is_valid:
+                    if c_count == 1 and a_count > 0:
+                        pass2_contracts += 1
+                        # Do two passes, one to get the total AND to make sure the first record is either a contract or a SO any subsequent records are amendments
+                        # Step 1 - validated Contract/Amendment instrument type is correct, and calculate the aggregate total
+                        grand_total = 0.0
+                        is_valid = True
                         i = 0
-                        psuedo_proc = ""
-                        for g_row in sql_cursor_2.execute("SELECT owner_org, reference_number, instrument_type, procurement_id from amendments WHERE vendor_name = ? AND contract_date = ? AND economic_object_code = ? AND owner_org = ? AND procurement_count = 1 ORDER BY reporting_period ASC, reference_number ASC",
-                                                            (a_row[1], a_row[2], a_row[3], a_row[4])):
-                            sql_cursor_update = sqldb.cursor()
+                        k = 0
+                        for g_row in sql_cursor_2.execute("select instrument_type, original_value, amendment_value from amendments where vendor_name = ? AND contract_date = ? AND economic_object_code = ? AND owner_org = ? AND procurement_count = 1 ORDER BY reporting_period ASC, reference_number ASC",
+                                                          (a_row[1], a_row[2], a_row[3], a_row[4])):
+                            # IF the first record is not a contract or standing offer then this group cannot be considered for pass 2
+                            if i == 0 and g_row[0] not in ('C', 'SOSA'):
+                                is_valid = False
+                                break
+                            try:
+                                if g_row[0] == "C":
+                                    if g_row[1]:
+                                        grand_total += float(g_row[1])
+                                else:
+                                    if g_row[2]:
+                                        grand_total += float(g_row[2])
 
-                            if i == 0:
-                                psuedo_proc = f"{g_row[3]}_{g_row[0]}_{a_row[2]}"
-
-                            if g_row[2] in ('C', 'SOSA'):
-                                sql_cursor_update.execute('UPDATE amendments SET aggregate_total = ?, amendment_no = ?, procurement_count = ?, pseudo_procurement_id = ? WHERE owner_org = ? AND reference_number = ?',
-                                                     (grand_total, i, k, psuedo_proc, a_row[4], g_row[1]))
-                            else:
-                                sql_cursor_update.execute('UPDATE amendments SET  amendment_no = ?, procurement_count = ?, pseudo_procurement_id = ? WHERE owner_org = ? AND reference_number = ?',
-                                                     (i, k, psuedo_proc, a_row[4], g_row[1]))
+                            except ValueError as ve:
+                                print(f"Bad numbers: original value {g_row[1]}, amendment value {g_row[2]}: {a_row[4]},{a_row[1]}")
                             i += 1
-                            pass2_count += 1
-                            sqldb.commit()
-                            sql_cursor_pass2 = sqldb.cursor()
-                            pass2_dict = {}
-                            for p2_row in sql_cursor_pass2.execute(f"SELECT {AMENDMENTS_HEADERS} from amendments where owner_org = ? AND reference_number = ?", (a_row[4], g_row[1])):
-                                for i, key in enumerate(AMENDMENTS_HEADERS.split(",")):
-                                    pass2_dict[key] = p2_row[i]
-                                report_writer.writerow(pass2_dict)
-                            # Smaller report - temporaritly replaced
-                            # rpt_dict = {
-                            #     "owner_org": g_row[0],
-                            #     "reference_number": g_row[1],
-                            #     "instrument_type": g_row[2],
-                            #     "procurement_id": g_row[3],
-                            #     "vendor_name": a_row[1],
-                            #     "contract_date": a_row[2],
-                            #     "economic_object_code": a_row[3],
-                            #     "pseudo_procurement_id": psuedo_proc,
-                            # }
-                            # report_writer.writerow(g_row)
-            print(f"Pass 2: {pass2_count} additional records matched as {pass2_contracts} amended contracts")
-            sqldb.commit()
+                            k += 1
+
+                        # Step 2 - Update validated groups with amendment information
+
+                        if is_valid:
+                            i = 0
+                            psuedo_proc = ""
+                            for g_row in sql_cursor_2.execute("SELECT owner_org, reference_number, instrument_type, procurement_id from amendments WHERE vendor_name = ? AND contract_date = ? AND economic_object_code = ? AND owner_org = ? AND procurement_count = 1 ORDER BY reporting_period ASC, reference_number ASC",
+                                                                (a_row[1], a_row[2], a_row[3], a_row[4])):
+                                sql_cursor_update = sqldb.cursor()
+
+                                if i == 0:
+                                    psuedo_proc = f"{g_row[3]}_{g_row[0]}_{a_row[2]}"
+
+                                if g_row[2] in ('C', 'SOSA'):
+                                    sql_cursor_update.execute('UPDATE amendments SET aggregate_total = ?, amendment_no = ?, procurement_count = ?, pseudo_procurement_id = ? WHERE owner_org = ? AND reference_number = ?',
+                                                         (grand_total, i, k, psuedo_proc, a_row[4], g_row[1]))
+                                else:
+                                    sql_cursor_update.execute('UPDATE amendments SET  amendment_no = ?, procurement_count = ?, pseudo_procurement_id = ? WHERE owner_org = ? AND reference_number = ?',
+                                                         (i, k, psuedo_proc, a_row[4], g_row[1]))
+                                i += 1
+                                pass2_count += 1
+                                sqldb.commit()
+                                sql_cursor_pass2 = sqldb.cursor()
+                                pass2_dict = {}
+                                for p2_row in sql_cursor_pass2.execute(f"SELECT {AMENDMENTS_HEADERS} from amendments where owner_org = ? AND reference_number = ?", (a_row[4], g_row[1])):
+                                    for i, key in enumerate(AMENDMENTS_HEADERS.split(",")):
+                                        pass2_dict[key] = p2_row[i]
+                                    report_writer.writerow(pass2_dict)
+
+                print(f"Pass 2: {pass2_count} additional records matched as {pass2_contracts} amended contracts")
+                sqldb.commit()
 
         # Write out amendments to CSV ready to be imported into Search
         with open(options['amendments'], 'a', encoding='utf-8-sig') as csv_out:
