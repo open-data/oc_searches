@@ -78,8 +78,8 @@
 <div class="row mrgn-bttm-lg">
     <div class="col-sm-5 col-xs-12" style="justify-content: left">
     {% if not show_all_results %}
-      <b>{% if LANGUAGE_CODE == 'fr' %}{{ total_hits|apnumber }} engagement{{ total_hits|pluralize }} trouvé{{ total_hits|pluralize }}
-      {% else %}Found {{ total_hits|apnumber }} commitment{{ total_hits|pluralize }}{% endif %}</b>
+      <b>{% if LANGUAGE_CODE == 'fr' %}{{ total_hits|apnumber }} action{{ total_hits|pluralize }} trouvé{{ total_hits|pluralize }}
+      {% else %}Found {{ total_hits|apnumber }} action{{ total_hits|pluralize }}{% endif %}</b>
     {% endif %}
     </div>
     <div class="col-sm-7 col-xs-12"><div style="display: flex; justify-content: right">

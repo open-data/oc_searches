@@ -101,7 +101,7 @@ def pre_render_search(context: dict, template: str, request: HttpRequest, lang: 
             context['ip_offset'] = circle_progress_bar_offset(context['facets']['status']['IP_EC'], context['total_hits']) if 'IP_EC' in stati and 'IP_EC' in context['facets']['status'] else 360
             context['ns_offset'] = circle_progress_bar_offset(context['facets']['status']['NS_NC'], context['total_hits']) if "NS_NC" in stati and 'NS_NC' in context['facets']['status'] else 360
             context['co_offset'] = circle_progress_bar_offset(context['facets']['status']['CP_RL'], context['total_hits']) if "CP_RL" in stati and 'CP_RL' in context['facets']['status'] else 360
-            context['on_offset'] = circle_progress_bar_offset(context['facets']['status']['ON_CO'], context['total_hits']) if "ON_CO" in context['facets']['status'] else 360
+            context['on_offset'] = circle_progress_bar_offset(context['facets']['status']['ON_CO'], context['total_hits']) if "ON_CO" in stati and 'ON_CO' in context['facets']['status'] else 360
 
             context['ip_num'] = context['facets']['status']['IP_EC'] if 'IP_EC' in stati and 'IP_EC' in context['facets']['status'] else 0
             context['ns_num'] = context['facets']['status']['NS_NC'] if "NS_NC" in stati and 'NS_NC' in context['facets']['status'] else 0
