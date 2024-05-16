@@ -5,7 +5,7 @@ from SolrClient import SolrResponse
 
 
 def plugin_api_version():
-    return 1.1
+    return 1.2
 
 
 def pre_search_solr_query(context: dict, solr_query: dict, request: HttpRequest, search: Search, fields: dict, codes: dict, facets: list, record_ids: str):
@@ -58,7 +58,7 @@ def load_csv_record(csv_record: dict, solr_record: dict, search: Search, fields:
 
 # Version 1.1 Methods
 
-def pre_render_search(context: dict, template: str, request: HttpRequest, lang: str, search: Search, fields: dict, codes: dict):
+def pre_render_search(context: dict, template: str, request: HttpRequest, lang: str, search: Search, fields: dict, codes: dict, view_type='search'):
     """
     If required, make changes to the context before rendering the search page or modify the template name
     :param context: the Django view context to be used
@@ -125,6 +125,9 @@ def pre_render_search(context: dict, template: str, request: HttpRequest, lang: 
     search_msg_fr, is_new = Setting.objects.get_or_create(key="data.searchpage.topmessage.fr")
     if not is_new:
         context["custom_search_message_fr"] = search_msg_fr.value
+
+    if request.META.get("QUERY_STRING", "") == "html":
+        template = "more_like_this.html"
 
     return context, template
 
