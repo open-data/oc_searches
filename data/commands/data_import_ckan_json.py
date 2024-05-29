@@ -450,17 +450,17 @@ class Command(BaseCommand):
                         self.log_it(f"Unknown subject {s} in dataset {ds['id']}")
             elif f == "title_translated":
                 if 'en' in ds[f]:
-                    solr_record['title_translated_eng'] = ds[f]['en']
-                    solr_record['title_translated_en'] = ds[f]['en']
+                    solr_record['title_translated_eng'] = ds[f]['en'].strip()
+                    solr_record['title_translated_en'] = ds[f]['en'].strip()
                 if 'en-t-fr' in ds[f]:
-                    solr_record['title_translated_eng'] = ds[f]['en-t-fr']
-                    solr_record['title_translated_en'] = ds[f]['en-t-fr']
+                    solr_record['title_translated_eng'] = ds[f]['en-t-fr'].strip()
+                    solr_record['title_translated_en'] = ds[f]['en-t-fr'].strip()
                 if 'fr' in ds[f]:
-                    solr_record['title_translated_fra'] = ds[f]['fr']
-                    solr_record['title_translated_fr'] = ds[f]['fr']
+                    solr_record['title_translated_fra'] = ds[f]['fr'].strip()
+                    solr_record['title_translated_fr'] = ds[f]['fr'].strip()
                 if 'fr-t-en' in ds[f]:
-                    solr_record['title_translated_fra'] = ds[f]['fr-t-en']
-                    solr_record['title_translated_fr'] = ds[f]['fr-t-en']
+                    solr_record['title_translated_fra'] = ds[f]['fr-t-en'].strip()
+                    solr_record['title_translated_fr'] = ds[f]['fr-t-en'].strip()
 
             elif f == 'keywords':
                 if 'en' in ds[f]:
