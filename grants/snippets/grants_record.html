@@ -8,7 +8,7 @@
 
 {% block main-content-title %}
 <h1 property="name" id="wb-cont">
-  {% if amendments %}{% translate 'Amendments for:' %} {{ docs.0.ref_number }}{% else %}{% translate 'Grants and Contributions:' %}{% endif %}</h1>
+  {% if amendments %}{% translate 'Amendments for:' %} <span data-testid="ref_number">{{ docs.0.ref_number }}</span>{% else %}{% translate 'Grants and Contributions:' %}{% endif %}</h1>
 {% endblock main-content-title %}
 
 {% block main-content-centre %}
@@ -24,7 +24,7 @@
             <header class="panel-heading">
                 <h5 class="panel-title">
                     {% if not doc.amendment_number == 'current' %}
-                      {% translate 'Amendment' %} {{ doc.amendment_number }}
+                  {% translate 'Amendment' %} {{ doc.amendment_number }}
                     {% else %}
                       <a href="{{ path_info }}">{% translate 'Current' %}
                     {% endif %}
