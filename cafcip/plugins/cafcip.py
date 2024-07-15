@@ -2,6 +2,7 @@
 from babel.dates import format_date
 from datetime import datetime
 from django.http import HttpRequest
+import re
 from search.models import Search, Field, Code
 from SolrClient import SolrResponse
 
@@ -15,6 +16,24 @@ def circle_progress_bar_offset(value: int, total: int):
         return 360
     else:
         return 360 - round(value * 360 / total)
+
+
+def handle_excel_dates(date_value: str):
+    return_value = ""
+
+    if re.search(r"^\d{4}-[0-1]\d-[0-3]\d", date_value) is not None:
+        # YYYY-MM-DD
+        m = re.search(r"^\d{4}-[0-1]\d-[0-3]\d", date_value)
+        return_value = m.group(0)
+
+    elif re.search(r"^(0?[1-9]|1[0-2])/(0?[1-9]|[12]\d|30|31)/(\d{4}|\d{2})$",date_value) is not None:
+        # M/D/Y - with or without leading zeroes
+        m = re.search(r"^(0?[1-9]|1[0-2])/(0?[1-9]|[12]\d|30|31)/(\d{4}|\d{2})$", date_value)
+        year = int(m.group(3)) if len(m.group(3)) == 4 else int(f'20{m.group(3)}')
+        day = int(m.group(2))
+        month = int(m.group(1))
+        return_value = f"{year:04d}-{month:02d}-{day:02d}"
+    return return_value
 
 
 def pre_search_solr_query(context: dict, solr_query: dict, request: HttpRequest, search: Search, fields: dict, codes: dict, facets: list, record_ids: str):
@@ -82,6 +101,11 @@ def filter_csv_record(csv_record,search: Search, fields: dict, codes: dict, form
     if csv_record['report'] in report_codes_en:
         csv_record['report'] = report_codes_en[csv_record['report']]
 
+    if csv_record['completion_date']:
+        csv_record['completion_date'] = handle_excel_dates(csv_record['completion_date'])
+    if csv_record['actual_date']:
+        csv_record['actual_date'] = handle_excel_dates(csv_record['actual_date'])
+
     return True,  csv_record
 
 
@@ -105,9 +129,21 @@ def load_csv_record(csv_record: dict, solr_record: dict, search: Search, fields:
             solr_record['culture_aspect_fr'] = "-"
 
     if csv_record['completion_date']:
-        completion_date = datetime.strptime(csv_record['completion_date'], '%Y-%m-%d')
-        solr_record['completion_date_en'] = f"By {format_date(completion_date, locale='en')}"
-        solr_record['completion_date_fr'] = f"D'ici {format_date(completion_date, locale='fr')}"
+        date_text = csv_record['completion_date']
+        completion_date = datetime.strptime(date_text, '%Y-%m-%d')
+        solr_record['completion_date'] = date_text
+        if completion_date:
+            solr_record['completion_date_en'] = f"By {format_date(completion_date, locale='en')}"
+            solr_record['completion_date_fr'] = f"D'ici {format_date(completion_date, locale='fr')}"
+
+    if csv_record['actual_date']:
+        date_text = csv_record['actual_date']
+        completion_date = datetime.strptime(date_text, '%Y-%m-%d')
+        solr_record['actual_date'] = date_text
+        if completion_date:
+            solr_record['actual_date_en'] = f"By {format_date(completion_date, locale='en')}"
+            solr_record['actual_date_fr'] = f"D'ici {format_date(completion_date, locale='fr')}"
+
     return solr_record
 
 # Version 1.1 Methods

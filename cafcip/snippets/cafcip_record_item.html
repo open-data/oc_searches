@@ -80,50 +80,50 @@
   {% if doc.web_links_fr1 != '-' %}
   <div class="row mrgn-tp-md">
   <div class="col-md-3"><strong>{% translate 'Web Links: ' %}</strong></div>
-  <div class="col-md-9">{{ doc.web_links_fr1 | safe }}</div>
+    <div class="col-md-9"><a href="{{ doc.web_links_fr1 }}">{{ doc.web_links_fr1 }}</a></div>
   </div>
   {% endif %}
   {% if doc.web_links_fr2 != '-' %}
   <div class="row mrgn-tp-md">
   <div class="col-md-3"></div>
-  <div class="col-md-9">{{ doc.web_links_fr2 | safe }}</div>
+    <div class="col-md-9"><a href="{{ doc.web_links_fr2 }}">{{ doc.web_links_fr2 }}</a></div>
   </div>
   {% endif %}
   {% if doc.web_links_fr3 != '-' %}
   <div class="row mrgn-tp-md">
   <div class="col-md-3"></div>
-  <div class="col-md-9">{{ doc.web_links_fr3 | safe }}</div>
+    <div class="col-md-9"><a href="{{ doc.web_links_fr3 }}">{{ doc.web_links_fr3 }}</a></div>
   </div>
   {% endif %}
   {% if doc.web_links_fr4 != '-' %}
   <div class="row mrgn-tp-md">
   <div class="col-md-3"></div>
-  <div class="col-md-9">{{ doc.web_links_fr4 | safe }}</div>
+    <div class="col-md-9"><a href="{{ doc.web_links_fr4 }}">{{ doc.web_links_fr4 }}</a></div>
   </div>
   {% endif %}
 {% else %}
   {% if doc.web_links_en1 != '-' %}
   <div class="row mrgn-tp-md">
   <div class="col-md-3"><strong>{% translate 'Web Links: ' %}</strong></div>
-  <div class="col-md-9">{{ doc.web_links_en1 | safe }}</div>
+    <div class="col-md-9"><a href="{{ doc.web_links_en1 }}">{{ doc.web_links_en1 }}</a></div>
   </div>
   {% endif %}
   {% if doc.web_links_en2 != '-' %}
   <div class="row mrgn-tp-md">
   <div class="col-md-3"></div>
-  <div class="col-md-9">{{ doc.web_links_en2 | safe }}</div>
+    <div class="col-md-9"><a href="{{ doc.web_links_en2 }}">{{ doc.web_links_en2 }}</a></div>
   </div>
   {% endif %}
   {% if doc.web_links_en3 != '-' %}
   <div class="row mrgn-tp-md">
   <div class="col-md-3"></div>
-  <div class="col-md-9">{{ doc.web_links_en3 | safe }}</div>
+    <div class="col-md-9"><a href="{{ doc.web_links_en3 }}">{{ doc.web_links_en3 }}</a></div>
   </div>
   {% endif %}
   {% if doc.web_links_en4 != '-' %}
   <div class="row mrgn-tp-md">
   <div class="col-md-3"></div>
-  <div class="col-md-9">{{ doc.web_links_en4 | safe }}</div>
+    <div class="col-md-9"><a href="{{ doc.web_links_en4 }}">{{ doc.web_links_en4 }}</a></div>
   </div>
   {% endif %}
 {% endif %}

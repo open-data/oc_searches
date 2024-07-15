@@ -54,50 +54,50 @@
           {% if docs.0.web_links_fr1 != '-' %}
           <div class="row mrgn-tp-md">
             <dt><div class="col-md-3"><strong>{% translate 'Web Links: ' %}</strong></div></dt>
-            <dd><div class="col-md-9">{{ docs.0.web_links_fr1 | safe }}</div></dd>
+            <dd><div class="col-md-9"><a href="{{ docs.0.web_links_fr1 }}">{{ docs.0.web_links_fr1 | safe }}</a></div></dd>
           </div>
           {% endif %}
           {% if docs.0.web_links_fr2 != '-' %}
           <div class="row mrgn-tp-md">
             <dt><div class="col-md-3">&nbsp;</div></dt>
-            <dd><div class="col-md-9">{{ docs.0.web_links_fr2 | safe }}</div></dd>
+            <dd><div class="col-md-9"><a href="{{ docs.0.web_links_fr2 }}">{{ docs.0.web_links_fr2 | safe }}</a></div></dd>
           </div>
           {% endif %}
           {% if docs.0.web_links_fr3 != '-' %}
           <div class="row mrgn-tp-md">
             <dt><div class="col-md-3">&nbsp;</div></dt>
-            <dd><div class="col-md-9">{{ docs.0.web_links_fr3 | safe }}</div></dd>
+            <dd><div class="col-md-9"><a href="{{ docs.0.web_links_fr3 }}">{{ docs.0.web_links_fr3 | safe }}</a></div></dd>
           </div>
           {% endif %}
           {% if docs.0.web_links_fr4 != '-' %}
           <div class="row mrgn-tp-md">
             <dt><div class="col-md-3">&nbsp;</div></dt>
-            <dd><div class="col-md-9">{{ docs.0.web_links_fr4 | safe }}</div></dd>
+            <dd><div class="col-md-9"><a href="{{ docs.0.web_links_fr4 }}">{{ docs.0.web_links_fr4 | safe }}</a></div></dd>
           </div>
           {% endif %}
         {% else %}
           {% if docs.0.web_links_en1 != '-' %}
           <div class="row mrgn-tp-md">
             <dt><div class="col-md-3"><strong>{% translate 'Web Links: ' %}</strong></div></dt>
-            <dd><div class="col-md-9">{{ docs.0.web_links_en1 | safe }}</div></dd>
+            <dd><div class="col-md-9"><a href="{{ docs.0.web_links_en1 }}">{{ docs.0.web_links_en1 | safe }}</a></div></dd>
           </div>
           {% endif %}
           {% if docs.0.web_links_en2 != '-' %}
           <div class="row mrgn-tp-md">
             <dt><div class="col-md-3">&nbsp;</div></dt>
-            <dd><div class="col-md-9">{{ docs.0.web_links_en2 | safe }}</div></dd>
+            <dd><div class="col-md-9"><a href="{{ docs.0.web_links_en2 }}">{{ docs.0.web_links_en2 | safe }}</a></div></dd>
           </div>
           {% endif %}
           {% if docs.0.web_links_en3 != '-' %}
           <div class="row mrgn-tp-md">
             <dt><div class="col-md-3">&nbsp;</div></dt>
-            <dd><div class="col-md-9">{{ docs.0.web_links_en3 | safe }}</div></dd>
+            <dd><div class="col-md-9"><a href="{{ docs.0.web_links_en3 }}">{{ docs.0.web_links_en3 | safe }}</a></div></dd>
           </div>
           {% endif %}
           {% if docs.0.web_links_en4 != '-' %}
           <div class="row mrgn-tp-md">
             <dt><div class="col-md-3">&nbsp;</div></dt>
-            <dd><div class="col-md-9">{{ docs.0.web_links_en4 | safe }}</div></dd>
+            <dd><div class="col-md-9"><a href="{{ docs.0.web_links_en4 }}">{{ docs.0.web_links_en4 | safe }}</a></div></dd>
           </div>
           {% endif %}
         {% endif %}
