@@ -31,7 +31,7 @@ class Command(BaseCommand):
         cur.execute(f'DROP TABLE IF EXISTS latest')
         cur.execute('create table latest(indicators NVARCHAR, reporting_period NVARCHAR)')
         try:
-            for chunk in pd.read_csv(options['csv'], chunksize=500, delimiter=","):
+            for chunk in pd.read_csv(options['csv'], chunksize=500, delimiter=",", encoding_errors="xmlcharrefreplace", encoding="utf-8-sig"):
                 chunk.columns = chunk.columns.str.replace(' ', '_')  # replacing spaces with underscores for column names
                 chunk.to_sql(name="nap5", con=conn, if_exists='append')
 
@@ -41,8 +41,8 @@ class Command(BaseCommand):
             cur.execute("select l.reporting_period, n.reporting_period, n.commitments, n.milestones, n.indicators, n.status, n.progress_en, n.progress_fr, n.evidence_en, n.evidence_fr, n.challenges_en, n.challenges_fr, n.owner_org, n.owner_org_title from nap5 n join latest l on n.indicators = l.indicators")
             nap_data = cur.fetchall()
 
-            with open(options['out'], 'w', newline='') as outfile:
-                out_writer = csv.writer(outfile, dialect='excel')
+            with open(options['out'], 'w', newline='', encoding="utf-8-sig") as outfile:
+                out_writer = csv.writer(outfile, dialect="excel")
                 out_writer.writerow(['reporting_period', 'commitments', 'milestones', 'indicators', 'status', 'progress_en', 'progress_fr', 'evidence_en', 'evidence_fr', 'challenges_en', 'challenges_fr', 'owner_org', 'owner_org_title', 'is_latest'])
                 for dt in nap_data:
                     row = list(dt)
@@ -54,7 +54,7 @@ class Command(BaseCommand):
                     out_writer.writerow(row)
 
         except Exception as e:
-            self.logger.critical(f'Error processing')
+            self.logger.critical(f'Error processing {e}')
             self.logger.error(e)
 
         finally:
