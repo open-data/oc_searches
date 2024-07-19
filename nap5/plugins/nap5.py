@@ -95,7 +95,7 @@ def load_csv_record(csv_record: dict, solr_record: dict, search: Search, fields:
             solr_record['s4d'] = "n"
             solr_record['s4d_en'] = codes['s4d']['n'].label_en
             solr_record['s4d_fr'] = codes['s4d']['n'].label_fr
-        solr_record['due_date'] = codes['indicators'][indicator].extra_01
+        solr_record['due_date'] = f"b'{codes['indicators'][indicator].extra_01}'"
         if solr_record['due_date'] in codes['due_date']:
             solr_record['due_date_en'] = codes['due_date'][solr_record['due_date']].label_en
             solr_record['due_date_fr'] = codes['due_date'][solr_record['due_date']].label_fr
