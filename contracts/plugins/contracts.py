@@ -122,15 +122,27 @@ def filter_csv_record(csv_record,search: Search, fields: dict, codes: dict, form
         if csv_record['award_criteria'][0:1] == "?":
             csv_record['award_criteria'] = ''
 
-        if csv_record['trade_agreement_exceptions'] not in codes['trade_agreement_exceptions'] and csv_record['trade_agreement_exceptions'] != '':
-            logger.warning('Unknown Trade Agreement Exceptions code: %s for %s,%s', csv_record['trade_agreement_exceptions'],
-                           csv_record['owner_org'], csv_record['reference_number'])
+        if 'trade_agreement_exceptions' in csv_record and len(csv_record['trade_agreement_exceptions']) > 1:
+            taes = csv_record['trade_agreement_exceptions'].split(',')
+            valid_taes = []
+            for tae in taes:
+                if tae not in codes['trade_agreement_exceptions']:
+                    logger.warning('Unknown Trade Agreement Exceptions code: %s for %s,%s',
+                                   csv_record['trade_agreement_exceptions'],
+                                   csv_record['owner_org'], csv_record['reference_number'])
+                else:
+                    valid_taes.append(tae)
+            csv_record['trade_agreement_exceptions'] = ",".join(valid_taes)
+        else:
             csv_record['trade_agreement_exceptions'] = ''
 
         if csv_record['country_of_vendor'].lower() not in codes['country_of_vendor'] and csv_record['country_of_vendor'] != '':
             logger.warning('Unknown Country of Vendor code: %s for %s,%s', csv_record['country_of_vendor'],
                            csv_record['owner_org'], csv_record['reference_number'])
             csv_record['country_of_vendor'] = ''
+
+        if csv_record['socioeconomic_indicator'] == 'N/A':
+            csv_record['socioeconomic_indicator'] = 'NA'
 
     return True,  csv_record
 

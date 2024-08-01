@@ -1,3 +1,4 @@
+from babel.numbers import format_decimal
 from django.core.management.base import BaseCommand, CommandError
 from django.conf import settings
 import csv
@@ -172,7 +173,7 @@ class Command(BaseCommand):
                                         grand_total += float(pro_row[2])
                             except ValueError as ve:
                                 print(f"Bad numbers: original value {pro_row[1]}, amendment value {pro_row[2]}: {row[41]},{row[1]}")
-                        amend_dict['aggregate_total'] = grand_total
+                        amend_dict['aggregate_total'] = format_decimal(grand_total, locale='en_US')
                 # Pass 1 logic does not apply, continue treating the current record as an individual record
                 else:
                     amend_dict["amendment_no"] = 0
