@@ -24,7 +24,7 @@ msgid "Title: "
 msgstr "Titre : "
 
 msgid "Recommendation #: "
-msgstr "N° de recommendation : "
+msgstr "N° de recommandation : "
 
 msgid "Status Narrative: "
 msgstr "Narratif du statut : "
@@ -33,7 +33,7 @@ msgid "Culture Aspect: "
 msgstr "Aspect culturel : "
 
 msgid "Recommendation: "
-msgstr "Recommendation : "
+msgstr "Recommandation : "
 
 msgid "Web Links: "
 msgstr "Liens Web : "

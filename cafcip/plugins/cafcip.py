@@ -141,8 +141,8 @@ def load_csv_record(csv_record: dict, solr_record: dict, search: Search, fields:
         completion_date = datetime.strptime(date_text, '%Y-%m-%d')
         solr_record['actual_date'] = date_text
         if completion_date:
-            solr_record['actual_date_en'] = f"By {format_date(completion_date, locale='en')}"
-            solr_record['actual_date_fr'] = f"D'ici {format_date(completion_date, locale='fr')}"
+            solr_record['actual_date_en'] = f"{format_date(completion_date, locale='en')}"
+            solr_record['actual_date_fr'] = f"{format_date(completion_date, locale='fr')}"
 
     return solr_record
 

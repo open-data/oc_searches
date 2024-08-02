@@ -26,7 +26,7 @@
 
         <div class="row mrgn-tp-md">
           <dt><div class="col-md-3"><strong>{% translate 'Recommendation: ' %}</strong></div></dt>
-          <dd><div class="col-md-9">{% if language == "fr" %}{{ docs.0.desc_fr }}{% else %}{{ docs.0.desc_en }}{% endif %}</div></dd>
+          <dd><div class="col-md-9">{% if language == "fr" %}{{ docs.0.desc_fr | markdown_filter | safe }}{% else %}{{ docs.0.desc_en | markdown_filter | safe }}{% endif %}</div></dd>
         </div>
 
         <div class="row mrgn-tp-md">
@@ -36,16 +36,16 @@
 
         {% if language == "fr" %}
           {% if docs.0.context_fr != '-' %}
-        <div class="row" mrgn-tp-md>
+        <div class="row mrgn-tp-md">
           <dt><div class="col-md-3"><strong>{% translate 'Context: ' %}</strong></div></dt>
-          <dd><div class="col-md-9">{{ docs.0.context_fr }}</div></dd>
+          <dd><div class="col-md-9">{{ docs.0.context_fr | markdown_filter | safe }}</div></dd>
         </div>
           {% endif %}
         {% else %}
           {% if docs.0.context_en != '-' %}
         <div class="row mrgn-tp-md">
           <dt><div class="col-md-3"><strong>{% translate 'Context: ' %}</strong></div></dt>
-          <dd><div class="col-md-9">{{ docs.0.context_en }}</div></dd>
+          <dd><div class="col-md-9">{{ docs.0.context_en | markdown_filter | safe }}</div></dd>
         </div>
           {% endif %}
         {% endif %}
@@ -54,50 +54,50 @@
           {% if docs.0.web_links_fr1 != '-' %}
           <div class="row mrgn-tp-md">
             <dt><div class="col-md-3"><strong>{% translate 'Web Links: ' %}</strong></div></dt>
-            <dd><div class="col-md-9"><a href="{{ docs.0.web_links_fr1 }}">{{ docs.0.web_links_fr1 | safe }}</a></div></dd>
+            <dd><div class="col-md-9"><a href="{{ docs.0.web_links_fr1 }}" target="_blank">{{ docs.0.web_links_fr1 | safe }}</a></div></dd>
           </div>
           {% endif %}
           {% if docs.0.web_links_fr2 != '-' %}
           <div class="row mrgn-tp-md">
             <dt><div class="col-md-3">&nbsp;</div></dt>
-            <dd><div class="col-md-9"><a href="{{ docs.0.web_links_fr2 }}">{{ docs.0.web_links_fr2 | safe }}</a></div></dd>
+            <dd><div class="col-md-9"><a href="{{ docs.0.web_links_fr2 }}" target="_blank">{{ docs.0.web_links_fr2 | safe }}</a></div></dd>
           </div>
           {% endif %}
           {% if docs.0.web_links_fr3 != '-' %}
           <div class="row mrgn-tp-md">
             <dt><div class="col-md-3">&nbsp;</div></dt>
-            <dd><div class="col-md-9"><a href="{{ docs.0.web_links_fr3 }}">{{ docs.0.web_links_fr3 | safe }}</a></div></dd>
+            <dd><div class="col-md-9"><a href="{{ docs.0.web_links_fr3 }}" target="_blank">{{ docs.0.web_links_fr3 | safe }}</a></div></dd>
           </div>
           {% endif %}
           {% if docs.0.web_links_fr4 != '-' %}
           <div class="row mrgn-tp-md">
             <dt><div class="col-md-3">&nbsp;</div></dt>
-            <dd><div class="col-md-9"><a href="{{ docs.0.web_links_fr4 }}">{{ docs.0.web_links_fr4 | safe }}</a></div></dd>
+            <dd><div class="col-md-9"><a href="{{ docs.0.web_links_fr4 }}" target="_blank">{{ docs.0.web_links_fr4 | safe }}</a></div></dd>
           </div>
           {% endif %}
         {% else %}
           {% if docs.0.web_links_en1 != '-' %}
           <div class="row mrgn-tp-md">
             <dt><div class="col-md-3"><strong>{% translate 'Web Links: ' %}</strong></div></dt>
-            <dd><div class="col-md-9"><a href="{{ docs.0.web_links_en1 }}">{{ docs.0.web_links_en1 | safe }}</a></div></dd>
+            <dd><div class="col-md-9"><a href="{{ docs.0.web_links_en1 }}" target="_blank">{{ docs.0.web_links_en1 | safe }}</a></div></dd>
           </div>
           {% endif %}
           {% if docs.0.web_links_en2 != '-' %}
           <div class="row mrgn-tp-md">
             <dt><div class="col-md-3">&nbsp;</div></dt>
-            <dd><div class="col-md-9"><a href="{{ docs.0.web_links_en2 }}">{{ docs.0.web_links_en2 | safe }}</a></div></dd>
+            <dd><div class="col-md-9"><a href="{{ docs.0.web_links_en2 }}" target="_blank">{{ docs.0.web_links_en2 | safe }}</a></div></dd>
           </div>
           {% endif %}
           {% if docs.0.web_links_en3 != '-' %}
           <div class="row mrgn-tp-md">
             <dt><div class="col-md-3">&nbsp;</div></dt>
-            <dd><div class="col-md-9"><a href="{{ docs.0.web_links_en3 }}">{{ docs.0.web_links_en3 | safe }}</a></div></dd>
+            <dd><div class="col-md-9"><a href="{{ docs.0.web_links_en3 }}" target="_blank">{{ docs.0.web_links_en3 | safe }}</a></div></dd>
           </div>
           {% endif %}
           {% if docs.0.web_links_en4 != '-' %}
           <div class="row mrgn-tp-md">
             <dt><div class="col-md-3">&nbsp;</div></dt>
-            <dd><div class="col-md-9"><a href="{{ docs.0.web_links_en4 }}">{{ docs.0.web_links_en4 | safe }}</a></div></dd>
+            <dd><div class="col-md-9"><a href="{{ docs.0.web_links_en4 }}" target="_blank">{{ docs.0.web_links_en4 | safe }}</a></div></dd>
           </div>
           {% endif %}
         {% endif %}
@@ -115,14 +115,14 @@
       <div class="panel-body">
         <dl>
           <div class="row mrgn-tp-md">
-            <dt><div class="col-md-3"><strong>{% translate 'Expected Implementation: ' %}</strong></div></dt>
-            <dd><div class="col-md-9">{% if language == "fr" %}{{ doc.completion_date_fr }}{% else %}{{ doc.completion_date_en }}{% endif %}</div></dd>
+            <dt><div class="col-md-4"><strong>{% translate 'Expected Implementation: ' %}</strong></div></dt>
+            <dd><div class="col-md-8">{% if language == "fr" %}{{ doc.completion_date_fr }}{% else %}{{ doc.completion_date_en }}{% endif %}</div></dd>
           </div>
 
-          <div class="row">
-            <dt><div class="col-md-3"><strong>{% translate 'Status: ' %}</strong></div></dt>
+          <div class="row mrgn-tp-md">
+            <dt><div class="col-md-4"><strong>{% translate 'Status: ' %}</strong></div></dt>
             <dd>
-              <div class="col-md-9">
+              <div class="col-md-8">
                 <span class="label {% if doc.status == 'not_started' %}label-danger{% elif doc.status == 'in_progress' %}label-info{% elif doc.status == 'completed' %}label-success{% endif %}">{% if language == 'fr' %}{{ doc.status_fr }}{% else %}{{ doc.status_en }}{% endif %}</span>
               </div>
             </dd>
@@ -130,23 +130,23 @@
           {% if language == "fr" %}
             {% if doc.status_comments_fr != '-' %}
             <div class="row mrgn-tp-md">
-              <dt><div class="col-md-3"><strong>{% translate 'Status Narrative: ' %}</strong></div></dt>
-              <dd><div class="col-md-9">{{ doc.status_comments_fr }}</div></dd>
+              <dt><div class="col-md-4"><strong>{% translate 'Status Narrative: ' %}</strong></div></dt>
+              <dd><div class="col-md-8">{{ doc.status_comments_fr | markdown_filter | safe  }}</div></dd>
             </div>
             {% endif %}
           {% else %}
             {% if doc.status_comments_en != '-' %}
             <div class="row mrgn-tp-md">
-              <dt><div class="col-md-3"><strong>{% translate 'Status Narrative: ' %}</strong></div></dt>
-              <dd><div class="col-md-9">{{ doc.status_comments_en }}</div></dd>
+              <dt><div class="col-md-4"><strong>{% translate 'Status Narrative: ' %}</strong></div></dt>
+              <dd><div class="col-md-8">{{ doc.status_comments_en | markdown_filter | safe  }}</div></dd>
             </div>
             {% endif %}
           {% endif %}
 
           {% if doc.actual_date != "2000-01-01T00:00:00Z" %}
           <div class="row mrgn-tp-md">
-            <dt><div class="col-md-3"><strong>{% translate 'Completion Date: ' %}</strong></div></dt>
-            <dd><div class="col-md-9">{% if language == "fr" %}{{ doc.actual_date_fr }}{% else %}{{ doc.actual_date_en }}{% endif %}</div></dd>
+            <dt><div class="col-md-4"><strong>{% translate 'Completion Date: ' %}</strong></div></dt>
+            <dd><div class="col-md-8">{% if language == "fr" %}{{ doc.actual_date_fr }}{% else %}{{ doc.actual_date_en }}{% endif %}</div></dd>
           </div>
           {% endif %}
 
