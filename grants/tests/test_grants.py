@@ -22,7 +22,7 @@ def test_not_empty_en(page: Page):
 
 def test_simple_search_fr(page: Page):
     page.goto(search_path('grants', 'fr'))
-    tb = page.get_by_label("Search text")
+    tb = page.get_by_test_id("search-text")
     tb.fill('"GC-2018-2019-Q3-00001"')
     bt = page.get_by_label("Search button")
     bt.click()
