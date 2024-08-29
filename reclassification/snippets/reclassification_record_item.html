@@ -1,0 +1,27 @@
+
+{% load i18n %}
+{% load search_extras %}
+
+<div class="col-md-4"><strong>{% translate 'Reference Number:' %}</strong></div>
+<div class="col-md-8">{{ doc.ref_number }}</div>
+
+<div class="col-md-4"><strong>{% translate 'Position Number:' %}</strong></div>
+<div class="col-md-8">{{ doc.pos_number }}</div>
+
+<div class="col-md-4"><strong>{% translate 'Position Title:' %}</strong></div>
+<div class="col-md-8">{% if language == "fr" %}{{ doc.pos_title_fr }}{% else %}{{ doc.pos_title_en }}{% endif %}</div>
+
+<div class="col-md-4"><strong>{% translate 'Organization:' %}</strong></div>
+<div class="col-md-8">{% if language == "fr" %}{{ doc.owner_org_fr }}{% else %}{{ doc.owner_org_en }}{% endif %}</div>
+
+<div class="col-md-4"><strong>{% translate 'Date:' %}</strong></div>
+<div class="col-md-8">{% if language == "fr" %}{{ doc.date_fr }}{% else %}{{ doc.date_en }}{% endif %}</div>
+
+<div class="col-md-4"><strong>{% translate 'Previous Classification:' %}</strong></div>
+<div class="col-md-8">{{ doc.old_class_group_code }}-{{ doc.old_class_level }}</div>
+
+<div class="col-md-4"><strong>{% translate 'Reclassified Position:' %}</strong></div>
+<div class="col-md-8">{{ doc.new_class_group_code }}-{{ doc.new_class_level }}</div>
+
+<div class="col-md-4"><strong>{% translate 'Reason:' %}</strong></div>
+<div class="col-md-8">{% if language == "fr" %}{{ doc.reason_fr }}{% else %}{{ doc.reason_en }}{% endif %}</div>
