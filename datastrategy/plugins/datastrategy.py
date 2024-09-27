@@ -102,7 +102,7 @@ def load_csv_record(csv_record: dict, solr_record: dict, search: Search, fields:
             solr_record['priority'] = 0
     else:
         solr_record['priority'] = 0
-
+    solr_record['priority_en'] = f"Year {y} priority"
     return solr_record
 
 # Version 1.1 Methods
