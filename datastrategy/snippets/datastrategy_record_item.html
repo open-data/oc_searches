@@ -36,7 +36,10 @@
 
 <div class="row">
 <div class="col-md-3"><strong>{% translate 'Lead: ' %}</strong></div>
-<div class="col-md-9">{% if language == "fr" %}{{ doc.lead_fr_fr }}{% else %}{{ doc.lead_en }}{% endif %}</div>
+<div class="col-md-9">
+  {% if language == "fr" %}{% for l in doc.lead_fr_fr %}{{ l }}<br>{% endfor %}
+  {% else %}{% for l in doc.lead_en %}{{ l }}<br>{% endfor %}
+  {% endif %}</div>
 </div>
 
 {% if doc.partners != '-' and doc.partners_fr != '-' %}

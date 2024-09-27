@@ -92,7 +92,7 @@
         {% else %}
 
         <div class="col-md-2">
-          {% if In_Progess_list %}<a href="{% qurl request.get_full_path action_status=In_Progess_list %}" title="In Progress" alt="{{ ip_num }} item{{ ip_num|pluralize }} {% translate 'with status' %} In progress ">{% endif %}
+          {% if In_Progress_list %}<a href="{% qurl request.get_full_path action_status=In_Progress_list %}" title="In Progress" alt="{{ ip_num }} item{{ ip_num|pluralize }} {% translate 'with status' %} In progress ">{% endif %}
           <svg aria-labelledby="ipStatTitle" role="img">
             <title id="ipStatTitle">{{ ip_num }} item{{ ip_num|pluralize }} {% translate "with status" %} In Progress</title>
             <circle class="bg-Blue" cx="57" cy="57" r="52" />
