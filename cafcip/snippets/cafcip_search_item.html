@@ -41,7 +41,7 @@
 
   <div class="col-sm-12">
        <strong>{% translate 'Status: ' %}</strong>
-    <span class="label {% if doc.status == 'not_started' %}label-danger{% elif doc.status == 'in_progress' %}label-info{% elif doc.status == 'completed' %}label-success{% endif %}">
+    <span class="label {% if doc.status == 'not_started' %}label-danger{% elif doc.status == 'in_progress' %}label-info{% elif doc.status == 'implemented' %}label-success{% endif %}">
     {% if language == 'fr' %}{{ doc.status_fr }}{% else %}{{ doc.status_en }}{% endif %}</span>
   </div>
 

@@ -91,6 +91,11 @@ def filter_csv_record(csv_record,search: Search, fields: dict, codes: dict, form
 
     if csv_record['status']:
         csv_record['status'] = csv_record['status'].lower().replace(' ', '_')
+        csv_record['status_detail'] = csv_record['status']
+        if csv_record['status'] == 'substantially_implemented':
+            csv_record['status'] = "implemented"
+        if csv_record['status'] == 'fully_implemented':
+            csv_record['status'] = "implemented"
 
     #  Ensure Code values are used in the report field:
     report_codes_en = {"independent external comprehensive review": "iecr",
@@ -164,12 +169,15 @@ def pre_render_search(context: dict, template: str, request: HttpRequest, lang: 
         context['ip_offset'] = 360
         context['ns_offset'] = 360
         context['co_offset'] = 360
+        context['mi_offset'] = 360
         context['ip_num'] = 0
         context['ns_num'] = 0
         context['co_num'] = 0
+        context['mi_num'] = 0
         context['ip_list'] = ()
         context['ns_list'] = ()
         context['co_list'] = ()
+        context['mi_list'] = ()
     else:
 
         context['show_all_results'] = True
@@ -188,13 +196,15 @@ def pre_render_search(context: dict, template: str, request: HttpRequest, lang: 
             stati = statii[0].split('|')
             context['ip_offset'] = circle_progress_bar_offset(context['facets']['status']['in_progress'], context['total_hits']) if "in_progress" in stati and 'in_progress' in context['facets']['status'] else 360
             context['ns_offset'] = circle_progress_bar_offset(context['facets']['status']['not_started'], context['total_hits']) if "not_started" in stati and 'not_started' in context['facets']['status'] else 360
-            context['co_offset'] = circle_progress_bar_offset(context['facets']['status']['completed'], context['total_hits']) if "completed" in stati and 'completed' in context['facets']['status'] else 360
+            context['co_offset'] = circle_progress_bar_offset(context['facets']['status']['implemented'], context['total_hits']) if "implemented" in stati and 'implemented' in context['facets']['status'] else 360
+            context['mi_offset'] = circle_progress_bar_offset(context['facets']['status']['mitigated'], context['total_hits']) if "mitigated" in stati and 'mitigated' in context['facets']['status'] else 360
 
             context['ip_num'] = context['facets']['status']['in_progress'] if "in_progress" in stati and 'in_progress' in context['facets']['status'] else 0
             context['ns_num'] = context['facets']['status']['not_started'] if "not_started" in stati and 'not_started' in context['facets']['status'] else 0
-            context['co_num'] = context['facets']['status']['completed'] if "completed" in stati and 'completed' in context['facets']['status'] else 0
+            context['co_num'] = context['facets']['status']['implemented'] if "implemented" in stati and 'implemented' in context['facets']['status'] else 0
+            context['mi_num'] = context['facets']['status']['mitigated'] if "mitigated" in stati and 'mitigated' in context['facets']['status'] else 0
 
-            for s in ['in_progress', 'not_started', 'completed']:
+            for s in ['in_progress', 'not_started', 'implemented', 'mitigated']:
                 stati2 = stati.copy()
                 if s in stati:
                     stati2.remove(s)
@@ -209,12 +219,14 @@ def pre_render_search(context: dict, template: str, request: HttpRequest, lang: 
         else:
             context['ip_offset'] = circle_progress_bar_offset(context['facets']['status']['in_progress'], context['total_hits']) if "in_progress" in context['facets']['status'] else 360
             context['ns_offset'] = circle_progress_bar_offset(context['facets']['status']['not_started'], context['total_hits']) if "not_started" in context['facets']['status'] else 360
-            context['co_offset'] = circle_progress_bar_offset(context['facets']['status']['completed'], context['total_hits']) if "completed" in context['facets']['status'] else 360
+            context['co_offset'] = circle_progress_bar_offset(context['facets']['status']['implemented'], context['total_hits']) if "implemented" in context['facets']['status'] else 360
+            context['mi_offset'] = circle_progress_bar_offset(context['facets']['status']['mitigated'], context['total_hits']) if "mitigated" in context['facets']['status'] else 360
             context['ip_num'] = context['facets']['status']['in_progress'] if "in_progress" in context['facets']['status'] else 0
             context['ns_num'] = context['facets']['status']['not_started'] if "not_started" in context['facets']['status'] else 0
-            context['co_num'] = context['facets']['status']['completed'] if "completed" in context['facets']['status'] else 0
+            context['co_num'] = context['facets']['status']['implemented'] if "implemented" in context['facets']['status'] else 0
+            context['mi_num'] = context['facets']['status']['mitigated'] if "mitigated" in context['facets']['status'] else 0
 
-            for s in ['in_progress', 'not_started', 'completed']:
+            for s in ['in_progress', 'not_started', 'implemented', 'mitigated']:
                 if s in context['facets']['status'] and context['facets']['status'][s] > 0:
                     context[s.replace(" ", "_") + "_list"] = s
                 else:

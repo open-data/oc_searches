@@ -21,15 +21,15 @@
     <div class="col-md-9 col-md-push-3 mrgn-tp-sm">
     <div class="row mrgn-bttm-md mrgn-lft-md form-inline">
       <div class="col-md-3 text-center">
-        {% if completed_list %}<a href="{% qurl request.get_full_path status=completed_list %}" title="{{ codes.status|get_dict_value:'completed' }}" alt="{{ co_num }} {% translate "recommendation" %}{{ co_num|pluralize }} {% translate "with status" %} {{ codes.status|get_dict_value:'completed' }}">{% endif %}
+        {% if implemented_list %}<a href="{% qurl request.get_full_path status=implemented_list %}" title="{{ codes.status|get_dict_value:'implemented' }}" alt="{{ co_num }} {% translate "recommendation" %}{{ co_num|pluralize }} {% translate "with status" %} {{ codes.status|get_dict_value:'implemented' }}">{% endif %}
         <svg aria-labelledby="cStatTitle" role="img">
-          <title id="cStatTitle">{{ co_num }} {% translate "recommendation" %}{{ co_num|pluralize }} {% translate "with status" %} {{ codes.status|get_dict_value:'completed' }}</title>
+          <title id="cStatTitle">{{ co_num }} {% translate "recommendation" %}{{ co_num|pluralize }} {% translate "with status" %} {{ codes.status|get_dict_value:'implemented' }}</title>
           <circle class="bg-CO" cx="57" cy="57" r="52" />
           <circle class="meter-CO" cx="57" cy="57" r="52" stroke-dashoffset="{{ co_offset }}" style="animation: kf_co 1s ease-out"/>
           <text x="57" y="64" text-anchor="middle" class="status_count_text">{{ co_num }}</text>
         </svg><br>
-        {{ codes.status|get_dict_value:'completed' }}
-        {% if completed_list %}</a>{% endif %}
+        {{ codes.status|get_dict_value:'implemented' }}
+        {% if implemented_list %}</a>{% endif %}
       </div>
 
       <div class="col-md-3 text-center">
@@ -54,6 +54,18 @@
         </svg><br>
         {{ codes.status|get_dict_value:'not_started' }}
         {% if not_started_list %}</a>{% endif %}
+      </div>
+
+      <div class="col-md-3 text-center">
+        {% if mitigated_list %}<a href="{% qurl request.get_full_path status=mitigated_list %}" title="{{ codes.status|get_dict_value:'mitigated' }}" alt="{{ mi_num }} {% translate "recommendation" %}{{ mi_num|pluralize }} {% translate "with status" %} {{ codes.status|get_dict_value:'mitigated' }}">{% endif %}
+        <svg aria-labelledby="miStatTitle" role="img">
+          <title id="miStatTitle">{{ mi_num }} {% translate "recommendation" %}{{ mi_num|pluralize }} {% translate "with status" %} {{ codes.status|get_dict_value:'mitigated' }}</title>
+          <circle class="bg-MI" cx="57" cy="57" r="52" />
+          <circle class="meter-MI" cx="57" cy="57" r="52" stroke-dashoffset="{{ mi_offset }}" style="animation: kf_lp .6s ease-out"/>
+          <text x="57" y="64" text-anchor="middle" class="status_count_text">{{ mi_num }}</text>
+        </svg><br>
+        {{ codes.status|get_dict_value:'mitigated' }}
+        {% if mitigated_list %}</a>{% endif %}
       </div>
 
     </div>

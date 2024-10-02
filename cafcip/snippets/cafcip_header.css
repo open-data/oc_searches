@@ -302,13 +302,23 @@ svg {
   animation: progress-2 .75s ease-out;
 }
 
+.bg-MI {
+  fill: none;
+  stroke-width: 10px;
+  stroke: #e1cef1;
+}
+.meter-MI {
+  stroke: #360c47;
+  stroke-dasharray: 360;
+}
+
 .bg-NS {
   fill: none;
   stroke-width: 10px;
-  stroke: #F3E9E8;
+  stroke: #f3f2e8;
 }
 .meter-NS {
-  stroke: #6c6c6c;
+  stroke: #95861e;
   stroke-dasharray: 360;
 }
 
