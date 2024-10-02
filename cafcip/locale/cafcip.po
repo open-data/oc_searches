@@ -61,3 +61,6 @@ msgstr "Date d'achèvement : "
 
 msgid "Context: "
 msgstr "Contexte : "
+
+msgid "Implementation Date: "
+msgstr "Date de mise en œuvre : "
