@@ -55,7 +55,7 @@ def load_csv_record(csv_record: dict, solr_record: dict, search: Search, fields:
                 solr_record['year']  = parse_date(csv_record['date']).year
             except ValueError as ve:
                 logger.warning(f"Warning, invalid date {csv_record['date']} for {csv_record['ref_number']},{csv_record['owner_org']}")
-            solr_record['year'] = datetime.now().year
+                solr_record['year'] = datetime.now().year
         else:
             solr_record['year'] = datetime.now().year
     return solr_record
