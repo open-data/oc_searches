@@ -51,6 +51,18 @@ def post_mlt_solr_query(context: dict, solr_response: SolrResponse, solr_query: 
 
 
 def filter_csv_record(csv_record,search: Search, fields: dict, codes: dict, format: str):
+    if csv_record['priority']:
+        y_set = False
+        for y in ['1', '2', '3', '4', '5', '6', '7', '8', '9']:
+            if csv_record['priority'].find(y) > -1:
+                csv_record['priority'] = y
+                y_set = True
+                break
+        if not y_set:
+            csv_record['priority'] = 0
+    else:
+        csv_record['priority'] = 0
+
     return True,  csv_record
 
 
@@ -91,18 +103,9 @@ def load_csv_record(csv_record: dict, solr_record: dict, search: Search, fields:
 
     # Replace the wordy priority text with a simpler code
 
-    if csv_record['priority']:
-        y_set = False
-        for y in ['1', '2', '3', '4', '5', '6', '7', '8', '9']:
-            if csv_record['priority'].find(y) > -1:
-                solr_record['priority'] = y
-                y_set = True
-                break
-        if not y_set:
-            solr_record['priority'] = 0
-    else:
-        solr_record['priority'] = 0
-    solr_record['priority_en'] = f"Year {y} priority"
+    solr_record['priority_en'] = f"Year {csv_record['priority']} priority"
+    solr_record['priority_fr'] = f"Année {csv_record['priority']} priorité"
+    solr_record['id'] = f"{csv_record['action_id']},{csv_record['priority']}"
     return solr_record
 
 # Version 1.1 Methods

@@ -14,7 +14,7 @@
         <div class="col-md-12"><strong>{% translate 'Area for action: ' %}</strong> {% if language == "fr" %}{{ doc.area_for_action_fr }}{% else %}{{ doc.area_for_action }}{% endif %}</div>
       </div>
       <div class="row">
-        <div class="col-md-6"><strong>{% translate 'Priority: ' %}</strong>{% if language == "fr" %}{{ doc.priority_fr }}{% else %}{{ doc.priority }}{% endif %}</div>
+        <div class="col-md-6"><strong>{% translate 'Priority: ' %}</strong>{% if language == "fr" %}{{ doc.priority_fr }}{% else %}{{ doc.priority_en }}{% endif %}</div>
         <div class="col-md-6"><strong>{% translate 'Status: ' %}</strong>{% if language == "fr" %}<span class="{{ doc.action_status_fr | ds_status_label }}">{{ doc.action_status_fr }}</span>{% else %}<span class="{{ doc.action_status | ds_status_label }}">{{ doc.action_status }}</span>{% endif %}</div>
       </div>
     </div>
