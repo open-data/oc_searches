@@ -92,6 +92,8 @@ def filter_csv_record(csv_record,search: Search, fields: dict, codes: dict, form
     if csv_record['status']:
         csv_record['status'] = csv_record['status'].lower().replace(' ', '_')
         csv_record['status_detail'] = csv_record['status']
+        if csv_record['status_detail'] == 'implemented':
+            csv_record['status_detail'] = 'fully_implemented'
         if csv_record['status'] == 'substantially_implemented':
             csv_record['status'] = "implemented"
         if csv_record['status'] == 'fully_implemented':
