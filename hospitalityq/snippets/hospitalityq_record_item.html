@@ -1,0 +1,145 @@
+
+{% load i18n %}
+{% load search_extras %}
+
+{% if language == "fr" %}
+
+  <div class="row">
+    <div class="col-md-4 mrgn-bttm-md"><strong>Numéro de demande :</strong></div>
+    <div class="col-md-8">{{ doc.ref_number }}</div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4 mrgn-bttm-md"><strong>Groupe de divulgation :</strong></div>
+    <div class="col-md-8">{{ doc.disclosure_group_fr }}</div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4 mrgn-bttm-md"><strong>Titre :</strong></div>
+    <div class="col-md-8">{{ doc.title_fr }}</div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4 mrgn-bttm-md"><strong>Nom :</strong></div>
+    <div class="col-md-8">{{ doc.name }}</div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4 mrgn-bttm-md"><strong>Organisation :</strong></div>
+    <div class="col-md-8">{{ doc.owner_org_fr }}</div>
+  </div>
+
+  {% if doc.location_en != "-" %}
+  <div class="row">
+    <div class="col-md-4 mrgn-bttm-md"><strong>Emplacement :</strong></div>
+    <div class="col-md-8">{{ doc.location_fr }}</div>
+  </div>
+  {% endif %}
+
+  <div class="row">
+    <div class="col-md-4 mrgn-bttm-md"><strong>Total :</strong></div>
+    <div class="col-md-8">{{ doc.total_fr }} $</div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4 mrgn-bttm-md"><strong>Description :</strong></div>
+    <div class="col-md-8">{{ doc.description_fr }}</div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4 mrgn-bttm-md"><strong>Date :</strong></div>
+    {% if doc.end_date_en != doc.start_date_en %}
+    <div class="col-md-8">Du {{ doc.start_date_fr }} au {{ doc.end_date_fr }}</div>
+    {% else %}
+    <div class="col-md-8">{{ doc.start_date_fr }}</div>
+    {% endif %}
+  </div>
+
+  <div class="row">
+    <div class="col-md-4 mrgn-bttm-md"><strong>Participants</strong> (employés du gouvernement du Canada) :</div>
+    <div class="col-md-8">{{ doc.employee_attendees_fr }}</div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4 mrgn-bttm-md"><strong>Participants</strong> (invités) :</div>
+    <div class="col-md-8">{{ doc.guest_attendees_fr }}</div>
+  </div>
+
+  {% if doc.vendor_en != '-' %}
+  <div class="row">
+    <div class="col-md-4 mrgn-bttm-md"><strong>Nom des établissements commerciaux ou des fournisseurs concernés:</strong></div>
+    <div class="col-md-8">{{ doc.vendor_fr }}</div>
+  </div>
+  {% endif %}
+
+{% else %} {# English #}
+
+  <div class="row">
+    <div class="col-md-4 mrgn-bttm-md"><strong>Reference Number:</strong></div>
+    <div class="col-md-8">{{ doc.ref_number }}</div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4 mrgn-bttm-md"><strong>Disclosure Group:</strong></div>
+    <div class="col-md-8">{{ doc.disclosure_group_en }}</div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4 mrgn-bttm-md"><strong>Title:</strong></div>
+    <div class="col-md-8">{{ doc.title_en }}</div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4 mrgn-bttm-md"><strong>Name:</strong></div>
+    <div class="col-md-8">{{ doc.name }}</div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4 mrgn-bttm-md"><strong>Organization:</strong></div>
+    <div class="col-md-8">{{ doc.owner_org_en }}</div>
+  </div>
+
+  {% if doc.location_en != "-" %}
+  <div class="row">
+    <div class="col-md-4 mrgn-bttm-md"><strong>Location:</strong></div>
+    <div class="col-md-8">{{ doc.location_en }}</div>
+  </div>
+  {% endif %}
+
+  <div class="row">
+    <div class="col-md-4 mrgn-bttm-md"><strong>Total:</strong></div>
+    <div class="col-md-8">$ {{ doc.total_en }}</div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4 mrgn-bttm-md"><strong>Description:</strong></div>
+    <div class="col-md-8">{{ doc.description_en }}</div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4 mrgn-bttm-md"><strong>Date:</strong></div>
+    {% if doc.end_date_en != doc.start_date_en %}
+    <div class="col-md-8">{{ doc.start_date_en }} to {{ doc.end_date_en }}</div>
+    {% else %}
+    <div class="col-md-8">{{ doc.start_date_en }}</div>
+    {% endif %}
+  </div>
+
+  <div class="row">
+    <div class="col-md-4 mrgn-bttm-md"><strong>Attendees</strong> (Government of Canada Employees):</div>
+    <div class="col-md-8">{{ doc.employee_attendees_en }}</div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4 mrgn-bttm-md"><strong>Attendees</strong> (Guest):</div>
+    <div class="col-md-8">{{ doc.guest_attendees_en }}</div>
+  </div>
+
+  {% if doc.vendor_en != '-' %}
+  <div class="row">
+    <div class="col-md-4 mrgn-bttm-md"><strong>Name of commercial establishment or vendor involved in the hospitality activity:</strong></div>
+    <div class="col-md-8">{{ doc.vendor_en }}</div>
+  </div>
+  {% endif %}
+
+{% endif %}
