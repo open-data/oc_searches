@@ -1,0 +1,3 @@
+Add leading 0 to the following fields of the reclassification search snippet:
+- old_class_level
+- new_class_level
