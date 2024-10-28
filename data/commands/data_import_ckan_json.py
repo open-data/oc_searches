@@ -670,23 +670,23 @@ class Command(BaseCommand):
 
         except Search.DoesNotExist as x:
             event_msg = f'Provided search id not found: {options["search"]}'
-            self.logger.error(event_msg)
+            self.logger.error(event_msg[:500])
             Event.objects.create(search_id='data', component_id='data_import_ckan_json', title=event_msg, category='warning')
             exit(-1)
         except Field.DoesNotExist as x1:
             event_msg = f"Field {x1} not found in search {options['search']}"
-            self.logger.error(event_msg)
+            self.logger.error(event_msg[:500])
             Event.objects.create(search_id='data', component_id='data_import_ckan_json', title=event_msg, category='error')
         except (ckanapi.CKANAPIError, ckanapi.ServerIncompatibleError) as cke:
             event_msg = f"Error while attempting to connect to CKAN at {options['remote_ckan']}: {cke}"
-            self.logger.error(event_msg)
+            self.logger.error(event_msg[:500])
             Event.objects.create(search_id='data', component_id='data_import_ckan_json', title=event_msg, category='error')
         except ConnectionError as cr:
             event_msg = f"Connection Refused Error while attempting to connect to CKAN at {options['remote_ckan']}: {cr}"
-            self.logger.error(event_msg)
+            self.logger.error(event_msg[:500])
             Event.objects.create(search_id='data', component_id='data_import_ckan_json', title=event_msg, category='error')
         except Exception as x:
             exc_type, exc_value, exc_traceback = sys.exc_info()
             event_msg = f"Command had unexpected exception. \nOptions: {options}. \nTraceback: {traceback.format_exception(exc_type, exc_value,exc_traceback)}"
-            self.logger.error(event_msg)
+            self.logger.error(event_msg[:500])
             Event.objects.create(search_id='data', component_id='data_import_ckan_json', title="Unhandled exception", message=event_msg, category='error')
