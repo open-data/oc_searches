@@ -12,7 +12,7 @@
     <div class="col-md-12">
         <div class="row">
             <div class="col-md-8" style="font-size: larger"><a href="{{ path_info }}record/{{ doc.id }}"><strong>{% if language == 'en' %}{{ doc.pos_title_en | safe }}{% else %}{{ doc.pos_title_fr | safe }}{% endif %}</strong></a></div>
-            <div class="col-md-4 text-right"><strong>{{ doc.old_class_group_code }}-{{ doc.old_class_level|intformat:"{:02d}" }}</strong> <span class="glyphicon glyphicon-arrow-right"></span> <strong>{{ doc.new_class_group_code }}-{{ doc.new_class_level|intformat:"{:02d}" }}</strong></div>
+            <div class="col-md-4 text-right"><strong>{{ doc.old_class_group_code | safe }}-{{ doc.old_class_level|intformat:"{:02d}" }}</strong> <span class="glyphicon glyphicon-arrow-right"></span> <strong>{{ doc.new_class_group_code | safe }}-{{ doc.new_class_level|intformat:"{:02d}" }}</strong></div>
         </div>
         <div class="row">
             <div class="col-md-8">{% translate 'Position No.' %} {{ doc.pos_number | safe }} <br>{% translate 'Reference No.' %} {{ doc.ref_number | safe }}</div>

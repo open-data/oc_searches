@@ -21,7 +21,7 @@ def test_uuid_search_title_en(page: Page):
 
 def test_uuid_search_title_fr(page: Page):
     page.goto(search_path('data', 'fr'))
-    tb = page.get_by_label("Recherche")
+    tb = page.get_by_test_id("search-text")
     tb.fill('009f9a49-c2d9-4d29-a6d4-1a228da335ce')
     bt = page.get_by_label("Search button")
     bt.click()
@@ -31,7 +31,7 @@ def test_uuid_search_title_fr(page: Page):
 
 def test_submit_a_search(page: Page):
     page.goto(search_path('data', 'en'))
-    tb = page.get_by_label("Search text")
+    tb = page.get_by_test_id("search-text")
     tb.fill('proactive disclosure travel expenses')
     bt = page.get_by_label("Search button")
     bt.click()
@@ -42,7 +42,7 @@ def test_submit_a_search(page: Page):
 
 def test_nothing_found(page: Page):
     page.goto(search_path('data', 'en'))
-    tb = page.get_by_label("Search text")
+    tb = page.get_by_test_id("search-text")
     tb.fill('zXcVbnmas')
     bt = page.get_by_label("Search button")
     bt.click()

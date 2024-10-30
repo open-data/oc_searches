@@ -27,7 +27,7 @@
     <p class="mrgn-tp-md"><strong>{% trans 'Locations:' %}</strong>
     <ul class="list-none">
       {% for location in doc.locations_fr %}
-      <li>{{location}}</li>
+      <li>{{location | safe }}</li>
       {% endfor %}
     </ul>
     </p>
@@ -36,7 +36,7 @@
     <p class="mrgn-tp-md"><strong>{% trans 'Locations:' %}</strong>
     <ul class="list-none">
       {% for location in doc.locations_en %}
-      <li>{{location}}</li>
+      <li>{{location | safe }}</li>
       {% endfor %}
     </ul>
     </p>
