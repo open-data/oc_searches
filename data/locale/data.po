@@ -63,6 +63,10 @@ msgstr "Recherchez des dossiers similaires"
 msgid "Date Published:"
 msgstr "Dossier publié :"
 
+msgid "No similar records found"
+msgstr "Aucun dossier similaire trouvé"
+
+
 
 
 

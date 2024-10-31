@@ -1,0 +1,2 @@
+For the Open Data search, for the More-like-this snipped used by the CKAN dataset page,
+display a meaningful messages instead of an empty list if no similar records are returned by Solr.

@@ -2,6 +2,7 @@
 {% load search_extras %}
 
 <div>
+    {% if docs|length > 0 %}
     <ul class="lst-spcd">
          {% for doc in docs %}
              <li>
@@ -21,4 +22,9 @@
              </li>
          {% endfor %}
     </ul>
+    {% else %}
+      <div class="text-center" style="padding-top:5px; font-style: italic;">
+        {% trans 'No similar records found' %}
+      </div>
+    {% endif %}
 </div>
