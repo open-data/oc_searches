@@ -53,7 +53,7 @@
   </div>
   <div class="row">
     <div class="col-sm-12">
-      <strong>{% translate 'Publisher:' %}</strong> {% if LANGUAGE_CODE == 'fr' %}{{ doc.owner_org_fr }}{% else %}{{ doc.owner_org_en }}{% endif %}
+      <strong>{% translate 'Publisher:' %}</strong> {% if LANGUAGE_CODE == 'fr' %}{{ doc.owner_title_fr.0 | safe }}{% else %}{{ doc.owner_title_en.0 | safe }}{% endif %}
     </div>
   </div>
   <div class="row">
