@@ -35,7 +35,7 @@
   </div>
   <div class="row">
     <div class="col-sm-4"><strong>Organisation' : </strong></div>
-    <div class="col-sm-8">{{ doc.owner_org_fr }}</div>
+    <div class="col-sm-8">{{ doc.owner_title_fr.0 | safe }}</div>
   </div>
   <div class="row">
     <div class="col-sm-4"><strong>Secteur : </strong></div>
@@ -62,7 +62,7 @@
   </div>
   <div class="row">
     <div class="col-sm-4"><strong>Organization:</strong></div>
-    <div class="col-sm-8">{{ doc.owner_org_en }}</div>
+    <div class="col-sm-8">{{ doc.owner_title_en.0 | safe }}</div>
   </div>
   <div class="row">
     <div class="col-sm-4"><strong>Sector:</strong></div>

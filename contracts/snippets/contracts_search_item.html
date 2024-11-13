@@ -54,7 +54,7 @@
   {% endif %}
   <div class="row">
     <div class="col-sm-4" id="org_lbl"><strong>{% trans 'Organization:' %}</strong></div>
-    <div class="col-sm-8" aria-labelledby="org_lbl">{% if LANGUAGE_CODE == 'fr' %}{{ doc.owner_org_fr | safe }}{% else %}{{ doc.owner_org_en | safe }}{% endif %}</div>
+    <div class="col-sm-8" aria-labelledby="org_lbl">{% if LANGUAGE_CODE == 'fr' %}{{ doc.owner_title_fr.0 | safe }}{% else %}{{ doc.owner_title_en.0 | safe }}{% endif %}</div>
   </div>
   {% if doc.procurement_count > 1 %}
   <div class="row">

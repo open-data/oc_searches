@@ -8,7 +8,7 @@
             <div class="col-md-4 text-right">
               {% if language == "fr" %}{{ doc.month_fr }}{% else %}{{ doc.month_en }}{% endif %}, {{ doc.year }}
             </div>
-            <div class="col-md-12"><strong>{% translate 'Organization:' %}</strong> {% if language == "fr" %}{{ doc.owner_org_fr }}{% else %}{{ doc.owner_org_en }}{% endif %}</div>
+            <div class="col-md-12"><strong>{% translate 'Organization:' %}</strong> {% if language == "fr" %}{{ doc.owner_title_fr.0 | safe }}{% else %}{{ doc.owner_title_en.0 | safe }}{% endif %}</div>
             </div>
         {% else %} {# Default #}
             {% if language == 'fr' %}
@@ -31,7 +31,7 @@
                 <div class="row mrgn-tp-sm">
                     <div class="col-md-12">{{ doc.title_fr | safe }}</div>
                 </div><div class="row">
-                    <div class="col-md-12"><strong>Organisation :</strong> {{ doc.owner_org_fr | safe }}</div>
+                    <div class="col-md-12"><strong>Organisation :</strong> {{ doc.owner_title_fr.0 | safe }}</div>
                 </div><div class="row">
                     <div class="col-md-12"><strong>N° de référence :</strong> {{ doc.ref_number | safe }}</div>
               </div>
@@ -55,7 +55,7 @@
                 <div class="row mrgn-tp-sm">
                     <div class="col-md-12">{{ doc.title_en | safe }}</div>
                 </div><div class="row">
-                    <div class="col-md-12"><strong>Organization:</strong> {{ doc.owner_org_en | safe }}</div>
+                    <div class="col-md-12"><strong>Organization:</strong> {{ doc.owner_title_en.0 | safe }}</div>
                 </div><div class="row">
                     <div class="col-md-12"><strong>Reference No.:</strong> {{ doc.ref_number | safe }}</div>
               </div>

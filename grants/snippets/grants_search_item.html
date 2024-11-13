@@ -39,7 +39,7 @@
       {% endif %}
       {% if not doc.description_fr == "-" %}
       <div class="col-sm-12"><strong>{% translate 'Description:' %}</strong> {{ doc.description_fr | markdown_filter | safe}}</div>{% endif %}
-      <div class="col-sm-12"><strong>{% translate 'Organization:' %}</strong> {{ doc.owner_org_fr | safe }}</div>
+      <div class="col-sm-12"><strong>{% translate 'Organization:' %}</strong> {{ doc.owner_title_fr.0 | safe }}</div>
       {% if not doc.prog_name_fr == "-" %}
       <div class="col-sm-12"><strong>{% translate 'Program Name:' %}</strong> {{ doc.prog_name_fr | safe }}</div>
       {% endif %}
@@ -63,7 +63,7 @@
       {% endif %}
       {% if not doc.description_en == "-" %}
       <div class="col-sm-12"><strong>{% translate 'Description:' %}</strong> {{ doc.description_en | markdown_filter | safe}}</div>{% endif %}
-      <div class="col-sm-12"><strong>{% translate 'Organization:' %}</strong> {{ doc.owner_org_en | safe }}</div>
+      <div class="col-sm-12"><strong>{% translate 'Organization:' %}</strong> {{ doc.owner_title_en.0 | safe }}</div>
       {% if not doc.prog_name_en == "-" %}
       <div class="col-sm-12"><strong>{% translate 'Program Name:' %}</strong> {{ doc.prog_name_en | safe }}</div>
       {% endif %}

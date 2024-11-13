@@ -30,7 +30,7 @@
             <p class="mrgn-tp-md">{{ doc.question_fr | markdown_filter | normalize_headings | safe }}</p>
         {% endif %}
         <p class="mrgn-tp-md">
-            <div><strong>{% trans 'Organization: ' %}</strong> {{ doc.owner_org_fr | safe }}</div>
+            <div><strong>{% trans 'Organization: ' %}</strong> {{ doc.owner_title_fr.0 | safe }}</div>
             {% if doc.minister_name_fr %}
                 <div><strong>{% trans 'Minister by name: ' %}</strong> {{ doc.minister_name_fr | safe }}</div>
             {% endif %}
@@ -41,7 +41,7 @@
             <p class="mrgn-tp-md">{{ doc.question_en | markdown_filter | normalize_headings | safe }}</p>
         {% endif %}
         <p class="mrgn-tp-md">
-            <div><strong>{% trans 'Organization: ' %}</strong> {{ doc.owner_org_en | safe }}</div>
+            <div><strong>{% trans 'Organization: ' %}</strong> {{ doc.owner_title_en.0 | safe }}</div>
             {% if doc.minister_name_en %}
                 <div><strong>{% trans 'Minister by name: ' %}</strong> {{ doc.minister_name_en | safe }}</div>
             {% endif %}
