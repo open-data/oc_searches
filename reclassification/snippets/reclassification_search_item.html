@@ -5,7 +5,7 @@
 <div class="row mrgn-bttm-lg">
     <div class="col-md-6"><em>{% trans 'Nothing to report this quarter' %}</em></div>
     <div class="col-md-6 text-right">{% if language == "fr" %} {{ doc.quarter_fr }} {% else %} {{ doc.quarter_en }} {% endif %}, {{ doc.year }}</div>
-    <div class="col-md-12"><strong>{% translate 'Organization:' %}</strong> {% if language == "fr" %} {{ doc.owner_org_fr }} {% else %} {{ doc.owner_org_en }} {% endif %}</div>
+    <div class="col-md-12"><strong>{% translate 'Organization:' %}</strong> {% if language == "fr" %} {{ doc.owner_title_fr.0 | safe }} {% else %} {{ doc.owner_title_en.0 | safe }} {% endif %}</div>
 </div>
 {% else %}
 <div class="row mrgn-bttm-lg">
@@ -19,7 +19,7 @@
             <div class="col-md-4 text-right">{% if language == 'fr' %}{{ doc.date_fr }}{% else %}{{ doc.date_en }}{% endif %}</div>
         </div>
         <div class="row">
-            <div class="col-md-12"><strong>{% translate 'Organization: ' %}</strong>{% if language == 'fr' %}{{ doc.owner_org_fr | safe }}{% else %}{{ doc.owner_org_en | safe }}{% endif %}</div>
+            <div class="col-md-12"><strong>{% translate 'Organization: ' %}</strong>{% if language == 'fr' %}{{ doc.owner_title_fr.0 | safe }}{% else %}{{ doc.owner_title_en.0 | safe }}{% endif %}</div>
         </div>
     </div>
 </div>

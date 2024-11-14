@@ -3,6 +3,7 @@ import csv
 import logging
 import pandas as pd
 import sqlite3
+import traceback
 
 class Command(BaseCommand):
     help = 'Process the NAP 5 Commitments files for loading into Solr'
@@ -31,7 +32,7 @@ class Command(BaseCommand):
         cur.execute(f'DROP TABLE IF EXISTS latest')
         cur.execute('create table latest(indicators NVARCHAR, reporting_period NVARCHAR)')
         try:
-            for chunk in pd.read_csv(options['csv'], chunksize=500, delimiter=",", encoding_errors="xmlcharrefreplace", encoding="utf-8-sig"):
+            for chunk in pd.read_csv(options['csv'], chunksize=500, delimiter=","):
                 chunk.columns = chunk.columns.str.replace(' ', '_')  # replacing spaces with underscores for column names
                 chunk.to_sql(name="nap5", con=conn, if_exists='append')
 
@@ -41,7 +42,7 @@ class Command(BaseCommand):
             cur.execute("select l.reporting_period, n.reporting_period, n.commitments, n.milestones, n.indicators, n.status, n.progress_en, n.progress_fr, n.evidence_en, n.evidence_fr, n.challenges_en, n.challenges_fr, n.owner_org, n.owner_org_title from nap5 n join latest l on n.indicators = l.indicators")
             nap_data = cur.fetchall()
 
-            with open(options['out'], 'w', newline='', encoding="utf-8-sig") as outfile:
+            with open(options['out'], 'w', newline='', encoding='utf-8') as outfile:
                 out_writer = csv.writer(outfile, dialect='excel')
                 out_writer.writerow(['reporting_period', 'commitments', 'milestones', 'indicators', 'status', 'progress_en', 'progress_fr', 'evidence_en', 'evidence_fr', 'challenges_en', 'challenges_fr', 'owner_org', 'owner_org_title', 'is_latest'])
                 for dt in nap_data:
@@ -54,7 +55,9 @@ class Command(BaseCommand):
                     out_writer.writerow(row)
 
         except Exception as e:
-            self.logger.critical(f'Error processing {e}')
+            self.logger.critical(f'Error processing')
+            self.logger.error(e)
+            print(traceback.print_exc())
 
         finally:
             cur.execute('VACUUM')

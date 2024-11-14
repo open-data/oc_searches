@@ -20,7 +20,7 @@
         <strong>{% translate 'Commitment: ' %}</strong>{% if language == 'fr' %}{{ doc.commitments_fr | safe }}{% else %}{{ doc.commitments_en | safe }}{% endif %}
     </div>
     <div class="col-sm-12">
-        <strong>{% translate 'Lead Organization: ' %}</strong>{% if language == 'fr' %}{{ doc.owner_org_fr }}{% else %}{{ doc.owner_org_en }}{% endif %}
+        <strong>{% translate 'Lead Organization: ' %}</strong>{% if language == 'fr' %}{{ doc.owner_title_fr.0 | safe }}{% else %}{{ doc.owner_title_en.0 | safe }}{% endif %}
     </div>
     <div class="col-sm-12">
         <strong>{% translate 'Deadline: ' %}</strong>{% if language == 'fr' %}{{ doc.deadline_fr }}{% else %}{{ doc.deadline_en }}{% endif %}

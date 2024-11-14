@@ -31,7 +31,7 @@
                     <div class="col-md-8 mrgn-tp-md">{{ doc.destination_fr | safe }}</div>
                 </div><div class="row">
                     <div class="col-md-4">Organisation :</div>
-                    <div class="col-md-8">{{ doc.owner_org_fr | safe }}</div>
+                    <div class="col-md-8">{{ doc.owner_title_fr.0 | safe }}</div>
                 </div><div class="row">
                    <div class="col-md-4">N° de référence :</div>
                    <div class="col-md-8">{{ doc.ref_number | safe }}</div>
@@ -56,7 +56,7 @@
                     <div class="col-md-8 mrgn-tp-md">{{ doc.destination_en | safe }}</div>
                 </div><div class="row">
                     <div class="col-md-4">Organization:</div>
-                    <div class="col-md-8">{{ doc.owner_org_en | safe }}</div>
+                    <div class="col-md-8">{{ doc.owner_title_en.0 | safe }}</div>
                 </div><div class="row">
                     <div class="col-md-4">Reference No:</div>
                     <div class="col-md-8">{{ doc.ref_number | safe }}</div>
