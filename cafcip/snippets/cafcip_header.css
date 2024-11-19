@@ -326,3 +326,42 @@ svg {
   font-weight: bolder;
   font-size: 24px;
 }
+
+.alert-mitigated,
+.label-mitigated,
+.label-mitigated[href]:active,
+.label-mitigated[href]:focus,
+.label-mitigated[href]:hover,
+details.alert.alert-mitigated,
+details.alert.alert-mitigated[open] {
+
+}
+
+.label-mitigated,
+.label-mitigated[href]:active,
+.label-mitigated[href]:focus,
+.label-mitigated[href]:hover {
+    color: #000;
+    text-decoration:underline;
+    background: #eadae9;
+    border-color: #9a0797;
+}
+
+.alert-mitigated,
+.label-mitigated,
+.label-mitigated[href]:active,
+.label-mitigated[href]:focus,
+.label-mitigated[href]:hover,
+details.alert.alert-mitigated,
+details.alert.alert-mitigated[open] {
+  background: #eadae9;
+  border-color: #9a0797;
+}
+
+.label-mitigated {
+  background-color: #eadae9
+}
+.label-mitigated[href]:focus,
+.label-mitigated[href]:hover {
+  background-color: #eadae9
+}

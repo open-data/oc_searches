@@ -123,7 +123,7 @@
             <dt><div class="col-md-4"><strong>{% translate 'Status: ' %}</strong></div></dt>
             <dd>
               <div class="col-md-8">
-                <span class="label {% if doc.status_detail == 'not_started' %}label-danger{% elif doc.status_detail == 'in_progress' %}label-info{% elif doc.status_detail == 'substantially_implemented' or doc.status_detail == 'fully_implemented' %}label-success{% endif %}">{% if language == 'fr' %}{{ doc.status_detail_fr }}{% else %}{{ doc.status_detail_en }}{% endif %}</span>
+                <span class="label {% if doc.status_detail == 'not_started' %}label-danger{% elif doc.status_detail == 'in_progress' %}label-info{% elif doc.status_detail == 'substantially_implemented' or doc.status_detail == 'fully_implemented' %}label-success{% elif doc.status_detail == 'mitigated' %}label-mitigated{% endif %}">{% if language == 'fr' %}{{ doc.status_detail_fr }}{% else %}{{ doc.status_detail_en }}{% endif %}</span>
               </div>
             </dd>
           </div>
