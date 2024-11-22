@@ -4,6 +4,7 @@ import ckanapi
 from django.core.management.base import BaseCommand
 from django.conf import settings
 from django.utils import timezone as utimezone
+from search.management.commands.goc_prev_org_names import add_prev_dept_names
 import json
 import logging
 import pytz
@@ -11,7 +12,6 @@ from search.models import Search, Field, Code, Setting, Event
 import sys
 from SolrClient import SolrClient
 from SolrClient.exceptions import ConnectionError as SolrConnectionError
-
 from time import time
 import traceback
 
@@ -27,49 +27,6 @@ DATE_FIELDS = {'metadata_created', 'metadata_modified', 'federated_date_modified
 # Note: in Solr all resource fieldnames are prefixed with "resource_". resource_type in already prefixed
 RESOURCE_FIELDS = ['character_set', 'data_quality', 'datastore_active', 'date_published', 'format', 'language',
                    'name_translated', 'related_relationship', 'related_type', 'resource_type', 'size', 'url']
-ADDITIONAL_ORG_INFO = {
-    "dfatd-maecd": {"acronym_en": ["gac", "dfait"],
-                    "acronym_fr": ["amc", "maeci"],
-                    "title_en": ["Foreign Affairs and International Trade Canada", "Department of Foreign Affairs, Trade and Development"],
-                    "title_fr": ["Ministère des Affaires étrangères et Commerce international Canada", "Ministère des Affaires étrangères et du Commerce international"]},
-    "ic": {"acronym_en": ["ised"],
-           "acronym_fr": ["isde"],
-           "title_en": ["Industry Canada"],
-           "title_fr": ["Industrie Canada"]},
-    "pwgsc-tpsgc": {"acronym_en": ["pspc"],
-                    "acronym_fr": ["spac"],
-                    "title_en": ["Public Works and Government Services Canada"],
-                    "title_fr": ["Ministère des Travaux publics et des Services gouvernementaux Canada"]},
-    "cra-arc": {"acronym_en": ["ccra"],
-                "acronym_fr": ["adrc"],
-                "title_en": ["Canada Customs and Revenue Agency"],
-                "title_fr": ["Agence des douanes et du revenu du Canada"]},
-    "cbsa-asfc": {"acronym_en": ["ccra"],
-                "acronym_fr": ["adrc"],
-                "title_en": ["Canada Customs and Revenue Agency"],
-                "title_fr": ["Agence des douanes et du revenu du Canada"]},
-    "ec": {"acronym_en": ["eccc"],
-           "acronym_fr": ["eccc"],
-           "title_en": ["Environment Canada"],
-           "title_fr": ["Environnement Canada"]},
-    "aandc-aadnc": {"acronym_en": ["cirnac", "diand"],
-                    "acronym_fr": ["rcaanc", "ainc"],
-                    "title_en": ["Department of Indian Affairs and Northern Development", "Aboriginal Affairs and Northern Development"],
-                    "title_fr": ["Ministère des Affaires indiennes et du Nord canadien", "Affaires autochtones et du développement du Grand Nord"]},
-    "esdc-edsc": {"acronym_en": ["hrdc"],
-                  "acronym_fr": ["drhc"],
-                  "title_en": ["uman Resources Development Canada "],
-                  "title_fr": ["Développement des ressources humaines Canada"]},
-    "cic": {"acronym_en": ["ircc"],
-            "acronym_fr": ["cicr"],
-            "title_en": ["Citizenship and Immigration Canada"],
-            "title_fr": ["Citoyenneté et Immigration Canada"]},
-    "cer-rec": {"acronym_en": ["neb"],
-                "acronym_fr": ["rec"],
-                "title_en": ["National Energy Board"],
-                "title_fr": ["Office national de l'énergie"]},
-}
-
 
 class Command(BaseCommand):
     help = 'Import CKAN JSON lines of Open Canada packages'
@@ -473,12 +430,7 @@ class Command(BaseCommand):
                 solr_record["owner_org_acronym_en"].append(ds[f]['name'].split('-')[0] if "-" in ds[f]['name'] else ds[f]['name'])
                 solr_record["owner_org_acronym_fr"].append(ds[f]['name'].split('-')[1] if "-" in ds[f]['name'] else ds[f]['name'])
                 # Add Additional Org information if applicable
-                if ds[f]['name'] in ADDITIONAL_ORG_INFO:
-                    solr_record["owner_title_en"].extend(ADDITIONAL_ORG_INFO[ds[f]['name']]["title_en"])
-                    solr_record["owner_title_fr"].extend(ADDITIONAL_ORG_INFO[ds[f]['name']]["title_fr"])
-                    solr_record["owner_org_acronym_en"].extend(ADDITIONAL_ORG_INFO[ds[f]['name']]["acronym_en"])
-                    solr_record["owner_org_acronym_fr"].extend(ADDITIONAL_ORG_INFO[ds[f]['name']]["acronym_fr"])
-
+                solr_record = add_prev_dept_names(ds[f]['name'], solr_record)
 
             elif f == 'owner_org':              # Ignore the root owner_org - it is a CKAN UUID
                 pass

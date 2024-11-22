@@ -66,6 +66,12 @@ msgstr "Dossier publié :"
 msgid "No similar records found"
 msgstr "Aucun dossier similaire trouvé"
 
+msgid "Record Modified:"
+msgstr "Dossier modifié :"
+
+msgid "Record Released:"
+msgstr "Dossier publié :"
+
 
 
 

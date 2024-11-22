@@ -45,10 +45,10 @@
   </div>
   <div class="row mrgn-tp-md">
     <div class="col-sm-6">
-      <strong>{% translate 'Last Updated:' %}</strong> {% if LANGUAGE_CODE == 'fr' %}{{ doc.metadata_modified_fr }}{% else %}{{ doc.metadata_modified_en }}{% endif %}
+      <strong>{% translate 'Record Modified:' %}</strong> {% if LANGUAGE_CODE == 'fr' %}{{ doc.metadata_modified_fr }}{% else %}{{ doc.metadata_modified_en }}{% endif %}
     </div>
     <div class="col-sm-6">
-      <strong>{% translate 'Date Published:' %}</strong> {% if LANGUAGE_CODE == 'fr' %}{{ doc.metadata_created_fr }}{% else %}{{ doc.metadata_created_en }}{% endif %}
+      <strong>{% translate 'Record Released:' %}</strong> {% if LANGUAGE_CODE == 'fr' %}{{ doc.metadata_created_fr }}{% else %}{{ doc.metadata_created_en }}{% endif %}
     </div>
   </div>
   <div class="row">
