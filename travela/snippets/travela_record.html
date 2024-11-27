@@ -22,7 +22,7 @@
             <p>{% translate 'Travel, hospitality and conference expenditures incurred by a federal department or agency relate to activities that support the department or agency’s mandate and the government’s priorities.' %}</p>
 
             <h3>{% translate "Mandate:" %}</h3>
-            <p>{% if language == 'fr' %}{{ doc.mandate_description_fr }}{% else %}{{ doc.mandate_description_en }}{% endif %}</p>
+            <p>{% if language == 'fr' %}{{ doc.mandate_description_fr | markdown_filter | safe }}{% else %}{{ doc.mandate_description_en | markdown_filter | safe }}{% endif %}</p>
 
             <h3>{{ org_title}} {% translate "Travel, Hospitality and Conference Expenditures for Year ending March 31," %} {{ doc.year }}</h3>
             <table class="table">
@@ -153,25 +153,24 @@
             </aside>
             {% endif %}
             <h3>{% translate 'Explanation of significant variances compared with previous fiscal year' %}</h3>
-            {% if doc.travel_compared_fiscal_year_en or doc.travel_compared_fiscal_year_fr%}
+            {% if doc.travel_compared_fiscal_year_en != "-" and doc.travel_compared_fiscal_year_fr != "-" %}
                 <h4>{% translate "Total travel:" %}</h4>
-                {% if language == 'fr' %}{{ doc.travel_compared_fiscal_year_fr|safe }}{% else %}{{ doc.travel_compared_fiscal_year_en|safe }}{% endif %}<br>
+                {% if language == 'fr' %}{{ doc.travel_compared_fiscal_year_fr|markdown_filter|safe }}{% else %}{{ doc.travel_compared_fiscal_year_en|markdown_filter|safe }}{% endif %}<br>
             {% endif %}
-            {% if doc.hospitality_compared_fiscal_year_en or doc.hospitality_compared_fiscal_year_fr %}
+            {% if doc.hospitality_compared_fiscal_year_en != "-" and doc.hospitality_compared_fiscal_year_fr != "-" %}
                 <h4>{% translate "Hospitality:" %}</h4>
-                {% if language == 'fr' %}{{ doc.hospitality_compared_fiscal_year_fr }}{% else %}{{ doc.hospitality_compared_fiscal_year_en }}{% endif %}
+                {% if language == 'fr' %}{{ doc.hospitality_compared_fiscal_year_fr|markdown_filter|safe }}{% else %}{{ doc.hospitality_compared_fiscal_year_en|markdown_filter|safe }}{% endif %}
             {% endif %}
-            {% if doc.conference_fees_compared_fiscal_year_en or doc.conference_fees_compared_fiscal_year_fr %}
+            {% if doc.conference_fees_compared_fiscal_year_en != '-' and doc.conference_fees_compared_fiscal_year_fr != "-" %}
                 <h4>{% translate "Conference fees:" %}</h4>
                 {% if language == 'fr' %}{{ doc.conference_fees_compared_fiscal_year_fr }}{% else %}{{ doc.conference_fees_compared_fiscal_year_en }}{% endif %}
             {% endif %}
-            {% if doc.conference_fees_compared_fiscal_year_en or doc.conference_fees_compared_fiscal_year_fr %}
+            {% if doc.conference_fees_compared_fiscal_year_en != "-" and doc.conference_fees_compared_fiscal_year_fr != "-" %}
                 <h4>{% translate "Minister and minister’s exempt staff - International travel:" %}</h4>
-                {% if language == 'fr' %}{{ doc.minister_compared_fiscal_year_fr }}{% else %}{{ doc.minister_compared_fiscal_year_en }}{% endif %}
+                {% if language == 'fr' %}{{ doc.minister_compared_fiscal_year_fr|markdown_filter|safe }}{% else %}{{ doc.minister_compared_fiscal_year_en|markdown_filter|safe }}{% endif %}
             {% endif %}
         {% endfor %}
         {% endblock main-content-search-items %}
 
     </div>
     {% endblock main-content-centre %}
-

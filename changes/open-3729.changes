@@ -1,0 +1,5 @@
+Add support for markdown formatting to the mandate_description fields and hide these
+fields if they are blank.
+- travel_compared_fiscal_year
+- hospitality_compared_fiscal_year
+- conference_fees_compared_fiscal_year
