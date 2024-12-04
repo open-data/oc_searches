@@ -1,0 +1,44 @@
+
+{% load i18n %}
+{% load search_extras %}
+
+<div class="mrgn-tp-sm clearfix">
+    <div class="col-md-4"><strong>{% translate 'Reference Number:' %}</strong></div>
+    <div class="col-md-8">{{ doc.ref_number }}</div>
+</div>
+
+<div class="mrgn-tp-sm clearfix">
+    <div class="col-md-4"><strong>{% translate 'Organization:' %}</strong></div>
+    <div class="col-md-8">{% if language == "fr" %}{{ doc.owner_org_fr }}{% else %}{{ doc.owner_org_en }}{% endif %}</div>
+</div>
+
+<div class="mrgn-tp-sm clearfix">
+    <div class="col-md-4"><strong>{% translate 'File Identification Number:' %}</strong></div>
+    <div class="col-md-8">{{ doc.file_id_number }}</div>
+</div>
+
+<div class="mrgn-tp-sm clearfix">
+    <div class="col-md-4"><strong>{% translate 'File Identification Date:' %}</strong></div>
+    <div class="col-md-8">{% if language == "fr" %}{{ doc.file_id_date_fr }}{% else %}{{ doc.file_id_date_en }}{% endif %}</div>
+</div>
+
+<div class="mrgn-tp-sm clearfix">
+    <div class="col-md-4"><strong>{% translate 'Findings and Conclusions:' %}</strong></div>
+    <div class="col-md-8">
+        {% if LANGUAGE_CODE == 'fr' %}
+            {% for fc in doc.findings_conclusions_fr %}{{ fc | capfirst }}{% if not forloop.last %};<br/> {% endif %}{% endfor %}
+        {% else %}
+            {% for fc in doc.findings_conclusions_en %}{{ fc | capfirst }}{% if not forloop.last %};<br/> {% endif %}{% endfor %}
+        {% endif %}
+    </div>
+</div>
+
+<div class="mrgn-tp-sm clearfix">
+    <div class="col-md-4"><strong>{% translate 'Case Description:' %}</strong></div>
+    <div class="col-md-8">{% if language == "fr" %}{{ doc.case_description_fr | markdown_filter | safe }}{% else %}{{ doc.case_description_en| markdown_filter | safe }}{% endif %}</div>
+</div>
+
+<div class="mrgn-tp-sm clearfix">
+    <div class="col-md-4"><strong>{% translate 'Recommendations and Corrective Measures:' %}</strong></div>
+    <div class="col-md-8">{% if language == "fr" %}{{ doc.recommendations_corrective_measures_fr| markdown_filter | safe }}{% else %}{{ doc.recommendations_corrective_measures_en| markdown_filter | safe }}{% endif %}</div>
+</div>

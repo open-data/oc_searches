@@ -1,0 +1,63 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR "Government of Canada, Gouvernement du Canada"
+# This file is distributed under the same license as the "Open Canada Search - wrongdoing Module" package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: \"Open Canada Search - wrongdoing Module\"\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-02-13 11:45-0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: C:\Users\rosst\PycharmProjects\oc_search\search\templates\snippets\custom\tmp9z_krdvr\wrongdoing_record_item.html:5
+#: C:\Users\rosst\PycharmProjects\oc_search\search\templates\snippets\custom\tmpryyp0mlk\wrongdoing_record_item.html:5
+msgid "Reference Number:"
+msgstr "Numéro de référence :"
+
+#: C:\Users\rosst\PycharmProjects\oc_search\search\templates\snippets\custom\tmp9z_krdvr\wrongdoing_record_item.html:9
+#: C:\Users\rosst\PycharmProjects\oc_search\search\templates\snippets\custom\tmpryyp0mlk\wrongdoing_record_item.html:9
+msgid "File Identification Number:"
+msgstr "Numéro d’identification du fichier :"
+
+#: C:\Users\rosst\PycharmProjects\oc_search\search\templates\snippets\custom\tmp9z_krdvr\wrongdoing_record_item.html:11
+#: C:\Users\rosst\PycharmProjects\oc_search\search\templates\snippets\custom\tmpryyp0mlk\wrongdoing_record_item.html:11
+msgid "Organization:"
+msgstr "Organisation :"
+
+#: C:\Users\rosst\PycharmProjects\oc_search\search\templates\snippets\custom\tmp9z_krdvr\wrongdoing_record_item.html:13
+#: C:\Users\rosst\PycharmProjects\oc_search\search\templates\snippets\custom\tmpryyp0mlk\wrongdoing_record_item.html:13
+msgid "File Identification Date:"
+msgstr "Date d’identification du ficher :"
+
+#: C:\Users\rosst\PycharmProjects\oc_search\search\templates\snippets\custom\tmp9z_krdvr\wrongdoing_record_item.html:15
+#: C:\Users\rosst\PycharmProjects\oc_search\search\templates\snippets\custom\tmpryyp0mlk\wrongdoing_record_item.html:15
+msgid "Findings and Conclusions:"
+msgstr "Constatations et conclusions :"
+
+#: C:\Users\rosst\PycharmProjects\oc_search\search\templates\snippets\custom\tmp9z_krdvr\wrongdoing_record_item.html:17
+#: C:\Users\rosst\PycharmProjects\oc_search\search\templates\snippets\custom\tmpryyp0mlk\wrongdoing_record_item.html:17
+msgid "Case Description:"
+msgstr "Description du cas :"
+
+#: C:\Users\rosst\PycharmProjects\oc_search\search\templates\snippets\custom\tmp9z_krdvr\wrongdoing_record_item.html:19
+#: C:\Users\rosst\PycharmProjects\oc_search\search\templates\snippets\custom\tmpryyp0mlk\wrongdoing_record_item.html:19
+msgid "Recommendations and Corrective Measures:"
+msgstr "Recommendations et mesures correctives :"
+
+#: C:\Users\rosst\PycharmProjects\oc_search\search\templates\snippets\custom\tmp9z_krdvr\wrongdoing_search_item.html:18
+#: C:\Users\rosst\PycharmProjects\oc_search\search\templates\snippets\custom\tmpryyp0mlk\wrongdoing_search_item.html:18
+msgid "Reference number: "
+msgstr "Numéro de référence : "
+
+#: C:\Users\rosst\PycharmProjects\oc_search\search\templates\snippets\custom\tmp9z_krdvr\wrongdoing_search_item.html:22
+#: C:\Users\rosst\PycharmProjects\oc_search\search\templates\snippets\custom\tmpryyp0mlk\wrongdoing_search_item.html:22
+msgid "Organization: "
+msgstr "Organisation : "

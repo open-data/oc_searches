@@ -1,0 +1,30 @@
+{% load search_extras %}
+{% load i18n %}
+
+<div class="row mrgn-bttm-lg">
+    <div class="col-md-8">
+        {% if doc.findings_conclusions|length > 0 %}
+        <a href="{{ path_info }}record/{{ doc.id }}" class="h4">
+            {% if LANGUAGE_CODE == 'fr' %}
+                {% for fc in doc.findings_conclusions_fr %}
+                    {{ fc | capfirst }}{% if not forloop.last %};<br/> {% endif %}
+                {% endfor %}
+            {% else %}
+                {% for fc in doc.findings_conclusions_en %}
+                   {{ fc | capfirst }}{% if not forloop.last %};<br/> {% endif %}
+                {% endfor %}
+            {% endif %}
+        </a>
+        {% endif %}
+        <p><small>
+            <strong>{% translate 'Organization: ' %}</strong>
+            {% if language == 'fr' %}{{ doc.owner_org_fr | safe }}{% else %}{{ doc.owner_org_en | safe }}{% endif %}<br/>
+            <strong>{% translate 'Reference number: ' %}</strong>
+            {{ doc.ref_number }}
+        </small></p>
+    </div>
+    <div class="col-md-4 text-right">
+        <span class="h3">{{ doc.file_id_number }}</span>
+        <p><small>{% if LANGUAGE_CODE == 'fr' %}{{ doc.file_id_date_fr }}{% else %}{{ doc.file_id_date_en }}{% endif %}</small></p>
+    </div>
+</div>
