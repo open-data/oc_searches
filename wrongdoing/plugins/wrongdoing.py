@@ -56,6 +56,9 @@ def load_csv_record(csv_record: dict, solr_record: dict, search: Search, fields:
             solr_record['year'] = 0
     else:
         solr_record['year'] = 0
+    if not csv_record['findings_conclusions']:
+        solr_record['findings_conclusions_en'] = ['Not specified']
+        solr_record['findings_conclusions_fr'] = ['Non spécifié']
     return solr_record
 
 # Version 1.1 Methods
