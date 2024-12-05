@@ -53,16 +53,16 @@ def test_click_facet(page: Page):
 
 def test_click_amendment(page: Page):
     page.goto(search_path('grants', 'en'))
-    cb = page.get_by_label("facet-owner_org-nrc-cnrc")
+    cb = page.get_by_label("facet-owner_org-fednor")
     # Because of the way Search handles facets, need to use a click event
     cb.dispatch_event('click')
     cb = page.get_by_label("facet-agreement_value_range_en-(g) More than $5,000,000")
     cb.dispatch_event('click')
     cb = page.get_by_label("facet-has_amendments-1")
     cb.dispatch_event('click')
-    page.get_by_label("nrc-cnrc,172-2021-2022-Q3-981653,current").click()
+    page.get_by_label("fednor,001-2023-2024-Q4-0010,current").click()
     an = page.get_by_test_id("ref_number")
-    expect(an).to_contain_text("172-2021-2022-Q3-981653")
+    expect(an).to_contain_text("001-2023-2024-Q4-0010")
 
 
 

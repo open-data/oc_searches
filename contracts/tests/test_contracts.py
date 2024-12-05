@@ -9,7 +9,7 @@ def test_page_title_en(page: Page):
 
 
 def test_page_title_fr(page: Page):
-    page.goto(search_path('contracts', 'fr'))
+    page.goto(search_path('contrats', 'fr'))
     expect(page).to_have_title("Recherche des contrats gouvernementaux de plus de 10 000 $")
 
 
@@ -21,7 +21,7 @@ def test_simple_search_en(page: Page):
 
 
 def test_simple_search_fr(page: Page):
-    page.goto(search_path('contracts', 'en', path="?sort=contract_date+desc&search_text=microsoft&page=1"))
+    page.goto(search_path('contrats', 'fr', path="?sort=contract_date+desc&search_text=microsoft&page=1"))
     count = page.get_by_test_id("itemsfound")
     # Just should not contain '0''
     expect(count).to_contain_text(re.compile(r"[1-9a-zA-Z]+"))
@@ -39,8 +39,8 @@ def test_submit_simple_search_en(page: Page):
 
 
 def test_submit_simple_search_fr(page: Page):
-    page.goto(search_path('contracts', 'fr'))
-    tb = page.get_by_label("Search text")
+    page.goto(search_path('contrats', 'fr'))
+    tb = page.get_by_label("Recherche")
     tb.fill('microsoft')
     bt = page.get_by_label("Search button")
     bt.click()
