@@ -1,0 +1,4 @@
+Update the Open Data Search with the latest resource format codes include some video and 
+geospatial formats.
+Also clean out some premature template changes from OPEN-3704 which were prematurely applied to 
+the master branch. There is a separate PR for these changes.

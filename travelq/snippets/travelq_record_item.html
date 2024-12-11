@@ -33,21 +33,6 @@
     <div class="col-md-3 mrgn-bttm-md"><strong>Destination :</strong></div>
     <div class="col-md-9 mrgn-bttm-md">{{ doc.destination_fr }}</div>
   </div>
-  {% if doc.destination_2_fr != '-' %}
-    <div class="row">
-      <div class="col-md-3 mrgn-bttm-md"><strong>Endroits visités :</strong></div>
-    <div class="col-md-9 mrgn-bttm-md">{{ doc.destination_2_fr }}</div>
-  {% endif %}
-  {% if doc.destination_other_fr.0 != '-' %}
-    <div class="row">
-      <div class="col-md-3 mrgn-bttm-md"><strong>Autres endroits visités :</strong></div>
-      <div class="col-md-9 mrgn-bttm-md">
-      {% for dest in doc.destination_other_fr %}
-        {{ dest }}<br>
-      {% endfor %}
-      </div>
-    </div>
-  {% endif %}
     <div class="row">
       <div class="col-md-3 mrgn-bttm-md"><strong>Numéro de demande:</strong></div>
       <div class="col-md-9 mrgn-bttm-md">{{ doc.ref_number }}</div>
@@ -109,22 +94,6 @@
     <div class="col-md-3 mrgn-bttm-md"><strong>Destination:</strong></div>
     <div class="col-md-9 mrgn-bttm-md">{{ doc.destination_en }}</div>
   </div>
-  {% if doc.destination_2_en != '-' %}
-    <div class="row">
-      <div class="col-md-3 mrgn-bttm-md"><strong>Second place visited:</strong></div>
-      <div class="col-md-9 mrgn-bttm-md">{{ doc.destination_2_en }}</div>
-    </div>
-  {% endif %}
-  {% if doc.destination_other_en.0 != '-' %}
-    <div class="row">
-      <div class="col-md-3 mrgn-bttm-md"><strong>Other places visited:</strong></div>
-      <div class="col-md-9 mrgn-bttm-md">
-        {% for dest in doc.destination_other_en %}
-          {{ dest }}<br>
-        {% endfor %}
-      </div>
-    </div>
-  {% endif %}
   <div class="row">
     <div class="col-md-3 mrgn-bttm-md"><strong>Reference Number:</strong></div>
     <div class="col-md-9 mrgn-bttm-md">{{ doc.ref_number }}</div>
