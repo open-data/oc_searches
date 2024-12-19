@@ -581,7 +581,8 @@ class Command(BaseCommand):
 
             elif options['type'] == 'remote_ckan':
                 object_ids = {}
-                with ckanapi.RemoteCKAN(options['remote_ckan'], 'oc_search/2.0 (+http://open.camada.ca/search)') as remote_ckan:
+                with ckanapi.RemoteCKAN(options['remote_ckan'], apikey=options['api_key'] if options['api_key'] else None,
+                                        user_agent='oc_search/2.0 (+http://open.camada.ca/search)') as remote_ckan:
 
                     # Determine the last activity that was indexed by retrieving these settings from the database
                     ckan_checkpoint_id, created_id = Setting.objects.get_or_create(key="data.checkpoint.dataset_id")
