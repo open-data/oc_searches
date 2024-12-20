@@ -358,6 +358,7 @@ class Command(BaseCommand):
         # format, language[], name_translated, resource_type, url
 
     def add_arguments(self, parser):
+        parser.add_argument('--api_key', type=str, help='Optional CKAN API token', required=False)
         parser.add_argument('--search', type=str, help='The Search ID that is being loaded', required=True)
         parser.add_argument('--type', choices=['jsonl', 'remote_ckan'], required=True,
                             help="Select method to load CKAN data. Valid choices are 'jsonl', 'local_ckan', 'remote_ckan'")
@@ -581,7 +582,8 @@ class Command(BaseCommand):
 
             elif options['type'] == 'remote_ckan':
                 object_ids = {}
-                with ckanapi.RemoteCKAN(options['remote_ckan'], 'oc_search/2.0 (+http://open.camada.ca/search)') as remote_ckan:
+                with ckanapi.RemoteCKAN(options['remote_ckan'], apikey=options['api_key'] if options['api_key'] else None,
+                                        user_agent='oc_search/2.0 (+http://open.canada.ca/search)') as remote_ckan:
 
                     # Determine the last activity that was indexed by retrieving these settings from the database
                     ckan_checkpoint_id, created_id = Setting.objects.get_or_create(key="data.checkpoint.dataset_id")
