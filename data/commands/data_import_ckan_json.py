@@ -358,6 +358,7 @@ class Command(BaseCommand):
         # format, language[], name_translated, resource_type, url
 
     def add_arguments(self, parser):
+        parser.add_argument('--api_key', type=str, help='Optional CKAN API token', required=False)
         parser.add_argument('--search', type=str, help='The Search ID that is being loaded', required=True)
         parser.add_argument('--type', choices=['jsonl', 'remote_ckan'], required=True,
                             help="Select method to load CKAN data. Valid choices are 'jsonl', 'local_ckan', 'remote_ckan'")
