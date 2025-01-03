@@ -1,26 +1,17 @@
 [
   {
-    "ccid": "qpnotes_minister_AMH_ya-ara-saks_20230726_29991231",
-    "code_cid": "qpnotes_minister_AMH",
-    "end_date": "2999-12-31T04:56:00+00:00",
-    "label": "Ya'ara Saks",
-    "label_en": "Saks, Ya'ara (Hon.)",
-    "label_fr": "Saks, Ya'ara (L\u2019hon.)",
-    "start_date": "2023-07-26T15:26:00+00:00"
-  },
-  {
-    "ccid": "qpnotes_minister_AMH_carolyn-bennett_20211026_20230726",
-    "code_cid": "qpnotes_minister_AMH",
-    "end_date": "2023-07-26T15:25:59+00:00",
-    "label": "Carolyn Bennett",
-    "label_en": "Bennett, Carolyn (Hon.)",
-    "label_fr": "Bennett, Carolyn (L\u2019hon.)",
-    "start_date": "2021-10-26T15:26:00+00:00"
-  },
-  {
-    "ccid": "qpnotes_minister_AMND_ginette-petitpas-taylor_20230726_29991231",
+    "ccid": "qpnotes_minister_AMND_darren-fisher_20241220_29991231",
     "code_cid": "qpnotes_minister_AMND",
     "end_date": "2999-12-31T04:56:00+00:00",
+    "label": "Darren Fisher",
+    "label_en": "Fisher, Darren (Hon.)",
+    "label_fr": "Fisher, Darren (L'hon.)",
+    "start_date": "2024-12-20T16:26:00+00:00"
+  },
+  {
+    "ccid": "qpnotes_minister_AMND_ginette-petitpas-taylor_20230726_20241220",
+    "code_cid": "qpnotes_minister_AMND",
+    "end_date": "2024-12-20T16:25:59+00:00",
     "label": "Ginette Petitpas Taylor",
     "label_en": "Petitpas Taylor, Ginette (Hon.)",
     "label_fr": "Petitpas Taylor, Ginette (L\u2019hon.)",
@@ -81,9 +72,9 @@
     "start_date": "2019-11-20T19:56:00+00:00"
   },
   {
-    "ccid": "qpnotes_minister_MCR_gary-anandasangaree_20230726_29991231",
+    "ccid": "qpnotes_minister_MCR_gary-anandasangaree_20230726_20241220",
     "code_cid": "qpnotes_minister_MCR",
-    "end_date": "2999-12-31T04:56:00+00:00",
+    "end_date": "2024-12-20T16:25:59+00:00",
     "label": "Gary Anandasangaree",
     "label_en": "Anandasangaree, Gary (Hon.)",
     "label_fr": "Anandasangaree, Gary (L\u2019hon.)",
@@ -189,6 +180,15 @@
     "start_date": "2021-10-26T15:26:00+00:00"
   },
   {
+    "ccid": "qpnotes_minister_MIA_dominic-leblanc_20241220_29991231",
+    "code_cid": "qpnotes_minister_MIA",
+    "end_date": "2999-12-31T04:56:00+00:00",
+    "label": "Dominic LeBlanc",
+    "label_en": "LeBlanc, Dominic (Hon.)",
+    "label_fr": "LeBlanc, Dominic (L\u2019hon.)",
+    "start_date": "2024-12-20T16:26:00+00:00"
+  },
+  {
     "ccid": "qpnotes_minister_MIA_dominic-leblanc_20200818_20211026",
     "code_cid": "qpnotes_minister_MIA",
     "end_date": "2021-10-26T15:25:59+00:00",
@@ -216,6 +216,15 @@
     "start_date": "2019-11-20T19:56:00+00:00"
   },
   {
+    "ccid": "qpnotes_minister_MOL_rachel-bendayan_20241220_29991231",
+    "code_cid": "qpnotes_minister_MOL",
+    "end_date": "2999-12-31T04:56:00+00:00",
+    "label": "Rachel Bendayan",
+    "label_en": "Bendayan, Rachel (Hon.)",
+    "label_fr": "Bendayan, Rachel (L'hon.)",
+    "start_date": "2024-12-20T16:26:00+00:00"
+  },
+  {
     "ccid": "qpnotes_minister_MOL_ginette-petitpas-taylor_20211026_20230726",
     "code_cid": "qpnotes_minister_MOL",
     "end_date": "2023-07-26T15:25:59+00:00",
@@ -232,6 +241,15 @@
     "label_en": "Joly, M\u00e9lanie (Hon.)",
     "label_fr": "Joly, M\u00e9lanie (L\u2019hon.)",
     "start_date": "2019-11-20T19:56:00+00:00"
+  },
+  {
+    "ccid": "qpnotes_minister_MPS_david-mcguinty_20241220_29991231",
+    "code_cid": "qpnotes_minister_MPS",
+    "end_date": "2999-12-31T04:56:00+00:00",
+    "label": "David McGuinty",
+    "label_en": "McGuinty, David (Hon.)",
+    "label_fr": "McGuinty, David (L\u2019hon.)",
+    "start_date": "2024-12-20T16:26:00+00:00"
   },
   {
     "ccid": "qpnotes_minister_MPS_marco-mendicino_20211026_20230726",
@@ -378,9 +396,18 @@
     "start_date": "2019-11-20T19:56:00+00:00"
   },
   {
-    "ccid": "qpnotes_minister_MRCNEDA_dan-vandal_20211026_29991231",
+    "ccid": "qpnotes_minister_MRCNEDA_gary-anandasangaree_20241220_29991231",
     "code_cid": "qpnotes_minister_MRCNEDA",
     "end_date": "2999-12-31T04:56:00+00:00",
+    "label": "Gary Anandasangaree",
+    "label_en": "Anandasangaree, Gary (Hon.)",
+    "label_fr": "Anandasangaree, Gary (L\u2019hon.)",
+    "start_date": "2024-12-20T16:26:00+00:00"
+  },
+  {
+    "ccid": "qpnotes_minister_MRCNEDA_dan-vandal_20211026_20241220",
+    "code_cid": "qpnotes_minister_MRCNEDA",
+    "end_date": "2024-12-20T16:25:59+00:00",
     "label": "Dan Vandal",
     "label_en": "Vandal, Dan (Hon.)",
     "label_fr": "Vandal, Dan (L\u2019hon.)",
@@ -585,18 +612,27 @@
     "start_date": "2019-11-20T19:56:00+00:00"
   },
   {
-    "ccid": "qpnotes_minister_MNA_dan-vandal_20191120_29991231",
+    "ccid": "qpnotes_minister_MNA_dan-vandal_20191120_20241220",
     "code_cid": "qpnotes_minister_MNA",
-    "end_date": "2999-12-31T04:56:00+00:00",
+    "end_date": "2024-12-20T16:25:59+00:00",
     "label": "Dan Vandal",
     "label_en": "Vandal, Dan (Hon.)",
     "label_fr": "Vandal, Dan (L\u2019hon.)",
     "start_date": "2019-11-20T19:56:00+00:00"
   },
   {
-    "ccid": "qpnotes_minister_MNR_marie-claude-bibeau_20230726_29991231",
+    "ccid": "qpnotes_minister_MNR_elisabeth-briere_20241220_29991231",
     "code_cid": "qpnotes_minister_MNR",
     "end_date": "2999-12-31T04:56:00+00:00",
+    "label": "\u00c9lisabeth Bri\u00e8re",
+    "label_en": "Bri\u00e8re, \u00c9lisabeth (Hon.)",
+    "label_fr": "Bri\u00e8re, \u00c9lisabeth (L'hon.)",
+    "start_date": "2024-12-20T16:26:00+00:00"
+  },
+  {
+    "ccid": "qpnotes_minister_MNR_marie-claude-bibeau_20230726_20241220",
+    "code_cid": "qpnotes_minister_MNR",
+    "end_date": "2024-12-20T16:25:59+00:00",
     "label": "Marie-Claude Bibeau",
     "label_en": "Bibeau, Marie-Claude (Hon.)",
     "label_fr": "Bibeau, Marie-Claude (L\u2019hon.)",
@@ -621,9 +657,18 @@
     "start_date": "2021-10-26T15:26:00+00:00"
   },
   {
-    "ccid": "qpnotes_minister_MRFEDASO_filomena-tassi_20220831_29991231",
+    "ccid": "qpnotes_minister_MRFEDASO_ruby-sahota_20241220_29991231",
     "code_cid": "qpnotes_minister_MRFEDASO",
     "end_date": "2999-12-31T04:56:00+00:00",
+    "label": "Ruby Sahota",
+    "label_en": "Sahota, Ruby (Hon.)",
+    "label_fr": "Sahota, Ruby (L\u2019hon.)",
+    "start_date": "2024-12-20T16:26:00+00:00"
+  },
+  {
+    "ccid": "qpnotes_minister_MRFEDASO_filomena-tassi_20220831_20241220",
+    "code_cid": "qpnotes_minister_MRFEDASO",
+    "end_date": "2024-12-20T16:25:59+00:00",
     "label": "Filomena Tassi",
     "label_en": "Tassi, Filomena (Hon.)",
     "label_fr": "Tassi, Filomena (L\u2019hon.)",
@@ -648,9 +693,18 @@
     "start_date": "2021-10-26T15:26:00+00:00"
   },
   {
-    "ccid": "qpnotes_minister_MRPEDC_dan-vandal_20211026_29991231",
+    "ccid": "qpnotes_minister_MRPEDC_terry-duguid_20241220_29991231",
     "code_cid": "qpnotes_minister_MRPEDC",
     "end_date": "2999-12-31T04:56:00+00:00",
+    "label": "Terry Duguid",
+    "label_en": "Duguid, Terry (Hon.)",
+    "label_fr": "Duguid, Terry (L'hon.)",
+    "start_date": "2024-12-20T16:26:00+00:00"
+  },
+  {
+    "ccid": "qpnotes_minister_MRPEDC_dan-vandal_20211026_20241220",
+    "code_cid": "qpnotes_minister_MRPEDC",
+    "end_date": "2024-12-20T16:25:59+00:00",
     "label": "Dan Vandal",
     "label_en": "Vandal, Dan (Hon.)",
     "label_fr": "Vandal, Dan (L\u2019hon.)",
@@ -747,9 +801,18 @@
     "start_date": "2021-10-26T15:26:00+00:00"
   },
   {
-    "ccid": "qpnotes_minister_MVA_ginette-petitpas-taylor_20230726_29991231",
+    "ccid": "qpnotes_minister_MVA_darren-fisher_20241220_29991231",
     "code_cid": "qpnotes_minister_MVA",
     "end_date": "2999-12-31T04:56:00+00:00",
+    "label": "Darren Fisher",
+    "label_en": "Fisher, Darren (Hon.)",
+    "label_fr": "Fisher, Darren (L'hon.)",
+    "start_date": "2024-12-20T16:26:00+00:00"
+  },
+  {
+    "ccid": "qpnotes_minister_MVA_ginette-petitpas-taylor_20230726_20241220",
+    "code_cid": "qpnotes_minister_MVA",
+    "end_date": "2024-12-20T16:25:59+00:00",
     "label": "Ginette Petitpas Taylor",
     "label_en": "Petitpas Taylor, Ginette (Hon.)",
     "label_fr": "Petitpas Taylor, Ginette (L\u2019hon.)",
@@ -828,9 +891,18 @@
     "start_date": "2021-10-26T15:26:00+00:00"
   },
   {
-    "ccid": "qpnotes_minister_PTB_anita-anand_20230726_29991231",
+    "ccid": "qpnotes_minister_PTB_ginette-petitpas-taylor_20241220_29991231",
     "code_cid": "qpnotes_minister_PTB",
     "end_date": "2999-12-31T04:56:00+00:00",
+    "label": "Ginette Petitpas Taylor",
+    "label_en": "Petitpas Taylor, Ginette (Hon.)",
+    "label_fr": "Petitpas Taylor, Ginette (L\u2019hon.)",
+    "start_date": "2024-12-20T16:26:00+00:00"
+  },
+  {
+    "ccid": "qpnotes_minister_PTB_anita-anand_20230726_20241220",
+    "code_cid": "qpnotes_minister_PTB",
+    "end_date": "2024-12-20T16:25:59+00:00",
     "label": "Anita Anand",
     "label_en": "Anand, Anita (Hon.)",
     "label_fr": "Anand, Anita (L\u2019hon.)",
@@ -879,33 +951,6 @@
     "label": "Marc Miller",
     "label_en": "Miller, Marc (Hon.)",
     "label_fr": "Miller, Marc (L\u2019hon.)",
-    "start_date": "2019-11-20T19:56:00+00:00"
-  },
-  {
-    "ccid": "qpnotes_minister_LGHC_karina-gould_20230726_29991231",
-    "code_cid": "qpnotes_minister_LGHC",
-    "end_date": "2999-12-31T04:56:00+00:00",
-    "label": "Karina Gould",
-    "label_en": "Gould, Karina (Hon.)",
-    "label_fr": "Gould, Karina (L\u2019hon.)",
-    "start_date": "2023-07-26T15:26:00+00:00"
-  },
-  {
-    "ccid": "qpnotes_minister_LGHC_mark-holland_20211026_20230726",
-    "code_cid": "qpnotes_minister_LGHC",
-    "end_date": "2023-07-26T15:25:59+00:00",
-    "label": "Mark Holland",
-    "label_en": "Holland, Mark (Hon.)",
-    "label_fr": "Holland, Mark (L\u2019hon.)",
-    "start_date": "2021-10-26T15:26:00+00:00"
-  },
-  {
-    "ccid": "qpnotes_minister_LGHC_pablo-rodriguez_20191120_20211026",
-    "code_cid": "qpnotes_minister_LGHC",
-    "end_date": "2021-10-26T15:25:59+00:00",
-    "label": "Pablo Rodriguez",
-    "label_en": "Rodriguez, Pablo (Hon.)",
-    "label_fr": "Rodriguez, Pablo (L\u2019hon.)",
     "start_date": "2019-11-20T19:56:00+00:00"
   },
   {
@@ -999,9 +1044,9 @@
     "start_date": "2019-11-20T19:56:00+00:00"
   },
   {
-    "ccid": "qpnotes_minister_MEWDOL_ginette-petitpas-taylor_20241120_29991231",
+    "ccid": "qpnotes_minister_MEWDOL_ginette-petitpas-taylor_20241120_20241220",
     "code_cid": "qpnotes_minister_MEWDOL",
-    "end_date": "2999-12-31T04:56:00+00:00",
+    "end_date": "2024-12-20T16:25:59+00:00",
     "label": "Ginette Petitpas Taylor",
     "label_en": "Petitpas Taylor, Ginette (Hon.)",
     "label_fr": "Petitpas Taylor, Ginette (L\u2019hon.)",
@@ -1017,18 +1062,27 @@
     "start_date": "2023-07-26T15:26:00+00:00"
   },
   {
-    "ccid": "qpnotes_minister_MHIC_sean-fraser_20230726_29991231",
+    "ccid": "qpnotes_minister_MHIC_nathaniel-erskine-smith_20241220_29991231",
     "code_cid": "qpnotes_minister_MHIC",
     "end_date": "2999-12-31T04:56:00+00:00",
+    "label": "Nathaniel Erskine-Smith",
+    "label_en": "Erskine-Smith, Nathaniel (Hon.)",
+    "label_fr": "Erskine-Smith, Nathaniel (L'hon.)",
+    "start_date": "2024-12-20T16:26:00+00:00"
+  },
+  {
+    "ccid": "qpnotes_minister_MHIC_sean-fraser_20230726_20241220",
+    "code_cid": "qpnotes_minister_MHIC",
+    "end_date": "2024-12-20T16:25:59+00:00",
     "label": "Sean Fraser",
     "label_en": "Fraser, Sean (Hon.)",
     "label_fr": "Fraser, Sean (L\u2019hon.)",
     "start_date": "2023-07-26T15:26:00+00:00"
   },
   {
-    "ccid": "qpnotes_minister_MLS_steven-mackinnon_20240719_29991231",
+    "ccid": "qpnotes_minister_MLS_steven-mackinnon_20240719_20241220",
     "code_cid": "qpnotes_minister_MLS",
-    "end_date": "2999-12-31T04:56:00+00:00",
+    "end_date": "2024-12-20T16:25:59+00:00",
     "label": "Steven MacKinnon",
     "label_en": "MacKinnon, Steven (Hon.)",
     "label_fr": "MacKinnon, Steven (L\u2019hon.)",
@@ -1089,9 +1143,9 @@
     "start_date": "2019-11-20T19:56:00+00:00"
   },
   {
-    "ccid": "qpnotes_minister_MPSDIIA_dominic-leblanc_20230726_29991231",
+    "ccid": "qpnotes_minister_MPSDIIA_dominic-leblanc_20230726_20241220",
     "code_cid": "qpnotes_minister_MPSDIIA",
-    "end_date": "2999-12-31T04:56:00+00:00",
+    "end_date": "2024-12-20T16:25:59+00:00",
     "label": "Dominic LeBlanc",
     "label_en": "LeBlanc, Dominic (Hon.)",
     "label_fr": "LeBlanc, Dominic (L\u2019hon.)",
@@ -1107,9 +1161,9 @@
     "start_date": "2023-07-26T15:26:00+00:00"
   },
   {
-    "ccid": "qpnotes_minister_MSPA_carla-qualtrough_20230726_29991231",
+    "ccid": "qpnotes_minister_MSPA_carla-qualtrough_20230726_20241220",
     "code_cid": "qpnotes_minister_MSPA",
-    "end_date": "2999-12-31T04:56:00+00:00",
+    "end_date": "2024-12-20T16:25:59+00:00",
     "label": "Carla Qualtrough",
     "label_en": "Qualtrough, Carla (Hon.)",
     "label_fr": "Qualtrough, Carla (L\u2019hon.)",
@@ -1168,5 +1222,95 @@
     "label_en": "Hussen, Ahmed (Hon.)",
     "label_fr": "Hussen, Ahmed (L\u2019hon.)",
     "start_date": "2019-11-20T19:56:00+00:00"
+  },
+  {
+    "ccid": "qpnotes_minister_AMH_ya-ara-saks_20230726_29991231",
+    "code_cid": "qpnotes_minister_AMH",
+    "end_date": "2999-12-31T04:56:00+00:00",
+    "label": "Ya'ara Saks",
+    "label_en": "Saks, Ya'ara (Hon.)",
+    "label_fr": "Saks, Ya'ara (L\u2019hon.)",
+    "start_date": "2023-07-26T15:26:00+00:00"
+  },
+  {
+    "ccid": "qpnotes_minister_AMH_carolyn-bennett_20211026_20230726",
+    "code_cid": "qpnotes_minister_AMH",
+    "end_date": "2023-07-26T15:25:59+00:00",
+    "label": "Carolyn Bennett",
+    "label_en": "Bennett, Carolyn (Hon.)",
+    "label_fr": "Bennett, Carolyn (L\u2019hon.)",
+    "start_date": "2021-10-26T15:26:00+00:00"
+  },
+  {
+    "ccid": "qpnotes_minister_AMPS_rachel-bendayan_20241220_29991231",
+    "code_cid": "qpnotes_minister_AMPS",
+    "end_date": "2999-12-31T04:56:00+00:00",
+    "label": "Rachel Bendayan",
+    "label_en": "Bendayan, Rachel (Hon.)",
+    "label_fr": "Bendayan, Rachel (L'hon.)",
+    "start_date": "2024-12-20T16:26:00+00:00"
+  },
+  {
+    "ccid": "qpnotes_minister_LGHC_karina-gould_20230726_29991231",
+    "code_cid": "qpnotes_minister_LGHC",
+    "end_date": "2999-12-31T04:56:00+00:00",
+    "label": "Karina Gould",
+    "label_en": "Gould, Karina (Hon.)",
+    "label_fr": "Gould, Karina (L\u2019hon.)",
+    "start_date": "2023-07-26T15:26:00+00:00"
+  },
+  {
+    "ccid": "qpnotes_minister_LGHC_mark-holland_20211026_20230726",
+    "code_cid": "qpnotes_minister_LGHC",
+    "end_date": "2023-07-26T15:25:59+00:00",
+    "label": "Mark Holland",
+    "label_en": "Holland, Mark (Hon.)",
+    "label_fr": "Holland, Mark (L\u2019hon.)",
+    "start_date": "2021-10-26T15:26:00+00:00"
+  },
+  {
+    "ccid": "qpnotes_minister_LGHC_pablo-rodriguez_20191120_20211026",
+    "code_cid": "qpnotes_minister_LGHC",
+    "end_date": "2021-10-26T15:25:59+00:00",
+    "label": "Pablo Rodriguez",
+    "label_en": "Rodriguez, Pablo (Hon.)",
+    "label_fr": "Rodriguez, Pablo (L\u2019hon.)",
+    "start_date": "2019-11-20T19:56:00+00:00"
+  },
+  {
+    "ccid": "qpnotes_minister_MCRNA_gary-anandasangaree_20241220_29991231",
+    "code_cid": "qpnotes_minister_MCRNA",
+    "end_date": "2999-12-31T04:56:00+00:00",
+    "label": "Gary Anandasangaree",
+    "label_en": "Anandasangaree, Gary (Hon.)",
+    "label_fr": "Anandasangaree, Gary (L\u2019hon.)",
+    "start_date": "2024-12-20T16:26:00+00:00"
+  },
+  {
+    "ccid": "qpnotes_minister_MDI_ruby-sahota_20241220_29991231",
+    "code_cid": "qpnotes_minister_MDI",
+    "end_date": "2999-12-31T04:56:00+00:00",
+    "label": "Ruby Sahota",
+    "label_en": "Sahota, Ruby (Hon.)",
+    "label_fr": "Sahota, Ruby (L\u2019hon.)",
+    "start_date": "2024-12-20T16:26:00+00:00"
+  },
+  {
+    "ccid": "qpnotes_minister_MEWDL_steven-mackinnon_20241220_29991231",
+    "code_cid": "qpnotes_minister_MEWDL",
+    "end_date": "2999-12-31T04:56:00+00:00",
+    "label": "Steven MacKinnon",
+    "label_en": "MacKinnon, Steven (Hon.)",
+    "label_fr": "MacKinnon, Steven (L\u2019hon.)",
+    "start_date": "2024-12-20T16:26:00+00:00"
+  },
+  {
+    "ccid": "qpnotes_minister_MTIT_anita-anand_20241220_29991231",
+    "code_cid": "qpnotes_minister_MTIT",
+    "end_date": "2999-12-31T04:56:00+00:00",
+    "label": "Anita Anand",
+    "label_en": "Anand, Anita (Hon.)",
+    "label_fr": "Anand, Anita (L\u2019hon.)",
+    "start_date": "2024-12-20T16:26:00+00:00"
   }
 ]
