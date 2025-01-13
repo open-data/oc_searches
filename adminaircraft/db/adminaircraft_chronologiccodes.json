@@ -1,5 +1,68 @@
 [
   {
+    "ccid": "adminaircraft_minister_MT_anita-anand_20240919_29991231",
+    "code_cid": "adminaircraft_minister_MT",
+    "end_date": "2999-12-31T04:56:00+00:00",
+    "label": "Anita Anand",
+    "label_en": "Anand, Anita (Hon.)",
+    "label_fr": "Anand, Anita (L\u2019hon.)",
+    "start_date": "2024-09-19T16:07:00+00:00"
+  },
+  {
+    "ccid": "adminaircraft_minister_MT_pablo-rodriguez_20230726_20240919",
+    "code_cid": "adminaircraft_minister_MT",
+    "end_date": "2024-09-19T16:06:59+00:00",
+    "label": "Pablo Rodriguez",
+    "label_en": "Rodriguez, Pablo (Hon.)",
+    "label_fr": "Rodriguez, Pablo (L\u2019hon.)",
+    "start_date": "2023-07-26T15:26:00+00:00"
+  },
+  {
+    "ccid": "adminaircraft_minister_MT_omar-alghabra_20210112_20230726",
+    "code_cid": "adminaircraft_minister_MT",
+    "end_date": "2023-07-26T15:25:59+00:00",
+    "label": "Omar Alghabra",
+    "label_en": "Alghabra, Omar (Hon.)",
+    "label_fr": "Alghabra, Omar (L\u2019hon.)",
+    "start_date": "2021-01-12T04:56:00+00:00"
+  },
+  {
+    "ccid": "adminaircraft_minister_MT_marc-garneau_20151104_20210111",
+    "code_cid": "adminaircraft_minister_MT",
+    "end_date": "2021-01-12T04:55:59+00:00",
+    "label": "Marc Garneau",
+    "label_en": "Garneau, Marc (Hon.)",
+    "label_fr": "Garneau, Marc (L\u2019hon.)",
+    "start_date": "2015-11-04T15:41:00+00:00"
+  },
+  {
+    "ccid": "adminaircraft_minister_MT1_soraya-martinez-ferrada_20230726_29991231",
+    "code_cid": "adminaircraft_minister_MT1",
+    "end_date": "2999-12-31T04:56:00+00:00",
+    "label": "Soraya Martinez Ferrada",
+    "label_en": "Martinez Ferrada, Soraya (Hon.)",
+    "label_fr": "Martinez Ferrada, Soraya (L\u2019hon.)",
+    "start_date": "2023-07-26T15:26:00+00:00"
+  },
+  {
+    "ccid": "adminaircraft_minister_MT1_randy-boissonnault_20211026_20230726",
+    "code_cid": "adminaircraft_minister_MT1",
+    "end_date": "2023-07-26T15:25:59+00:00",
+    "label": "Randy Boissonnault",
+    "label_en": "Boissonnault, Randy (Hon.)",
+    "label_fr": "Boissonnault, Randy (L\u2019hon.)",
+    "start_date": "2021-10-26T15:26:00+00:00"
+  },
+  {
+    "ccid": "adminaircraft_minister_MOL_rachel-bendayan_20241220_29991231",
+    "code_cid": "adminaircraft_minister_MOL",
+    "end_date": "2999-12-31T04:56:00+00:00",
+    "label": "Rachel Bendayan",
+    "label_en": "Bendayan, Rachel (Hon.)",
+    "label_fr": "Bendayan, Rachel (L'hon.)",
+    "start_date": "2024-12-20T16:26:00+00:00"
+  },
+  {
     "ccid": "adminaircraft_minister_MOL_ginette-petitpas-taylor_20211026_20230726",
     "code_cid": "adminaircraft_minister_MOL",
     "end_date": "2023-07-26T15:25:59+00:00",
@@ -16,6 +79,15 @@
     "label_en": "Joly, M\u00e9lanie (Hon.)",
     "label_fr": "Joly, M\u00e9lanie (L\u2019hon.)",
     "start_date": "2019-11-20T19:56:00+00:00"
+  },
+  {
+    "ccid": "adminaircraft_minister_MPS_david-mcguinty_20241220_29991231",
+    "code_cid": "adminaircraft_minister_MPS",
+    "end_date": "2999-12-31T04:56:00+00:00",
+    "label": "David McGuinty",
+    "label_en": "McGuinty, David (Hon.)",
+    "label_fr": "McGuinty, David (L\u2019hon.)",
+    "start_date": "2024-12-20T16:26:00+00:00"
   },
   {
     "ccid": "adminaircraft_minister_MPS_marco-mendicino_20211026_20230726",
@@ -45,9 +117,18 @@
     "start_date": "2019-01-14T14:56:01+00:00"
   },
   {
-    "ccid": "adminaircraft_minister_AMND_ginette-petitpas-taylor_20230726_29991231",
+    "ccid": "adminaircraft_minister_AMND_darren-fisher_20241220_29991231",
     "code_cid": "adminaircraft_minister_AMND",
     "end_date": "2999-12-31T04:56:00+00:00",
+    "label": "Darren Fisher",
+    "label_en": "Fisher, Darren (Hon.)",
+    "label_fr": "Fisher, Darren (L'hon.)",
+    "start_date": "2024-12-20T16:26:00+00:00"
+  },
+  {
+    "ccid": "adminaircraft_minister_AMND_ginette-petitpas-taylor_20230726_20241220",
+    "code_cid": "adminaircraft_minister_AMND",
+    "end_date": "2024-12-20T16:25:59+00:00",
     "label": "Ginette Petitpas Taylor",
     "label_en": "Petitpas Taylor, Ginette (Hon.)",
     "label_fr": "Petitpas Taylor, Ginette (L\u2019hon.)",
@@ -63,9 +144,9 @@
     "start_date": "2019-03-01T15:26:01+00:00"
   },
   {
-    "ccid": "adminaircraft_minister_DPM_chrystia-freeland_20191120_29991231",
+    "ccid": "adminaircraft_minister_DPM_chrystia-freeland_20191120_20241215",
     "code_cid": "adminaircraft_minister_DPM",
-    "end_date": "2999-12-31T04:56:00+00:00",
+    "end_date": "2024-12-16T04:55:59+00:00",
     "label": "Chrystia Freeland",
     "label_en": "Freeland, Chrystia (Hon.)",
     "label_fr": "Freeland, Chrystia (L\u2019hon.)",
@@ -126,15 +207,6 @@
     "start_date": "2019-03-18T04:56:00+00:00"
   },
   {
-    "ccid": "adminaircraft_minister_MDIY_bardish-chagger_20191120_20211026",
-    "code_cid": "adminaircraft_minister_MDIY",
-    "end_date": "2021-10-26T15:25:59+00:00",
-    "label": "Bardish Chagger",
-    "label_en": "Chagger, Bardish (Hon.)",
-    "label_fr": "Chagger, Bardish (L\u2019hon.)",
-    "start_date": "2019-11-20T19:56:00+00:00"
-  },
-  {
     "ccid": "adminaircraft_minister_MECC_steven-guilbeault_20211026_29991231",
     "code_cid": "adminaircraft_minister_MECC",
     "end_date": "2999-12-31T04:56:00+00:00",
@@ -180,9 +252,18 @@
     "start_date": "2021-10-26T15:26:00+00:00"
   },
   {
-    "ccid": "adminaircraft_minister_MF_chrystia-freeland_20200818_29991231",
+    "ccid": "adminaircraft_minister_MF_dominic-leblanc_20241216_29991231",
     "code_cid": "adminaircraft_minister_MF",
     "end_date": "2999-12-31T04:56:00+00:00",
+    "label": "Dominic LeBlanc",
+    "label_en": "LeBlanc, Dominic (Hon.)",
+    "label_fr": "LeBlanc, Dominic (L\u2019hon.)",
+    "start_date": "2024-12-16T04:56:00+00:00"
+  },
+  {
+    "ccid": "adminaircraft_minister_MF_chrystia-freeland_20200818_20241215",
+    "code_cid": "adminaircraft_minister_MF",
+    "end_date": "2024-12-16T04:55:59+00:00",
     "label": "Chrystia Freeland",
     "label_en": "Freeland, Chrystia (Hon.)",
     "label_fr": "Freeland, Chrystia (L\u2019hon.)",
@@ -261,6 +342,15 @@
     "start_date": "2021-10-26T15:26:00+00:00"
   },
   {
+    "ccid": "adminaircraft_minister_MIA_dominic-leblanc_20241220_29991231",
+    "code_cid": "adminaircraft_minister_MIA",
+    "end_date": "2999-12-31T04:56:00+00:00",
+    "label": "Dominic LeBlanc",
+    "label_en": "LeBlanc, Dominic (Hon.)",
+    "label_fr": "LeBlanc, Dominic (L\u2019hon.)",
+    "start_date": "2024-12-20T16:26:00+00:00"
+  },
+  {
     "ccid": "adminaircraft_minister_MIA_dominic-leblanc_20200818_20211026",
     "code_cid": "adminaircraft_minister_MIA",
     "end_date": "2021-10-26T15:25:59+00:00",
@@ -279,9 +369,18 @@
     "start_date": "2019-11-20T19:56:00+00:00"
   },
   {
-    "ccid": "adminaircraft_minister_MRPEDC_dan-vandal_20211026_29991231",
+    "ccid": "adminaircraft_minister_MRPEDC_terry-duguid_20241220_29991231",
     "code_cid": "adminaircraft_minister_MRPEDC",
     "end_date": "2999-12-31T04:56:00+00:00",
+    "label": "Terry Duguid",
+    "label_en": "Duguid, Terry (Hon.)",
+    "label_fr": "Duguid, Terry (L'hon.)",
+    "start_date": "2024-12-20T16:26:00+00:00"
+  },
+  {
+    "ccid": "adminaircraft_minister_MRPEDC_dan-vandal_20211026_20241220",
+    "code_cid": "adminaircraft_minister_MRPEDC",
+    "end_date": "2024-12-20T16:25:59+00:00",
     "label": "Dan Vandal",
     "label_en": "Vandal, Dan (Hon.)",
     "label_fr": "Vandal, Dan (L\u2019hon.)",
@@ -468,18 +567,27 @@
     "start_date": "2021-10-26T15:26:00+00:00"
   },
   {
-    "ccid": "adminaircraft_minister_MNA_dan-vandal_20191120_29991231",
+    "ccid": "adminaircraft_minister_MNA_dan-vandal_20191120_20241220",
     "code_cid": "adminaircraft_minister_MNA",
-    "end_date": "2999-12-31T04:56:00+00:00",
+    "end_date": "2024-12-20T16:25:59+00:00",
     "label": "Dan Vandal",
     "label_en": "Vandal, Dan (Hon.)",
     "label_fr": "Vandal, Dan (L\u2019hon.)",
     "start_date": "2019-11-20T19:56:00+00:00"
   },
   {
-    "ccid": "adminaircraft_minister_MNR_marie-claude-bibeau_20230726_29991231",
+    "ccid": "adminaircraft_minister_MNR_elisabeth-briere_20241220_29991231",
     "code_cid": "adminaircraft_minister_MNR",
     "end_date": "2999-12-31T04:56:00+00:00",
+    "label": "\u00c9lisabeth Bri\u00e8re",
+    "label_en": "Bri\u00e8re, \u00c9lisabeth (Hon.)",
+    "label_fr": "Bri\u00e8re, \u00c9lisabeth (L'hon.)",
+    "start_date": "2024-12-20T16:26:00+00:00"
+  },
+  {
+    "ccid": "adminaircraft_minister_MNR_marie-claude-bibeau_20230726_20241220",
+    "code_cid": "adminaircraft_minister_MNR",
+    "end_date": "2024-12-20T16:25:59+00:00",
     "label": "Marie-Claude Bibeau",
     "label_en": "Bibeau, Marie-Claude (Hon.)",
     "label_fr": "Bibeau, Marie-Claude (L\u2019hon.)",
@@ -585,63 +693,18 @@
     "start_date": "2021-10-26T15:26:00+00:00"
   },
   {
-    "ccid": "adminaircraft_minister_MT_anita-anand_20240919_29991231",
-    "code_cid": "adminaircraft_minister_MT",
-    "end_date": "2999-12-31T04:56:00+00:00",
-    "label": "Anita Anand",
-    "label_en": "Anand, Anita (Hon.)",
-    "label_fr": "Anand, Anita (L\u2019hon.)",
-    "start_date": "2024-09-19T16:07:00+00:00"
-  },
-  {
-    "ccid": "adminaircraft_minister_MT_pablo-rodriguez_20230726_20240919",
-    "code_cid": "adminaircraft_minister_MT",
-    "end_date": "2024-09-19T16:06:59+00:00",
-    "label": "Pablo Rodriguez",
-    "label_en": "Rodriguez, Pablo (Hon.)",
-    "label_fr": "Rodriguez, Pablo (L\u2019hon.)",
-    "start_date": "2023-07-26T15:26:00+00:00"
-  },
-  {
-    "ccid": "adminaircraft_minister_MT_omar-alghabra_20210112_20230726",
-    "code_cid": "adminaircraft_minister_MT",
-    "end_date": "2023-07-26T15:25:59+00:00",
-    "label": "Omar Alghabra",
-    "label_en": "Alghabra, Omar (Hon.)",
-    "label_fr": "Alghabra, Omar (L\u2019hon.)",
-    "start_date": "2021-01-12T04:56:00+00:00"
-  },
-  {
-    "ccid": "adminaircraft_minister_MT_marc-garneau_20151104_20210111",
-    "code_cid": "adminaircraft_minister_MT",
-    "end_date": "2021-01-12T04:55:59+00:00",
-    "label": "Marc Garneau",
-    "label_en": "Garneau, Marc (Hon.)",
-    "label_fr": "Garneau, Marc (L\u2019hon.)",
-    "start_date": "2015-11-04T15:41:00+00:00"
-  },
-  {
-    "ccid": "adminaircraft_minister_MT1_soraya-martinez-ferrada_20230726_29991231",
-    "code_cid": "adminaircraft_minister_MT1",
-    "end_date": "2999-12-31T04:56:00+00:00",
-    "label": "Soraya Martinez Ferrada",
-    "label_en": "Martinez Ferrada, Soraya (Hon.)",
-    "label_fr": "Martinez Ferrada, Soraya (L\u2019hon.)",
-    "start_date": "2023-07-26T15:26:00+00:00"
-  },
-  {
-    "ccid": "adminaircraft_minister_MT1_randy-boissonnault_20211026_20230726",
-    "code_cid": "adminaircraft_minister_MT1",
-    "end_date": "2023-07-26T15:25:59+00:00",
-    "label": "Randy Boissonnault",
-    "label_en": "Boissonnault, Randy (Hon.)",
-    "label_fr": "Boissonnault, Randy (L\u2019hon.)",
-    "start_date": "2021-10-26T15:26:00+00:00"
-  },
-  {
-    "ccid": "adminaircraft_minister_MVA_ginette-petitpas-taylor_20230726_29991231",
+    "ccid": "adminaircraft_minister_MVA_darren-fisher_20241220_29991231",
     "code_cid": "adminaircraft_minister_MVA",
     "end_date": "2999-12-31T04:56:00+00:00",
+    "label": "Darren Fisher",
+    "label_en": "Fisher, Darren (Hon.)",
+    "label_fr": "Fisher, Darren (L'hon.)",
+    "start_date": "2024-12-20T16:26:00+00:00"
+  },
+  {
+    "ccid": "adminaircraft_minister_MVA_ginette-petitpas-taylor_20230726_20241220",
+    "code_cid": "adminaircraft_minister_MVA",
+    "end_date": "2024-12-20T16:25:59+00:00",
     "label": "Ginette Petitpas Taylor",
     "label_en": "Petitpas Taylor, Ginette (Hon.)",
     "label_fr": "Petitpas Taylor, Ginette (L\u2019hon.)",
@@ -675,9 +738,18 @@
     "start_date": "2015-11-04T15:41:00+00:00"
   },
   {
-    "ccid": "adminaircraft_minister_PTB_anita-anand_20230726_29991231",
+    "ccid": "adminaircraft_minister_PTB_ginette-petitpas-taylor_20241220_29991231",
     "code_cid": "adminaircraft_minister_PTB",
     "end_date": "2999-12-31T04:56:00+00:00",
+    "label": "Ginette Petitpas Taylor",
+    "label_en": "Petitpas Taylor, Ginette (Hon.)",
+    "label_fr": "Petitpas Taylor, Ginette (L\u2019hon.)",
+    "start_date": "2024-12-20T16:26:00+00:00"
+  },
+  {
+    "ccid": "adminaircraft_minister_PTB_anita-anand_20230726_20241220",
+    "code_cid": "adminaircraft_minister_PTB",
+    "end_date": "2024-12-20T16:25:59+00:00",
     "label": "Anita Anand",
     "label_en": "Anand, Anita (Hon.)",
     "label_fr": "Anand, Anita (L\u2019hon.)",
@@ -711,9 +783,18 @@
     "start_date": "2021-01-12T04:56:00+00:00"
   },
   {
-    "ccid": "adminaircraft_minister_MRCNEDA_dan-vandal_20211026_29991231",
+    "ccid": "adminaircraft_minister_MRCNEDA_gary-anandasangaree_20241220_29991231",
     "code_cid": "adminaircraft_minister_MRCNEDA",
     "end_date": "2999-12-31T04:56:00+00:00",
+    "label": "Gary Anandasangaree",
+    "label_en": "Anandasangaree, Gary (Hon.)",
+    "label_fr": "Anandasangaree, Gary (L\u2019hon.)",
+    "start_date": "2024-12-20T16:26:00+00:00"
+  },
+  {
+    "ccid": "adminaircraft_minister_MRCNEDA_dan-vandal_20211026_20241220",
+    "code_cid": "adminaircraft_minister_MRCNEDA",
+    "end_date": "2024-12-20T16:25:59+00:00",
     "label": "Dan Vandal",
     "label_en": "Vandal, Dan (Hon.)",
     "label_fr": "Vandal, Dan (L\u2019hon.)",
@@ -747,9 +828,18 @@
     "start_date": "2021-10-26T15:26:00+00:00"
   },
   {
-    "ccid": "adminaircraft_minister_MRFEDASO_filomena-tassi_20220831_29991231",
+    "ccid": "adminaircraft_minister_MRFEDASO_ruby-sahota_20241220_29991231",
     "code_cid": "adminaircraft_minister_MRFEDASO",
     "end_date": "2999-12-31T04:56:00+00:00",
+    "label": "Ruby Sahota",
+    "label_en": "Sahota, Ruby (Hon.)",
+    "label_fr": "Sahota, Ruby (L\u2019hon.)",
+    "start_date": "2024-12-20T16:26:00+00:00"
+  },
+  {
+    "ccid": "adminaircraft_minister_MRFEDASO_filomena-tassi_20220831_20241220",
+    "code_cid": "adminaircraft_minister_MRFEDASO",
+    "end_date": "2024-12-20T16:25:59+00:00",
     "label": "Filomena Tassi",
     "label_en": "Tassi, Filomena (Hon.)",
     "label_fr": "Tassi, Filomena (L\u2019hon.)",
@@ -762,15 +852,6 @@
     "label": "Helena Jaczek",
     "label_en": "Jaczek, Helena (Hon.)",
     "label_fr": "Jaczek, Helena (L\u2019hon.)",
-    "start_date": "2021-10-26T15:26:00+00:00"
-  },
-  {
-    "ccid": "adminaircraft_minister_MITEPSBED_mary-ng_20211026_20230726",
-    "code_cid": "adminaircraft_minister_MITEPSBED",
-    "end_date": "2023-07-26T15:25:59+00:00",
-    "label": "Mary Ng",
-    "label_en": "Ng, Mary (Hon.)",
-    "label_fr": "Ng, Mary (L\u2019hon.)",
     "start_date": "2021-10-26T15:26:00+00:00"
   },
   {
@@ -900,9 +981,9 @@
     "start_date": "2021-10-26T15:26:00+00:00"
   },
   {
-    "ccid": "adminaircraft_minister_MCR_gary-anandasangaree_20230726_29991231",
+    "ccid": "adminaircraft_minister_MCR_gary-anandasangaree_20230726_20241220",
     "code_cid": "adminaircraft_minister_MCR",
-    "end_date": "2999-12-31T04:56:00+00:00",
+    "end_date": "2024-12-20T16:25:59+00:00",
     "label": "Gary Anandasangaree",
     "label_en": "Anandasangaree, Gary (Hon.)",
     "label_fr": "Anandasangaree, Gary (L\u2019hon.)",
@@ -1080,27 +1161,45 @@
     "start_date": "2019-11-20T19:56:00+00:00"
   },
   {
-    "ccid": "adminaircraft_minister_MEWDOL_randy-boissonnault_20230726_29991231",
+    "ccid": "adminaircraft_minister_MEWDOL_ginette-petitpas-taylor_20241120_20241220",
     "code_cid": "adminaircraft_minister_MEWDOL",
-    "end_date": "2999-12-31T04:56:00+00:00",
+    "end_date": "2024-12-20T16:25:59+00:00",
+    "label": "Ginette Petitpas Taylor",
+    "label_en": "Petitpas Taylor, Ginette (Hon.)",
+    "label_fr": "Petitpas Taylor, Ginette (L\u2019hon.)",
+    "start_date": "2024-11-20T19:27:00+00:00"
+  },
+  {
+    "ccid": "adminaircraft_minister_MEWDOL_randy-boissonnault_20230726_20241120",
+    "code_cid": "adminaircraft_minister_MEWDOL",
+    "end_date": "2024-11-20T19:26:59+00:00",
     "label": "Randy Boissonnault",
     "label_en": "Boissonnault, Randy (Hon.)",
     "label_fr": "Boissonnault, Randy (L\u2019hon.)",
     "start_date": "2023-07-26T15:26:00+00:00"
   },
   {
-    "ccid": "adminaircraft_minister_MHIC_sean-fraser_20230726_29991231",
+    "ccid": "adminaircraft_minister_MHIC_nathaniel-erskine-smith_20241220_29991231",
     "code_cid": "adminaircraft_minister_MHIC",
     "end_date": "2999-12-31T04:56:00+00:00",
+    "label": "Nathaniel Erskine-Smith",
+    "label_en": "Erskine-Smith, Nathaniel (Hon.)",
+    "label_fr": "Erskine-Smith, Nathaniel (L'hon.)",
+    "start_date": "2024-12-20T16:26:00+00:00"
+  },
+  {
+    "ccid": "adminaircraft_minister_MHIC_sean-fraser_20230726_20241220",
+    "code_cid": "adminaircraft_minister_MHIC",
+    "end_date": "2024-12-20T16:25:59+00:00",
     "label": "Sean Fraser",
     "label_en": "Fraser, Sean (Hon.)",
     "label_fr": "Fraser, Sean (L\u2019hon.)",
     "start_date": "2023-07-26T15:26:00+00:00"
   },
   {
-    "ccid": "adminaircraft_minister_MLS_steven-mackinnon_20240719_29991231",
+    "ccid": "adminaircraft_minister_MLS_steven-mackinnon_20240719_20241220",
     "code_cid": "adminaircraft_minister_MLS",
-    "end_date": "2999-12-31T04:56:00+00:00",
+    "end_date": "2024-12-20T16:25:59+00:00",
     "label": "Steven MacKinnon",
     "label_en": "MacKinnon, Steven (Hon.)",
     "label_fr": "MacKinnon, Steven (L\u2019hon.)",
@@ -1116,9 +1215,9 @@
     "start_date": "2023-07-26T15:26:00+00:00"
   },
   {
-    "ccid": "adminaircraft_minister_MPSDIIA_dominic-leblanc_20230726_29991231",
+    "ccid": "adminaircraft_minister_MPSDIIA_dominic-leblanc_20230726_20241220",
     "code_cid": "adminaircraft_minister_MPSDIIA",
-    "end_date": "2999-12-31T04:56:00+00:00",
+    "end_date": "2024-12-20T16:25:59+00:00",
     "label": "Dominic LeBlanc",
     "label_en": "LeBlanc, Dominic (Hon.)",
     "label_fr": "LeBlanc, Dominic (L\u2019hon.)",
@@ -1134,9 +1233,9 @@
     "start_date": "2023-07-26T15:26:00+00:00"
   },
   {
-    "ccid": "adminaircraft_minister_MSPA_carla-qualtrough_20230726_29991231",
+    "ccid": "adminaircraft_minister_MSPA_carla-qualtrough_20230726_20241220",
     "code_cid": "adminaircraft_minister_MSPA",
-    "end_date": "2999-12-31T04:56:00+00:00",
+    "end_date": "2024-12-20T16:25:59+00:00",
     "label": "Carla Qualtrough",
     "label_en": "Qualtrough, Carla (Hon.)",
     "label_fr": "Qualtrough, Carla (L\u2019hon.)",
@@ -1150,5 +1249,68 @@
     "label_en": "Sajjan, Harjit S. (Hon.)",
     "label_fr": "Sajjan, Harjit S. (L\u2019hon.)",
     "start_date": "2023-07-26T15:26:00+00:00"
+  },
+  {
+    "ccid": "adminaircraft_minister_AMPS_rachel-bendayan_20241220_29991231",
+    "code_cid": "adminaircraft_minister_AMPS",
+    "end_date": "2999-12-31T04:56:00+00:00",
+    "label": "Rachel Bendayan",
+    "label_en": "Bendayan, Rachel (Hon.)",
+    "label_fr": "Bendayan, Rachel (L'hon.)",
+    "start_date": "2024-12-20T16:26:00+00:00"
+  },
+  {
+    "ccid": "adminaircraft_minister_MCRNA_gary-anandasangaree_20241220_29991231",
+    "code_cid": "adminaircraft_minister_MCRNA",
+    "end_date": "2999-12-31T04:56:00+00:00",
+    "label": "Gary Anandasangaree",
+    "label_en": "Anandasangaree, Gary (Hon.)",
+    "label_fr": "Anandasangaree, Gary (L\u2019hon.)",
+    "start_date": "2024-12-20T16:26:00+00:00"
+  },
+  {
+    "ccid": "adminaircraft_minister_MDI_ruby-sahota_20241220_29991231",
+    "code_cid": "adminaircraft_minister_MDI",
+    "end_date": "2999-12-31T04:56:00+00:00",
+    "label": "Ruby Sahota",
+    "label_en": "Sahota, Ruby (Hon.)",
+    "label_fr": "Sahota, Ruby (L\u2019hon.)",
+    "start_date": "2024-12-20T16:26:00+00:00"
+  },
+  {
+    "ccid": "adminaircraft_minister_MDIY_bardish-chagger_20191120_20211026",
+    "code_cid": "adminaircraft_minister_MDIY",
+    "end_date": "2021-10-26T15:25:59+00:00",
+    "label": "Bardish Chagger",
+    "label_en": "Chagger, Bardish (Hon.)",
+    "label_fr": "Chagger, Bardish (L\u2019hon.)",
+    "start_date": "2019-11-20T19:56:00+00:00"
+  },
+  {
+    "ccid": "adminaircraft_minister_MEWDL_steven-mackinnon_20241220_29991231",
+    "code_cid": "adminaircraft_minister_MEWDL",
+    "end_date": "2999-12-31T04:56:00+00:00",
+    "label": "Steven MacKinnon",
+    "label_en": "MacKinnon, Steven (Hon.)",
+    "label_fr": "MacKinnon, Steven (L\u2019hon.)",
+    "start_date": "2024-12-20T16:26:00+00:00"
+  },
+  {
+    "ccid": "adminaircraft_minister_MITEPSBED_mary-ng_20211026_20230726",
+    "code_cid": "adminaircraft_minister_MITEPSBED",
+    "end_date": "2023-07-26T15:25:59+00:00",
+    "label": "Mary Ng",
+    "label_en": "Ng, Mary (Hon.)",
+    "label_fr": "Ng, Mary (L\u2019hon.)",
+    "start_date": "2021-10-26T15:26:00+00:00"
+  },
+  {
+    "ccid": "adminaircraft_minister_MTIT_anita-anand_20241220_29991231",
+    "code_cid": "adminaircraft_minister_MTIT",
+    "end_date": "2999-12-31T04:56:00+00:00",
+    "label": "Anita Anand",
+    "label_en": "Anand, Anita (Hon.)",
+    "label_fr": "Anand, Anita (L\u2019hon.)",
+    "start_date": "2024-12-20T16:26:00+00:00"
   }
 ]
