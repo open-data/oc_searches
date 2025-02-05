@@ -85,4 +85,14 @@ def load_csv_record(csv_record: dict, solr_record: dict, search: Search, fields:
                     ccode: ChronologicCode = ccodes[0]
                     solr_record['minister_name_en'] = ccode.label_en
                     solr_record['minister_name_fr'] = ccode.label_fr
+    if csv_record['locations_en']:
+        loc_txt = ""
+        for loc in csv_record['locations_en'].split(";"):
+            loc_txt = f"{loc_txt}<li> {loc} </li> "
+        solr_record["location_en_txt"] = loc_txt
+    if csv_record['locations_fr']:
+        loc_txt = ""
+        for loc in csv_record['locations_fr'].split(";"):
+            loc_txt = f"{loc_txt}<li> {loc} </li> "
+        solr_record["location_fr_txt"] = loc_txt        
     return solr_record

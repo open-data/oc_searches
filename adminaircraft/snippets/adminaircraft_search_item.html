@@ -26,18 +26,14 @@
     <p class="mrgn-tp-md"><strong>{% trans 'Purpose:' %}</strong> {{ doc.purpose_fr | safe }}</p>
     <p class="mrgn-tp-md"><strong>{% trans 'Locations:' %}</strong>
     <ul class="list-none">
-      {% for location in doc.locations_fr %}
-      <li>{{location | safe }}</li>
-      {% endfor %}
+      {{ doc.location_fr_txt | safe }}
     </ul>
     </p>
     {% else %}
     <p class="mrgn-tp-md"><strong>{% trans 'Purpose: ' %}</strong> {{ doc.purpose_en | safe }}</p>
     <p class="mrgn-tp-md"><strong>{% trans 'Locations:' %}</strong>
     <ul class="list-none">
-      {% for location in doc.locations_en %}
-      <li>{{location | safe }}</li>
-      {% endfor %}
+      {{ doc.location_en_txt | safe }}
     </ul>
     </p>
     {% endif %}
