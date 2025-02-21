@@ -4,7 +4,7 @@
 <div class="row mrgn-bttm-lg">
     <div class="col-md-8">
         {% if doc.findings_conclusions|length > 0 %}
-        <a href="{{ path_info }}record/{{ doc.id }}" class="h4">
+        <a href="{{ path_info }}record/{{ doc.id|urlencode }}" class="h4">
             {% if LANGUAGE_CODE == 'fr' %}
                 {% for fc in doc.findings_conclusions_fr %}
                     {{ fc | capfirst }}{% if not forloop.last %};<br/> {% endif %}

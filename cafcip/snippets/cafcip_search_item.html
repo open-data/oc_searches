@@ -14,7 +14,7 @@
   </div>
 
   <div class="col-sm-12">
-      <strong>{% translate 'Title: ' %}</strong>{% if language == 'fr' %}<a href="{{ path_info }}record/{{ doc.id }}">{{ doc.short_desc_fr | safe }}{% else %}<a href="{{ path_info }}record/{{ doc.id }}">{{ doc.short_desc_en | safe }}{% endif %}</a>
+      <strong>{% translate 'Title: ' %}</strong>{% if language == 'fr' %}<a href="{{ path_info }}record/{{ doc.id|urlencode }}">{{ doc.short_desc_fr | safe }}{% else %}<a href="{{ path_info }}record/{{ doc.id }}">{{ doc.short_desc_en | safe }}{% endif %}</a>
   </div>
 
   <div class="col-sm-12">

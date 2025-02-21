@@ -6,7 +6,7 @@
 
   <div class="row">
     <div class="col-sm-8">
-      <h4 class="mrgn-tp-0 mrgn-bttm-sm"><a href="{{ path_info }}record/{{ doc.id }}">
+      <h4 class="mrgn-tp-0 mrgn-bttm-sm"><a href="{{ path_info }}record/{{ doc.id|urlencode }}">
           {% if LANGUAGE_CODE == 'en' %}
             {{ doc.recipient_legal_name_en | title | markdown_filter | safe}}</a>
           {% else %}
@@ -47,7 +47,7 @@
       <div class="col-sm-12"><strong>{% translate 'Location:' %}</strong> {% if not doc.recipient_city_fr == "-" %}{{ doc.recipient_city_fr | safe }}, {% endif %}{% if not doc.recipient_province == "zz" %}{{ doc.recipient_province_fr }}, {% endif %}{% if not doc.recipient_country == "" %}{{ doc.recipient_country }} {% endif %}{% if not doc.recipient_postal_code == "-" %} {{ doc.recipient_postal_code | safe }}{% endif %}</div>
       {% endif %}
       {% if doc.amendment_date_fr %}{% if not doc.amendment_date_fr == "-" %}
-      <div class="col-sm-12"><a href="{{ path_info }}record/{{ doc.id }}?amendments"><strong>{% translate 'Amendments' %}</strong></a></div>
+      <div class="col-sm-12"><a href="{{ path_info }}record/{{ doc.id|urlencode }}?amendments"><strong>{% translate 'Amendments' %}</strong></a></div>
       {% endif %}{% endif %}
 
     {% else %}
@@ -71,7 +71,7 @@
       <div class="col-sm-12"><strong>{% translate 'Location:' %}</strong> {% if not doc.recipient_city_en == "-" %}{{ doc.recipient_city_en | safe }}, {% endif %}{% if not doc.recipient_province == "zz" %}{{ doc.recipient_province_en }}, {% endif %}{% if not doc.recipient_country == "-" %}{{ doc.recipient_country }} {% endif %}{% if not doc.recipient_postal_code == "-" %} {{ doc.recipient_postal_code | safe }}{% endif %}</div>
       {% endif %}
       {% if doc.amendment_date_en %}{% if not doc.amendment_date_en == "-" %}
-      <div class="col-sm-12"><a href="{{ path_info }}record/{{ doc.id }}?amendments" aria-label="amendment-link-{{ doc.id }}"><strong>{% translate 'Amendments' %}</strong></a></div>
+      <div class="col-sm-12"><a href="{{ path_info }}record/{{ doc.id|urlencode }}?amendments" aria-label="amendment-link-{{ doc.id|urlencode }}"><strong>{% translate 'Amendments' %}</strong></a></div>
       {% endif %}{% endif %}
 
     {% endif %}

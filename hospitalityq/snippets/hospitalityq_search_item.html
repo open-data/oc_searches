@@ -13,7 +13,7 @@
         {% else %} {# Default #}
             {% if language == 'fr' %}
                 <div class="row mrgn-bttm-sm">
-                    <div class="col-md-10"><a href="{{ path_info }}record/{{ doc.id }}"><strong>{% if doc.description_fr %}{{ doc.description_fr | safe }}{% else %}{{ doc.id }}{% endif %}</strong></a></div>
+                    <div class="col-md-10"><a href="{{ path_info }}record/{{ doc.id|urlencode }}"><strong>{% if doc.description_fr %}{{ doc.description_fr | safe }}{% else %}{{ doc.id|urlencode }}{% endif %}</strong></a></div>
                     <div class="col-md-2 text-right"><strong>{{ doc.total_fr | safe }} $</strong></div>
                 </div>
                 {% if doc.start_date_fr == doc.end_date_fr %}
@@ -37,7 +37,7 @@
               </div>
             {% else %} {# English #}
                 <div class="row mrgn-bttm-sm">
-                    <div class="col-md-10"><a href="{{ path_info }}record/{{ doc.id }}"><strong>{% if doc.description_en %}{{ doc.description_en | safe }}{% else %}{{ doc.id }}{% endif %}</strong></a></div>
+                    <div class="col-md-10"><a href="{{ path_info }}record/{{ doc.id|urlencode }}"><strong>{% if doc.description_en %}{{ doc.description_en | safe }}{% else %}{{ doc.id|urlencode }}{% endif %}</strong></a></div>
                     <div class="col-md-2 text-right"><strong>${{ doc.total_en | safe }}</strong></div>
                 </div>
                 {% if doc.start_date_en == doc.end_date_en %}

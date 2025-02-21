@@ -10,9 +10,9 @@
     <div class="col-sm-8">
         <h2 class="mrgn-tp-0 mrgn-bttm-sm h4">
             {% if language == 'en' %}
-                <a href="{{ path_info }}record/{{ doc.id }}"><strong>{{ doc.title_en | safe }}</strong></a>
+                <a href="{{ path_info }}record/{{ doc.id|urlencode }}"><strong>{{ doc.title_en | safe }}</strong></a>
             {% else %}
-                <a href="{{ path_info }}record/{{ doc.id }}"><strong>{{ doc.title_fr | safe }}</strong></a>
+                <a href="{{ path_info }}record/{{ doc.id|urlencode }}"><strong>{{ doc.title_fr | safe }}</strong></a>
             {% endif %}
         </h2>
     </div>

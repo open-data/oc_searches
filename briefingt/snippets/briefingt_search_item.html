@@ -11,7 +11,7 @@
 {% else %}
   <div class="row">
     <div class="col-sm-9">
-      <h4 class="mrgn-tp-0 mrgn-bttm-sm"><a href="{{ path_info }}record/{{ doc.id }}">
+      <h4 class="mrgn-tp-0 mrgn-bttm-sm"><a href="{{ path_info }}record/{{ doc.id|urlencode }}">
         {% if language == 'fr' %}{{ doc.title_fr | safe }}{% else %}{{ doc.title_en | safe }}{% endif %}</a>
       </h4>
     </div>
