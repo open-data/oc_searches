@@ -9745,7 +9745,7 @@
   },
   {
     "cid": "hospitalityq_month_P02",
-    "code_id": "P02",
+    "code_id": "05",
     "extra_01": "",
     "extra_01_en": "",
     "extra_01_fr": "",
@@ -9773,7 +9773,7 @@
   },
   {
     "cid": "hospitalityq_month_P04",
-    "code_id": "P04",
+    "code_id": "07",
     "extra_01": "",
     "extra_01_en": "",
     "extra_01_fr": "",
@@ -9801,7 +9801,7 @@
   },
   {
     "cid": "hospitalityq_month_P07",
-    "code_id": "P07",
+    "code_id": "10",
     "extra_01": "",
     "extra_01_en": "",
     "extra_01_fr": "",
@@ -9829,7 +9829,7 @@
   },
   {
     "cid": "hospitalityq_month_P08",
-    "code_id": "P08",
+    "code_id": "11",
     "extra_01": "",
     "extra_01_en": "",
     "extra_01_fr": "",
@@ -9857,7 +9857,7 @@
   },
   {
     "cid": "hospitalityq_month_P09",
-    "code_id": "P09",
+    "code_id": "12",
     "extra_01": "",
     "extra_01_en": "",
     "extra_01_fr": "",
@@ -9885,7 +9885,7 @@
   },
   {
     "cid": "hospitalityq_month_P10",
-    "code_id": "P10",
+    "code_id": "01",
     "extra_01": "",
     "extra_01_en": "",
     "extra_01_fr": "",
@@ -9913,7 +9913,7 @@
   },
   {
     "cid": "hospitalityq_month_P11",
-    "code_id": "P11",
+    "code_id": "02",
     "extra_01": "",
     "extra_01_en": "",
     "extra_01_fr": "",
@@ -9941,7 +9941,7 @@
   },
   {
     "cid": "hospitalityq_month_P12",
-    "code_id": "P12",
+    "code_id": "03",
     "extra_01": "",
     "extra_01_en": "",
     "extra_01_fr": "",
@@ -9969,7 +9969,7 @@
   },
   {
     "cid": "hospitalityq_month_P01",
-    "code_id": "P01",
+    "code_id": "04",
     "extra_01": "",
     "extra_01_en": "",
     "extra_01_fr": "",
@@ -9997,7 +9997,7 @@
   },
   {
     "cid": "hospitalityq_month_P03",
-    "code_id": "P03",
+    "code_id": "06",
     "extra_01": "",
     "extra_01_en": "",
     "extra_01_fr": "",
@@ -10025,7 +10025,7 @@
   },
   {
     "cid": "hospitalityq_month_P05",
-    "code_id": "P05",
+    "code_id": "08",
     "extra_01": "",
     "extra_01_en": "",
     "extra_01_fr": "",
@@ -10053,7 +10053,7 @@
   },
   {
     "cid": "hospitalityq_month_P06",
-    "code_id": "P06",
+    "code_id": "09",
     "extra_01": "",
     "extra_01_en": "",
     "extra_01_fr": "",
