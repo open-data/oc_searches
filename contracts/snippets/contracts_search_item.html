@@ -5,7 +5,7 @@
 {% if doc.format != "NTR" %}
   <div class="row">
      <div class="col-sm-8 text-capitalize">
-         <a href="{{ path_info }}record/{{ doc.id }}"><h3>{{ doc.vendor_name_txt | safe }}</h3></a>
+         <a href="{{ path_info }}record/{{ doc.id|urlencode }}"><h3>{{ doc.vendor_name_txt | safe }}</h3></a>
     </div>
   <div class="col-sm-4 text-right"><h3>{% trans 'Total Value: ' %} {% if LANGUAGE_CODE == 'fr' %}{{ doc.aggregate_total_fr }}{% else %}{{ doc.aggregate_total_en }}{% endif %}</h3></div></div>
   <div class="row">
