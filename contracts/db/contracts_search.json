@@ -14,7 +14,7 @@
   "disabled_message_en": "This search is currently unavailable for maintenance",
   "disabled_message_fr": "Ce service de recherche est actuellement indisponible pour cause de maintenance.",
   "footer_snippet": "search_snippets/default_footer.html",
-  "header_css_snippet": "search_snippets/default_header.css",
+  "header_css_snippet": "search_snippets/custom/contracts/contracts_header.css",
   "header_js_snippet": "search_snippets/default_header.js",
   "id_fields": "owner_org,reference_number",
   "imported_on": "2022-05-05T20:28:25+00:00",

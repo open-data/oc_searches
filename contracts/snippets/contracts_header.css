@@ -294,7 +294,7 @@
 
 @media (min-width: 970px) {
     .teaser-img-right {
-        max-width: 650px;
+        max-width: 620px;
         position: absolute;
         top: -5.0em;
         z-index: -1;
@@ -303,7 +303,7 @@
 
 @media (max-width: 969px) {
     .teaser-img-right {
-        max-width: 650px;
+        max-width: 580px;
         position: initial;
     }
 }
