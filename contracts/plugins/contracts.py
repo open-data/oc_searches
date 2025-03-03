@@ -235,18 +235,13 @@ def pre_render_search(context: dict, template: str, request: HttpRequest, lang: 
     :return: context object, and the template name
     """
     teaser_status = "open"
-    if request.session.has_key("contracts_show_teaser"):
-        teaser_status = request.session.get("contracts_show_teaser")
-        print(f"Show Existing Teaser: {request.session['contracts_show_teaser']}")
-    else:
-        request.session["contracts_show_teaser"] = "open"
-        request.session.modified = True
-        print(f"Show New Teaser: {request.session['contracts_show_teaser']}")
-    if teaser_status == 'closed':
-        context['teaser_status'] = ""
-    else:
-        context['teaser_status'] = "open"
-    
+    data_viz_cookie = request.COOKIES.get('contracts_show_teaser')
+    if data_viz_cookie is not None:
+        if data_viz_cookie == "closed":
+            teaser_status = "closed"
+            print(f"Data Viz Cookie {teaser_status}")
+
+    context['teaser_status'] = teaser_status
     return context, template
 
 def pre_render_record(context: dict, template: str, request: HttpRequest, lang: str, search: Search, fields: dict, codes: dict):
