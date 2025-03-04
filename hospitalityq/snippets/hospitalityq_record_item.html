@@ -72,6 +72,24 @@
   </div>
   {% endif %}
 
+  {% if doc.vendor_2_fr != '-' %}
+  <div class="row">
+    <div class="col-md-4 mrgn-bttm-md"><strong>Nom des deuxièmes établissements ou des fournisseurs concernés :</strong></div>
+    <div class="col-md-8">{{ doc.vendor_2_fr }}</div>
+  </div>
+  {% endif %}
+
+  {% if doc.vendor_other_fr.0 != '-' %}
+  <div class="row">
+    <div class="col-md-4 mrgn-bttm-md"><strong>Nom des touts autres établissements commerciaux ou des fournisseurs concernés :</strong></div>
+    <div class="col-md-8">
+      {% for vendor in doc.vendor_other_fr %}
+        {{ vendor }}<br>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+
   {% if doc.additional_comments_fr != '-' %}
   <div class="row">
     <div class="col-md-4 mrgn-bttm-md"><strong>Commentaires additionnels :</strong></div>
@@ -146,6 +164,24 @@
   <div class="row">
     <div class="col-md-4 mrgn-bttm-md"><strong>Name of commercial establishment or vendor involved in the hospitality activity:</strong></div>
     <div class="col-md-8">{{ doc.vendor_en }}</div>
+  </div>
+  {% endif %}
+
+  {% if doc.vendor_2_en != '-' %}
+  <div class="row">
+    <div class="col-md-4 mrgn-bttm-md"><strong>Name of the second commercial establishment or vendor involved in the hospitality activity:</strong></div>
+    <div class="col-md-8">{{ doc.vendor_2_en }}</div>
+  </div>
+  {% endif %}
+
+  {% if doc.vendor_other_en.0 != '-' %}
+  <div class="row">
+    <div class="col-md-4 mrgn-bttm-md"><strong>Name of any other commercial establishments or vendors involved in the hospitality activity:</strong></div>
+    <div class="col-md-8">
+      {% for vendor in doc.vendor_other_en %}
+        {{ vendor }}<br>
+      {% endfor %}
+    </div>
   </div>
   {% endif %}
 

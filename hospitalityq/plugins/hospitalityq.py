@@ -55,18 +55,18 @@ def filter_csv_record(csv_record,search: Search, fields: dict, codes: dict, form
 
 
 MONTH_MAP = {
-    "P01": 4,
-    "P02": 5,
-    "P03": 6,
-    "P04": 7,
-    "P05": 8,
-    "P06": 9,
-    "P07": 10,
-    "P08": 11,
-    "P09": 12,
-    "P10": 1,
-    "P11": 2,
-    "P12": 3
+    "01": 1,
+    "02": 2,
+    "03": 3,
+    "04": 4,
+    "05": 5,
+    "06": 6,
+    "07": 7,
+    "08": 8,
+    "09": 9,
+    "10": 10,
+    "11": 11,
+    "12": 12
 }
 
 def load_csv_record(csv_record: dict, solr_record: dict, search: Search, fields: dict, codes: dict, format: str):
