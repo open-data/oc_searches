@@ -218,6 +218,13 @@ def load_csv_record(csv_record: dict, solr_record: dict, search: Search, fields:
 
         solr_record['vendor_name_txt'] = csv_record['vendor_name'] if csv_record['vendor_name'] else "-"
 
+        # # OPEN 3941 - Will be adding a filter to the non-mandatory field country_of_vendor
+
+        # if not csv_record["country_of_vendor"]:
+        #     solr_record['country_of_vendor'] = "00"
+        #     solr_record['country_of_vendor_en'] = "Unspedified"
+        #     solr_record['country_of_vendor_fr'] = "Pays non spécifié"
+
     return solr_record
 
 # Version 1.1 Methods
@@ -234,6 +241,14 @@ def pre_render_search(context: dict, template: str, request: HttpRequest, lang: 
     :param codes: the application code objects to be used
     :return: context object, and the template name
     """
+    teaser_status = "open"
+    data_viz_cookie = request.COOKIES.get('contracts_show_teaser')
+    if data_viz_cookie is not None:
+        if data_viz_cookie == "closed":
+            teaser_status = "closed"
+            print(f"Data Viz Cookie {teaser_status}")
+
+    context['teaser_status'] = teaser_status
     return context, template
 
 def pre_render_record(context: dict, template: str, request: HttpRequest, lang: str, search: Search, fields: dict, codes: dict):
