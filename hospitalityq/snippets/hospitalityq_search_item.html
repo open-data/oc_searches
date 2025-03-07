@@ -6,7 +6,7 @@
             <div class="row">
             <div class="col-md-8"><em>{% trans 'Nothing to report this period'  %}</em></div>
             <div class="col-md-4 text-right">
-              {% if language == "fr" %}{{ doc.month_fr }}{% else %}{{ doc.month_en }}{% endif %}, {{ doc.year }}
+              {% if language == "fr" %}{{ doc.month_fr | safe }}{% else %}{{ doc.month_en | safe }}{% endif %}, {{ doc.year | safe }}
             </div>
             <div class="col-md-12"><strong>{% translate 'Organization:' %}</strong> {% if language == "fr" %}{{ doc.owner_title_fr.0 | safe }}{% else %}{{ doc.owner_title_en.0 | safe }}{% endif %}</div>
             </div>
