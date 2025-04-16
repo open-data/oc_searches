@@ -78,13 +78,17 @@ def load_csv_record(csv_record: dict, solr_record: dict, search: Search, fields:
                             ccode: ChronologicCode = ccodes[0]
                             solr_record['minister_name_en'] = ccode.label_en
                             solr_record['minister_name_fr'] = ccode.label_fr
+
             if solr_record['title_en']:
-                solr_record['title_en'] = str(solr_record['title_en']).strip()
+                solr_record['title_en'] = str(solr_record['title_en']).strip().strip('•\t')
             if solr_record['title_fr']:
-                solr_record['title_fr'] = str(solr_record['title_fr']).strip()
+                solr_record['title_fr'] = str(solr_record['title_fr']).strip().strip('•\t')
         else:
             id_str = f'{solr_record["owner_org"]},{solr_record["year"]},{solr_record["reporting_period"]}'
             solr_record['id'] = id_str
+            # Fallback, should only occur with Nothing-to-Report records
+            solr_record['minister_name_en'] = 'Not Applicable'
+            solr_record['minister_name_fr'] = "Ne s'applique pas"
     except Exception as e:
         print(e)
     return solr_record

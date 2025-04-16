@@ -26,7 +26,7 @@
 
     <div class="col-sm-12">
     {% if language == 'fr' %}
-        {% if doc.question_fra != '-' %}
+        {% if doc.question_fr != '-' %}
             <p class="mrgn-tp-md">{{ doc.question_fr | markdown_filter | normalize_headings | safe }}</p>
         {% endif %}
         <p class="mrgn-tp-md">
@@ -37,7 +37,7 @@
             <div><strong>{% trans 'Minister by title: ' %}</strong> {{ doc.minister_fr | safe }}</div>
         </p>
     {% else %}
-        {% if doc.question_eng != '-' %}
+        {% if doc.question_en != '-' %}
             <p class="mrgn-tp-md">{{ doc.question_en | markdown_filter | normalize_headings | safe }}</p>
         {% endif %}
         <p class="mrgn-tp-md">
