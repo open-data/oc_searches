@@ -1,5 +1,6 @@
 from babel.numbers import format_currency, format_decimal, parse_decimal, NumberFormatError
 from django.http import HttpRequest
+import json
 from search.models import Search, Field, Code
 from SolrClient import SolrResponse
 
