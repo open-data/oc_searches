@@ -52,7 +52,7 @@ def plugin_api_version():
 def pre_search_solr_query(context: dict, solr_query: dict, request: HttpRequest, search: Search, fields: dict, codes: dict, facets: list, record_ids: str):
     # Only show non-amendments
     solr_query['hl.q'] = solr_query['q']
-    solr_query['q'] = f'{solr_query["q"]} AND amendment_no:0'
+    solr_query['q'] = f'({solr_query["q"]}) AND amendment_no:0'
     return context, solr_query
 
 

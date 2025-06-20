@@ -34,7 +34,7 @@ def plugin_api_version():
 def pre_search_solr_query(context: dict, solr_query: dict, request: HttpRequest, search: Search, fields: dict, codes: dict, facets: list, record_ids: str):
     # Only show the latest grants and contributions, not the amendments
     solr_query['hl.q'] = solr_query['q']
-    solr_query['q'] = '{0} AND (amendment_number:"current" OR amendment_number:"-")'.format(solr_query['q'])
+    solr_query['q'] = '({0}) AND (amendment_number:"current" OR amendment_number:"-")'.format(solr_query['q'])
     return context, solr_query
 
 
