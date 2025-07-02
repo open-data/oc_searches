@@ -764,7 +764,7 @@
     "is_default_year": false,
     "is_search_facet": false,
     "label_en": "Reporting Period",
-    "label_fr": "Reporting Period",
+    "label_fr": "Periode de d\u00e9claration",
     "search_id": "contracts",
     "solr_extra_fields": "",
     "solr_facet_display_order": 0,
