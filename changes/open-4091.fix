@@ -1,0 +1,3 @@
+Adding string fields destination_2_eng/fra and destination_other_eng/fra to the defintion
+of the Travel search in order to include these multi-value fields in the search results
+export files.
