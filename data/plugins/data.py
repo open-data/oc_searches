@@ -80,11 +80,11 @@ def pre_render_search(context: dict, template: str, request: HttpRequest, lang: 
 
     MACHINE_XLT_MSG_EN = '<span class="fa fa-language text-muted mrgn-lft-sm" title="This third party metadata ' \
                          'element has been translated using an automated translation tool. To report any ' \
-                         'discrepancies please contact open-ouvert@tbs-sct.gc.ca"></span>'
+                         'discrepancies please contact PortalSupport-Soutienportail@tbs-sct.gc.ca"></span>'
     MACHINE_XLT_MSG_FR = '<span class="fa fa-language text-muted mrgn-lft-sm" title="Cet élément de métadonnées ' \
                          'provenant d’une tierce partie a été traduit à l’aide d’un outil de traduction automatisée. ' \
                          'Pour signaler toute anomalie, veuillez communiquer avec nous à ' \
-                         'open-ouvert@tbs-sct.gc.ca"></span>'
+                         'PortalSupport-Soutienportail@tbs-sct.gc.ca"></span>'
 
     context['search_alerts'] = []
     context['od_en_fgp_root'] = settings.OPEN_DATA_EN_FGP_BASE
