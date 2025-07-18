@@ -57,7 +57,7 @@ def load_csv_record(csv_record: dict, solr_record: dict, search: Search, fields:
             if 0 < total_decimal < 250:
                 solr_record['total_range'] = 'r6'
             elif 250 <= total_decimal < 500:
-                solr_record['total_range_'] = 'r5'
+                solr_record['total_range'] = 'r5'
             elif 500 <= total_decimal < 1000:
                 solr_record['total_range'] = 'r4'
             elif 1000 <= total_decimal < 5000:
