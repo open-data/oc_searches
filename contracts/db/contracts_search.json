@@ -23,7 +23,7 @@
   "json_response": false,
   "label_en": "Search Government Contracts over $10,000",
   "label_fr": "Recherche des contrats gouvernementaux de plus de 10 000 $",
-  "main_content_body_top_snippet": "search_snippets/default_main_content_body_top.html",
+  "main_content_body_top_snippet": "search_snippets/custom/contracts/contracts_main_content_body_top.html",
   "mlt_enabled": false,
   "mlt_items": 10,
   "more_like_this_template": "more_like_this.html",
