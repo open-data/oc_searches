@@ -16,7 +16,7 @@
   "footer_snippet": "search_snippets/default_footer.html",
   "header_css_snippet": "search_snippets/default_header.css",
   "header_js_snippet": "search_snippets/default_header.js",
-  "id_fields": "reporting_period,lead",
+  "id_fields": "ref_number",
   "imported_on": null,
   "info_message_snippet": "search_snippets/default_info_message.html",
   "is_disabled": false,

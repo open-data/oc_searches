@@ -227,7 +227,7 @@
     "solr_field_is_currency": false,
     "solr_field_lang": "bi",
     "solr_field_multivalue_delimeter": ",",
-    "solr_field_multivalued": false,
+    "solr_field_multivalued": true,
     "solr_field_stored": true,
     "solr_field_type": "string"
   },
@@ -350,8 +350,8 @@
   {
     "alt_format": "",
     "default_export_value": "str|-",
-    "fid": "aistrategy_reference_number",
-    "field_id": "reference_number",
+    "fid": "aistrategy_ref_number",
+    "field_id": "ref_number",
     "format_name": "aistrategy",
     "is_default_display": false,
     "is_default_month": false,
@@ -374,6 +374,6 @@
     "solr_field_multivalue_delimeter": ",",
     "solr_field_multivalued": false,
     "solr_field_stored": true,
-    "solr_field_type": "pint"
+    "solr_field_type": "string"
   }
 ]
