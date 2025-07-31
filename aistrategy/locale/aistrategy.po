@@ -46,3 +46,6 @@ msgstr "Achèvement attendu :"
 
 msgid "Strategy"
 msgstr "Stratégie"
+
+msgid "Lead Organization"
+msgstr "Organization"
