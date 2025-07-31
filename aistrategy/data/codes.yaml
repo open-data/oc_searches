@@ -395,7 +395,7 @@ fields:
         label_fr: 2027-T2
 
   - field:
-    name: lead
+    name: lead_department
     codes:
       - code: TBS
         label_en: Treasury Board of Canada Secretariat

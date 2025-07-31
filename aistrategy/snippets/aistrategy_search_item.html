@@ -1,0 +1,44 @@
+{% load i18n %}
+{% load search_extras %}
+
+<div class="row mrgn-bttm-xl">
+
+
+  <div class="col-sm-12 mrgn-bttm-md">
+      <strong>{% translate 'Strategic Action:' %}</strong>  <a href="{{ path_info }}record/{{ doc.id|urlencode }}">{% if language == 'fr' %}{{ doc.sub_action_fr }}{% else %}{{ doc.sub_action_en }}{% endif %} ({{ doc.sub_action }})</a>
+  </div>
+
+  <div class="col-sm-6">
+      <strong>{% translate 'Reporting Period:' %}</strong> {% if language == 'fr' %}{{ doc.reporting_period_fr }}{% else %}{{ doc.reporting_period_en }}{% endif %}
+  </div>
+
+  <div class="col-sm-6">
+      <strong>{% translate 'Expected Completion:' %}</strong> {% if language == 'fr' %}{{ doc.expected_completion_fr }}{% else %}{{ doc.expected_completion_en }}{% endif %}
+  </div>
+
+   <div class="col-sm-12">
+     
+        {% if language == 'fr' %}
+            <strong>Organisation{{ doc.lead_department|pluralize:'s' }} Principal : </strong> 
+            {% for value in doc.lead_department_fr %}{{ value }}{% if doc.lead_department|length > 1 %},{% endif %} {% endfor %}
+        {% else %}
+            <strong>Lead Organization{{ doc.lead_department|pluralize:'s' }}: </strong> 
+            {% for value in doc.lead_department_en %}{{ value }}{% if doc.lead_department|length > 1 %},{% endif %} {% endfor %}
+        {% endif %}
+   </div>
+
+  <div class="col-sm-12">
+      <strong>{% translate 'Key Action:' %}</strong> {% if language == 'fr' %}{{ doc.key_action_fr }}{% else %}{{ doc.key_action_en }}{% endif %} ({{ doc.key_action }})
+  </div>
+
+  <div class="col-sm-12">
+      <strong>{% translate 'Activity:' %}</strong><br> {% if language == 'fr' %}{{ doc.activity_fr | markdown_filter | strip_paragraph }}{% else %}{{ doc.activity_en | markdown_filter | strip_paragraph }}{% endif %}
+  </div>
+
+  <div class="col-sm-12">
+      <strong>{% translate 'Status:' %}  </strong> 
+    <span class="label {% if doc.status == 'NS' %}label-danger{% elif doc.status == 'IP' %}label-info{% elif doc.status == 'CO' %}label-success{% endif %}">
+    {% if language == 'fr' %}{{ doc.status_fr }}{% else %}{{ doc.status_en }}{% endif %}</span>
+  </div>
+
+</div>

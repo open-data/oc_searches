@@ -1,0 +1,95 @@
+{% extends "search.html" %}
+{% load static %}
+{% load humanize %}
+{% load i18n %}
+{% load qurl %}
+{% load search_extras %}
+
+{% block main-content-body-top %}
+  <style>
+    @keyframes kf_co {
+      from {stroke-dashoffset: 360} to {stroke-dashoffset: {{co_offset}};}
+    }
+    @keyframes kf_ip {
+      from {stroke-dashoffset: 360} to {stroke-dashoffset: {{ip_offset}};}
+    }
+    @keyframes kf_ns {
+      from {stroke-dashoffset: 360} to {stroke-dashoffset: {{ns_offset}};}
+    }
+  </style>
+  <div class="row">
+
+    <div class="col-md-3"></div>
+    <div class="row mrgn-bttm-md mrgn-lft-md form-inline">
+      <div class="col-md-2 text-center">
+        {% if CO_list %}<a href="{% qurl request.get_full_path status=CO_list %}" title="{{ codes.status|get_dict_value:'CO' }}" alt="{{ co_num }} action{{ co_num|pluralize }} {% translate "with status" %} {{ codes.status|get_dict_value:'CO' }}">{% endif %}
+        <svg aria-labelledby="cStatTitle" role="img">
+          <title id="cStatTitle">{{ co_num }} {% if language == "fr" %}Stratégie{{ co_num|pluralize:"s" }}{% else %}Stratag{{ co_num|pluralize:"y,ies" }}{% endif %} {% translate "with status" %} {{ codes.status|get_dict_value:'CP' }}</title>
+          <circle class="bg-CO" cx="57" cy="57" r="52" />
+          <circle class="meter-CO" cx="57" cy="57" r="52" stroke-dashoffset="{{ co_offset }}" style="animation: kf_co 1s ease-out"/>
+          <text x="57" y="64" text-anchor="middle" class="status_count_text">{{ co_num }}</text>
+        </svg><br>
+        {{ codes.status|get_dict_value:'CO' }}
+        {% if CO_list %}</a>{% endif %}
+      </div>
+
+      <div class="col-md-2 text-center">
+        {% if IP_list %}<a href="{% qurl request.get_full_path status=IP_list %}" title="{{ codes.status|get_dict_value:'IP' }}" alt="{{ ip_num }} action{{ ip_num|pluralize }} {% translate "with status" %} {{ codes.status|get_dict_value:'IP' }}">{% endif %}
+        <svg aria-labelledby="spStatTitle" role="img">
+          <title id="spStatTitle">{{ ip_num }} action{{ ip_num|pluralize }} {% translate "with status" %} {{ codes.status|get_dict_value:'IP' }}</title>
+          <circle class="bg-IP" cx="57" cy="57" r="52" />
+          <circle class="meter-IP" cx="57" cy="57" r="52" stroke-dashoffset="{{ ip_offset }}" style="animation: kf_ip .8s ease-out"/>
+          <text x="57" y="64" text-anchor="middle" class="status_count_text">{{ ip_num }}</text>
+        </svg><br>
+        {{ codes.status|get_dict_value:'IP' }}
+        {% if IP_list %}</a>{% endif %}
+      </div>
+
+      <div class="col-md-2 text-center">
+        {% if NS_list %}<a href="{% qurl request.get_full_path status=NS_list %}" title="{{ codes.status|get_dict_value:'NS' }}" alt="{{ ns_num }} action{{ ns_num|pluralize }} {% translate "with status" %} {{ codes.status|get_dict_value:'NS' }}">{% endif %}
+        <svg aria-labelledby="nsStatTitle" role="img">
+          <title id="nsStatTitle">{{ ns_num }} action{{ ns_num|pluralize }} {% translate "with status" %} {{ codes.status|get_dict_value:'NS' }}</title>
+          <circle class="bg-NS" cx="57" cy="57" r="52" />
+          <circle class="meter-NS" cx="57" cy="57" r="52" stroke-dashoffset="{{ ns_offset }}" style="animation: kf_lp .6s ease-out"/>
+          <text x="57" y="64" text-anchor="middle" class="status_count_text">{{ ns_num }}</text>
+        </svg><br>
+        {{ codes.status|get_dict_value:'NS' }}
+        {% if NS_list %}</a>{% endif %}
+      </div>
+      <div class="col-md-3"></div>
+
+    </div>
+
+  </div>
+{% endblock main-content-body-top %}
+
+{% block search_results_message %}
+
+<div class="row mrgn-bttm-lg">
+    <div class="col-sm-5 col-xs-12" style="justify-content: left">
+    {% if not show_all_results %}
+      <b>{% if LANGUAGE_CODE == 'fr' %}{{ total_hits|apnumber }} action{{ total_hits|pluralize }} trouvé{{ total_hits|pluralize }}
+      {% else %}Found {{ total_hits|apnumber }} action{{ total_hits|pluralize }}{% endif %}</b>
+    {% endif %}
+    </div>
+    <div class="col-sm-7 col-xs-12"><div style="display: flex; justify-content: right">
+    <label class="control-label mrgn-rght-md" for="sort"> {% translate "Order By" %}</label>
+    <select class="form-control mrgn-rght-0" id="sort" name="sort" onchange="submitForm();" value="{{ sort }}" style="flex: none">
+        {% for option, label in sort_options.items %}
+            <option value="{{ option }}" {% if sort == option %}selected="selected"{% endif %}>{{ label }}</option>
+        {% endfor %}
+    </select>
+    </div>
+    </div>
+</div>
+{% endblock search_results_message %}
+
+
+
+
+
+{% block main-content-search-items %}
+{% for doc in docs %}
+    {% include search_item_snippet %}
+{% endfor %}
+{% endblock main-content-search-items %}
