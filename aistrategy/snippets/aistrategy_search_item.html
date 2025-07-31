@@ -8,11 +8,11 @@
       <strong>{% translate 'Strategic Action:' %}</strong>  <a href="{{ path_info }}record/{{ doc.id|urlencode }}">{% if language == 'fr' %}{{ doc.sub_action_fr }}{% else %}{{ doc.sub_action_en }}{% endif %} ({{ doc.sub_action }})</a>
   </div>
 
-  <div class="col-sm-6">
+  <div class="col-sm-5">
       <strong>{% translate 'Reporting Period:' %}</strong> {% if language == 'fr' %}{{ doc.reporting_period_fr }}{% else %}{{ doc.reporting_period_en }}{% endif %}
   </div>
 
-  <div class="col-sm-6">
+  <div class="col-sm-7">
       <strong>{% translate 'Expected Completion:' %}</strong> {% if language == 'fr' %}{{ doc.expected_completion_fr }}{% else %}{{ doc.expected_completion_en }}{% endif %}
   </div>
 

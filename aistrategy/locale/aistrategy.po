@@ -23,9 +23,6 @@ msgstr "L'action clé :"
 msgid "Strategic Action:"
 msgstr "Action stratégique :"
 
-msgid "Strategic Action:"
-msgstr "Action stratégique :"
-
 msgid "Activity:"
 msgstr "Activité :"
 
