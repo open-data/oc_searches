@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-msgid "'AI Strategy:"
+msgid "AI Strategy:"
 msgstr "Stratégie en matière d'IA :"
 
 msgid "Key Action:"
