@@ -1,0 +1,55 @@
+
+{% load i18n %}
+{% load search_extras %}
+
+
+<div class="row">
+<div class="col-md-3"><strong>{% translate 'AI Strategy:' %}</strong></div>
+<div class="col-md-3">{{ doc.ref_number }}</div>
+</div>
+
+
+<div class="row">
+  <div class="col-md-3"><strong>{% translate 'Status:' %}</strong></div>
+  <div class="col-md-3">{% if language == "fr" %}{{ doc.status_fr }}{% else %}{{ doc.status_en }}{% endif %}</div>
+</div>
+
+<div class="row">
+  <div class="col-md-3"><strong>{% translate 'Priority Area:' %}</strong></div>
+  <div class="col-md-9">({{ doc.priority_area }}) {% if language == "fr" %}{{ doc.priority_area_fr }}{% else %}{{ doc.priority_area_en }}{% endif %}</div>
+</div>
+
+<div class="row">
+  <div class="col-md-3"><strong>{% translate 'Key Action:' %}</strong></div>
+  <div class="col-md-9">({{ doc.key_action }}) {% if language == "fr" %}{{ doc.key_action_fr }}{% else %}{{ doc.key_action_en }}{% endif %}</div>
+</div>
+
+<div class="row">
+  <div class="col-md-3"><strong>{% translate 'Strategic sub-action:' %}</strong></div>
+  <div class="col-md-9">({{ doc.sub_action }}) {% if language == "fr" %}{{ doc.sub_action_fr }}{% else %}{{ doc.sub_action_en }}{% endif %}</div>
+</div>
+
+<div class="row">
+  <div class="col-md-3"><strong>{% translate 'Activity:' %}</strong></div>
+  <div class="col-md-9">({{ doc.activity }}) {% if language == "fr" %}{{ doc.activity_fr }}{% else %}{{ doc.activity_en }}{% endif %}</div>
+</div>
+
+<div class="row">
+  <div class="col-md-3"><strong>{% translate 'Description:' %}</strong></div>
+  <div class="col-md-9">{% if language == "fr" %}{{ doc.description_fr | markdown_filter | safe }}{% else %}{{ doc.description_en | markdown_filter | safe }}{% endif %}</div>
+</div>
+
+<div class="row">
+{% if language == "fr" %}
+  <div class="col-md-3"><strong>Ministère{{ doc.lead_department_fr|length|pluralize}} responsable{{ doc.lead_department_fr|length|pluralize}}</strong></div>
+  <div class="col-md-9"><ul style="list-style-type: none;padding-left: 0;">{% for dept in doc.lead_department_fr %}<li>{{dept}}</li>{% endfor %}</ul></div>
+{% else %}
+  <div class="col-md-3"><strong>Lead Department{{ doc.lead_department_en|length|pluralize}}</strong></div>
+  <div class="col-md-9"><ul style="list-style-type: none;padding-left: 0;">{% for dept in doc.lead_department_en %}<li>{{dept}}</li>{% endfor %}</ul></div>
+{% endif %}
+</div>
+
+<div class="row">
+  <div class="col-md-12"><strong>{% translate 'Progress Made:' %}</strong></div>
+  <div class="col-md-12">{% if language == "fr" %}{{ doc.progress_fr }}{% else %}{{ doc.progress_en }}{% endif %}</div>
+</div>

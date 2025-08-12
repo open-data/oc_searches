@@ -17,6 +17,9 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+msgid "AI Strategy:"
+msgstr "Stratégie en matière d'IA :"
+
 msgid "Key Action:"
 msgstr "L'action clé :"
 
@@ -35,6 +38,9 @@ msgstr "Statut: "
 msgid "Reference No."
 msgstr "Numéro de référence :"
 
+msgid "Priority Area:"
+msgstr "Domaine prioritaire :"
+
 msgid ":"
 msgstr " :"
 
@@ -46,3 +52,12 @@ msgstr "Stratégie"
 
 msgid "Lead Organization"
 msgstr "Organization"
+
+msgid "Strategic sub-action:"
+msgstr "Sous-action stratégique :"
+
+msgid "Description:"
+msgstr "Description :"
+
+msgid "Progress Made:"
+msgstr "Progrès réalisés :"
