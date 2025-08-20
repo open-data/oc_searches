@@ -15,6 +15,10 @@ def circle_progress_bar_offset(value: int, total: int):
     
 
 def pre_search_solr_query(context: dict, solr_query: dict, request: HttpRequest, search: Search, fields: dict, codes: dict, facets: list, record_ids: str):
+    solr_query['group'] = True
+    solr_query['group.field'] = 'ref_number'
+    solr_query['group.sort'] = 'reporting_period desc'
+    solr_query['group.limit'] = 1
     return context, solr_query
 
 
@@ -23,6 +27,9 @@ def post_search_solr_query(context: dict, solr_response: SolrResponse, solr_quer
 
 
 def pre_record_solr_query(context: dict, solr_query: dict, request: HttpRequest, search: Search, fields: dict, codes: dict, facets: list, record_ids: str):
+    ref_number = solr_query['q'].split(':')[1].split(",")[1].strip("\"'")
+    solr_query['q'] = f"ref_number:{ref_number}"
+    solr_query['sort'] = "reporting_period desc"
     return context, solr_query
 
 

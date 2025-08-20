@@ -3,11 +3,17 @@
 {% load search_extras %}
 
 
-<div class="row">
-<div class="col-md-3"><strong>{% translate 'AI Strategy:' %}</strong></div>
-<div class="col-md-3">{{ doc.ref_number }}</div>
-</div>
+<section class="panel panel-default">
+  <header class="panel-heading">
+   <h5 class="panel-title">{% translate 'Reporting Period:' %} {{ doc.reporting_period_en }}</h5>
+  </header>
+  <div class="panel-body">
+   <p>
 
+<div class="row">
+  <div class="col-md-3"><strong>{% translate 'AI Strategy:' %}</strong></div>
+  <div class="col-md-3">{{ doc.ref_number }}</div>
+</div>
 
 <div class="row">
   <div class="col-md-3"><strong>{% translate 'Status:' %}</strong></div>
@@ -31,20 +37,12 @@
 
 <div class="row">
   <div class="col-md-3"><strong>{% translate 'Activity:' %}</strong></div>
-<<<<<<< HEAD
   <div class="col-md-9">({{ doc.activity }}) {% if language == "fr" %}{{ doc.activity_fr }}{% else %}{{ doc.activity_en }}{% endif %}</div>
-=======
-  <div class="col-md-9">{% if language == "fr" %}{{ doc.description_fr | markdown_filter | safe }}{% else %}{{ doc.description_en | markdown_filter | safe }}{% endif %}</div>
->>>>>>> 0d2ef06f15ef4190ba907e3d7d42e19f0f269844
 </div>
 
 <div class="row">
   <div class="col-md-3"><strong>{% translate 'Description:' %}</strong></div>
-<<<<<<< HEAD
   <div class="col-md-9">{% if language == "fr" %}{{ doc.description_fr | markdown_filter | safe }}{% else %}{{ doc.description_en | markdown_filter | safe }}{% endif %}</div>
-=======
-  <div class="col-md-9">{% if language == "fr" %}{{ doc.activity_fr }}{% else %}{{ doc.activity_en }}{% endif %}</div>
->>>>>>> 0d2ef06f15ef4190ba907e3d7d42e19f0f269844
 </div>
 
 <div class="row">
@@ -61,3 +59,7 @@
   <div class="col-md-12"><strong>{% translate 'Progress Made:' %}</strong></div>
   <div class="col-md-12">{% if language == "fr" %}{{ doc.progress_fr }}{% else %}{{ doc.progress_en }}{% endif %}</div>
 </div>
+
+</p>
+</div>
+</section>
