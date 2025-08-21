@@ -19,6 +19,8 @@ def pre_search_solr_query(context: dict, solr_query: dict, request: HttpRequest,
     solr_query['group.field'] = 'ref_number'
     solr_query['group.sort'] = 'reporting_period desc'
     solr_query['group.limit'] = 1
+    solr_query['group.ngroups'] = True
+    solr_query['group.truncate'] = True
     return context, solr_query
 
 
