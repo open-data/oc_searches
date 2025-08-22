@@ -61,7 +61,7 @@ def filter_csv_record(csv_record,search: Search, fields: dict, codes: dict, form
 
 def load_csv_record(csv_record: dict, solr_record: dict, search: Search, fields: dict, codes: dict, format: str):
     solr_record['activity_eng'] = codes['activity'][csv_record['activity'].lower()].label_en
-    solr_record['activity_eng'] = codes['activity'][csv_record['activity'].lower()].label_fr
+    solr_record['activity_fra'] = codes['activity'][csv_record['activity'].lower()].label_fr
     solr_record['key_action_eng'] = codes['key_action'][csv_record['key_action'].lower()].label_en
     solr_record['key_action_fra'] = codes['key_action'][csv_record['key_action'].lower()].label_fr
     solr_record['sub_action_eng'] = codes['sub_action'][csv_record['sub_action'].lower()].label_en
@@ -157,4 +157,5 @@ def pre_render_record(context: dict, template: str, request: HttpRequest, lang: 
     :param codes: the application code objects to be used
     :return: context object, and the template name
     """
+    context['search_title'] = f"{context['search_title']} ({context['docs'][0]['ref_number']})"
     return context, template
