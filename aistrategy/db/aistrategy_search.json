@@ -19,7 +19,7 @@
   "id_fields": "reporting_period,ref_number",
   "imported_on": null,
   "info_message_snippet": "search_snippets/default_info_message.html",
-  "is_disabled": true,
+  "is_disabled": false,
   "json_response": false,
   "label_en": "AI Strategy Tracker",
   "label_fr": "L'outil de suivi pour la strat\u00e9gie d'IA",
