@@ -1,5 +1,5 @@
 from django.http import HttpRequest
-from search.models import Search, Field, Code
+from search.models import Search, Field, Setting
 from SolrClient import SolrResponse
 
 
@@ -82,6 +82,15 @@ def pre_render_search(context: dict, template: str, request: HttpRequest, lang: 
     :param codes: the application code objects to be used
     :return: context object, and the template name
     """
+
+    # Get the total value to show at the top of the page
+
+    total_strategies, is_new = Setting.objects.get_or_create(key="aistrategy.searchpage.total")
+    if not is_new:
+        context["total_strategies"] = total_strategies.value
+    else:
+        context["total_strategies"] = "?"
+    
     if context['total_hits'] == 0:
         context['ip_offset'] = 360
         context['ns_offset'] = 360

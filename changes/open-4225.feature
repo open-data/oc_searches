@@ -1,0 +1,1 @@
+Add a new static total circle to the top of the AI Strategy Tracker search page
