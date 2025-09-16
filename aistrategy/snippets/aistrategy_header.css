@@ -305,10 +305,10 @@ svg {
 .bg-NS {
   fill: none;
   stroke-width: 10px;
-  stroke: #dadada;
+  stroke: #ffdada;
 }
 .meter-NS {
-  stroke: #444;
+  stroke: #f91d1d;
   stroke-dasharray: 360;
 }
 

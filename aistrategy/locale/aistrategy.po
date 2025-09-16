@@ -7,10 +7,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \"Open Canada Search - Open Data and Information Search\"\n"
-"Report-Msgid-Bugs-To: \n"None
+"Report-Msgid-Bugs-To: Open a GitHub issue\n"
 "POT-Creation-Date: 2025-07-29 12:15-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: French - Canadian\n"
 "MIME-Version: 1.0\n"
