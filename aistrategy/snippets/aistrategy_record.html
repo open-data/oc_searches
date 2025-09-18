@@ -1,0 +1,70 @@
+{% extends "record.html" %}
+{% load i18n %}
+{% load search_extras %}
+
+<div class="col-md-12"  id="{{ docs.0.reporting_period }}">
+    {% block main-content-search-items %}
+
+    <div class="row">
+      <div class="col-md-3"><strong>{% translate 'AI Strategy:' %}</strong></div>
+      <div class="col-md-9">{{ docs.0.ref_number }}</div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-3"><strong>{% translate 'Status:' %}</strong></div>
+      <div class="col-md-9">{% if language == "fr" %}{{ docs.0.status_fr }}{% else %}{{ docs.0.status_en }}{% endif %}</div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-3"><strong>{% translate 'Priority Area:' %}</strong></div>
+      <div class="col-md-9">({{ docs.0.priority_area }}) {% if language == "fr" %}{{ docs.0.priority_area_fr }}{% else %}{{ docs.0.priority_area_en }}{% endif %}</div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-3"><strong>{% translate 'Key Action:' %}</strong></div>
+      <div class="col-md-9">({{ docs.0.key_action }}) {% if language == "fr" %}{{ docs.0.key_action_fr }}{% else %}{{ docs.0.key_action_en }}{% endif %}</div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-3"><strong>{% translate 'Strategic sub-action:' %}</strong></div>
+      <div class="col-md-9">({{ docs.0.sub_action }}) {% if language == "fr" %}{{ docs.0.sub_action_fr }}{% else %}{{ docs.0.sub_action_en }}{% endif %}</div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-3"><strong>{% translate 'Activity:' %}</strong></div>
+      <div class="col-md-9">({{ docs.0.activity }}) {% if language == "fr" %}{{ docs.0.activity_fr }}{% else %}{{ docs.0.activity_en }}{% endif %}</div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-3"><strong>{% translate 'Description:' %}</strong></div>
+      <div class="col-md-9">{% if language == "fr" %}{{ docs.0.description_fr | markdown_filter | safe }}{% else %}{{ docs.0.description_en | markdown_filter | safe }}{% endif %}</div>
+    </div>
+
+    <div class="row">
+    {% if language == "fr" %}
+      <div class="col-md-3"><strong>Ministère{{ docs.0.lead_department_fr|length|pluralize}} responsable{{ docs.0.lead_department_fr|length|pluralize}}</strong></div>
+      <div class="col-md-9"><ul style="list-style-type: none;padding-left: 0;">{% for dept in docs.0.lead_department_fr %}<li>{{dept}}</li>{% endfor %}</ul></div>
+    {% else %}
+      <div class="col-md-3"><strong>Lead Department{{ docs.0.lead_department_en|length|pluralize}}</strong></div>
+      <div class="col-md-9"><ul style="list-style-type: none;padding-left: 0;">{% for dept in docs.0.lead_department_en %}<li>{{dept}}</li>{% endfor %}</ul></div>
+    {% endif %}
+    </div>
+
+    {% for doc in docs %}
+    <section class="panel panel-default" {% if forloop.counter != 1 %}id="{{ doc.reporting_period }}"{% endif %}>
+      <header class="panel-heading">
+      <h5 class="panel-title">{% translate 'Reporting Period:' %} {% if language == "fr" %}{{ doc.reporting_period_fr }}{% else %}{{ doc.reporting_period_en }}{% endif %}</h5>
+      </header>
+      <div class="panel-body">
+        <p>
+          <div class="row">
+            <div class="col-md-12"><strong>{% translate 'Progress Made:' %}</strong></div>
+            <div class="col-md-12">{% if language == "fr" %}{{ doc.progress_fr | markdown_filter | safe }}{% else %}{{ doc.progress_en | markdown_filter | safe }}{% endif %}</div>
+          </div>
+        </p>
+      </div>
+    </section>
+    {% endfor %}
+
+  {% endblock main-content-search-items %}
+</div>

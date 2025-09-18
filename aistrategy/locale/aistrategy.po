@@ -29,7 +29,7 @@ msgid "Activity:"
 msgstr "Activité :"
 
 msgid "Reporting Period:"
-msgstr "Période de déclaration: "
+msgstr "Période de déclaration :"
 
 msgid "Status:"
 msgstr "Statut: "

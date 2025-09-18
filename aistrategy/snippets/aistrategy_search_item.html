@@ -32,7 +32,7 @@
   </div>
 
   <div class="col-sm-12">
-      <strong>{% translate 'Activity:' %}</strong><br> {% if language == 'fr' %}{{ doc.activity_fra | markdown_filter | strip_paragraph | safe }}{% else %}{{ doc.activity_eng | markdown_filter | strip_paragraph | safe }}{% endif %}
+      <strong>{% translate 'Activity:' %}</strong><br>({{ doc.activity }}) {% if language == 'fr' %}{{ doc.activity_fra | markdown_filter | strip_paragraph | safe }}{% else %}{{ doc.activity_eng | markdown_filter | strip_paragraph | safe }}{% endif %}
   </div>
 
   <div class="col-sm-12">
