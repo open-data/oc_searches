@@ -5,7 +5,7 @@
 
 
   <div class="col-sm-12 mrgn-bttm-md">
-      <strong>{% translate 'Strategic Action:' %}</strong>  <a href="{{ path_info }}record/{{ doc.id|urlencode }}#{{  doc.reporting_period }}">{% if language == 'fr' %}{{ doc.sub_action_fr }}{% else %}{{ doc.sub_action_en }}{% endif %} ({{ doc.sub_action }})</a>
+      <strong>{% translate 'Strategic Action:' %}</strong>  <a href="{{ path_info }}record/{{ doc.id|urlencode }}#{{  doc.reporting_period }}">{% if language == 'fr' %}{{ doc.sub_action_fr }}{% else %}{{ doc.sub_action_en }}{% endif %} ({{ doc.sub_action | safe }})</a>
   </div>
 
   <div class="col-sm-5">
@@ -28,7 +28,7 @@
    </div>
 
   <div class="col-sm-12">
-      <strong>{% translate 'Key Action:' %}</strong> {% if language == 'fr' %}{{ doc.key_action_fra | markdown_filter | strip_paragraph | safe }}{% else %}{{ doc.key_action_eng | markdown_filter | strip_paragraph | safe }}{% endif %} ({{ doc.key_action }})
+      <strong>{% translate 'Key Action:' %}</strong> {% if language == 'fr' %}{{ doc.key_action_fra | markdown_filter | strip_paragraph | safe }}{% else %}{{ doc.key_action_eng | markdown_filter | strip_paragraph | safe }}{% endif %} ({{ doc.key_action | safe }})
   </div>
 
   <div class="col-sm-12">
