@@ -8,9 +8,9 @@
     <div class="col-sm-8">
       <h4 class="mrgn-tp-0 mrgn-bttm-sm"><a href="{{ path_info }}record/{{ doc.id|urlencode }}">
           {% if LANGUAGE_CODE == 'en' %}
-            {{ doc.recipient_legal_name_en | title | markdown_filter | safe}}</a>
+            {{ doc.recipient_legal_name_en | markdown_filter | safe}}</a>
           {% else %}
-            {{ doc.recipient_legal_name_fr | title | markdown_filter | safe}}</a>
+            {{ doc.recipient_legal_name_fr | markdown_filter | safe}}</a>
           {% endif %}
       </h4>
     </div>
