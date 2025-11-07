@@ -3,27 +3,27 @@ from django.conf import settings
 from django.core.cache import caches
 from django.http import HttpRequest
 import json
-import nltk
-from nltk.stem import PorterStemmer
+# import nltk
+# from nltk.stem import PorterStemmer
 import numpy as np
 import os
 import pickle
 from search.models import Search, Field, Code
-from SolrClient import SolrResponse
+from SolrClient2 import SolrResponse
 import sys
 import time
 
 
-def load_model(path):
-    if os.path.exists(path):
-        start1 = time.time()
-        model = pickle.load(open(path, 'rb'))
-        end1 = time.time()
-        print('Loading file : {0} sec'.format(end1-start1))
-        return model
+# def load_model(path):
+#     if os.path.exists(path):
+#         start1 = time.time()
+#         model = pickle.load(open(path, 'rb'))
+#         end1 = time.time()
+#         print('Loading file : {0} sec'.format(end1-start1))
+#         return model
 
 # Use a local memory cache for the DB objects
-cache = caches['local']
+# cache = caches['local']
 # Load Search and Field configuration
 
 # Disabling models for now
@@ -45,8 +45,8 @@ cache = caches['local']
 #     model_fr = load_model(classifier_fr)
 #     cache.set('ati_model_fr', model_fr, timeout=3600)
 
-if settings.NLTK_DATADIR not in nltk.data.path:
-    nltk.data.path.append(settings.NLTK_DATADIR)
+# if settings.NLTK_DATADIR not in nltk.data.path:
+#     nltk.data.path.append(settings.NLTK_DATADIR)
 
 
 def plugin_api_version():

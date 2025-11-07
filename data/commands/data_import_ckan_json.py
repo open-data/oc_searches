@@ -10,8 +10,8 @@ import logging
 import pytz
 from search.models import Search, Field, Code, Setting, Event
 import sys
-from SolrClient import SolrClient
-from SolrClient.exceptions import ConnectionError as SolrConnectionError
+from SolrClient2 import SolrClient
+from SolrClient2.exceptions import ConnectionError as SolrConnectionError
 from time import time
 import traceback
 
@@ -513,7 +513,11 @@ class Command(BaseCommand):
 
         # Ensure all empty CSV fields are set to appropriate or default values
         solr_record = self.set_empty_fields(solr_record)
-        solr_record['machine_translated_fields'] = ",".join(solr_record['machine_translated_fields'])
+        if "machine_translated_fields" in solr_record and len(solr_record['machine_translated_fields']) > 1:
+            solr_record['machine_translated_fields'].remove('-')
+            solr_record['machine_translated_fields'] = ",".join(solr_record['machine_translated_fields'])
+        else:
+            solr_record['machine_translated_fields'] = '-'
 
         return solr_record
 
@@ -556,7 +560,7 @@ class Command(BaseCommand):
             if options['type'] == 'jsonl':
                 with open(options['jsonl'], 'r', encoding='utf-8-sig', errors="ignore") as json_file:
                     for dataset in json_file:
-                        ds = json.loads(dataset)
+                        ds = json.loads(dataset.strip())
                         solr_record = self.jsons_to_dataset(ds)
                         solr_records.append(solr_record)
                         # self.logger.info(json.dumps(solr_record, indent=4))

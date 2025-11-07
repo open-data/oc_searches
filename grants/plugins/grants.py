@@ -3,7 +3,7 @@ from datetime import date
 from django.http import HttpRequest
 import re
 from search.models import Search, Field, Code
-from SolrClient import SolrResponse
+from SolrClient2 import SolrResponse
 
 
 def _set_bilingual_field(field_name: str, field_value: str, solr_record: list):

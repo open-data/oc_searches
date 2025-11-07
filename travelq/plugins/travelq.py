@@ -2,7 +2,7 @@ from babel.numbers import format_currency, format_decimal, parse_decimal, Number
 from django.http import HttpRequest
 import json
 from search.models import Search, Field, Code
-from SolrClient import SolrResponse
+from SolrClient2 import SolrResponse
 
 
 def plugin_api_version():

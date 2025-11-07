@@ -1,7 +1,7 @@
 from django.http import HttpRequest
 from django.conf import settings
 from search.models import Search, Field, Code
-from SolrClient import SolrClient, SolrResponse
+from SolrClient2 import SolrClient, SolrResponse
 
 
 def plugin_api_version():

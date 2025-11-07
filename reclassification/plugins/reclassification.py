@@ -3,7 +3,7 @@ from datetime import datetime
 from django.http import HttpRequest
 import logging
 from search.models import Search, Field, Code
-from SolrClient import SolrResponse
+from SolrClient2 import SolrResponse
 
 
 logger = logging.getLogger(__name__)

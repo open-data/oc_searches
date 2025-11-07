@@ -3,8 +3,8 @@ from django.conf import settings
 import json
 import logging
 from search.models import Search, Field, Code, Setting
-from SolrClient import SolrClient
-from SolrClient.exceptions import ConnectionError
+from SolrClient2 import SolrClient
+from SolrClient2.exceptions import ConnectionError
 from time import time
 import traceback
 

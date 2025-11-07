@@ -1,6 +1,6 @@
 from django.http import HttpRequest
 from search.models import Search, Field, Code, ChronologicCode
-from SolrClient import SolrResponse
+from SolrClient2 import SolrResponse
 from datetime import datetime
 import pytz
 

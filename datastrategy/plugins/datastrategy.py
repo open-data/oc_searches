@@ -4,7 +4,7 @@
 # from dateutil.tz import gettz
 from django.http import HttpRequest
 from search.models import Search, Field, Code
-from SolrClient import SolrResponse
+from SolrClient2 import SolrResponse
 
 
 def circle_progress_bar_offset(value: int, total: int):
