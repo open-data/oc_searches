@@ -42,26 +42,26 @@
         </div>
 
         <div class="col-md-2">
-          {% if Pas_commence_list %}<a href="{% qurl request.get_full_path action_status_fr=Pas_commence_list %}" title="Pas commencé" alt="{{ ns_num }} item{{ ns_num|pluralize }} {% translate 'with status' %} Pas commencé ">{% endif %}
+          {% if Non_entamee_list %}<a href="{% qurl request.get_full_path action_status_fr=Non_entamee_list %}" title="Non entamée" alt="{{ ns_num }} item{{ ns_num|pluralize }} {% translate 'with status' %} Pas commencé ">{% endif %}
           <svg aria-labelledby="nsStatTitle" role="img">
-            <title id="nsStatTitle">{{ ns_num }} item{{ ns_num|pluralize }} {% translate "with status" %} Pas commencé</title>
+            <title id="nsStatTitle">{{ ns_num }} item{{ ns_num|pluralize }} {% translate "with status" %} Non entamée</title>
             <circle class="bg-Silver" cx="57" cy="57" r="52" />
             <circle class="meter-Silver" cx="57" cy="57" r="52" stroke-dashoffset="{{ ns_offset }}" style="animation: kf_ns 1s ease-out"/>
             <text x="57" y="64" text-anchor="middle" class="status_count_text">{{ ns_num }}</text>
           </svg>
-          <div class="text-center">Pas commencé</div>
-          {% if Pas_commence_list %}</a>{% endif %}
+          <div class="text-center">Non entamée</div>
+          {% if Non_entamee_list %}</a>{% endif %}
         </div>
 
         <div class="col-md-2">
-          {% if Termine_list %}<a href="{% qurl request.get_full_path action_status_fr=Termine_list %}" title="Terminé" alt="{{ co_num }} item{{ co_num|pluralize }} {% translate 'with status' %} Terminé ">{% endif %}
+          {% if Terminee_list %}<a href="{% qurl request.get_full_path action_status_fr=Terminee_list %}" title="Terminée" alt="{{ co_num }} item{{ co_num|pluralize }} {% translate 'with status' %} Terminé ">{% endif %}
           <svg aria-labelledby="coStatTitle" role="img">
-            <title id="coStatTitle">{{ co_num }} item{{ co_num|pluralize }} {% translate "with status" %} Terminé</title>
+            <title id="coStatTitle">{{ co_num }} item{{ co_num|pluralize }} {% translate "with status" %} Terminée</title>
             <circle class="bg-Green" cx="57" cy="57" r="52" />
             <circle class="meter-Green" cx="57" cy="57" r="52" stroke-dashoffset="{{ co_offset }}" style="animation: co_ns 1s ease-out"/>
             <text x="57" y="64" text-anchor="middle" class="status_count_text">{{ co_num }}</text>
           </svg>
-          <div class="text-center">Terminé</div>
+          <div class="text-center">Terminée</div>
           {% if Termine_list %}</a>{% endif %}
         </div>
 
