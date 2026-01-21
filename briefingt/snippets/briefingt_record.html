@@ -20,7 +20,7 @@
             <div class="col-sm-3"><strong>{% trans 'Title:' %}</strong> </div>
             <div class="col-sm-9">{{ doc.title_fr }}</div>
         </div>
-        {% if results.docs.0.additional_information_fr_s %}
+        {% if doc.additional_information_fr %}
         <div class="row">
             <div class="col-sm-3"><strong>{% trans 'Additional Information: ' %}</strong> </div>
             <div class="col-sm-9">{{ doc.additional_information_fr }}</div>
