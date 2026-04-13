@@ -137,20 +137,34 @@ def pre_render_search(context: dict, template: str, request: HttpRequest, lang: 
         context['LP_list'] = ()
         context['NS_list'] = ()
     else:
-
-        context['show_all_results'] = True
-        for p in request.GET:
-            if p not in ['encoding', 'page', 'sort']:
-                context['show_all_results'] = False
-                break
+        if context['query_type'] == "GET":
+            context['show_all_results'] = True
+            for p in request.GET:
+                if p not in ['encoding', 'page', 'sort']:
+                    context['show_all_results'] = False
+                    break
         # @TODO Do some better calculations for the circle progress bars on the search page for more accurate rendering
 
         # The graph at the top or the search page uses non-standard facet counts - when the status facets are selected,
         # the unselected values are automatically set to zero. It is simpler to calculate these numbers here instead of
         # in the template
-        if 'status' in request.GET:
-            statii = request.GET.getlist('status')
-            stati = statii[0].split('|')
+        if 'status' in request.GET or 'cb-status-C' in request.POST or 'cb-status-SP' in request.POST or 'cb-status-LP' in request.POST or 'cb-status-NS' in request.POST:
+            if context['query_type'] == "GET":
+                statii = request.GET.getlist('status')
+                stati = statii[0].split('|')
+            else:
+                stati = []
+                if 'cb-status-C' in request.POST:
+                    stati.append("C") 
+                if 'cb-status-SP' in request.POST:
+                    stati.append("SP") 
+                if 'cb-status-LP' in request.POST:
+                    stati.append("LP") 
+                if 'cb-status-NS' in request.POST:
+                    stati.append("NS") 
+
+# @TODO How to handle links
+
             context['c_offset'] = circle_progress_bar_offset(context['facets']['status']['C'], context['total_hits']) if "C" in stati and 'C' in context['facets']['status'] else 360
             context['sp_offset'] = circle_progress_bar_offset(context['facets']['status']['SP'], context['total_hits']) if "SP" in stati and 'SP' in context['facets']['status'] else 360
             context['lp_offset'] = circle_progress_bar_offset(context['facets']['status']['LP'], context['total_hits']) if "LP" in stati and 'LP' in context['facets']['status'] else 360
