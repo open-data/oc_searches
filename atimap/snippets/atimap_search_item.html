@@ -5,11 +5,19 @@
 
   <div class="col-sm-12 mrgn-bttm-md">
       <h2 class="mrgn-tp-0 mrgn-bttm-sm h4">
+        {% if view_type == "SearchView" %}
           {% if language == 'fr' %}
               Action : <a href="{{ path_info }}record/{{ doc.id|urlencode }}">{{ doc.actions_text_fr | markdown_filter | strip_paragraph | safe }}</a>
           {% else %}
               Action: <a href="{{ path_info }}record/{{ doc.id|urlencode }}">{{ doc.actions_text_en | markdown_filter | strip_paragraph | safe }}</a>
           {% endif %}
+        {% else %}
+          {% if language == 'fr' %}
+              Action : <a href="{{ path_info }}/record/{{ doc.id|urlencode }}">{{ doc.actions_text_fr | markdown_filter | strip_paragraph | safe }}</a>
+          {% else %}
+              Action: <a href="{{ path_info }}/record/{{ doc.id|urlencode }}">{{ doc.actions_text_en | markdown_filter | strip_paragraph | safe }}</a>
+          {% endif %}        
+        {% endif %}
       </h2>
   </div>
 

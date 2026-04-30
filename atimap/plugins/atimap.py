@@ -84,28 +84,40 @@ def pre_render_search(context: dict, template: str, request: HttpRequest, lang: 
 
     else:
 
-        context['show_all_results'] = True
-        for p in request.GET:
-            if p not in ['encoding', 'page', 'sort']:
-                context['show_all_results'] = False
-                break
-        # @TODO Do some better calculations for the circle progress bars on the search page for more accurate rendering
+        if context['query_type'] == "GET":
+            context['show_all_results'] = True
+            for p in request.GET:
+                if p not in ['encoding', 'page', 'sort']:
+                    context['show_all_results'] = False
+                    break
 
         # The graph at the top or the search page uses non-standard facet counts - when the status facets are selected,
         # the unselected values are automatically set to zero. It is simpler to calculate these numbers here instead of
         # in the template
 
-        if 'status' in request.GET:
-            statii = request.GET.getlist('status')
-            stati = statii[0].split('|')
-            context['ip_offset'] = circle_progress_bar_offset(context['facets']['status']['IP_EC'], context['total_hits']) if 'IP_EC' in stati and 'IP_EC' in context['facets']['status'] else 360
-            context['ns_offset'] = circle_progress_bar_offset(context['facets']['status']['NS_NC'], context['total_hits']) if "NS_NC" in stati and 'NS_NC' in context['facets']['status'] else 360
-            context['co_offset'] = circle_progress_bar_offset(context['facets']['status']['CP_RL'], context['total_hits']) if "CP_RL" in stati and 'CP_RL' in context['facets']['status'] else 360
-            context['on_offset'] = circle_progress_bar_offset(context['facets']['status']['ON_CO'], context['total_hits']) if "ON_CO" in stati and 'ON_CO' in context['facets']['status'] else 360
+        if 'status' in request.GET or 'cb-status-IP_EC' in request.POST or 'cb-status-NS_NC' in request.POST or 'cb-status-CP_RL' in request.POST  or 'cb-status-ON_CL' in request.POST:
+            if context['query_type'] == "GET":
+                statii = request.GET.getlist('status')
+                stati = statii[0].split('|')
+            else:
+                stati = []
+                if 'cb-status-IP_EC' in request.POST:
+                    stati.append("IP_EC")
+                if 'cb-status-NS_NC' in request.POST:
+                    stati.append("NS_NC")
+                if 'cb-status-CP_RL' in request.POST:
+                    stati.append("CP_RL")
+                if 'cb-status-ON_CO' in request.POST:
+                    stati.append("ON_CO")
+                    
+            context['ip_offset'] = circle_progress_bar_offset(context['facets']['status']['IP_EC'], context['total_hits']) if 'IP_EC' in  context['facets']['status'] else 360
+            context['ns_offset'] = circle_progress_bar_offset(context['facets']['status']['NS_NC'], context['total_hits']) if "NS_NC" in context['facets']['status'] else 360
+            context['co_offset'] = circle_progress_bar_offset(context['facets']['status']['CP_RL'], context['total_hits']) if "CP_RL" in context['facets']['status'] else 360
+            context['on_offset'] = circle_progress_bar_offset(context['facets']['status']['ON_CO'], context['total_hits']) if "ON_CO" in context['facets']['status'] else 360
 
             context['ip_num'] = context['facets']['status']['IP_EC'] if 'IP_EC' in stati and 'IP_EC' in context['facets']['status'] else 0
-            context['ns_num'] = context['facets']['status']['NS_NC'] if "NS_NC" in stati and 'NS_NC' in context['facets']['status'] else 0
-            context['co_num'] = context['facets']['status']['CP_RL'] if "CP_RL" in stati and 'CP_RL' in context['facets']['status'] else 0
+            context['ns_num'] = context['facets']['status']['NS_NC'] if "NS_NC" in stati and "NS_NC" in context['facets']['status'] else 0
+            context['co_num'] = context['facets']['status']['CP_RL'] if "CP_RL" in stati and "CP_RL" in context['facets']['status'] else 0
             context['on_num'] = context['facets']['status']['ON_CO'] if "ON_CO" in stati and "ON_CO" in context['facets']['status'] else 0
 
             for s in ['IP_EC', 'NS_NC', 'CP_RL', 'ON_CO']:

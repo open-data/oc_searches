@@ -43,6 +43,7 @@
   "search_alias_fr": "voyage",
   "search_id": "travelq",
   "search_item_snippet": "search_snippets/custom/travelq/travelq_search_item.html",
+  "search_results_message_snippet": "search_snippets/default_search_results_message.html",
   "solr_core_name": "search_travelq",
   "solr_debugging": false,
   "solr_default_op": "AND"

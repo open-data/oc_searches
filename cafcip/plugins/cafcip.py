@@ -181,21 +181,31 @@ def pre_render_search(context: dict, template: str, request: HttpRequest, lang: 
         context['co_list'] = ()
         context['mi_list'] = ()
     else:
+        if context['query_type'] == "GET":
+            context['show_all_results'] = True
+            for p in request.GET:
+                if p not in ['encoding', 'page', 'sort']:
+                    context['show_all_results'] = False
+                    break
 
-        context['show_all_results'] = True
-        for p in request.GET:
-            if p not in ['encoding', 'page', 'sort']:
-                context['show_all_results'] = False
-                break
-        # @TODO Do some better calculations for the circle progress bars on the search page for more accurate rendering
-
-        # The graph at the top or the search page uses non-standard facet counts - when the status facets are selected,
+        # The graph at the top of the search page uses non-standard facet counts - when the status facets are selected,
         # the unselected values are automatically set to zero. It is simpler to calculate these numbers here instead of
         # in the template
 
-        if 'status' in request.GET:
-            statii = request.GET.getlist('status')
-            stati = statii[0].split('|')
+        if 'status' in request.GET or 'cb-status-in_progress' in request.POST or 'cb-status-not_started' in request.POST or 'cb-status-implemented' in request.POST or 'cb-status-mitigated'in request.POST:
+            if context['query_type'] == "GET":
+                statii = request.GET.getlist('status')
+                stati = statii[0].split('|')
+            else:
+                stati = []
+                if 'cb-status-in_progress' in request.POST:
+                    stati.append("in_progress") 
+                if 'cb-status-not_started' in request.POST:
+                    stati.append("not_started") 
+                if 'cb-status-implemented' in request.POST:
+                    stati.append("implemented") 
+                if 'cb-status-mitigated' in request.POST:
+                    stati.append("mitigated")                                                     
             context['ip_offset'] = circle_progress_bar_offset(context['facets']['status']['in_progress'], context['total_hits']) if "in_progress" in stati and 'in_progress' in context['facets']['status'] else 360
             context['ns_offset'] = circle_progress_bar_offset(context['facets']['status']['not_started'], context['total_hits']) if "not_started" in stati and 'not_started' in context['facets']['status'] else 360
             context['co_offset'] = circle_progress_bar_offset(context['facets']['status']['implemented'], context['total_hits']) if "implemented" in stati and 'implemented' in context['facets']['status'] else 360

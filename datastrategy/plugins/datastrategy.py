@@ -156,44 +156,58 @@ def pre_render_search(context: dict, template: str, request: HttpRequest, lang: 
         context['bl_list'] = ()
         context['be_list'] = ()
     else:
+        if context['query_type'] == "GET":
+            context['show_all_results'] = True
+            for p in request.GET:
+                if p not in ['encoding', 'page', 'sort']:
+                    context['show_all_results'] = False
+                    break
 
-        context['show_all_results'] = True
-        for p in request.GET:
-            if p not in ['encoding', 'page', 'sort']:
-                context['show_all_results'] = False
-                break
-        # @TODO Do some better calculations for the circle progress bars on the search page for more accurate rendering
-
-        # The graph at the top or the search page uses non-standard facet counts - when the status facets are selected,
-        # the unselected values are automatically set to zero. It is simpler to calculate these numbers here instead of
-        # in the template
         if request.LANGUAGE_CODE == 'fr':
-            if 'action_status_fr' in request.GET:
-                statii = request.GET.getlist('action_status_fr')
-                stati = statii[0].split('|')
-                context['ip_offset'] = circle_progress_bar_offset(context['facets']['action_status_fr']['En cours'], context['total_hits']) if "En cours" in stati and 'En cours' in context['facets']['action_status_fr'] else 360
-                context['ns_offset'] = circle_progress_bar_offset(context['facets']['action_status_fr']['Non entamée'], context['total_hits']) if "Pas commencé" in stati and 'Non entamée' in context['facets']['action_status_fr'] else 360
-                context['co_offset'] = circle_progress_bar_offset(context['facets']['action_status_fr']['Terminée'], context['total_hits']) if "Terminée" in stati and 'Terminée' in context['facets']['action_status_fr'] else 360
-                context['bl_offset'] = circle_progress_bar_offset(context['facets']['action_status_fr']['En pause'], context['total_hits']) if "En pause" in stati and 'En pause' in context['facets']['action_status_fr'] else 360
-                context['be_offset'] = circle_progress_bar_offset(context['facets']['action_status_fr']['Behind'], context['total_hits']) if "Behind" in stati and 'Behind' in context['facets']['action_status_fr'] else 360
 
-                context['ip_num'] = context['facets']['action_status_fr']['En cours'] if "En cours" in stati and 'En cours' in context['facets']['action_status_fr'] else 0
-                context['ns_num'] = context['facets']['action_status_fr']['Non entamée'] if "Non entamée" in stati and 'Non entamée' in context['facets']['action_status_fr'] else 0
-                context['co_num'] = context['facets']['action_status_fr']['Terminée'] if "Terminée" in stati and 'Terminée' in context['facets']['action_status_fr'] else 0
-                context['bl_num'] = context['facets']['action_status_fr']['En pause'] if "En pause" in stati and 'En pause' in context['facets']['action_status_fr'] else 0
-                context['be_num'] = context['facets']['action_status_fr']['Behind'] if "Behind" in stati and 'Behind' in context['facets']['action_status_fr'] else 0
+            # The graph at the top or the search page uses non-standard facet counts - when the status facets are selected,
+            # the unselected values are automatically set to zero. It is simpler to calculate these numbers here instead of
+            # in the template
+            if 'action_status_fr' in request.GET or 'cb-action_status_fr-En cours' in request.POST or 'cb-action_status_fr-Non entamée' in request.POST or 'cb-action_status_fr-Terminée' in request.POST or 'cb-action_status_fr-En pause' in request.POST or 'cb-action_status_fr-Behind' in request.POST:
+                if context['query_type'] == "GET":
+                    statii = request.GET.getlist('action_status_fr')
+                    stati = statii[0].split('|')
+                else:
+                    stati = []
+                    if 'cb-action_status_fr-En cours' in request.POST:
+                        stati.append('En cours')
+                    if 'cb-action_status_fr-Non entamée' in request.POST:
+                        stati.append('Non entamée')                                                     
+                    if 'cb-action_status_fr-Terminée' in request.POST:
+                        stati.append('Terminée')  
+                    if 'cb-action_status_fr-En pause' in request.POST:
+                        stati.append('En pause')  
+                    if 'cb-action_status_fr-Behind' in request.POST:
+                        stati.append('Behind')  
 
-                for s in ['En cours', 'Non entamée', 'Terminée', 'En pause', 'Behind']:
-                    stati2 = stati.copy()
-                    if s in stati:
-                        stati2.remove(s)
-                    else:
-                        # We do not want to show any links when clicking on the status would result in no change or zero results
-                        if s in context['facets']['action_status_fr'] and context['facets']['action_status_fr'][s] > 0:
-                            stati2.append(s)
-                        elif stati == stati2:
-                            stati2 = ()
-                    context[s.replace(" ", "_").replace('é', 'e') + "_list"] = "|".join(stati2)
+                    context['ip_offset'] = circle_progress_bar_offset(context['facets']['action_status_fr']['En cours'], context['total_hits']) if "En cours" in stati and 'En cours' in context['facets']['action_status_fr'] else 360
+                    context['ns_offset'] = circle_progress_bar_offset(context['facets']['action_status_fr']['Non entamée'], context['total_hits']) if "Pas commencé" in stati and 'Non entamée' in context['facets']['action_status_fr'] else 360
+                    context['co_offset'] = circle_progress_bar_offset(context['facets']['action_status_fr']['Terminée'], context['total_hits']) if "Terminée" in stati and 'Terminée' in context['facets']['action_status_fr'] else 360
+                    context['bl_offset'] = circle_progress_bar_offset(context['facets']['action_status_fr']['En pause'], context['total_hits']) if "En pause" in stati and 'En pause' in context['facets']['action_status_fr'] else 360
+                    context['be_offset'] = circle_progress_bar_offset(context['facets']['action_status_fr']['Behind'], context['total_hits']) if "Behind" in stati and 'Behind' in context['facets']['action_status_fr'] else 360
+
+                    context['ip_num'] = context['facets']['action_status_fr']['En cours'] if "En cours" in stati and 'En cours' in context['facets']['action_status_fr'] else 0
+                    context['ns_num'] = context['facets']['action_status_fr']['Non entamée'] if "Non entamée" in stati and 'Non entamée' in context['facets']['action_status_fr'] else 0
+                    context['co_num'] = context['facets']['action_status_fr']['Terminée'] if "Terminée" in stati and 'Terminée' in context['facets']['action_status_fr'] else 0
+                    context['bl_num'] = context['facets']['action_status_fr']['En pause'] if "En pause" in stati and 'En pause' in context['facets']['action_status_fr'] else 0
+                    context['be_num'] = context['facets']['action_status_fr']['Behind'] if "Behind" in stati and 'Behind' in context['facets']['action_status_fr'] else 0
+
+                    for s in ['En cours', 'Non entamée', 'Terminée', 'En pause', 'Behind']:
+                        stati2 = stati.copy()
+                        if s in stati:
+                            stati2.remove(s)
+                        else:
+                            # We do not want to show any links when clicking on the status would result in no change or zero results
+                            if s in context['facets']['action_status_fr'] and context['facets']['action_status_fr'][s] > 0:
+                                stati2.append(s)
+                            elif stati == stati2:
+                                stati2 = ()
+                        context[s.replace(" ", "_").replace('é', 'e') + "_list"] = "|".join(stati2)
 
             else:
                 context['ip_offset'] = circle_progress_bar_offset(context['facets']['action_status_fr']['En cours'], context['total_hits']) if "En cours" in context['facets']['action_status_fr'] else 360
@@ -214,9 +228,23 @@ def pre_render_search(context: dict, template: str, request: HttpRequest, lang: 
                         context[s.replace(" ", "_").replace('é', 'e') + "_list"] = ()
 
         else:
-            if 'action_status' in request.GET:
-                statii = request.GET.getlist('action_status')
-                stati = statii[0].split('|')
+
+            if 'action_status' in request.GET or 'cb-action_status-In Progress' in request.POST or 'cb-action_status-Behind' in request.POST or 'cb-action_status-Not Started' in request.POST or 'cb-action_status-Completed' in request.POST or 'cb-action_status-Blocked' in request.POST:
+                if context['query_type'] == "GET":
+                    statii = request.GET.getlist('action_status')
+                    stati = statii[0].split('|')
+                else:
+                    stati = []
+                    if 'cb-action_status-In Progress' in request.POST:
+                        stati.append("In Progress")
+                    if 'cb-action_status-Behind' in request.POST:
+                        stati.append("Behind")
+                    if 'cb-action_status-Not Started' in request.POST:
+                        stati.append("Not Started")
+                    if 'cb-action_status-Completed' in request.POST:
+                        stati.append("Completed")
+                    if 'cb-action_status-Blocked' in request.POST:
+                        stati.append("Blocked")
                 context['ip_offset'] = circle_progress_bar_offset(context['facets']['action_status']['In Progress'], context['total_hits']) if "In Progress" in stati and 'In Progress' in context['facets']['action_status'] else 360
                 context['ns_offset'] = circle_progress_bar_offset(context['facets']['action_status']['Not Started'], context['total_hits']) if "Not Started" in stati and 'Not Started' in context['facets']['action_status'] else 360
                 context['co_offset'] = circle_progress_bar_offset(context['facets']['action_status']['Completed'], context['total_hits']) if "Completed" in stati and 'Completed' in context['facets']['action_status'] else 360

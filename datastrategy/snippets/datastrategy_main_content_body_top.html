@@ -1,0 +1,319 @@
+{% load static %}
+{% load humanize %}
+{% load i18n %}
+{% load qurl %}
+{% load search_extras %}
+
+<script>
+function toggleStatusCheckbox(cbid) {
+    let stdId = cbid.replace(/ /g, "_")
+     .replace(/é/g, "e")
+     .replace(/à/g, "a");
+
+    const cb = document.getElementById(stdId);
+    if (cb) {
+        cb.checked = !cb.checked;
+    }
+    // Submit the form that contains this checkbox
+    const form = cb.form;
+    if (form) {
+        form.submit();
+    }
+}
+</script>
+
+<style>
+  @keyframes kf_ip {
+    from {stroke-dashoffset: 360} to {stroke-dashoffset: {{ip_offset}};}
+  }
+  @keyframes kf_ns {
+    from {stroke-dashoffset: 360} to {stroke-dashoffset: {{ns_offset}};}
+  }
+  @keyframes kf_co {
+    from {stroke-dashoffset: 360} to {stroke-dashoffset: {{co_offset}};}
+  }
+  @keyframes kf_bl {
+    from {stroke-dashoffset: 360} to {stroke-dashoffset: {{bl_offset}};}
+  }
+  @keyframes kf_be {
+    from {stroke-dashoffset: 360} to {stroke-dashoffset: {{be_offset}};}
+  }
+</style>
+
+{% comment 'Why is this so much longer than other trackers?' %}
+Unlike the datasets of other Trackers, the data strategy has separate English and French
+status columns. Because the English and French data have their own variables and code values
+the format needs to be doubled. 
+{% endcomment %}
+
+{% if view_type == "SearchView" %}
+
+<div class="row">
+    <div class="col-md-10 col-md-push-2 mrgn-tp-sm">
+      <div class="row mrgn-bttm-md mrgn-lft-md form-inline">
+
+        {% if LANGUAGE_CODE == 'fr' %}
+
+        <div class="col-md-2">
+          {% if En_cours_list %}<a href="{% qurl request.get_full_path action_status_fr=En_cours_list %}" title="En cours" alt="{{ ip_num }} item{{ ip_num|pluralize }} {% translate 'with status' %} En cours ">{% endif %}
+          <svg aria-labelledby="ipStatTitle" role="img">
+            <title id="ipStatTitle">{{ ip_num }} item{{ ip_num|pluralize }} {% translate "with status" %} En cours</title>
+            <circle class="bg-Blue" cx="57" cy="57" r="52" />
+            <circle class="meter-Blue" cx="57" cy="57" r="52" stroke-dashoffset="{{ ip_offset }}" style="animation: kf_ip 1s ease-out"/>
+            <text x="57" y="64" text-anchor="middle" class="status_count_text">{{ ip_num }}</text>
+          </svg>
+          <div class="text-center">En cours</div>
+          {% if En_cours_list %}</a>{% endif %}
+        </div>
+
+        <div class="col-md-2">
+          {% if Non_entamee_list %}<a href="{% qurl request.get_full_path action_status_fr=Non_entamee_list %}" title="Non entamée" alt="{{ ns_num }} item{{ ns_num|pluralize }} {% translate 'with status' %} Pas commencé ">{% endif %}
+          <svg aria-labelledby="nsStatTitle" role="img">
+            <title id="nsStatTitle">{{ ns_num }} item{{ ns_num|pluralize }} {% translate "with status" %} Non entamée</title>
+            <circle class="bg-Silver" cx="57" cy="57" r="52" />
+            <circle class="meter-Silver" cx="57" cy="57" r="52" stroke-dashoffset="{{ ns_offset }}" style="animation: kf_ns 1s ease-out"/>
+            <text x="57" y="64" text-anchor="middle" class="status_count_text">{{ ns_num }}</text>
+          </svg>
+          <div class="text-center">Non entamée</div>
+          {% if Non_entamee_list %}</a>{% endif %}
+        </div>
+
+        <div class="col-md-2">
+          {% if Terminee_list %}<a href="{% qurl request.get_full_path action_status_fr=Terminee_list %}" title="Terminée" alt="{{ co_num }} item{{ co_num|pluralize }} {% translate 'with status' %} Terminé ">{% endif %}
+          <svg aria-labelledby="coStatTitle" role="img">
+            <title id="coStatTitle">{{ co_num }} item{{ co_num|pluralize }} {% translate "with status" %} Terminée</title>
+            <circle class="bg-Green" cx="57" cy="57" r="52" />
+            <circle class="meter-Green" cx="57" cy="57" r="52" stroke-dashoffset="{{ co_offset }}" style="animation: co_ns 1s ease-out"/>
+            <text x="57" y="64" text-anchor="middle" class="status_count_text">{{ co_num }}</text>
+          </svg>
+          <div class="text-center">Terminée</div>
+          {% if Termine_list %}</a>{% endif %}
+        </div>
+
+        <div class="col-md-2">
+          {% if Bloque_list %}<a href="{% qurl request.get_full_path action_status_fr=Bloque_list %}" title="Bloqué" alt="{{ bl_num }} item{{ bl_num|pluralize }} {% translate 'with status' %} Bloqué ">{% endif %}
+          <svg aria-labelledby="blStatTitle" role="img">
+            <title id="blStatTitle">{{ bl_num }} item{{ bl_num|pluralize }} {% translate "with status" %} Bloqué</title>
+            <circle class="bg-Red" cx="57" cy="57" r="52" />
+            <circle class="meter-Red" cx="57" cy="57" r="52" stroke-dashoffset="{{ bl_offset }}" style="animation: bl_ns 1s ease-out"/>
+            <text x="57" y="64" text-anchor="middle" class="status_count_text">{{ bl_num }}</text>
+          </svg>
+          <div class="text-center">En pause</div>
+          {% if Bloque_list %}</a>{% endif %}
+        </div>
+
+        <div class="col-md-2">
+          {% if Behind_list %}<a href="{% qurl request.get_full_path action_status_fr=Behind_list %}" title="En arrière" alt="{{ be_num }} item{{ be_num|pluralize }} {% translate 'with status' %} {% translate 'Behind' %} ">{% endif %}
+          <svg aria-labelledby="beStatTitle" role="img">
+            <title id="beStatTitle">{{ be_num }} item{{ be_num|pluralize }} {% translate "with status" %} {% translate "Behind" %}</title>
+            <circle class="bg-Orange" cx="57" cy="57" r="52" />
+            <circle class="meter-Orange" cx="57" cy="57" r="52" stroke-dashoffset="{{ be_offset }}" style="animation: be_ns 1s ease-out"/>
+            <text x="57" y="64" text-anchor="middle" class="status_count_text">{{ be_num }}</text>
+          </svg>
+          <div class="text-center">{% translate "Behind" %}</div>
+          {% if Behind_list %}</a>{% endif %}
+        </div>
+
+        {% else %}
+
+        <div class="col-md-2">
+          {% if In_Progress_list %}<a href="{% qurl request.get_full_path action_status=In_Progress_list %}" title="In Progress" alt="{{ ip_num }} item{{ ip_num|pluralize }} {% translate 'with status' %} In progress ">{% endif %}
+          <svg aria-labelledby="ipStatTitle" role="img">
+            <title id="ipStatTitle">{{ ip_num }} item{{ ip_num|pluralize }} {% translate "with status" %} In Progress</title>
+            <circle class="bg-Blue" cx="57" cy="57" r="52" />
+            <circle class="meter-Blue" cx="57" cy="57" r="52" stroke-dashoffset="{{ ip_offset }}" style="animation: kf_ip 1s ease-out"/>
+            <text x="57" y="64" text-anchor="middle" class="status_count_text">{{ ip_num }}</text>
+          </svg>
+          <div class="text-center">In Progress</div>
+          {% if In_Progress_list %}</a>{% endif %}
+        </div>
+
+        <div class="col-md-2">
+          {% if Not_Started_list %}<a href="{% qurl request.get_full_path action_status=Not_Started_list %}" title="Not Started" alt="{{ ns_num }} item{{ ns_num|pluralize }} {% translate 'with status' %} Not Started ">{% endif %}
+          <svg aria-labelledby="nsStatTitle" role="img">
+            <title id="nsStatTitle">{{ ns_num }} item{{ ns_num|pluralize }} {% translate "with status" %} Not Started</title>
+            <circle class="bg-Silver" cx="57" cy="57" r="52" />
+            <circle class="meter-Silver" cx="57" cy="57" r="52" stroke-dashoffset="{{ ns_offset }}" style="animation: kf_ns 1s ease-out"/>
+            <text x="57" y="64" text-anchor="middle" class="status_count_text">{{ ns_num }}</text>
+          </svg>
+          <div class="text-center">Not Started</div>
+          {% if Not_Started_list %}</a>{% endif %}
+        </div>
+
+        <div class="col-md-2">
+          {% if Completed_list %}<a href="{% qurl request.get_full_path action_status=Completed_list %}" title="Completed" alt="{{ co_num }} item{{ co_num|pluralize }} {% translate 'with status' %} Completed ">{% endif %}
+          <svg aria-labelledby="coStatTitle" role="img">
+            <title id="coStatTitle">{{ co_num }} item{{ co_num|pluralize }} {% translate "with status" %} Completed</title>
+            <circle class="bg-Green" cx="57" cy="57" r="52" />
+            <circle class="meter-Green" cx="57" cy="57" r="52" stroke-dashoffset="{{ co_offset }}" style="animation: co_ns 1s ease-out"/>
+            <text x="57" y="64" text-anchor="middle" class="status_count_text">{{ co_num }}</text>
+          </svg>
+          <div class="text-center">Completed</div>
+          {% if Completed_list %}</a>{% endif %}
+        </div>
+
+        <div class="col-md-2">
+          {% if Blocked_list %}<a href="{% qurl request.get_full_path action_status=Blocked_list %}" title="Blocked" alt="{{ bl_num }} item{{ bl_num|pluralize }} {% translate 'with status' %} Blocked ">{% endif %}
+          <svg aria-labelledby="blStatTitle" role="img">
+            <title id="blStatTitle">{{ bl_num }} item{{ bl_num|pluralize }} {% translate "with status" %} Blocked</title>
+            <circle class="bg-Turquoise" cx="57" cy="57" r="52" />
+            <circle class="meter-Turquoise" cx="57" cy="57" r="52" stroke-dashoffset="{{ bl_offset }}" style="animation: bl_ns 1s ease-out"/>
+            <text x="57" y="64" text-anchor="middle" class="status_count_text">{{ bl_num }}</text>
+          </svg>
+          <div class="text-center">Paused</div>
+          {% if Blocked_list %}</a>{% endif %}
+        </div>
+
+        <div class="col-md-2">
+          {% if Behind_list %}<a href="{% qurl request.get_full_path action_status=Behind_list %}" title="Behind" alt="{{ be_num }} item{{ be_num|pluralize }} {% translate 'with status' %} Behind ">{% endif %}
+          <svg aria-labelledby="beStatTitle" role="img">
+            <title id="beStatTitle">{{ be_num }} item{{ be_num|pluralize }} {% translate "with status" %} Behind</title>
+            <circle class="bg-Orange" cx="57" cy="57" r="52" />
+            <circle class="meter-Orange" cx="57" cy="57" r="52" stroke-dashoffset="{{ be_offset }}" style="animation: be_ns 1s ease-out"/>
+            <text x="57" y="64" text-anchor="middle" class="status_count_text">{{ be_num }}</text>
+          </svg>
+          <div class="text-center">Behind</div>
+          {% if Behind_list %}</a>{% endif %}
+        </div>
+
+        {% endif %}
+    </div>
+  </div>
+</div>
+
+{% else %}
+
+<div class="row">
+    <div class="col-md-10 col-md-push-2 mrgn-tp-sm">
+      <div class="row mrgn-bttm-md mrgn-lft-md form-inline">
+
+        {% if LANGUAGE_CODE == 'fr' %}
+
+        <div class="col-md-2">
+          <a href="#" title="En cours" alt="{{ ip_num }} item{{ ip_num|pluralize }} {% translate 'with status' %} En cours " onclick="toggleStatusCheckbox('cb-action_status_fr-En_cours'); return false;">
+          <svg aria-labelledby="ipStatTitle" role="img">
+            <title id="ipStatTitle">{{ ip_num }} item{{ ip_num|pluralize }} {% translate "with status" %} En cours</title>
+            <circle class="bg-Blue" cx="57" cy="57" r="52" />
+            <circle class="meter-Blue" cx="57" cy="57" r="52" stroke-dashoffset="{{ ip_offset }}" style="animation: kf_ip 1s ease-out"/>
+            <text x="57" y="64" text-anchor="middle" class="status_count_text">{{ ip_num }}</text>
+          </svg>
+          <div class="text-center">En cours</div>
+          </a>
+        </div>
+
+        <div class="col-md-2">
+          <a href="#" title="Non entamée" alt="{{ ns_num }} item{{ ns_num|pluralize }} {% translate 'with status' %} Pas commencé " onclick="toggleStatusCheckbox('cb-action_status_fr-Non_entamee'); return false;">
+          <svg aria-labelledby="nsStatTitle" role="img">
+            <title id="nsStatTitle">{{ ns_num }} item{{ ns_num|pluralize }} {% translate "with status" %} Non entamée</title>
+            <circle class="bg-Silver" cx="57" cy="57" r="52" />
+            <circle class="meter-Silver" cx="57" cy="57" r="52" stroke-dashoffset="{{ ns_offset }}" style="animation: kf_ns 1s ease-out"/>
+            <text x="57" y="64" text-anchor="middle" class="status_count_text">{{ ns_num }}</text>
+          </svg>
+          <div class="text-center">Non entamée</div>
+          </a>
+        </div>
+
+        <div class="col-md-2">
+          <a href="#" title="Terminée" alt="{{ co_num }} item{{ co_num|pluralize }} {% translate 'with status' %} Terminé " onclick="toggleStatusCheckbox('cb-action_status_fr-Terminée'); return false;">
+          <svg aria-labelledby="coStatTitle" role="img">
+            <title id="coStatTitle">{{ co_num }} item{{ co_num|pluralize }} {% translate "with status" %} Terminée</title>
+            <circle class="bg-Green" cx="57" cy="57" r="52" />
+            <circle class="meter-Green" cx="57" cy="57" r="52" stroke-dashoffset="{{ co_offset }}" style="animation: co_ns 1s ease-out"/>
+            <text x="57" y="64" text-anchor="middle" class="status_count_text">{{ co_num }}</text>
+          </svg>
+          <div class="text-center">Terminée</div>
+          </a>
+        </div>
+
+        <div class="col-md-2">
+          <a href="#" title="Bloqué" alt="{{ bl_num }} item{{ bl_num|pluralize }} {% translate 'with status' %} Bloqué " onclick="toggleStatusCheckbox('cb-action_status_fr-En_pause'); return false;">
+          <svg aria-labelledby="blStatTitle" role="img">
+            <title id="blStatTitle">{{ bl_num }} item{{ bl_num|pluralize }} {% translate "with status" %} Bloqué</title>
+            <circle class="bg-Red" cx="57" cy="57" r="52" />
+            <circle class="meter-Red" cx="57" cy="57" r="52" stroke-dashoffset="{{ bl_offset }}" style="animation: bl_ns 1s ease-out"/>
+            <text x="57" y="64" text-anchor="middle" class="status_count_text">{{ bl_num }}</text>
+          </svg>
+          <div class="text-center">En pause</div>
+          </a>
+        </div>
+
+        <div class="col-md-2">
+          <a href="#" title="En arrière" alt="{{ be_num }} item{{ be_num|pluralize }} {% translate 'with status' %} {% translate 'Behind' %}" onclick="toggleStatusCheckbox('cb-action_status_fr-Bloque'); return false;">
+          <svg aria-labelledby="beStatTitle" role="img">
+            <title id="beStatTitle">{{ be_num }} item{{ be_num|pluralize }} {% translate "with status" %} {% translate "Behind" %}</title>
+            <circle class="bg-Orange" cx="57" cy="57" r="52" />
+            <circle class="meter-Orange" cx="57" cy="57" r="52" stroke-dashoffset="{{ be_offset }}" style="animation: be_ns 1s ease-out"/>
+            <text x="57" y="64" text-anchor="middle" class="status_count_text">{{ be_num }}</text>
+          </svg>
+          <div class="text-center">{% translate "Behind" %}</div>
+          </a>
+        </div>
+
+        {% else %}
+
+        <div class="col-md-2">
+          <a href="#" title="In Progress" alt="{{ ip_num }} item{{ ip_num|pluralize }} {% translate 'with status' %} In progress " onclick="toggleStatusCheckbox('cb-action_status-In_Progress'); return false;">
+          <svg aria-labelledby="ipStatTitle" role="img">
+            <title id="ipStatTitle">{{ ip_num }} item{{ ip_num|pluralize }} {% translate "with status" %} In Progress</title>
+            <circle class="bg-Blue" cx="57" cy="57" r="52" />
+            <circle class="meter-Blue" cx="57" cy="57" r="52" stroke-dashoffset="{{ ip_offset }}" style="animation: kf_ip 1s ease-out"/>
+            <text x="57" y="64" text-anchor="middle" class="status_count_text">{{ ip_num }}</text>
+          </svg>
+          <div class="text-center">In Progress</div>
+          </a>
+        </div>
+
+        <div class="col-md-2">
+          <a href="#" title="Not Started" alt="{{ ns_num }} item{{ ns_num|pluralize }} {% translate 'with status' %} Not Started " onclick="toggleStatusCheckbox('cb-action_status-Not_Started'); return false;">
+          <svg aria-labelledby="nsStatTitle" role="img">
+            <title id="nsStatTitle">{{ ns_num }} item{{ ns_num|pluralize }} {% translate "with status" %} Not Started</title>
+            <circle class="bg-Silver" cx="57" cy="57" r="52" />
+            <circle class="meter-Silver" cx="57" cy="57" r="52" stroke-dashoffset="{{ ns_offset }}" style="animation: kf_ns 1s ease-out"/>
+            <text x="57" y="64" text-anchor="middle" class="status_count_text">{{ ns_num }}</text>
+          </svg>
+          <div class="text-center">Not Started</div>
+          </a>
+        </div>
+
+        <div class="col-md-2">
+          <a href="#" title="Completed" alt="{{ co_num }} item{{ co_num|pluralize }} {% translate 'with status' %} Completed " onclick="toggleStatusCheckbox('cb-action_status-Completed'); return false;">
+          <svg aria-labelledby="coStatTitle" role="img">
+            <title id="coStatTitle">{{ co_num }} item{{ co_num|pluralize }} {% translate "with status" %} Completed</title>
+            <circle class="bg-Green" cx="57" cy="57" r="52" />
+            <circle class="meter-Green" cx="57" cy="57" r="52" stroke-dashoffset="{{ co_offset }}" style="animation: co_ns 1s ease-out"/>
+            <text x="57" y="64" text-anchor="middle" class="status_count_text">{{ co_num }}</text>
+          </svg>
+          <div class="text-center">Completed</div>
+          </a>
+        </div>
+
+        <div class="col-md-2">
+          <a href="#" title="Blocked" alt="{{ bl_num }} item{{ bl_num|pluralize }} {% translate 'with status' %} Blocked " onclick="toggleStatusCheckbox('cb-action_status-Blocked'); return false;">
+          <svg aria-labelledby="blStatTitle" role="img">
+            <title id="blStatTitle">{{ bl_num }} item{{ bl_num|pluralize }} {% translate "with status" %} Blocked</title>
+            <circle class="bg-Turquoise" cx="57" cy="57" r="52" />
+            <circle class="meter-Turquoise" cx="57" cy="57" r="52" stroke-dashoffset="{{ bl_offset }}" style="animation: bl_ns 1s ease-out"/>
+            <text x="57" y="64" text-anchor="middle" class="status_count_text">{{ bl_num }}</text>
+          </svg>
+          <div class="text-center">Paused</div>
+          </a>
+        </div>
+
+        <div class="col-md-2">
+          <a href="#" title="Behind" alt="{{ be_num }} item{{ be_num|pluralize }} {% translate 'with status' %} Behind " onclick="toggleStatusCheckbox('cb-status-Behind'); return false;">
+          <svg aria-labelledby="beStatTitle" role="img">
+            <title id="beStatTitle">{{ be_num }} item{{ be_num|pluralize }} {% translate "with status" %} Behind</title>
+            <circle class="bg-Orange" cx="57" cy="57" r="52" />
+            <circle class="meter-Orange" cx="57" cy="57" r="52" stroke-dashoffset="{{ be_offset }}" style="animation: be_ns 1s ease-out"/>
+            <text x="57" y="64" text-anchor="middle" class="status_count_text">{{ be_num }}</text>
+          </svg>
+          <div class="text-center">Behind</div>
+          </a>
+        </div>
+
+        {% endif %}
+    </div>
+  </div>
+</div>
+
+{% endif %}

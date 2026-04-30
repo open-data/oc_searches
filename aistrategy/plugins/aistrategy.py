@@ -90,7 +90,9 @@ def pre_render_search(context: dict, template: str, request: HttpRequest, lang: 
         context["total_strategies"] = total_strategies.value
     else:
         context["total_strategies"] = "?"
-    
+
+    # If there is no search text and no facets, then hide the results message
+
     if context['total_hits'] == 0:
         context['ip_offset'] = 360
         context['ns_offset'] = 360
@@ -103,21 +105,30 @@ def pre_render_search(context: dict, template: str, request: HttpRequest, lang: 
         context['CO_list'] = ()
 
     else:
-
-        context['show_all_results'] = True
-        for p in request.GET:
-            if p not in ['encoding', 'page', 'sort']:
-                context['show_all_results'] = False
-                break
-        # @TODO Do some better calculations for the circle progress bars on the search page for more accurate rendering
+        if context['query_type'] == "GET":
+            context['show_all_results'] = True
+            for p in request.GET:
+                if p not in ['encoding', 'page', 'sort']:
+                    context['show_all_results'] = False
+                    break
 
         # The graph at the top or the search page uses non-standard facet counts - when the status facets are selected,
         # the unselected values are automatically set to zero. It is simpler to calculate these numbers here instead of
         # in the template
 
-        if 'status' in request.GET:
-            statii = request.GET.getlist('status')
-            stati = statii[0].split('|')
+        if 'status' in request.GET or 'cb-status-CO' in request.POST or 'cb-status-IP' in request.POST or 'cb-status-NS' in request.POST:
+
+            if context['query_type'] == "GET":
+                statii = request.GET.getlist('status')
+                stati = statii[0].split('|')
+            else:
+                stati = []
+                if 'cb-status-CO' in request.POST:
+                    stati.append("CO") 
+                if 'cb-status-IP' in request.POST:
+                    stati.append("IP") 
+                if 'cb-status-NS' in request.POST:
+                    stati.append("NS") 
             context['ip_offset'] = circle_progress_bar_offset(context['facets']['status']['IP'], context['total_hits']) if 'IP' in stati and 'IP' in context['facets']['status'] else 360
             context['ns_offset'] = circle_progress_bar_offset(context['facets']['status']['NS'], context['total_hits']) if "NS" in stati and 'NS' in context['facets']['status'] else 360
             context['co_offset'] = circle_progress_bar_offset(context['facets']['status']['CO'], context['total_hits']) if "CO" in stati and 'CO' in context['facets']['status'] else 360
@@ -142,6 +153,7 @@ def pre_render_search(context: dict, template: str, request: HttpRequest, lang: 
             context['ip_offset'] = circle_progress_bar_offset(context['facets']['status']['IP'], context['total_hits']) if 'IP' in context['facets']['status'] else 360
             context['ns_offset'] = circle_progress_bar_offset(context['facets']['status']['NS'], context['total_hits']) if "NS" in context['facets']['status'] else 360
             context['co_offset'] = circle_progress_bar_offset(context['facets']['status']['CO'], context['total_hits']) if "CO" in context['facets']['status'] else 360
+
             context['ip_num'] = context['facets']['status']['IP'] if 'IP' in context['facets']['status'] else 0
             context['ns_num'] = context['facets']['status']['NS'] if "NS" in context['facets']['status'] else 0
             context['co_num'] = context['facets']['status']['CO'] if "CO" in context['facets']['status'] else 0

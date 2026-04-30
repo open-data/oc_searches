@@ -1,0 +1,21 @@
+{% load i18n %}
+{% load humanize %}
+{% load search_extras %}
+
+<div class="row mrgn-bttm-lg">
+    <div class="col-sm-5 col-xs-12" style="justify-content: left">
+    {% if not show_all_results %}
+      <b>{% if LANGUAGE_CODE == 'fr' %}{{ total_hits|apnumber }} stratégie{{ total_hits|pluralize:"s" }} trouvé{{ total_hits|pluralize:"s" }}
+      {% else %}Found {{ total_hits|apnumber }} Strateg{{ total_hits|pluralize:"y,ies" }}{% endif %}</b>
+    {% endif %}
+    </div>
+    <div class="col-sm-7 col-xs-12"><div style="display: flex; justify-content: right">
+    <label class="control-label mrgn-rght-md" for="sort"> {% translate "Order By" %}</label>
+    <select class="form-control mrgn-rght-0" id="sort" name="sort" {% if view_type == "SearchView" %}onchange="submitForm();" {% endif %}value="{{ sort }}" style="flex: none">
+        {% for option, label in sort_options.items %}
+            <option value="{{ option }}" {% if sort == option %}selected="selected"{% endif %}>{{ label }}</option>
+        {% endfor %}
+    </select>
+    </div>
+    </div>
+</div>

@@ -4,7 +4,7 @@
 {% load qurl %}
 {% load search_extras %}
 
-  <script>
+<script>
 function toggleStatusCheckbox(cbid) {
     const cb = document.getElementById(cbid);
     if (cb) {
@@ -88,8 +88,7 @@ function toggleStatusCheckbox(cbid) {
 
   {% else %}
 
-  <div class="row">
-    <div class="col-md-8 col-md-push-2 mrgn-tp-sm">
+  <div class="row"><div class="col-md-8 col-md-push-2 mrgn-tp-sm">
     <div class="row mrgn-bttm-md mrgn-lft-md form-inline">
       <div class="col-md-3">
         <a href="#" title="{{ codes.status|get_dict_value:'C' }}" alt="{{ c_num }} {% translate "committment" %}{{ c_num|pluralize }} {% translate "with status" %} {{ codes.status|get_dict_value:'C' }}" onclick="toggleStatusCheckbox('cb-status-C'); return false;">
@@ -138,7 +137,6 @@ function toggleStatusCheckbox(cbid) {
         <div class="text-center">{{ codes.status|get_dict_value:'NS' }}</div>
         </a>
       </div>
-    </div>
-      </div>
+    </div></div>
   </div>
   {% endif %}

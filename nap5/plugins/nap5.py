@@ -25,9 +25,6 @@ def pre_search_solr_query(context: dict, solr_query: dict, request: HttpRequest,
     solr_query['group.facet'] = True
     solr_query['group.main'] = True
     solr_query['group.truncate'] = True
-    #solr_query['fq'].insert(0, "{!collapse field=indicators max=reporting_period_no size=1}")
-    #solr_query['fq'].append("{!collapse field=indicators}")
-    #solr_query['expand'] = False
 
     solr_query['q'] = f'{solr_query["q"]} AND (is_latest:"T")'
 
@@ -143,7 +140,6 @@ def pre_render_search(context: dict, template: str, request: HttpRequest, lang: 
                 if p not in ['encoding', 'page', 'sort']:
                     context['show_all_results'] = False
                     break
-        # @TODO Do some better calculations for the circle progress bars on the search page for more accurate rendering
 
         # The graph at the top or the search page uses non-standard facet counts - when the status facets are selected,
         # the unselected values are automatically set to zero. It is simpler to calculate these numbers here instead of
@@ -162,8 +158,6 @@ def pre_render_search(context: dict, template: str, request: HttpRequest, lang: 
                     stati.append("LP") 
                 if 'cb-status-NS' in request.POST:
                     stati.append("NS") 
-
-# @TODO How to handle links
 
             context['c_offset'] = circle_progress_bar_offset(context['facets']['status']['C'], context['total_hits']) if "C" in stati and 'C' in context['facets']['status'] else 360
             context['sp_offset'] = circle_progress_bar_offset(context['facets']['status']['SP'], context['total_hits']) if "SP" in stati and 'SP' in context['facets']['status'] else 360
