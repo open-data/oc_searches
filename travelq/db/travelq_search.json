@@ -23,7 +23,7 @@
   "json_response": false,
   "label_en": "Government Travel Expenses",
   "label_fr": "D\u00e9penses de voyage gouvernementaux",
-  "main_content_body_top_snippet": "search_snippets/custom/travelq/travelq_default_main_content_body_top.html",
+  "main_content_body_top_snippet": "search_snippets/default_main_content_body_top.html",
   "mlt_enabled": false,
   "mlt_items": 10,
   "more_like_this_template": "more_like_this.html",
