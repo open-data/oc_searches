@@ -27,7 +27,7 @@
   "mlt_enabled": false,
   "mlt_items": 10,
   "more_like_this_template": "more_like_this.html",
-  "page_template": "search_snippets/custom/nap5/search.html",
+  "page_template": "search.html",
   "raw_solr_response": false,
   "record_breadcrumb_snippet": "search_snippets/default_record_breadcrumb.html",
   "record_detail_snippet": "",
