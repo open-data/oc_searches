@@ -1,6 +1,7 @@
 from django.http import HttpRequest
 from search.models import Search, Field, Code
 from SolrClient2 import SolrResponse
+import ast
 
 
 # --custom method
@@ -84,8 +85,24 @@ def load_csv_record(csv_record: dict, solr_record: dict, search: Search, fields:
     solr_record['milestones_fra'] = solr_record['milestones_fr'] if solr_record['milestones_fr'] else '-'
     indicator = csv_record['indicators'].lower()
     if indicator in codes['indicators']:
-        solr_record['deadline_en'] = codes['indicators'][indicator].extra_04_en
-        solr_record['deadline_fr'] = codes['indicators'][indicator].extra_04_fr
+        solr_record['lead_dept'] = codes['indicators'][indicator].extra_01
+        lead_depts = str(codes['indicators'][indicator].extra_01 or '').strip()
+
+        if (lead_depts.startswith('[') and lead_depts.endswith(']')):
+            lead_depts = ast.literal_eval(lead_depts)
+        else:
+            lead_depts = [lead_depts]
+
+        solr_record['lead_dept_title_en'] = [
+            codes['owner_org'][lead_dept].label_en
+            for lead_dept in lead_depts
+        ]
+        solr_record['lead_dept_title_fr'] = [
+            codes['owner_org'][lead_dept].label_fr
+            for lead_dept in lead_depts
+        ]
+        solr_record['deadline_en'] = codes['indicators'][indicator].extra_02_en
+        solr_record['deadline_fr'] = codes['indicators'][indicator].extra_02_fr
         solr_record['reporting_period_no'] = int(csv_record['reporting_period'][0:4] + csv_record['reporting_period'][5:7])
     return solr_record
 

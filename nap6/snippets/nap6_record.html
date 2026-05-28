@@ -13,7 +13,6 @@
 
 <div class="col-md-12">
     {% block main-content-search-items %}
-
         <section class="panel panel-info mrgn-tp-lg">
             <header class="panel-heading">
                 <h2 class="panel-title">{{ docs.0.indicators }} - {% if language == 'fr' %}{{ docs.0.commitments_fr }}{% else %}{{ docs.0.commitments_en }}{% endif %}</h2>
@@ -39,7 +38,11 @@
                     <div class="row">
                         <dt><div class="col-sm-3"><strong>{% translate 'Lead Organization: ' %}</strong></div></dt>
                         <dd><div class="col-sm-9">
-                            {% if language == 'fr' %}{{ docs.0.owner_org_fr }}{% else %}{{ docs.0.owner_org_en }}{% endif %}
+                            {% if language == 'fr' %}
+                                {{ docs.0.lead_dept_title_fr|join:", " }}
+                            {% else %}
+                                {{ docs.0.lead_dept_title_en|join:", " }}
+                            {% endif %}
                         </div></dd>
                     </div>
                     <div class="row">
