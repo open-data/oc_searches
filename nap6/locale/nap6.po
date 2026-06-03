@@ -73,10 +73,7 @@ msgid "Milestones"
 msgstr "Jalons"
 
 msgid "Deadline: "
-msgstr "Date d'échéance :"
-
-msgid "Deadline"
-msgstr "Date d'échéance"
+msgstr "Date d'échéance : "
 
 msgid "Found"
 msgstr "trouvé"

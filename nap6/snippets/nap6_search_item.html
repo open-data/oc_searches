@@ -28,7 +28,7 @@
         {% endif %}
     </div>
     <div class="col-sm-12">
-        <strong>{% translate 'Deadline: ' %}</strong>{% if language == 'fr' %}{{ doc.deadline_fr }}{% else %}{{ doc.deadline_en }}{% endif %}
+        <strong>{% translate 'Deadline: ' %}</strong>{% if language == 'fr' %}{{ doc.deadline_fr | markdown_filter | normalize_headings | safe }}{% else %}{{ doc.deadline_en | markdown_filter | normalize_headings | safe }}{% endif %}
     </div>
     <div class="col-sm-8">
          <strong>{% translate 'Status: ' %}</strong>
