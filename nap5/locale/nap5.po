@@ -85,7 +85,7 @@ msgid "Summit for Democracy: "
 msgstr "Sommet sur la démocratie : "
 
 msgid "Deadline: "
-msgstr "Date d'échéance"
+msgstr "Date d'échéance : "
 
 msgid "Found"
 msgstr "trouvé"
