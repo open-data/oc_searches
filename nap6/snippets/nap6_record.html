@@ -48,7 +48,7 @@
                     <div class="row">
                         <dt><div class="col-sm-3"><strong>{% translate 'Deadline: ' %}</strong></div></dt>
                         <dd><div class="col-sm-9">
-                        {% if language == 'fr' %}{{ docs.0.deadline_fr | markdown_filter | safe | strip_paragraph }}{% else %}{{ docs.0.deadline_en | markdown_filter | safe | strip_paragraph }}{% endif %}
+                        {% if language == 'fr' %}{{ docs.0.deadline_fr | markdown_filter | strip_paragraph | safe }}{% else %}{{ docs.0.deadline_en | markdown_filter | strip_paragraph | safe}}{% endif %}
                         </div></dd>
                     </div>
                 </dl>
