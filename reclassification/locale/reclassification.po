@@ -61,8 +61,8 @@ msgstr "Raison :"
 
 #: C:\Users\rosst\PycharmProjects\oc_search\search\templates\snippets\custom\tmp9z_krdvr\reclass_search_item.html:5
 #: C:\Users\rosst\PycharmProjects\oc_search\search\templates\snippets\custom\tmpryyp0mlk\reclass_search_item.html:5
-msgid "Nothing to report this period"
-msgstr "Rien à signaler pour cette périod"
+msgid "Nothing to report this quarter"
+msgstr "Rien à signaler pour ce trimestre"
 
 #: C:\Users\rosst\PycharmProjects\oc_search\search\templates\snippets\custom\tmp9z_krdvr\reclass_search_item.html:7
 msgid "Year: "
