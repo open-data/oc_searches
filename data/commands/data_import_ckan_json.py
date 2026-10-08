@@ -166,17 +166,32 @@ class Command(BaseCommand):
                         solr_record[field_name + "_fr"] = ["-"]
                 else:
                     ri = str(raw_value).lower()
-                    solr_record[field_name] = raw_value
+
+                    # Check for multivalued list field
+                    is_multivalued = getattr(self.search_fields[field_name], 'solr_field_multivalued', False)
+                    fallback_value = [raw_value] if is_multivalued else raw_value
+                    translation_fallback = ["-"] if is_multivalued else "-"
+
+                    solr_record[field_name] = fallback_value
+
                     if ri in self.field_codes[field_name]:
-                        solr_record[field_name + "_en"] = self.field_codes[field_name][ri].label_en
-                        solr_record[field_name + "_fr"] = self.field_codes[field_name][ri].label_fr
-                    elif ri != '-':
-                        if ri not in self.missing_codes_dict:
-                            self.missing_codes_dict[ri] = f"Unknown code {ri} for field {field_name} in dataset {id}"
-                        solr_record[field_name + "_en"] = "-"
-                        solr_record[field_name + "_fr"] = "-"
+                        # Wrap these in a list if the schema requires it
+                        lbl_en = self.field_codes[field_name][ri].label_en
+                        lbl_fr = self.field_codes[field_name][ri].label_fr
+                        solr_record[field_name + "_en"] = [lbl_en] if is_multivalued else lbl_en
+                        solr_record[field_name + "_fr"] = [lbl_fr] if is_multivalued else lbl_fr
+                    else:
+                        if ri != '-':
+                            if ri not in self.missing_codes_dict:
+                                self.missing_codes_dict[ri] = f"Unknown code {ri} for field {field_name} in dataset {id}"
+
+                        # Apply the localized array structures when empty
+                        solr_record[field_name + "_en"] = translation_fallback
+                        solr_record[field_name + "_fr"] = translation_fallback
             else:
-                solr_record[field_name] = raw_value
+                # Handle non-coded multi-valued layout if applicable
+                is_multivalued = getattr(self.search_fields[field_name], 'solr_field_multivalued', False)
+                solr_record[field_name] = [raw_value] if is_multivalued else raw_value
 
         return solr_record
 
