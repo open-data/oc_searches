@@ -27,7 +27,7 @@ msgid "Title:"
 msgstr "Titre :"
 
 msgid "Received:"
-msgstr "Date fournie :"
+msgstr "Date de réception :"
 
 msgid "Organization:"
 msgstr "Organisation :"
