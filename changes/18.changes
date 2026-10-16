@@ -1,0 +1,3 @@
+Bugfix for downloading search reuslts feature:
+ - remove Name field from the open data search which is duplicate of the ID field
+ - define default English and French solr variables for multivalued fields
