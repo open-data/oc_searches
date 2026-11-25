@@ -1,7 +1,6 @@
 {% load static %}
 {% load humanize %}
 {% load i18n %}
-{% load qurl %}
 {% load search_extras %}
 
 <script>
@@ -55,7 +54,7 @@ the format needs to be doubled.
         {% if LANGUAGE_CODE == 'fr' %}
 
         <div class="col-md-2">
-          {% if En_cours_list %}<a href="{% qurl request.get_full_path action_status_fr=En_cours_list %}" title="En cours" alt="{{ ip_num }} item{{ ip_num|pluralize }} {% translate 'with status' %} En cours ">{% endif %}
+          {% if En_cours_list %}<a href="{{ request.path }}{% querystring action_status_fr=En_cours_list %}" title="En cours" alt="{{ ip_num }} item{{ ip_num|pluralize }} {% translate 'with status' %} En cours ">{% endif %}
           <svg aria-labelledby="ipStatTitle" role="img">
             <title id="ipStatTitle">{{ ip_num }} item{{ ip_num|pluralize }} {% translate "with status" %} En cours</title>
             <circle class="bg-Blue" cx="57" cy="57" r="52" />
@@ -67,7 +66,7 @@ the format needs to be doubled.
         </div>
 
         <div class="col-md-2">
-          {% if Non_entamee_list %}<a href="{% qurl request.get_full_path action_status_fr=Non_entamee_list %}" title="Non entamée" alt="{{ ns_num }} item{{ ns_num|pluralize }} {% translate 'with status' %} Pas commencé ">{% endif %}
+          {% if Non_entamee_list %}<a href="{{ request.path }}{% querystring action_status_fr=Non_entamee_list %}" title="Non entamée" alt="{{ ns_num }} item{{ ns_num|pluralize }} {% translate 'with status' %} Pas commencé ">{% endif %}
           <svg aria-labelledby="nsStatTitle" role="img">
             <title id="nsStatTitle">{{ ns_num }} item{{ ns_num|pluralize }} {% translate "with status" %} Non entamée</title>
             <circle class="bg-Silver" cx="57" cy="57" r="52" />
@@ -79,7 +78,7 @@ the format needs to be doubled.
         </div>
 
         <div class="col-md-2">
-          {% if Terminee_list %}<a href="{% qurl request.get_full_path action_status_fr=Terminee_list %}" title="Terminée" alt="{{ co_num }} item{{ co_num|pluralize }} {% translate 'with status' %} Terminé ">{% endif %}
+          {% if Terminee_list %}<a href="{{ request.path }}{% querystring action_status_fr=Terminee_list %}" title="Terminée" alt="{{ co_num }} item{{ co_num|pluralize }} {% translate 'with status' %} Terminé ">{% endif %}
           <svg aria-labelledby="coStatTitle" role="img">
             <title id="coStatTitle">{{ co_num }} item{{ co_num|pluralize }} {% translate "with status" %} Terminée</title>
             <circle class="bg-Green" cx="57" cy="57" r="52" />
@@ -91,7 +90,7 @@ the format needs to be doubled.
         </div>
 
         <div class="col-md-2">
-          {% if Bloque_list %}<a href="{% qurl request.get_full_path action_status_fr=Bloque_list %}" title="Bloqué" alt="{{ bl_num }} item{{ bl_num|pluralize }} {% translate 'with status' %} Bloqué ">{% endif %}
+          {% if Bloque_list %}<a href="{{ request.path }}{% querystring action_status_fr=Bloque_list %}" title="Bloqué" alt="{{ bl_num }} item{{ bl_num|pluralize }} {% translate 'with status' %} Bloqué ">{% endif %}
           <svg aria-labelledby="blStatTitle" role="img">
             <title id="blStatTitle">{{ bl_num }} item{{ bl_num|pluralize }} {% translate "with status" %} Bloqué</title>
             <circle class="bg-Red" cx="57" cy="57" r="52" />
@@ -103,7 +102,7 @@ the format needs to be doubled.
         </div>
 
         <div class="col-md-2">
-          {% if Behind_list %}<a href="{% qurl request.get_full_path action_status_fr=Behind_list %}" title="En arrière" alt="{{ be_num }} item{{ be_num|pluralize }} {% translate 'with status' %} {% translate 'Behind' %} ">{% endif %}
+          {% if Behind_list %}<a href="{{ request.path }}{% querystring action_status_fr=Behind_list %}" title="En arrière" alt="{{ be_num }} item{{ be_num|pluralize }} {% translate 'with status' %} {% translate 'Behind' %} ">{% endif %}
           <svg aria-labelledby="beStatTitle" role="img">
             <title id="beStatTitle">{{ be_num }} item{{ be_num|pluralize }} {% translate "with status" %} {% translate "Behind" %}</title>
             <circle class="bg-Orange" cx="57" cy="57" r="52" />
@@ -117,7 +116,7 @@ the format needs to be doubled.
         {% else %}
 
         <div class="col-md-2">
-          {% if In_Progress_list %}<a href="{% qurl request.get_full_path action_status=In_Progress_list %}" title="In Progress" alt="{{ ip_num }} item{{ ip_num|pluralize }} {% translate 'with status' %} In progress ">{% endif %}
+          {% if In_Progress_list %}<a href="{{ request.path }}{% querystring action_status=In_Progress_list %}" title="In Progress" alt="{{ ip_num }} item{{ ip_num|pluralize }} {% translate 'with status' %} In progress ">{% endif %}
           <svg aria-labelledby="ipStatTitle" role="img">
             <title id="ipStatTitle">{{ ip_num }} item{{ ip_num|pluralize }} {% translate "with status" %} In Progress</title>
             <circle class="bg-Blue" cx="57" cy="57" r="52" />
@@ -129,7 +128,7 @@ the format needs to be doubled.
         </div>
 
         <div class="col-md-2">
-          {% if Not_Started_list %}<a href="{% qurl request.get_full_path action_status=Not_Started_list %}" title="Not Started" alt="{{ ns_num }} item{{ ns_num|pluralize }} {% translate 'with status' %} Not Started ">{% endif %}
+          {% if Not_Started_list %}<a href="{{ request.path }}{% querystring action_status=Not_Started_list %}" title="Not Started" alt="{{ ns_num }} item{{ ns_num|pluralize }} {% translate 'with status' %} Not Started ">{% endif %}
           <svg aria-labelledby="nsStatTitle" role="img">
             <title id="nsStatTitle">{{ ns_num }} item{{ ns_num|pluralize }} {% translate "with status" %} Not Started</title>
             <circle class="bg-Silver" cx="57" cy="57" r="52" />
@@ -141,7 +140,7 @@ the format needs to be doubled.
         </div>
 
         <div class="col-md-2">
-          {% if Completed_list %}<a href="{% qurl request.get_full_path action_status=Completed_list %}" title="Completed" alt="{{ co_num }} item{{ co_num|pluralize }} {% translate 'with status' %} Completed ">{% endif %}
+          {% if Completed_list %}<a href="{{ request.path }}{% querystring action_status=Completed_list %}" title="Completed" alt="{{ co_num }} item{{ co_num|pluralize }} {% translate 'with status' %} Completed ">{% endif %}
           <svg aria-labelledby="coStatTitle" role="img">
             <title id="coStatTitle">{{ co_num }} item{{ co_num|pluralize }} {% translate "with status" %} Completed</title>
             <circle class="bg-Green" cx="57" cy="57" r="52" />
@@ -153,7 +152,7 @@ the format needs to be doubled.
         </div>
 
         <div class="col-md-2">
-          {% if Blocked_list %}<a href="{% qurl request.get_full_path action_status=Blocked_list %}" title="Blocked" alt="{{ bl_num }} item{{ bl_num|pluralize }} {% translate 'with status' %} Blocked ">{% endif %}
+          {% if Blocked_list %}<a href="{{ request.path }}{% querystring action_status=Blocked_list %}" title="Blocked" alt="{{ bl_num }} item{{ bl_num|pluralize }} {% translate 'with status' %} Blocked ">{% endif %}
           <svg aria-labelledby="blStatTitle" role="img">
             <title id="blStatTitle">{{ bl_num }} item{{ bl_num|pluralize }} {% translate "with status" %} Blocked</title>
             <circle class="bg-Turquoise" cx="57" cy="57" r="52" />
@@ -165,7 +164,7 @@ the format needs to be doubled.
         </div>
 
         <div class="col-md-2">
-          {% if Behind_list %}<a href="{% qurl request.get_full_path action_status=Behind_list %}" title="Behind" alt="{{ be_num }} item{{ be_num|pluralize }} {% translate 'with status' %} Behind ">{% endif %}
+          {% if Behind_list %}<a href="{{ request.path }}{% querystring action_status=Behind_list %}" title="Behind" alt="{{ be_num }} item{{ be_num|pluralize }} {% translate 'with status' %} Behind ">{% endif %}
           <svg aria-labelledby="beStatTitle" role="img">
             <title id="beStatTitle">{{ be_num }} item{{ be_num|pluralize }} {% translate "with status" %} Behind</title>
             <circle class="bg-Orange" cx="57" cy="57" r="52" />
