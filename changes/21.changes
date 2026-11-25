@@ -1,0 +1,9 @@
+Repalce `{% qurl request.get_full_path ... %}` template tags to Django 5.2's built-in `{% querystring %}` tag and removed `{% load qurl %}` for the following searches:
+
+- atimap
+- cafcip
+- datastrategy
+- nap5
+- nap6
+
+Also fixed double-slash (`//record/`) URL concatenation on the `nap6` search.
