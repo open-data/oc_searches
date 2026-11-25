@@ -6,9 +6,11 @@
     <div class="col-sm-12">
         <h2 class="mrgn-tp-0 mrgn-bttm-sm h4">
             {% if language == 'fr' %}
-                <a href="{{ path_info }}/record/{{ doc.id }}">{{ doc.indicators_fra | truncatewords_html:22 | markdown_filter | safe }}</a>
+                {{ path_info }}
+                <a href="{{ path_info }}record/{{ doc.id }}">{{ doc.indicators_fra | truncatewords_html:22 | markdown_filter | safe }}</a>
             {% else %}
-                <a href="{{ path_info }}/record/{{ doc.id }}">{{ doc.indicators_eng | truncatewords_html:22 | markdown_filter | safe }}</a>
+                {{ path_info }}
+                <a href="{{ path_info }}record/{{ doc.id }}">{{ doc.indicators_eng | truncatewords_html:22 | markdown_filter | safe }}</a>
             {% endif %}
         </h2>
     </div>
