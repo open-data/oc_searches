@@ -1,7 +1,6 @@
 {% load static %}
 {% load humanize %}
 {% load i18n %}
-{% load qurl %}
 {% load search_extras %}
 
 <script>
@@ -36,7 +35,7 @@ function toggleStatusCheckbox(cbid) {
     <div class="col-md-8 col-md-push-2 mrgn-tp-sm">
     <div class="row mrgn-bttm-md mrgn-lft-md form-inline">
       <div class="col-md-3 text-center">
-        {% if implemented_list %}<a href="{% qurl request.get_full_path status=implemented_list %}" title="{{ codes.status|get_dict_value:'implemented' }}" alt="{{ co_num }} {% translate "recommendation" %}{{ co_num|pluralize }} {% translate "with status" %} {{ codes.status|get_dict_value:'implemented' }}">{% endif %}
+        {% if implemented_list %}<a href="{{ request.path }}{% querystring status=implemented_list %}" title="{{ codes.status|get_dict_value:'implemented' }}" alt="{{ co_num }} {% translate "recommendation" %}{{ co_num|pluralize }} {% translate "with status" %} {{ codes.status|get_dict_value:'implemented' }}">{% endif %}
         <svg aria-labelledby="cStatTitle" role="img">
           <title id="cStatTitle">{{ co_num }} {% translate "recommendation" %}{{ co_num|pluralize }} {% translate "with status" %} {{ codes.status|get_dict_value:'implemented' }}</title>
           <circle class="bg-CO" cx="57" cy="57" r="52" />
@@ -48,7 +47,7 @@ function toggleStatusCheckbox(cbid) {
       </div>
 
       <div class="col-md-3 text-center">
-        {% if in_progress_list %}<a href="{% qurl request.get_full_path status=in_progress_list %}" title="{{ codes.status|get_dict_value:'in_progress' }}" alt="{{ ip_num }} {% translate "recommendation" %}{{ ip_num|pluralize }} {% translate "with status" %} {{ codes.status|get_dict_value:'in_progress' }}">{% endif %}
+        {% if in_progress_list %}<a href="{{ request.path }}{% querystring status=in_progress_list %}" title="{{ codes.status|get_dict_value:'in_progress' }}" alt="{{ ip_num }} {% translate "recommendation" %}{{ ip_num|pluralize }} {% translate "with status" %} {{ codes.status|get_dict_value:'in_progress' }}">{% endif %}
         <svg aria-labelledby="spStatTitle" role="img">
           <title id="spStatTitle">{{ ip_num }} {% translate "recommendation" %}{{ ip_num|pluralize }} {% translate "with status" %} {{ codes.status|get_dict_value:'in_progress' }}</title>
           <circle class="bg-IP" cx="57" cy="57" r="52" />
@@ -60,7 +59,7 @@ function toggleStatusCheckbox(cbid) {
       </div>
 
       <div class="col-md-3 text-center">
-        {% if not_started_list %}<a href="{% qurl request.get_full_path status=not_started_list %}" title="{{ codes.status|get_dict_value:'not_started' }}" alt="{{ ns_num }} {% translate "recommendation" %}{{ ns_num|pluralize }} {% translate "with status" %} {{ codes.status|get_dict_value:'not_started' }}">{% endif %}
+        {% if not_started_list %}<a href="{{ request.path }}{% querystring status=not_started_list %}" title="{{ codes.status|get_dict_value:'not_started' }}" alt="{{ ns_num }} {% translate "recommendation" %}{{ ns_num|pluralize }} {% translate "with status" %} {{ codes.status|get_dict_value:'not_started' }}">{% endif %}
         <svg aria-labelledby="lpStatTitle" role="img">
           <title id="lpStatTitle">{{ ns_num }} {% translate "recommendation" %}{{ ns_num|pluralize }} {% translate "with status" %} {{ codes.status|get_dict_value:'not_started' }}</title>
           <circle class="bg-NS" cx="57" cy="57" r="52" />
@@ -72,7 +71,7 @@ function toggleStatusCheckbox(cbid) {
       </div>
 
       <div class="col-md-3 text-center">
-        {% if mitigated_list %}<a href="{% qurl request.get_full_path status=mitigated_list %}" title="{{ codes.status|get_dict_value:'mitigated' }}" alt="{{ mi_num }} {% translate "recommendation" %}{{ mi_num|pluralize }} {% translate "with status" %} {{ codes.status|get_dict_value:'mitigated' }}">{% endif %}
+        {% if mitigated_list %}<a href="{{ request.path }}{% querystring status=mitigated_list %}" title="{{ codes.status|get_dict_value:'mitigated' }}" alt="{{ mi_num }} {% translate "recommendation" %}{{ mi_num|pluralize }} {% translate "with status" %} {{ codes.status|get_dict_value:'mitigated' }}">{% endif %}
         <svg aria-labelledby="miStatTitle" role="img">
           <title id="miStatTitle">{{ mi_num }} {% translate "recommendation" %}{{ mi_num|pluralize }} {% translate "with status" %} {{ codes.status|get_dict_value:'mitigated' }}</title>
           <circle class="bg-MI" cx="57" cy="57" r="52" />
@@ -129,7 +128,7 @@ function toggleStatusCheckbox(cbid) {
       </div>
 
       <div class="col-md-3 text-center">
-        <a href="{% qurl request.get_full_path status=mitigated_list %}" title="{{ codes.status|get_dict_value:'mitigated' }}" alt="{{ mi_num }} {% translate "recommendation" %}{{ mi_num|pluralize }} {% translate "with status" %} {{ codes.status|get_dict_value:'mitigated' }}" onclick="toggleStatusCheckbox('cb-status-mitigated'); return false;">
+        <a href="{{ request.path }}{% querystring status=mitigated_list %}" title="{{ codes.status|get_dict_value:'mitigated' }}" alt="{{ mi_num }} {% translate "recommendation" %}{{ mi_num|pluralize }} {% translate "with status" %} {{ codes.status|get_dict_value:'mitigated' }}" onclick="toggleStatusCheckbox('cb-status-mitigated'); return false;">
         <svg aria-labelledby="miStatTitle" role="img">
           <title id="miStatTitle">{{ mi_num }} {% translate "recommendation" %}{{ mi_num|pluralize }} {% translate "with status" %} {{ codes.status|get_dict_value:'mitigated' }}</title>
           <circle class="bg-MI" cx="57" cy="57" r="52" />

@@ -2,7 +2,6 @@
 {% load static %}
 {% load humanize %}
 {% load i18n %}
-{% load qurl %}
 {% load search_extras %}
 
 {% block main-content-body-top %}
@@ -21,7 +20,7 @@
 
     <div class="row mrgn-bttm-md mrgn-lft-md form-inline">
       <div class="col-md-3 text-center">
-        {% if CP_RL_list %}<a href="{% qurl request.get_full_path status=CP_RL_list %}" title="{{ codes.status|get_dict_value:'CP_RL' }}" alt="{{ co_num }} {% translate "committment" %}{{ co_num|pluralize }} {% translate "with status" %} {{ codes.status|get_dict_value:'CP_RL' }}">{% endif %}
+        {% if CP_RL_list %}<a href="{{ request.path }}{% querystring status=CP_RL_list %}" title="{{ codes.status|get_dict_value:'CP_RL' }}" alt="{{ co_num }} {% translate "committment" %}{{ co_num|pluralize }} {% translate "with status" %} {{ codes.status|get_dict_value:'CP_RL' }}">{% endif %}
         <svg aria-labelledby="cStatTitle" role="img">
           <title id="cStatTitle">{{ co_num }} {% translate "commitment" %}{{ co_num|pluralize }} {% translate "with status" %} {{ codes.status|get_dict_value:'CP_RL' }}</title>
           <circle class="bg-CO" cx="57" cy="57" r="52" />
@@ -33,7 +32,7 @@
       </div>
 
       <div class="col-md-3 text-center">
-        {% if IP_EC_list %}<a href="{% qurl request.get_full_path status=IP_EC_list %}" title="{{ codes.status|get_dict_value:'IP_EC' }}" alt="{{ ip_num }} {% translate "commitment" %}{{ ip_num|pluralize }} {% translate "with status" %} {{ codes.status|get_dict_value:'IP_EC' }}">{% endif %}
+        {% if IP_EC_list %}<a href="{{ request.path }}{% querystring status=IP_EC_list %}" title="{{ codes.status|get_dict_value:'IP_EC' }}" alt="{{ ip_num }} {% translate "commitment" %}{{ ip_num|pluralize }} {% translate "with status" %} {{ codes.status|get_dict_value:'IP_EC' }}">{% endif %}
         <svg aria-labelledby="spStatTitle" role="img">
           <title id="spStatTitle">{{ ip_num }} {% translate "commitment" %}{{ ip_num|pluralize }} {% translate "with status" %} {{ codes.status|get_dict_value:'IP_EC' }}</title>
           <circle class="bg-IP" cx="57" cy="57" r="52" />
@@ -45,7 +44,7 @@
       </div>
 
       <div class="col-md-3 text-center">
-        {% if ON_CO_list %}<a href="{% qurl request.get_full_path status=ON_CO_list %}" title="{{ codes.status|get_dict_value:'ON_CO' }}" alt="{{ on_num }} {% translate "commitment" %}{{ on_num|pluralize }} {% translate "with status" %} {{ codes.status|get_dict_value:'ON_CO' }}">{% endif %}
+        {% if ON_CO_list %}<a href="{{ request.path }}{% querystring status=ON_CO_list %}" title="{{ codes.status|get_dict_value:'ON_CO' }}" alt="{{ on_num }} {% translate "commitment" %}{{ on_num|pluralize }} {% translate "with status" %} {{ codes.status|get_dict_value:'ON_CO' }}">{% endif %}
         <svg aria-labelledby="onStatTitle" role="img">
           <title id="onStatTitle">{{ on_num }} {% translate "commitment" %}{{ on_num|pluralize }} {% translate "with status" %} {{ codes.status|get_dict_value:'ON_CO' }}</title>
           <circle class="bg-ON" cx="57" cy="57" r="52" />
@@ -57,7 +56,7 @@
       </div>
 
       <div class="col-md-3 text-center">
-        {% if NS_NC_list %}<a href="{% qurl request.get_full_path status=NS_NC_list %}" title="{{ codes.status|get_dict_value:'NS_NC' }}" alt="{{ ns_num }} {% translate "commitment" %}{{ ns_num|pluralize }} {% translate "with status" %} {{ codes.status|get_dict_value:'NS_NC' }}">{% endif %}
+        {% if NS_NC_list %}<a href="{{ request.path }}{% querystring status=NS_NC_list %}" title="{{ codes.status|get_dict_value:'NS_NC' }}" alt="{{ ns_num }} {% translate "commitment" %}{{ ns_num|pluralize }} {% translate "with status" %} {{ codes.status|get_dict_value:'NS_NC' }}">{% endif %}
         <svg aria-labelledby="nsStatTitle" role="img">
           <title id="nsStatTitle">{{ ns_num }} {% translate "commitment" %}{{ ns_num|pluralize }} {% translate "with status" %} {{ codes.status|get_dict_value:'NS_NC' }}</title>
           <circle class="bg-NS" cx="57" cy="57" r="52" />
